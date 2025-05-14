@@ -1,98 +1,51 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
-public class HousePicker : MonoBehaviour
+public class HousePicker : Field
 {
-    // Start is called before the first frame update
-    public string NickName;
-    public string ColumnName;
-    public int Index;
-    public int Row;
-    public int Column;
-    public Transform Target;
-
-    public bool Status = false;
-    public bool Busy;
-
-    public bool AttackMode = false;
-
-    public GameObject BusyPiece;
-
-    [SerializeField]
-    TextMesh TxtForce;
-
-    GameObject VisualActive;
-
-    AudioSource Select;
-    
-
-    void Start()
-    {
-        if (GameObject.Find("Select"))
-        {
-            Select = GameObject.Find("Select").GetComponent<AudioSource>();
-        }
-
-
-
-        if (transform.Find("Preview"))
-        {
-            VisualActive = transform.Find("Preview").gameObject;
-            VisualActive.SetActive(false);
+    public bool select { get; private set; }
+    public bool hasPiece {
+        get {
+            return piece != null;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject piece { get; private set; }
+
+    [SerializeField]
+    TextMesh txtForce;
+
+    [Header("Feedback")]
+    [SerializeField]
+    GameObject visualActive;
+
+    private UnityEvent onSelect = new UnityEvent();
+
+    void Awake()
     {
-        
+        visualActive.SetActive(false);
+        onSelect.AddListener(Select);
     }
 
     private void OnMouseDown()
     {
-
-        Debug.Log("Selected field: " + name);
-        Debug.Log("Selected NickName: " + NickName);
-        Debug.Log("Index field: " + Index);
-        Debug.Log("Column field: " + Column);
-        Debug.Log("Row field: " + Row);        
-
-        Selection();
-
+        onSelect.Invoke();
     }
 
-    private void Selection()
+    private void Select()
     {
-
-        GameObject[] houses = GameObject.FindGameObjectsWithTag("Field");
-
-        foreach(GameObject house in houses)
-        {
-            house.GetComponent<HousePicker>().Disable();
-        }
-
-        Select.Play();
-
-        Status = true;
-        VisualActive.SetActive(true);
-        ActivateCollisionPieces();
-
+        select = true;
+        visualActive.SetActive(true);
     }
 
-    public void Disable()
+    public void Deselect()
     {
-        Status = false;
-        VisualActive.SetActive(false);
+        select = false;
+        visualActive.SetActive(false);
     }
 
-    void ActivateCollisionPieces()
-    {
-        GameObject[] pieces = GameObject.FindGameObjectsWithTag("Player");
-
-        foreach (GameObject piece in pieces)
-        {
-            (piece.GetComponent(typeof(BoxCollider)) as Collider).enabled = true;
-        }
+    public void SetPiece(GameObject piece, UnityAction call = null){
+        this.piece = piece;
+        if(call != null) onSelect.AddListener(call);
     }
 }

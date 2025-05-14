@@ -85,19 +85,17 @@ public class Player : MonoBehaviour
 
     string sDebug="";
 
-    DebugToText debugTotext;
-
     GameObject gEX_Default;
 
     GameObject gEX_New;
 
-    int iGameMode=0;
+    GameMode.GameType iGameMode=0;
 
     GameObject gChest;
 
     bool bDie = false;
 
-    CreateBoard board;
+    BoardController board;
 
     void Start()
     {        
@@ -117,7 +115,8 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (iGameMode > 1)
+            //iGameMode > 1
+            if (iGameMode != GameMode.GameType.Training)
             {
                 if (tag == "Enemy")
                 {
@@ -152,7 +151,7 @@ public class Player : MonoBehaviour
             Txt3dForce.text = Force.ToString();
         }
 
-        board = FindObjectOfType<CreateBoard>();
+        board = FindObjectOfType<BoardController>();
 
         iFields = board.GetFields();
         iFields = iFields + 1;               
@@ -161,7 +160,8 @@ public class Player : MonoBehaviour
 
         iGameMode = FindObjectOfType<GameMode>().GetGameType();        
 
-        if (iGameMode > 1)
+        //iGameMode > 1
+        if (iGameMode != GameMode.GameType.Training)
         {
 
             gEX_Default = GetComponentInChildren<Animator>().gameObject;
@@ -286,7 +286,7 @@ public class Player : MonoBehaviour
     public void AttackRules(GameObject pieace)
     {
         iTargetField = pieace.GetComponent<Player>().iFieldLive;
-        GameObject[] fcs = FindObjectOfType<OrdersParts>().Fields;
+        Field[] fcs = FindObjectOfType<OrdersParts>().fields;
 
         gEnemyPieace = pieace;
         LookEnemy(pieace.transform);
@@ -478,7 +478,7 @@ public class Player : MonoBehaviour
     {
         if (tag == "Enemy")
         {
-            if (iGameMode == 2)
+            if (iGameMode == GameMode.GameType.Normal)
             {
                 if (Types != ItemType.Soldado)
                 {
@@ -493,7 +493,7 @@ public class Player : MonoBehaviour
                     anim = gEX_Default.GetComponent<Animator>();
                 }                
             }
-            else if (iGameMode == 3)
+            else if (iGameMode == GameMode.GameType.Hard)
             {
                 if (Types == ItemType.Bandeira || Types == ItemType.Bomba)
                 {
@@ -542,7 +542,7 @@ public class Player : MonoBehaviour
 
         foreach (FieldController fc in fcs)
         {
-            if (fc.Index == index)
+            if (fc.index == index)
             {
                 indexfield = indexloop;
             }
@@ -564,7 +564,7 @@ public class Player : MonoBehaviour
 
         indexfield = IndexHouse(iFieldLive);
 
-        int iColumnCount = FindObjectOfType<CreateBoard>().GetFields()+1;
+        int iColumnCount = FindObjectOfType<BoardController>().GetFields()+1;
 
         Debug.Log("HousesFree - indexfield = " + indexfield);
         Debug.Log("HousesFree - fcs.Length = " + fcs.Length);
@@ -592,12 +592,12 @@ public class Player : MonoBehaviour
                 {
                     if (fcs[indexfieldright].BusyPiece.gameObject.tag == "Player")
                     {
-                        lhouses.Add(fcs[indexfieldright].Index);
+                        lhouses.Add(fcs[indexfieldright].index);
                     }
                 }
                 else
                 {
-                    lhouses.Add(fcs[indexfieldright].Index);
+                    lhouses.Add(fcs[indexfieldright].index);
                 }
             }
         }
@@ -610,12 +610,12 @@ public class Player : MonoBehaviour
                 {
                     if (fcs[indexfieldleft].BusyPiece.gameObject.tag == "Player")
                     {
-                        lhouses.Add(fcs[indexfieldleft].Index);
+                        lhouses.Add(fcs[indexfieldleft].index);
                     }
                 }
                 else
                 {
-                    lhouses.Add(fcs[indexfieldleft].Index);
+                    lhouses.Add(fcs[indexfieldleft].index);
                 }
             }
         }
@@ -628,12 +628,12 @@ public class Player : MonoBehaviour
                 {
                     if (fcs[indexfieldtop].BusyPiece.gameObject.tag == "Player")
                     {
-                        lhouses.Add(fcs[indexfieldtop].Index);
+                        lhouses.Add(fcs[indexfieldtop].index);
                     }
                 }
                 else
                 {
-                    lhouses.Add(fcs[indexfieldtop].Index);
+                    lhouses.Add(fcs[indexfieldtop].index);
                 }
             }
         }
@@ -646,12 +646,12 @@ public class Player : MonoBehaviour
                 {
                     if (fcs[indexfieldbottom].BusyPiece.gameObject.tag == "Player")
                     {
-                        lhouses.Add(fcs[indexfieldbottom].Index);
+                        lhouses.Add(fcs[indexfieldbottom].index);
                     }
                 }
                 else
                 {
-                    lhouses.Add(fcs[indexfieldbottom].Index);
+                    lhouses.Add(fcs[indexfieldbottom].index);
                 }
             }
         } 
@@ -672,7 +672,7 @@ public class Player : MonoBehaviour
 
         indexfield = IndexHouse(iFieldLive);
 
-        int iColumnCount = FindObjectOfType<CreateBoard>().GetFields() + 1;
+        int iColumnCount = FindObjectOfType<BoardController>().GetFields() + 1;
 
         Debug.Log("HousesFree - indexfield = " + indexfield);
         Debug.Log("HousesFree - fcs.Length = " + fcs.Length);
@@ -700,12 +700,12 @@ public class Player : MonoBehaviour
                 {
                     if (fcs[indexfieldright].BusyPiece.gameObject.tag == "Enemy")
                     {
-                        lhouses.Add(fcs[indexfieldright].Index);
+                        lhouses.Add(fcs[indexfieldright].index);
                     }
                 }
                 else
                 {
-                    lhouses.Add(fcs[indexfieldright].Index);
+                    lhouses.Add(fcs[indexfieldright].index);
                 }
             }
         }
@@ -718,12 +718,12 @@ public class Player : MonoBehaviour
                 {
                     if (fcs[indexfieldleft].BusyPiece.gameObject.tag == "Enemy")
                     {
-                        lhouses.Add(fcs[indexfieldleft].Index);
+                        lhouses.Add(fcs[indexfieldleft].index);
                     }
                 }
                 else
                 {
-                    lhouses.Add(fcs[indexfieldleft].Index);
+                    lhouses.Add(fcs[indexfieldleft].index);
                 }
             }
         }
@@ -736,12 +736,12 @@ public class Player : MonoBehaviour
                 {
                     if (fcs[indexfieldtop].BusyPiece.gameObject.tag == "Enemy")
                     {
-                        lhouses.Add(fcs[indexfieldtop].Index);
+                        lhouses.Add(fcs[indexfieldtop].index);
                     }
                 }
                 else
                 {
-                    lhouses.Add(fcs[indexfieldtop].Index);
+                    lhouses.Add(fcs[indexfieldtop].index);
                 }
             }
         }
@@ -754,12 +754,12 @@ public class Player : MonoBehaviour
                 {
                     if (fcs[indexfieldbottom].BusyPiece.gameObject.tag == "Enemy")
                     {
-                        lhouses.Add(fcs[indexfieldbottom].Index);
+                        lhouses.Add(fcs[indexfieldbottom].index);
                     }
                 }
                 else
                 {
-                    lhouses.Add(fcs[indexfieldbottom].Index);
+                    lhouses.Add(fcs[indexfieldbottom].index);
                 }
             }
         }
@@ -773,7 +773,7 @@ public class Player : MonoBehaviour
     {
         Turn turn = FindObjectOfType<Turn>();
 
-        GameObject[] fcs = FindObjectOfType<OrdersParts>().Fields;
+        Field[] fcs = FindObjectOfType<OrdersParts>().fields;
 
         int TotalFields = fcs.Length;
 
@@ -796,7 +796,7 @@ public class Player : MonoBehaviour
                     {
                         GameObject gpieace = fcs[indexField + 1].GetComponent<FieldController>().BusyPiece.gameObject;
 
-                        sDebug = "Field Index = " + fcs[indexField + 1].GetComponent<FieldController>().Index + " - " + "Field Busy = " + fcs[indexField + 1].GetComponent<FieldController>().Busy;
+                        sDebug = "Field Index = " + fcs[indexField + 1].GetComponent<FieldController>().index + " - " + "Field Busy = " + fcs[indexField + 1].GetComponent<FieldController>().Busy;
 
                         Debug.Log(sDebug);
                         //debugTotext.ShowDebug(sDebug);
@@ -934,7 +934,7 @@ public class Player : MonoBehaviour
                         {
                             if (iLimitFieldCol == 0)
                             {
-                                iLimitFieldCol = fcs[i].GetComponent<FieldController>().Index;
+                                iLimitFieldCol = fcs[i].GetComponent<FieldController>().index;
                             }
                         }
                     }
@@ -1011,7 +1011,7 @@ public class Player : MonoBehaviour
                         {
                             if (iLimitFieldCol == 0)
                             {
-                                iLimitFieldCol = fcs[i].GetComponent<FieldController>().Index;                                
+                                iLimitFieldCol = fcs[i].GetComponent<FieldController>().index;                                
                             }
                         }
                     }
@@ -1077,7 +1077,7 @@ public class Player : MonoBehaviour
                         {
                             if (iLimitFieldRow == 0)
                             {
-                                iLimitFieldRow = fcs[i].GetComponent<FieldController>().Index;
+                                iLimitFieldRow = fcs[i].GetComponent<FieldController>().index;
                             }
 
                         }
@@ -1101,7 +1101,7 @@ public class Player : MonoBehaviour
                 {
                     if (i > indexField)
                     {
-                        if (fcs[i].GetComponent<FieldController>().Index < iLimitFieldRow)
+                        if (fcs[i].GetComponent<FieldController>().index < iLimitFieldRow)
                         {
                             fcs[i].GetComponent<FieldController>().SetStatus(bRowLoop);
                         }
@@ -1158,7 +1158,7 @@ public class Player : MonoBehaviour
                         {
                             if (iLimitFieldRow == 0)
                             {
-                                iLimitFieldRow = fcs[i].GetComponent<FieldController>().Index;
+                                iLimitFieldRow = fcs[i].GetComponent<FieldController>().index;
                             }
 
                         }
@@ -1186,7 +1186,7 @@ public class Player : MonoBehaviour
                 {
                     if (i != indexField)
                     {
-                        if (fcs[i].GetComponent<FieldController>().Index > iLimitFieldRow)
+                        if (fcs[i].GetComponent<FieldController>().index > iLimitFieldRow)
                         {
                             fcs[i].GetComponent<FieldController>().SetStatus(bRowLoop);
                         }
@@ -1232,7 +1232,7 @@ public class Player : MonoBehaviour
     {
         bool bsamerow = false;
 
-        GameObject[] fcs = FindObjectOfType<OrdersParts>().Fields;
+        Field[] fcs = FindObjectOfType<OrdersParts>().fields;
 
         int rowindex = fcs[indexpiece].GetComponent<FieldController>().Row;
 
@@ -1620,7 +1620,7 @@ public class Player : MonoBehaviour
         SetAnimation("Attack", true);
         bAttack = true;
 
-        if (iGameMode == 2 || iGameMode == 3)
+        if (iGameMode == GameMode.GameType.Normal || iGameMode == GameMode.GameType.Hard)
         {
             if (tag == "Enemy")
             {
@@ -1669,7 +1669,7 @@ public class Player : MonoBehaviour
     {
         if(AttackEffect)
         {
-            if (iGameMode == 2 || iGameMode == 3)
+            if (iGameMode == GameMode.GameType.Normal || iGameMode == GameMode.GameType.Hard)
             {
                 if (tag == "Enemy")
                 {
@@ -1720,7 +1720,7 @@ public class Player : MonoBehaviour
             //Move a peça até a casa do inimigo abatido
             //int iTargetField = pieace.GetComponent<Player>().iFieldLive;
             int iHomeField = Field;
-            GameObject[] fcs = FindObjectOfType<OrdersParts>().Fields;
+            Field[] fcs = FindObjectOfType<OrdersParts>().fields;
             MoveStart(fcs[iHomeField].gameObject.transform);
             IEnumerator enumerator = EndTurnAfterAttack(iHomeField, 1.5f);
             StartCoroutine(enumerator);
@@ -1790,7 +1790,7 @@ public class Player : MonoBehaviour
         SetAnimation("Attack", true);
         bAttack = true;
 
-        if (iGameMode == 2 || iGameMode == 3)
+        if (iGameMode == GameMode.GameType.Normal || iGameMode == GameMode.GameType.Hard)
         {
             if (tag == "Enemy")
             {
@@ -1988,7 +1988,7 @@ public class Player : MonoBehaviour
     private IEnumerator ShouPain(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        if (iGameMode == 3)
+        if (iGameMode == GameMode.GameType.Hard)
         {
             if (tag == "Enemy")
             {
@@ -2010,7 +2010,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
 
-        if (iGameMode == 3)
+        if (iGameMode == GameMode.GameType.Hard)
         {
             if (tag == "Enemy")
             {
@@ -2058,7 +2058,7 @@ public class Player : MonoBehaviour
         FieldController[] fcs = FindObjectsOfType<FieldController>();        
         foreach (FieldController fd in fcs)
         {
-            if (fd.Index == iFieldLive)
+            if (fd.index == iFieldLive)
             {
                 fd.BusyPiece = null;
                 fd.Busy = false;

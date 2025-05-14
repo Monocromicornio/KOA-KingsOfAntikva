@@ -236,7 +236,7 @@ public class MachinePlayer : MonoBehaviour
         //HousePlayer++;
 
         int iHouseFreeCount = ihousesfree.Length;
-        int iMaxRows = FindObjectOfType<CreateBoard>().GetFields() + 1;
+        int iMaxRows = FindObjectOfType<BoardController>().GetFields() + 1;
         Debug.Log("SelectPart iHouseFreeCount =" + iHouseFreeCount);
 
         if (iHouseFreeCount == 0)
@@ -432,7 +432,7 @@ public class MachinePlayer : MonoBehaviour
         {
             if (fc.Status == true)
             {
-                if (fc.Index == house)
+                if (fc.index == house)
                 {
                     if (!fc.Busy)
                     {
@@ -460,7 +460,7 @@ public class MachinePlayer : MonoBehaviour
         {
             if (fc.Status == true)
             {
-                lfreehouses.Add(fc.Index);
+                lfreehouses.Add(fc.index);
             }
         }
 
@@ -478,7 +478,7 @@ public class MachinePlayer : MonoBehaviour
         {
             if (fc.Status == true)
             {
-                lfreehouses.Add(fc.Index);
+                lfreehouses.Add(fc.index);
             }
         }
 
@@ -496,7 +496,7 @@ public class MachinePlayer : MonoBehaviour
 
         foreach (FieldController fc in fcs)
         {
-            if (fc.Index == index)
+            if (fc.index == index)
             {
                 indexfield = indexloop;
             }

@@ -10,13 +10,13 @@ public class AddPlayers : MonoBehaviour
     GameObject gGame;
 
     bool bStart = false;
-    CreateBoard board;
+    BoardController board;
 
     Turn turn;
 
     void Start()
     {
-        board = FindObjectOfType<CreateBoard>();
+        board = FindObjectOfType<BoardController>();
         turn = FindObjectOfType<Turn>();
     }
 

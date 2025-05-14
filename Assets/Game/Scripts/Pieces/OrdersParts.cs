@@ -4,41 +4,31 @@ using UnityEngine;
 
 public class OrdersParts : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Playsystems.Table table;
-
-    public GameObject[] Pieces;
-
-    public GameObject[] Fields;    
-
-    public bool bPlayer = true;
-
-    [SerializeField]
-    bool bEdit = false;
-
-    void Start()
-    {
-        if (bEdit)
-        {
-            StartCoroutine(OrderEdit(0.5f));
+    public TableData table;
+    protected BoardController board {
+        get {
+            return BoardController.instance;
         }
-        else
-        {
-            //StartCoroutine(Order(0.5f));
-            if (bPlayer)
-            {
-                StartCoroutine(StartLoadPieces());
-            }
-            else
-            {
-                StartCoroutine(StartLoadEnemyPieces());
-            }
+    }
+    public Field[] fields {
+        get {
+            return board.fields.ToArray();
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool isPlayerBoard = true;
+
+    void Start()
     {
+        //StartCoroutine(Order(0.5f));
+        if (isPlayerBoard)
+        {
+            StartCoroutine(StartLoadPieces());
+        }
+        else
+        {
+            StartCoroutine(StartLoadEnemyPieces());
+        }
         
     }
 
@@ -77,11 +67,7 @@ public class OrdersParts : MonoBehaviour
 
     private void LoadPieces(int length)
     {
-        //Pieces = new GameObject[length-1];
-
-        Fields = GameObject.FindGameObjectsWithTag("Field");
-
-        if (bPlayer)
+        if (isPlayerBoard)
         {
             for (int i = 1; i < length; i++)
             {
@@ -90,17 +76,16 @@ public class OrdersParts : MonoBehaviour
                 GameObject piece = transform.Find(table.GetRecord("Piece", i).ToString()).gameObject;
                 int house = int.Parse(table.GetRecord("House", i));
 
-                Fields[house].GetComponent<FieldController>().Busy = true;
-                Fields[house].GetComponent<FieldController>().BusyPiece = piece;
-                Fields[house].GetComponent<FieldController>().SetTextForce(piece.GetComponent<Player>().GetForceType());
-                piece.GetComponent<Player>().iFieldLive = Fields[house].GetComponent<FieldController>().Index;
-                piece.GetComponent<Player>().SetTargetField(Fields[house].transform);
+                fields[house].GetComponent<FieldController>().Busy = true;
+                fields[house].GetComponent<FieldController>().BusyPiece = piece;
+                fields[house].GetComponent<FieldController>().SetTextForce(piece.GetComponent<Player>().GetForceType());
+                piece.GetComponent<Player>().iFieldLive = fields[house].GetComponent<FieldController>().index;
+                piece.GetComponent<Player>().SetTargetField(fields[house].transform);
                 piece.transform.Rotate(0, 0, 0, Space.Self);
             }
         }
         else
         {            
-
             for (int i = 0; i < length; i++)
             {
 
@@ -110,28 +95,25 @@ public class OrdersParts : MonoBehaviour
                 Debug.Log("LoadPieces aOrderEnemies field = " + aOrderEnemies[i, 1]);
                 int house = int.Parse(aOrderEnemies[i, 1].ToString());
 
-                Fields[house].GetComponent<FieldController>().Busy = true;
-                Fields[house].GetComponent<FieldController>().BusyPiece = piece;
-                Fields[house].GetComponent<FieldController>().SetTextForce(piece.GetComponent<Player>().GetForceType());
-                piece.GetComponent<Player>().iFieldLive = Fields[house].GetComponent<FieldController>().Index;
-                piece.GetComponent<Player>().SetTargetField(Fields[house].transform);
+                fields[house].GetComponent<FieldController>().Busy = true;
+                fields[house].GetComponent<FieldController>().BusyPiece = piece;
+                fields[house].GetComponent<FieldController>().SetTextForce(piece.GetComponent<Player>().GetForceType());
+                piece.GetComponent<Player>().iFieldLive = fields[house].GetComponent<FieldController>().index;
+                piece.GetComponent<Player>().SetTargetField(fields[house].transform);
                 piece.transform.Rotate(0, 180, 0, Space.Self);
                 
             }
         }
-
-        //StartCoroutine(Order(0.5f));
     }
 
     private string[,] OrderEnemy()    
     {
         GameObject[] pieces = GameObject.FindGameObjectsWithTag("Enemy");
-        Fields = GameObject.FindGameObjectsWithTag("Field");
 
         string[,] orderpieaces = new string[pieces.Length, 2];
 
         int PiecesCount = pieces.Length;
-        int FieldsCount = Fields.Length-1;
+        int FieldsCount = fields.Length-1;
 
         List<string> lpieces = new List<string>();
 
@@ -148,7 +130,7 @@ public class OrdersParts : MonoBehaviour
         {
             int index = Random.Range(0, lpieces.Count);
             orderpieaces[i, 0] = lpieces[index];
-            orderpieaces[i, 1] = Fields[FieldsCount].GetComponent<FieldController>().Index.ToString();
+            orderpieaces[i, 1] = fields[FieldsCount].GetComponent<FieldController>().index.ToString();
             lpieces.Remove(lpieces[index]);
             FieldsCount--;
             Debug.Log("OrderEnemy piece = " + orderpieaces[i, 0]);
@@ -159,7 +141,7 @@ public class OrdersParts : MonoBehaviour
         return orderpieaces;
     }
 
-    private IEnumerator Order(float waitTime)
+    /*private IEnumerator Order(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         Fields = GameObject.FindGameObjectsWithTag("Field");
@@ -177,7 +159,7 @@ public class OrdersParts : MonoBehaviour
                     Field.GetComponent<FieldController>().Busy = true;
                     Field.GetComponent<FieldController>().BusyPiece = Pieces[count].gameObject;
                     Field.GetComponent<FieldController>().SetTextForce(Pieces[count].GetComponent<Player>().Force.ToString());
-                    Pieces[count].GetComponent<Player>().iFieldLive = Field.GetComponent<FieldController>().Index;
+                    Pieces[count].GetComponent<Player>().iFieldLive = Field.GetComponent<FieldController>().index;
                     Pieces[count].GetComponent<Player>().SetTargetField(Field.transform);
                     Pieces[count].transform.Rotate(0, 0, 0, Space.Self);
                     count++;
@@ -199,7 +181,7 @@ public class OrdersParts : MonoBehaviour
                 {
                     fcs[i].GetComponent<FieldController>().Busy = true;
                     fcs[i].GetComponent<FieldController>().BusyPiece = Pieces[count].gameObject;
-                    Pieces[count].GetComponent<Player>().iFieldLive = fcs[i].GetComponent<FieldController>().Index;
+                    Pieces[count].GetComponent<Player>().iFieldLive = fcs[i].GetComponent<FieldController>().index;
                     Pieces[count].GetComponent<Player>().SetTargetField(fcs[i].transform);
                     Pieces[count].transform.Rotate(0, 180, 0, Space.Self);                                        
                     count++;
@@ -214,60 +196,5 @@ public class OrdersParts : MonoBehaviour
 
         print("OrdersParts - WaitAndPrint " + Time.time);            
 
-    }
-
-    private IEnumerator OrderEdit(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        Fields = GameObject.FindGameObjectsWithTag("Field");
-
-        int length = table.Count();
-
-        if (length > 1)
-        {
-
-            for (int i = 1; i < length; i++)
-            {
-                Debug.Log("Name piece = " + table.GetRecord("Piece", i) + " - House = " + table.GetRecord("House", i));
-
-                GameObject piece = transform.Find(table.GetRecord("Piece", i).ToString()).gameObject;
-                int house = int.Parse(table.GetRecord("House", i));
-
-                Fields[house].GetComponent<HousePicker>().Busy = true;
-                Fields[house].GetComponent<HousePicker>().BusyPiece = piece;
-                
-                piece.GetComponent<ChangePiece>().iHouse = Fields[house].GetComponent<HousePicker>().Index;
-                piece.transform.position = Fields[house].transform.position;
-                piece.transform.Rotate(0, 0, 0, Space.Self);
-                (piece.GetComponent(typeof(BoxCollider)) as Collider).enabled = false;
-        }
-        }
-        else
-        {
-            int count = 0;
-
-            foreach (GameObject Field in Fields)
-            {
-                Debug.Log(Field.name);
-
-                if (count < (Pieces.Length))
-                {
-                    //Field.GetComponent<FieldController>().Busy = true;
-
-                    //Pieces[count].GetComponent<Player>().iFieldLive = Field.GetComponent<FieldController>().Index;
-                    //Pieces[count].GetComponent<Player>().SetTargetField(Field.transform);                
-                    Field.GetComponent<HousePicker>().BusyPiece = Pieces[count].gameObject;
-                    (Pieces[count].GetComponent(typeof(BoxCollider)) as Collider).enabled = false;
-                    Pieces[count].transform.position = Field.transform.position;
-                    Pieces[count].GetComponent<ChangePiece>().SetHouse(Field.GetComponent<HousePicker>().Index);
-                    count++;
-                }
-            }
-        }
-        print("OrdersParts - WaitAndPrint " + Time.time);
-
-    }
-
-
-
+    }*/
 }

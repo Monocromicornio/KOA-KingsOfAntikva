@@ -4,30 +4,14 @@ using UnityEngine;
 
 public class ForceText : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField]
-    string sForce;
-    TextMesh txtForce;    
+    private string sForce;
+    [SerializeField]
+    private TextMesh txtForce;    
 
-    void Start()
-    {        
-
-        if (sForce != "B")
-        {
-            txtForce = transform.Find("TxtForce").GetComponent<TextMesh>();
-            txtForce.text = sForce;
-        }
-        else if (sForce != "F")
-        {
-            txtForce = transform.Find("TxtForce").GetComponent<TextMesh>();
-            txtForce.text = sForce;
-        }
-        else
-        {
-            txtForce = transform.Find("TxtForce").GetComponent<TextMesh>();
-            txtForce.text = "";
-        }
-
+    void Awake()
+    {
+        bool txtEmpty = sForce == "B" || sForce != "F";
+        txtForce.text = txtEmpty? "" : sForce;
     }
-
 }

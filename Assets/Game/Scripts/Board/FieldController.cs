@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldController : MonoBehaviour
-{
-    // Start is called before the first frame update
-    public string NickName;
-    public string ColumnName;
-    public int Index;
-    public int Row;
-    public int Column;
+public class FieldController : Field
+{   
     public Transform Target;
 
     public bool Status=false;
@@ -30,7 +24,7 @@ public class FieldController : MonoBehaviour
 
     GameMode gamemode;
 
-    int iGameMode = 0;
+    GameMode.GameType iGameMode = 0;
 
     bool bPlayer = false;
 
@@ -107,7 +101,7 @@ public class FieldController : MonoBehaviour
         }
         else
         {
-            if(iGameMode == 1)
+            if(iGameMode == GameMode.GameType.Training)
             {                
                 if (Busy)
                 {
@@ -122,7 +116,7 @@ public class FieldController : MonoBehaviour
                     TxtForce.gameObject.SetActive(false);
                 }
             }
-            else if (iGameMode == 2)
+            else if (iGameMode == GameMode.GameType.Normal)
             {
                 if (Busy)
                 {
@@ -157,7 +151,7 @@ public class FieldController : MonoBehaviour
             {
                 Debug.Log("Selected field: " + name);
                 Debug.Log("Selected NickName: " + NickName);
-                Debug.Log("Index field: " + Index);
+                Debug.Log("Index field: " + index);
                 Debug.Log("Column field: " + Column);
                 Debug.Log("Row field: " + Row);
                 Debug.Log("Piece Type: " + turn.Piece.GetComponent<Player>().Types.ToString());
@@ -193,7 +187,7 @@ public class FieldController : MonoBehaviour
 
         turn.Piece.GetComponent<Player>().CancelMovement();
 
-        turn.Piece.GetComponent<Player>().iFieldLive = Index;
+        turn.Piece.GetComponent<Player>().iFieldLive = index;
     }
 
     public void SetStatus(bool status)
