@@ -14,6 +14,11 @@ public class SavePieceOrder : MonoBehaviour
         public Toggle toggle;
         public GameMode.GameType gameType;
     }
+    private BoardController board {
+        get {
+            return BoardController.instance;
+        }
+    }
 
     [SerializeField]
     GameMode gameMode;
@@ -55,8 +60,7 @@ public class SavePieceOrder : MonoBehaviour
 
     void SavePieces()
     {
-        HousePicker[] houses = FindObjectsOfType<HousePicker>();
-
+        HousePicker[] houses = board.GetHousePickersFromFields();
         foreach (HousePicker house in houses)
         {
             Debug.Log("SavePieceOrder - house.Index = " + house.index + " - house.BusyPiece.name = " + house.piece.name);
