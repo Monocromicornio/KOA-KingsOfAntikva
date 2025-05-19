@@ -24,7 +24,7 @@ public class TurnUI : MonoBehaviour
     void Update()
     {
 
-        if(turn.Liberate && turn.TurnPlayer == "Player")
+        if(turn.Liberate && turn.isPlayerTurn)
         {
             gTurnOn.SetActive(true);
             gTurnOff.SetActive(false);

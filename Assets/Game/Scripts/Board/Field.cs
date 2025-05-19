@@ -8,15 +8,15 @@ public class Field: MonoBehaviour
     public string ColumnName { get; set; }
     public string NickName { get; set; }
 
-    public bool isHousePicker{
+    public bool isEditableField{
         get {
-            return this is HousePicker;
+            return this is EditableField;
         }
     }
 
-    public bool isFieldController{
+    public bool isGameField{
         get {
-            return this is FieldController;
+            return this is GameField;
         }
     }
 
@@ -42,13 +42,13 @@ public class Field: MonoBehaviour
 
     public Component GetFieldType()
     {
-        if (isHousePicker)
+        if (isEditableField)
         {
-            return GetComponent<HousePicker>();
+            return GetComponent<EditableField>();
         }
-        else if (isFieldController)
+        else if (isGameField)
         {
-            return GetComponent<FieldController>();
+            return GetComponent<GameField>();
         }
         else
         {

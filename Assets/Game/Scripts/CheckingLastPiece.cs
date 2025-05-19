@@ -20,15 +20,15 @@ public class CheckingLastPiece : MonoBehaviour
     {
         int count = 0;
 
-        FieldController[] fcs = FindObjectsOfType<FieldController>();
+        GameField[] gameFields = FindObjectsOfType<GameField>();
 
-        foreach(FieldController fc in fcs)
+        foreach(GameField gameField in gameFields)
         {
-            if(fc.BusyPiece.gameObject.tag == sType)
+            if(gameField.piece.gameObject.tag == sType)
             {
-                if (fc.BusyPiece.GetComponent<Player>().Types != Player.ItemType.Bomba)
+                if (gameField.piece.GetComponent<Piece>().Types != Piece.ItemType.Bomba)
                 {
-                    if (fc.BusyPiece.GetComponent<Player>().Types != Player.ItemType.Bandeira)
+                    if (gameField.piece.GetComponent<Piece>().Types != Piece.ItemType.Bandeira)
                     {
                         count++;
                     }

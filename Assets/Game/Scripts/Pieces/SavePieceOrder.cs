@@ -35,7 +35,7 @@ public class SavePieceOrder : MonoBehaviour
         {
             if (toggleGame.toggle.isOn)
             {
-                gameMode.SetGameType(toggleGame.gameType);
+                gameMode.type = toggleGame.gameType;
             }
         }
 
@@ -60,12 +60,12 @@ public class SavePieceOrder : MonoBehaviour
 
     void SavePieces()
     {
-        HousePicker[] houses = board.GetHousePickersFromFields();
-        foreach (HousePicker house in houses)
+        EditableField[] editables = board.GetEditableFieldsFromFields();
+        foreach (EditableField editable in editables)
         {
-            Debug.Log("SavePieceOrder - house.Index = " + house.index + " - house.BusyPiece.name = " + house.piece.name);
+            Debug.Log("SavePieceOrder - house.Index = " + editable.index + " - house.BusyPiece.name = " + editable.piece.name);
 
-            string[] newRecord = { house.index.ToString(), house.piece.name.ToString() };
+            string[] newRecord = { editable.index.ToString(), editable.piece.name.ToString() };
             table.AddRecord(newRecord);
         }
 

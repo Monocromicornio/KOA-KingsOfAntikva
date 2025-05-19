@@ -1,20 +1,30 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Turn : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    public GameObject Piece;
-    public string TurnPlayer="";
+    MatchController matchController
+    {
+        get
+        {
+            return MatchController.instance;
+        }
+    }
+    public Piece currentePiece { get; private set; }
+    public bool isPlayerTurn { get; private set; }
     public bool Liberate=false;
 
     [SerializeField]
     AudioSource auChangeTurn;
 
     bool bVictory=false;
-    bool bWin = false;
+    bool finished
+    {
+        get
+        {
+            return matchController.finished;
+        }
+    }
 
     int iPlayerCountVictory = 0;
     int iEnemyCountVictory = 0;
@@ -23,9 +33,8 @@ public class Turn : MonoBehaviour
 
     private void Start()
     {
-        TurnPlayer = "Player";
+        isPlayerTurn = true;
         Liberate = true;
-
     }
 
     private void Update()
@@ -33,14 +42,14 @@ public class Turn : MonoBehaviour
         VictoryVerify();
     }
 
-    public void SetPiece(GameObject piece)
+    public void SetPiece(Piece piece)
     {
-        Piece = piece;
+        currentePiece = piece;
     }
 
-    public GameObject GetPiece()
+    public Piece GetPiece()
     {
-        return Piece;
+        return currentePiece;
     }
 
     public bool bChangeTurn = false;
@@ -52,7 +61,7 @@ public class Turn : MonoBehaviour
 
         if (bLoad)
         {
-            if (!bWin)
+            if (!finished)
             {
                 if (!bChangeTurn)
                 {
@@ -72,25 +81,15 @@ public class Turn : MonoBehaviour
 
         //if (Piece.GetComponent<Player>().tag == "Player")        
 
-        Debug.Log("TurnPlayer = " + TurnPlayer);
         PieacesCount();
 
         if (!bSuicid)
         {
-            if (TurnPlayer == "Player")
-            {
-                TurnPlayer = "Enemy";
-            }
-            else
-            {
-                TurnPlayer = "Player";
-                auChangeTurn.Play();
-            }
+            isPlayerTurn = !isPlayerTurn;
 
+            if(isPlayerTurn) auChangeTurn.Play();
             bChangeTurn = false;
-
-            IEnumerator enumerator = IELiberateTurn(0.5f);
-            StartCoroutine(enumerator);
+            StartCoroutine(IELiberateTurn(0.5f));
         }
     }
 
@@ -99,8 +98,6 @@ public class Turn : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         KillStuckPiece();
         Liberate = true;
-
-        
     }
 
     public void PieacesCount()
@@ -113,9 +110,9 @@ public class Turn : MonoBehaviour
 
         foreach (GameObject enemy in Enemies)
         {
-            if (enemy.GetComponent<Player>().Types.ToString() != "Bandeira")
+            if (enemy.GetComponent<Piece>().Types.ToString() != "Bandeira")
             {
-                if (enemy.GetComponent<Player>().Types.ToString() != "Bomba")
+                if (enemy.GetComponent<Piece>().Types.ToString() != "Bomba")
                 {
                     //enemy.GetComponent<Player>().SetDie();                
                     iEnemyCount++;
@@ -128,9 +125,9 @@ public class Turn : MonoBehaviour
 
         foreach (GameObject player in Players)
         {
-            if (player.GetComponent<Player>().Types.ToString() != "Bandeira")
+            if (player.GetComponent<Piece>().Types.ToString() != "Bandeira")
             {
-                if (player.GetComponent<Player>().Types.ToString() != "Bomba")
+                if (player.GetComponent<Piece>().Types.ToString() != "Bomba")
                 {
                     //player.GetComponent<Player>().SetDie();                
                     iPlayerCount++;
@@ -138,16 +135,8 @@ public class Turn : MonoBehaviour
             }
         }
 
-
-        //Debug.Log("player iPlayerCount = " + iPlayerCount);
-        //Debug.Log("enemy iEnemyCount = " + iEnemyCount);        
-
         iPlayerCountVictory = iPlayerCount;
         iEnemyCountVictory = iEnemyCount;
-
-        //Debug.Log("enemy iPlayerCountVictory = " + iPlayerCountVictory);
-        //Debug.Log("player iEnemyCountVictory = " + iEnemyCountVictory);
-
     }
 
     void VictoryVerify()
@@ -158,15 +147,14 @@ public class Turn : MonoBehaviour
             {
                 if (iEnemyCountVictory == 0)
                 {
-
-                    bWin = true;
-                    Piece = null;
+                    matchController.WinGame();
+                    currentePiece = null;
 
                     GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
 
                     foreach (GameObject player in Players)
                     {
-                        player.GetComponent<Player>().SetVictory();
+                        player.GetComponent<Piece>().SetVictory();
                     }
 
                     bVictory = true;
@@ -174,25 +162,20 @@ public class Turn : MonoBehaviour
 
                 if (iPlayerCountVictory == 0)
                 {
-                    bWin = true;
-                    Piece = null;
+                    matchController.WinGame();
+                    currentePiece = null;
 
                     GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
                     foreach (GameObject enemy in Enemies)
                     {
-                        enemy.GetComponent<Player>().SetVictory();
+                        enemy.GetComponent<Piece>().SetVictory();
                     }
 
                     bVictory = true;
                 }
             }
         }
-    }
-
-    public void SetVictory()
-    {
-        bWin = true;
     }
 
     public void LoadPieces()
@@ -208,7 +191,7 @@ public class Turn : MonoBehaviour
 
     private void KillStuckPiece()
     {
-        if(TurnPlayer == "Player")
+        if(isPlayerTurn)
         {
             Debug.Log("KillStuckPiece - iPlayerCountVictory = " + iPlayerCountVictory);
             if(iPlayerCountVictory==1)
@@ -217,25 +200,24 @@ public class Turn : MonoBehaviour
 
                 foreach (GameObject player in Players)
                 {
-                    if (player.GetComponent<Player>().Types.ToString() != "Bandeira")
+                    if (player.GetComponent<Piece>().Types.ToString() != "Bandeira")
                     {
-                        if (player.GetComponent<Player>().Types.ToString() != "Bomba")
+                        if (player.GetComponent<Piece>().Types.ToString() != "Bomba")
                         {
-                            int[] iHousesFree = player.GetComponent<Player>().CheckHouses();
+                            int[] iHousesFree = player.GetComponent<Piece>().CheckHouses();
                             Debug.Log("KillStuckPiece - iHousesFree.Length = " + iHousesFree.Length);
 
                             if (iHousesFree.Length==0)
                             {
                                 bSuicid = true;
-                                player.GetComponent<Player>().SetSuicide();
+                                player.GetComponent<Piece>().SetSuicide();
                             }
                         }
                     }
                 }
             }            
         }
-
-        if (TurnPlayer == "Enemy")
+        else
         {
             if (iEnemyCountVictory == 1)
             {
@@ -243,17 +225,17 @@ public class Turn : MonoBehaviour
 
                 foreach (GameObject player in Players)
                 {
-                    if (player.GetComponent<Player>().Types.ToString() != "Bandeira")
+                    if (player.GetComponent<Piece>().Types.ToString() != "Bandeira")
                     {
-                        if (player.GetComponent<Player>().Types.ToString() != "Bomba")
+                        if (player.GetComponent<Piece>().Types.ToString() != "Bomba")
                         {
-                            int[] iHousesFree = player.GetComponent<Player>().HousesFree();
+                            int[] iHousesFree = player.GetComponent<Piece>().HousesFree();
                             Debug.Log("KillStuckPiece - iHousesFree.Length = " + iHousesFree.Length);
 
                             if (iHousesFree.Length == 0)
                             {
                                 bSuicid = true;
-                                player.GetComponent<Player>().SetSuicide();
+                                player.GetComponent<Piece>().SetSuicide();
                             }
                         }
                     }

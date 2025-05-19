@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BoardController : MonoBehaviour
 {
@@ -74,28 +75,45 @@ public class BoardController : MonoBehaviour
         CreateFields(col, row, boardData.distance);
     }
 
-    public int GetFields()
+    public int ColumnLength()
     {
         return boardData.column;
     }
 
-    public bool isFinished(){
+    public bool isFinished()
+    {
         return boardData.isFinished;
     }
 
-    public float GetDistance(){
+    public float GetDistance()
+    {
         return boardData.distance;
     }
 
-    public HousePicker[] GetHousePickersFromFields(){
-        List<HousePicker> pickers = new List<HousePicker>();
+    public EditableField[] GetEditableFieldsFromFields()
+    {
+        List<EditableField> editables = new List<EditableField>();
 
-        foreach(Field field in fields){
-            if(field.isHousePicker){
-                pickers.Add(field.GetFieldType() as HousePicker);
+        foreach (Field field in fields)
+        {
+            if (field.isEditableField)
+            {
+                editables.Add(field.GetFieldType() as EditableField);
             }
         }
 
-        return pickers.ToArray();
+        return editables.ToArray();
+    }
+    
+    public GameField[] GetGameFieldFromFields(){
+        List<GameField> gamefields = new List<GameField>();
+
+        foreach(Field field in this.fields){
+            if(field.isGameField){
+                gamefields.Add(field.GetFieldType() as GameField);
+            }
+        }
+
+        return gamefields.ToArray();
     }
 }

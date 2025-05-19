@@ -12,18 +12,20 @@ public class GameMode : MonoBehaviour
     [SerializeField]
     private GameType gameType = GameType.Training;
 
-    public GameType GetGameType()
+    public GameType type
     {
-        if (gameType == 0)
+        get
         {
-            gameType = (GameType)PlayerPrefs.GetInt("GameMode", (int)GameType.Training);
+            if (gameType == 0)
+            {
+                gameType = (GameType)PlayerPrefs.GetInt("GameMode", (int)GameType.Training);
+            }
+            return gameType;
         }
-        return gameType;
-    }
-
-    public void SetGameType(GameType newGameType)
-    {
-        gameType = newGameType;
-        PlayerPrefs.SetInt("GameMode", (int)newGameType);
+        set
+        {
+            gameType = value;
+            PlayerPrefs.SetInt("GameMode", (int)gameType);
+        }
     }
 }
