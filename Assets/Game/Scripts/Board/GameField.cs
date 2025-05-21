@@ -168,9 +168,7 @@ public class GameField : Field
     {
         turn.Liberate = false;
 
-        turn.currentePiece.MoveStart(this);
-
-        turn.currentePiece.GetComponent<Piece>().iFieldLive = index;
+        turn.currentePiece.SelectedAField(this);
     }
 
     public void Select()

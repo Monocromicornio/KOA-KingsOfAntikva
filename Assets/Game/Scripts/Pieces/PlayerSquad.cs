@@ -16,7 +16,7 @@ public class PlayerSquad : Squad
 
             int house = int.Parse(table.GetRecord("House", i));
             gameFields[house].SetPiece(piece);
-            piece.GoToField(gameFields[house]);
+            piece.SetFirstField(gameFields[house]);
         }
     }
 }

@@ -58,15 +58,9 @@ public class FakePiece : Piece
         Reveal();
     }
 
-    public override void GoToField()
+    public override void SetFirstField(GameField field)
     {
-        base.GoToField();
-        transform.Rotate(0, 180, 0, Space.Self);
-    }
-
-    public override void GoToField(GameField field)
-    {
-        base.GoToField(field);
+        base.SetFirstField(field);
         transform.Rotate(0, 180, 0, Space.Self);
     }
 }

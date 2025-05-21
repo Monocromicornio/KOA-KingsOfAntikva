@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Piece))]
-public class MovingPiece : MonoBehaviour
+public class SelectField : MonoBehaviour
 {
     private Piece piece;
     private MatchController matchController => MatchController.instance;

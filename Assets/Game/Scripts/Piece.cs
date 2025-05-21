@@ -30,11 +30,11 @@ public class Piece : MonoBehaviour
     private void SetCurrentField(GameField value)
     {
         currentField?.SetPiece(null);
-        
-        currentField = value;
-        iFieldLive = value.index;
 
+        currentField = value;
         currentField.SetPiece(this);
+
+        SendMessage("ChangeField", currentField, SendMessageOptions.DontRequireReceiver);
     }
 
     public ForceText forceTxt;
@@ -60,7 +60,7 @@ public class Piece : MonoBehaviour
 
     public int Force;
     public int Rule;
-    public int iFieldLive;
+    public int iFieldLive => currentField.index;
     public float MoveSpeed;
     public bool Attacked = false;
 
@@ -204,8 +204,8 @@ public class Piece : MonoBehaviour
 
                 PlayStep();
 
-                IEnumerator enumerator = MovetoAttack(pieace, true);
-                StartCoroutine(enumerator);
+                /*IEnumerator enumerator = MovetoAttack(pieace, true);
+                StartCoroutine(enumerator);*/
 
             }
         }
@@ -235,8 +235,8 @@ public class Piece : MonoBehaviour
 
                 PlayStep();
 
-                IEnumerator enumerator = MovetoAttack(pieace, true);
-                StartCoroutine(enumerator);
+                /*IEnumerator enumerator = MovetoAttack(pieace, true);
+                StartCoroutine(enumerator);*/
                 
             }
 
@@ -259,8 +259,8 @@ public class Piece : MonoBehaviour
 
                 PlayStep();
 
-                IEnumerator enumerator = MovetoAttack(pieace, false);
-                StartCoroutine(enumerator);
+                /*IEnumerator enumerator = MovetoAttack(pieace, false);
+                StartCoroutine(enumerator);*/
             }
 
 
@@ -302,8 +302,8 @@ public class Piece : MonoBehaviour
 
                 PlayStep();
 
-                IEnumerator enumerator = MovetoAttack(pieace,true);
-                StartCoroutine(enumerator);
+                /*IEnumerator enumerator = MovetoAttack(pieace,true);
+                StartCoroutine(enumerator);*/
                 
             }
         }
@@ -320,8 +320,8 @@ public class Piece : MonoBehaviour
 
                 PlayStep();
 
-                IEnumerator enumerator = MovetoAttack(pieace,false);
-                StartCoroutine(enumerator);
+                /*IEnumerator enumerator = MovetoAttack(pieace,false);
+                StartCoroutine(enumerator);*/
             }
 
          }
@@ -608,159 +608,17 @@ public class Piece : MonoBehaviour
         return ihouses;
     }
 
-    public virtual void GoToField()
-    {
-        if (currentField == null) return;
-
-        transform.position = currentField.transform.position;
-        transform.Rotate(0, 0, 0, Space.Self);
-    }
-
-    public virtual void GoToField(GameField field)
+    public virtual void SetFirstField(GameField field)
     {
         SetCurrentField(field);
         transform.position = currentField.transform.position;
         transform.Rotate(0, 0, 0, Space.Self);
     }
 
-    public void MoveStart(GameField target)
+    public void SelectedAField(GameField field)
     {
         if (finished) return;
-
-        SetCurrentField(target);
-
-        transform.LookAt(target.transform);
-
-        PlayStep();
-
-        StartCoroutine(Moveto());
-    }
-
-    IEnumerator Moveto()
-    {
-        float SpeedPlus = 0;
-
-        if (CanRun(currentField.transform))
-        {
-            SpeedPlus = 1.0f;
-        }
-
-        while (!DistanceTarget(currentField.transform))
-        {
-            print("B");
-            SetAnimation("Walk", true);
-            transform.Translate(Vector3.forward * Time.deltaTime * (MoveSpeed + SpeedPlus));
-            yield return null;
-        }
-
-        if (!turn.bChangeTurn)
-        {
-            turn.ChangeTurn();
-        }
-        StopStep();
-        SetAnimation("Walk", false);
-        
-        yield return 0;
-    }
-
-    private bool CanRun(Transform target)
-    {
-        bool bRun = false;
-        float dist;
-
-        float MaxDist = board.GetDistance() * 2;
-
-        if (target)
-        {
-            dist = Vector3.Distance(target.position, transform.position);           
-
-            if (dist >= MaxDist)
-            {
-                print("CanRun - Distance: " + dist);
-                bRun = true;
-            }
-        }
-
-        return bRun;
-
-    }
-
-    IEnumerator MovetoAttack(GameObject pieace,bool attack)
-    {
-        if (finished) yield return null;
-        
-        turn.Liberate = false;
-        //CancelMovement();
-
-        Debug.Log("MovetoAttack pieace = " + pieace.name + " - attack = " + attack);
-
-        float SpeedPlus = 0;
-
-        if(CanRun(currentField.transform))
-        {
-            SpeedPlus = 1.0f;
-        }
-
-        while (!DistanceAttack(currentField.transform))
-        {
-            SetAnimation("Walk", true);
-            transform.Translate(Vector3.forward * Time.deltaTime * (MoveSpeed + SpeedPlus));
-            yield return null;
-        }
-        if (attack)
-        {
-            soundController.PreAttack();
-            IEnumerator enumerator = IEattack(pieace, 1.0f);
-            StartCoroutine(enumerator);
-        }
-        else
-        {
-            soundController.PreAttack();
-            pieace.GetComponent<Piece>().CounterAttack(gameObject);
-        }
-
-        StopStep();
-        SetAnimation("Walk", false);
-        
-        yield return 0;
-    }
-
-    private bool DistanceTarget(Transform target)
-    {
-        bool bdistance = false;
-        float dist;
-
-        if (target)
-        {
-            dist = Vector3.Distance(target.position, transform.position);
-            if (dist <= 0.1f)            
-            {
-                bdistance = true;                
-            }
-        }
-
-        return bdistance;
-
-    }
-
-    private bool DistanceAttack(Transform target)
-    {
-        bool bdistance = false;
-        float dist;
-
-        if (target)
-        {
-            dist = Vector3.Distance(target.position, transform.position);
-            //print("Distance to other: " + dist);
-
-            if (dist <= 1.5f)
-            {
-                bdistance = true;                
-            }
-        }
-
-        return bdistance;
-
+        SetCurrentField(field);
     }
 
     public void OpenChest()
@@ -801,7 +659,7 @@ public class Piece : MonoBehaviour
         soundController.VictoryPeaple();
     }
 
-    void SetAnimation(string AnimName, bool bstatus)
+    public void SetAnimation(string AnimName, bool bstatus)
     {
         anim.SetBool(AnimName, bstatus);
     }
@@ -946,7 +804,7 @@ public class Piece : MonoBehaviour
         if (!finished)
         {
             int iHomeField = Field;
-            MoveStart(gameFields[iHomeField]);
+            //MoveStart(gameFields[iHomeField]);
             IEnumerator enumerator = EndTurnAfterAttack(iHomeField, 1.5f);
             StartCoroutine(enumerator);
         }
@@ -964,7 +822,7 @@ public class Piece : MonoBehaviour
             turn.currentePiece.GetComponent<Piece>().ReleaseHouses();
 
             //Atualiza a casa atual após a peça andar
-            turn.currentePiece.GetComponent<Piece>().iFieldLive = Field;
+            //turn.currentePiece.GetComponent<Piece>().iFieldLive = Field;
         }
         sDebug = "EndTurnAfterAttack";
         Debug.Log(sDebug);
@@ -981,7 +839,7 @@ public class Piece : MonoBehaviour
         turn.currentePiece.GetComponent<Piece>().ReleaseHouses();
 
         //Atualiza a casa atual após a peça andar
-        turn.currentePiece.GetComponent<Piece>().iFieldLive = Field;
+        //turn.currentePiece.GetComponent<Piece>().iFieldLive = Field;
 
         //Troca o turno
         Debug.Log("EndTurn - turn.bChangeTurn = " + turn.bChangeTurn);

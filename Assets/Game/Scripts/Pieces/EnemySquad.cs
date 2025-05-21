@@ -34,7 +34,7 @@ public class EnemySquad : Squad
             fieldIndexes.RemoveAt(rndField);
 
             gameFields[fieldIndex].SetPiece(pieces[i]);
-            pieces[i].GoToField(gameFields[fieldIndex]);
+            pieces[i].SetFirstField(gameFields[fieldIndex]);
         }
     }
 }

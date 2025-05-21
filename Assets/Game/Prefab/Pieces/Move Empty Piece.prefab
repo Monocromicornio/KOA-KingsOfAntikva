@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 7107614780625465282}
   - component: {fileID: 7107614780625465283}
   - component: {fileID: 4755829936823940059}
+  - component: {fileID: 1756047616036489277}
   m_Layer: 0
   m_Name: Move Empty Piece
   m_TagString: Player
@@ -317,12 +318,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  selected: 0
   forceTxt: {fileID: 7634243943974959251}
   Types: 0
   Force: 0
   Rule: 0
-  iFieldLive: 0
   MoveSpeed: 0
   Attacked: 0
   Attack: 0
@@ -348,6 +347,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 1
+--- !u!114 &1756047616036489277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107614780625465293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a73ce9af30efa4fbaf05811b39bd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7107614781505568004
 GameObject:
   m_ObjectHideFlags: 0
