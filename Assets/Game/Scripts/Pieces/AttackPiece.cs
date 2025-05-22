@@ -15,14 +15,22 @@ public class AttackPiece : MonoBehaviour
     private GameField fieldAtk;
     private Piece target;
 
+    
+    [SerializeField]
+    AnimPiece anim;
+
+    public Piece.ItemType Types;
+
+    public int Force;
+
     [SerializeField]
     GameObject AttackEffect;
 
     [SerializeField]
-    GameObject AttackEffectSoldier;
+    Transform AttackEffectPos;
 
     [SerializeField]
-    Transform AttackEffectPos;
+    GameObject AttackEffectSoldier;
 
     void Awake()
     {
@@ -37,7 +45,8 @@ public class AttackPiece : MonoBehaviour
 
     public void NewTarget()
     {
-        if (finished) return;
+        return;
+        //if (finished) return;
 
         GameField fieldPiece = piece.targetField;
         if (!fieldPiece.hasPiece) return;
@@ -46,42 +55,41 @@ public class AttackPiece : MonoBehaviour
         target = fieldPiece.piece;
     }
 
-    //gpieace = atacante - piece = alvo
-    public void AttackRules(Piece target)
+    public void AttackRules()
     {
         transform.LookAt(target.transform);
 
-        //if (target.Types != ItemType.Bomba || target.Types != ItemType.Bandeira)
+        if (target.Types != Piece.ItemType.Bomba || target.Types != Piece.ItemType.Bandeira)
         {
             transform.LookAt(target.transform);
         }
 
-        //if (target.Types == ItemType.Bandeira)
+        if (target.Types == Piece.ItemType.Bandeira)
         {
             soundController.PreAttack();
             StartCoroutine(FeedbackAtk(target, 1.0f));
         }
-        //else if (this.Types == ItemType.Antibomba && target.Types == ItemType.Bomba)
+        else if (this.Types == Piece.ItemType.Antibomba && target.Types == Piece.ItemType.Bomba)
         {
             soundController.PreAttack();
             StartCoroutine(FeedbackAtk(target, 1.0f));
         }
-        //else if (this.Types != ItemType.Antibomba && target.Types == ItemType.Bomba)
+        else if (this.Types != Piece.ItemType.Antibomba && target.Types == Piece.ItemType.Bomba)
         {
             soundController.PreAttack();
             target.GetComponent<AttackPiece>().CounterAttack(piece);
         }
-        //else if (this.Types == ItemType.Espia && target.Force == 9)
+        else if (this.Types == Piece.ItemType.Espia && target.Force == 9)
         {
             soundController.PreAttack();
             StartCoroutine(FeedbackAtk(target, 1.0f));
         }
-        //else if (this.Force >= target.Force && target.Types != ItemType.Bomba)
+        else if (this.Force >= target.Force && target.Types != Piece.ItemType.Bomba)
         {
             soundController.PreAttack();
             StartCoroutine(FeedbackAtk(target, 1.0f));
         }
-        //else if (this.Force < target.Force)
+        else if (this.Force < target.Force)
         {
             soundController.PreAttack();
             target.GetComponent<AttackPiece>().CounterAttack(piece);
@@ -92,7 +100,7 @@ public class AttackPiece : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         //turn.Liberate = false;
-        pieace.SetAnimation("Attack", true);
+        anim.SetAnimation("Attack", true);
 
         /*if (gameType == GameMode.GameType.Normal || gameType == GameMode.GameType.Hard)
         {
@@ -123,7 +131,7 @@ public class AttackPiece : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         StartEffectAttack();
 
-        //if (pieace.Types == ItemType.Bandeira)
+        //if (pieace.Types == Piece.ItemType.Bandeira)
         {
             pieace.OpenChest();
         }
@@ -191,7 +199,7 @@ public class AttackPiece : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         //turn.Liberate = false;
 
-        pieace.SetAnimation("Attack", true);
+        anim.SetAnimation("Attack", true);
 
         /*if (gameType == GameMode.GameType.Normal || gameType == GameMode.GameType.Hard)
         {
@@ -224,7 +232,7 @@ public class AttackPiece : MonoBehaviour
         pieace.SetDie();
         pieace.EndTurnEnemy();
 
-        /*if(Types == ItemType.Bomba)
+        /*if(Types == Piece.ItemType.Bomba)
         {
             SetDie();
         }*/

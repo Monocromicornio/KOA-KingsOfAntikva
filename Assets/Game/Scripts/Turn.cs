@@ -39,7 +39,7 @@ public class Turn : MonoBehaviour
 
     private void Update()
     {
-        VictoryVerify();
+        //VictoryVerify();
     }
 
     public void SetPiece(Piece piece)

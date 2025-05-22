@@ -15,6 +15,9 @@ public class MovePiece : MonoBehaviour
     private Transform target => targetGameField.transform;
 
     [SerializeField]
+    AnimPiece anim;
+
+    [SerializeField]
     [Min(0)]
     float moveSpeed = 1;
 
@@ -40,7 +43,7 @@ public class MovePiece : MonoBehaviour
 
     IEnumerator Moveto()
     {
-        piece.SetAnimation("Walk", true);
+        anim.SetAnimation("Walk", true);
 
         while (IsFarFromTarget())
         {
@@ -49,7 +52,7 @@ public class MovePiece : MonoBehaviour
         }
 
         transform.position = target.position;
-        piece.SetAnimation("Walk", false);
+        anim.SetAnimation("Walk", false);
     }
 
     private bool IsFarFromTarget()

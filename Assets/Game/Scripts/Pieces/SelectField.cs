@@ -88,8 +88,6 @@ public class SelectField : MonoBehaviour
 
             gameField.Select();
             gameField.AttackMode = true;
-            piece.Attack = true;
-            pieace.Attacked = true;
         }
 
         gameField.Select();

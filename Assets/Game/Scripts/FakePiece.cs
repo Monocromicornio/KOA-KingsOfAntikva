@@ -2,22 +2,39 @@ using UnityEngine;
 
 public class FakePiece : Piece
 {
+    [Header("Fake Piece")]
+    [SerializeField]
+    GameObject obj;
+
     [SerializeField]
     GameObject fake;
 
     void Start()
     {
         fake.SetActive(false);
-        Vector3 vector3 = new Vector3(anim.transform.position.x, 0, anim.transform.position.z);
+        Vector3 vector3 = new Vector3(obj.transform.position.x, 0, obj.transform.position.z);
         fake = Instantiate(fake, vector3, transform.rotation);
         fake.transform.parent = transform;
 
-        anim.gameObject.SetActive(false);
+        obj.SetActive(false);
         fake.SetActive(true);
         fake.transform.rotation = transform.rotation;
 
-        anim = fake.GetComponent<Animator>();
+        AnimPiece anim = GetComponent<AnimPiece>();
+        if(anim) anim.ChangeAnim(fake);
+
         if (gChest != null) gChest.SetActive(false);
+    }
+
+    protected override void OnMouseDown()
+    {
+        if (!turn.isPlayerTurn) return;
+
+        if (turn.currentePiece != null)
+        {
+            print("ME ATAQUE " + gameObject.name);
+            turn.currentePiece.SelectedAField(field);
+        }
     }
 
     public void Reveal()
@@ -39,21 +56,21 @@ public class FakePiece : Piece
             gChest.SetActive(true);
         }
 
-        anim.gameObject.SetActive(true);
+        obj.gameObject.SetActive(true);
         fake.SetActive(false);
     }
 
-    void Attack()
+    public void Attack()
     {
         Reveal();
     }
 
-    void Hitted()
+    public void Hitted()
     {
         Reveal();
     }
 
-    void Die()
+    public void Die()
     {
         Reveal();
     }

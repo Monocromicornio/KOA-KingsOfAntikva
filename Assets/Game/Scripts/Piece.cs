@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
-    private MatchController matchController => MatchController.instance;
-    private SoundController soundController => matchController.soundController;
+    protected MatchController matchController => MatchController.instance;
+    protected SoundController soundController => matchController.soundController;
 
-    private BoardController board => matchController.boardController;
-    private GameField[] gameFields => board.gameFields;
+    protected BoardController board => matchController.boardController;
+    protected GameField[] gameFields => board.gameFields;
 
     protected GameMode.GameType gameType => matchController.gameType;
 
-    private Turn turn => matchController.turn;
+    protected Turn turn => matchController.turn;
 
-    [SerializeField]
-    protected Animator anim;
+    protected bool finished => matchController.finished;
 
-    private bool finished => matchController.finished;
-
-    private GameField field;
+    protected GameField field;
     public GameField targetField { get; private set; }
 
     public int indexCurrentField => field.index;
@@ -45,13 +42,6 @@ public class Piece : MonoBehaviour
     public ItemType Types;
 
     public int Force;
-    public int Rule;
-
-    public bool Attacked = false;
-
-    public bool Attack = false;
-
-    int iTargetField;
 
     [SerializeField]
     GameObject AttackEffect;
@@ -91,6 +81,7 @@ public class Piece : MonoBehaviour
 
     void Start()
     {
+        if (forceTxt == null) print("force txt null " + name);
         forceTxt.force = Force.ToString();
 
         if (Types == ItemType.Bandeira)
@@ -99,15 +90,9 @@ public class Piece : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    protected virtual void OnMouseDown()
     {
         if (!turn.isPlayerTurn) return;
-
-        if (turn.currentePiece != null && turn.currentePiece.tag != tag)
-        {
-            print("ME ATAQUE " + gameObject.name);
-            turn.currentePiece.SelectedAField(field);
-        }
 
         bool myTurn = tag == "Player" == turn.isPlayerTurn;
         if (myTurn && turn.Liberate == true)
@@ -399,8 +384,8 @@ public class Piece : MonoBehaviour
 
     public void OpenChest()
     {
-        AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
-        anim.SetBool("Open", true);
+        /*AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
+        anim.SetBool("Open", true);*/
 
         gParticleChest.SetActive(true);
 
@@ -425,7 +410,7 @@ public class Piece : MonoBehaviour
     {
         if (!finished) return;
 
-        SetAnimation("Win", true);
+        //SetAnimation("Win", true);
         StartCoroutine(VictoryPlay(1.5f));
     }
 
@@ -433,12 +418,7 @@ public class Piece : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         soundController.VictoryPeaple();
-    }
-
-    public void SetAnimation(string AnimName, bool bstatus)
-    {
-        anim.SetBool(AnimName, bstatus);
-    }  
+    } 
 
     public void SetTakeHome(int iGoField)
     {
@@ -526,7 +506,7 @@ public class Piece : MonoBehaviour
 
     public void SetDie()
     {
-        anim.SetBool("Die", true);        
+        //anim.SetBool("Die", true);
         bDie = true;
 
         IEnumerator enumerator1 = ShouPain(0.5f);
@@ -541,7 +521,7 @@ public class Piece : MonoBehaviour
 
     public void SetSuicide()
     {
-        anim.SetBool("Die", true);
+        //anim.SetBool("Die", true);
         //bDie = true;
 
         IEnumerator enumerator1 = ShouPain(0.5f);
