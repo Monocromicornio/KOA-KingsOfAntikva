@@ -6,8 +6,8 @@ public class Squad : MonoBehaviour
     protected TableData table;
     protected BoardController board => BoardController.instance;
     protected Field[] fields => board.fields.ToArray();
-    protected EditableField[] editables => board.GetEditableFieldsFromFields();
-    protected GameField[] gameFields => board.GetGameFieldFromFields();
+    protected EditableField[] editables => board.editableFields;
+    protected GameField[] gameFields => board.gameFields;
 
     [SerializeField]
     protected Piece[] defaultPieces;

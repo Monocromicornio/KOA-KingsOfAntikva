@@ -47,11 +47,6 @@ public class Turn : MonoBehaviour
         currentePiece = piece;
     }
 
-    public Piece GetPiece()
-    {
-        return currentePiece;
-    }
-
     public bool bChangeTurn = false;
 
     public bool bSuicid = false;

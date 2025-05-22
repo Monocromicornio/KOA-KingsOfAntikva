@@ -14,11 +14,9 @@ public class SavePieceOrder : MonoBehaviour
         public Toggle toggle;
         public GameMode.GameType gameType;
     }
-    private BoardController board {
-        get {
-            return BoardController.instance;
-        }
-    }
+    private BoardController board => BoardController.instance;
+    private EditableField[] editableFields => board.editableFields;
+
 
     [SerializeField]
     GameMode gameMode;
@@ -60,8 +58,7 @@ public class SavePieceOrder : MonoBehaviour
 
     void SavePieces()
     {
-        EditableField[] editables = board.GetEditableFieldsFromFields();
-        foreach (EditableField editable in editables)
+        foreach (EditableField editable in editableFields)
         {
             Debug.Log("SavePieceOrder - house.Index = " + editable.index + " - house.BusyPiece.name = " + editable.piece.name);
 

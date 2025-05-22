@@ -6,10 +6,12 @@ public class SelectField : MonoBehaviour
 {
     private Piece piece;
     private MatchController matchController => MatchController.instance;
-
+    private SoundController soundController => matchController.soundController;
     private BoardController board => matchController.boardController;
-    private GameField[] gameFields => board.GetGameFieldFromFields();
-    private List<GameField> selectedFields = new List<GameField>();
+    private GameField[] gameFields => board.gameFields;
+
+    private Dictionary<string, List<GameField>> selectedFields = new Dictionary<string, List<GameField>>();
+    private bool getted;
 
     [SerializeField]
     [Min(1)]
@@ -20,36 +22,63 @@ public class SelectField : MonoBehaviour
         piece = GetComponent<Piece>();
     }
 
+    public void GetPiece()
+    {
+        getted = !getted;
+
+        if (getted) Select();
+        else Deselect();
+    }
+
+    public void EndTurn()
+    {
+        print("AAAAAAAA");
+        Deselect();
+    }
+
     private void Select()
     {
         ActiveSelectablesFields();
+
+        if (selectedFields.Count == 0) return;
+
+        soundController.Select();
     }
 
     private void Deselect()
     {
-        foreach (GameField gameField in selectedFields)
+        foreach (List<GameField> fields in selectedFields.Values)
         {
-            gameField.Deselect();
+            foreach (GameField gameField in fields)
+            {
+                gameField.Deselect();
+            }
         }
 
         selectedFields.Clear();
+        soundController.Cancel();
     }
 
     private void ActiveSelectablesFields()
     {
         //X axis
-        SelectFieldsInSameRow(piece.iFieldLive, distance);
-        SelectFieldsInSameRow(piece.iFieldLive, -distance);
+        SelectFieldsInSameRow(piece.indexCurrentField, distance);
+        SelectFieldsInSameRow(piece.indexCurrentField, -distance);
 
         //Y axis
-        SelectFieldsInSameColumn(piece.iFieldLive, distance);
-        SelectFieldsInSameColumn(piece.iFieldLive, -distance);
+        SelectFieldsInSameColumn(piece.indexCurrentField, distance);
+        SelectFieldsInSameColumn(piece.indexCurrentField, -distance);
     }
 
-    void SetSelectField(GameField gameField)
+    private void SetSelectField(GameField gameField, string key)
     {
         if (gameField == null) return;
-        selectedFields.Add(gameField);
+
+        if (!selectedFields.ContainsKey(key))
+        {
+            selectedFields.Add(key, new List<GameField>());
+        }
+        selectedFields[key].Add(gameField);
 
         if (gameField.hasPiece)
         {
@@ -67,17 +96,36 @@ public class SelectField : MonoBehaviour
         gameField.Select();
     }
 
-    GameField GetField(int target)
+    private GameField GetField(int target)
     {
         if (target < 0 || target >= gameFields.Length) return null;
 
         return gameFields[target];
     }
 
+    public GameField GetEmptyFieldFromActive(GameField gameField)
+    {
+        if (gameField == null || !gameField.hasPiece) return gameField;
+
+        foreach (List<GameField> fields in selectedFields.Values)
+        {
+            if (fields.Contains(gameField))
+            {
+                int index = fields.IndexOf(gameField) - 1;
+                if (index < 0) index = 0;
+
+                return fields[index];
+            }
+        }
+
+        return null;
+    }
+
 #region Column
-    void SelectFieldsInSameColumn(int current, int distance, bool add = true)
+    private void SelectFieldsInSameColumn(int current, int distance, bool add = true)
     {
         int columnLength = board.ColumnLength();
+        string key = add? "column_up" : "column_down";
 
         for (int i = 1; i <= distance; i++)
         {
@@ -85,20 +133,20 @@ public class SelectField : MonoBehaviour
             int target = current + interval;
             GameField field = GetFieldInSameColumn(current, target);
 
-            SetSelectField(field);
+            SetSelectField(field, key);
 
             if (field == null || field.hasPiece) return;
         }
     }
 
-    GameField GetFieldInSameColumn(int current, int target)
+    private GameField GetFieldInSameColumn(int current, int target)
     {
         if (!OnTheSameColumn(current, target)) return null;
 
         return GetField(target);
     }
 
-    bool OnTheSameColumn(int current, int target)
+    private bool OnTheSameColumn(int current, int target)
     {
         if (!IsItAGameFieldIndex(new[] { current, target })) return false;
 
@@ -110,28 +158,30 @@ public class SelectField : MonoBehaviour
 #endregion
 
 #region Row
-    void SelectFieldsInSameRow(int current, int distance, bool add = true)
+    private void SelectFieldsInSameRow(int current, int distance, bool add = true)
     {
+        string key = add? "row_right" : "row_left";
+
         for (int i = 1; i <= distance; i++)
         {
             int interval = i * (add ? 1 : -1);
             int target = current + interval;
             GameField field = GetFieldInSameRow(current, target);
 
-            SetSelectField(field);
+            SetSelectField(field, key);
 
             if (field == null || field.hasPiece) return;
         }
     }
 
-    GameField GetFieldInSameRow(int current, int target)
+    private GameField GetFieldInSameRow(int current, int target)
     {
         if (!OnTheSameRow(current, target)) return null;
 
         return GetField(target);
     }
 
-    bool OnTheSameRow(int current, int target)
+    private bool OnTheSameRow(int current, int target)
     {
         if (!IsItAGameFieldIndex(new[] { current, target })) return false;
 
@@ -142,7 +192,7 @@ public class SelectField : MonoBehaviour
     }
     #endregion
 
-    bool IsItAGameFieldIndex(int[] indexes)
+    private bool IsItAGameFieldIndex(int[] indexes)
     {
         foreach (int index in indexes)
         {

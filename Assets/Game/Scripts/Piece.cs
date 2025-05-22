@@ -8,7 +8,7 @@ public class Piece : MonoBehaviour
     private SoundController soundController => matchController.soundController;
 
     private BoardController board => matchController.boardController;
-    private GameField[] gameFields => board.GetGameFieldFromFields();
+    private GameField[] gameFields => board.gameFields;
 
     protected GameMode.GameType gameType => matchController.gameType;
 
@@ -19,23 +19,10 @@ public class Piece : MonoBehaviour
 
     private bool finished => matchController.finished;
 
-    public bool selected { get; private set; }
-    private GameField currentField;
+    private GameField field;
+    public GameField targetField { get; private set; }
 
-    public GameField GetCurrentField()
-    {
-        return currentField;
-    }
-
-    private void SetCurrentField(GameField value)
-    {
-        currentField?.SetPiece(null);
-
-        currentField = value;
-        currentField.SetPiece(this);
-
-        SendMessage("ChangeField", currentField, SendMessageOptions.DontRequireReceiver);
-    }
+    public int indexCurrentField => field.index;
 
     public ForceText forceTxt;
 
@@ -53,15 +40,13 @@ public class Piece : MonoBehaviour
         Espia,
         Bandeira,
         Bomba
-
     }
 
     public ItemType Types;
 
     public int Force;
     public int Rule;
-    public int iFieldLive => currentField.index;
-    public float MoveSpeed;
+
     public bool Attacked = false;
 
     public bool Attack = false;
@@ -123,43 +108,68 @@ public class Piece : MonoBehaviour
     {
         if (!turn.isPlayerTurn) return;
 
-        SelectPeace();
-    }
-
-    public void SelectPeace()
-    {
-        if (finished) return;
-
-        bool myTurn = tag == "Player" == turn.isPlayerTurn;
-        if (myTurn && turn.Liberate == true)
-        {
-            if (!selected)
-            {
-                SendMessage("Select", SendMessageOptions.DontRequireReceiver);
-                selected = true;
-                turn.SetPiece(this);
-                soundController.Select();
-            }
-            else
-            {
-                SendMessage("Deselect", SendMessageOptions.DontRequireReceiver);
-                selected = false;
-                turn.SetPiece(null);
-                soundController.Cancel();
-            }
-        }
-
         if (Attacked == true)
         {
             SetAttack();
         }
+
+        bool myTurn = tag == "Player" == turn.isPlayerTurn;
+        if (myTurn && turn.Liberate == true)
+        {
+            turn.SetPiece(this);
+            SendMessage("GetPiece", SendMessageOptions.DontRequireReceiver);
+        }
     }
 
+    public void SelectPeace()
+    {
+        turn.ChangeTurn();
+    }
+
+    public virtual void SetFirstField(GameField field)
+    {
+        this.field = field;
+        targetField = null;
+
+        transform.position = field.transform.position;
+        transform.Rotate(0, 0, 0, Space.Self);
+    }
+
+    public void SelectedAField(GameField field)
+    {
+        if (finished) return;
+        targetField = field;
+        SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
+    }
+
+    public bool CheckPieceOnField()
+    {
+        if (field == targetField) return true;
+        if (targetField == null) return false;
+
+        if (transform.position == targetField.transform.position)
+        {
+            targetField.SetPiece(null);
+            field?.SetPiece(null);
+
+            field = targetField;
+            field.SetPiece(this);
+
+            SendMessage("ChangeField", targetField, SendMessageOptions.DontRequireReceiver);
+            print("--------------END TURN------------------");
+            SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
+            turn.ChangeTurn();
+            return true;
+        }
+
+        return false;
+    }
+
+//@
     GameObject gEnemyPieace;
 
     void SetAttack()
     {       
-        
         Piece gpieace = turn.currentePiece;
 
         if (gpieace)
@@ -171,7 +181,7 @@ public class Piece : MonoBehaviour
 
     public void AttackRules(GameObject pieace)
     {
-        iTargetField = pieace.GetComponent<Piece>().iFieldLive;
+        iTargetField = pieace.GetComponent<Piece>().indexCurrentField;
         gEnemyPieace = pieace;
         LookEnemy(pieace.transform);
 
@@ -200,7 +210,7 @@ public class Piece : MonoBehaviour
             //else if (pieace.GetComponent<Player>().Types == ItemType.Soldado)
             else if (Types == ItemType.Soldado)
             {
-                SetCurrentField(gameFields[iTargetField]);
+                SelectedAField(gameFields[iTargetField]);
 
                 PlayStep();
 
@@ -226,12 +236,12 @@ public class Piece : MonoBehaviour
             }
             else if (pieace.GetComponent<Piece>().Types == ItemType.Soldado)
             {
-                sDebug = "Move to " + pieace.GetComponent<Piece>().iFieldLive + " - " + "Name of house " + gameFields[iTargetField].GetComponent<GameField>().gameObject.name;
+                sDebug = "Move to " + pieace.GetComponent<Piece>().indexCurrentField + " - " + "Name of house " + gameFields[iTargetField].GetComponent<GameField>().gameObject.name;
 
                 Debug.Log(sDebug);
                 //debugTotext.ShowDebug(sDebug);
 
-                SetCurrentField(gameFields[iTargetField]);
+                SelectedAField(gameFields[iTargetField]);
 
                 PlayStep();
 
@@ -250,12 +260,12 @@ public class Piece : MonoBehaviour
             }
             else if (Types == ItemType.Soldado)
             {
-                sDebug = "Move to " + pieace.GetComponent<Piece>().iFieldLive + " - " + "Name of house " + gameFields[iTargetField].GetComponent<GameField>().gameObject.name;
+                sDebug = "Move to " + pieace.GetComponent<Piece>().indexCurrentField + " - " + "Name of house " + gameFields[iTargetField].GetComponent<GameField>().gameObject.name;
 
                 Debug.Log(sDebug);
                 //debugTotext.ShowDebug(sDebug);
 
-                SetCurrentField(gameFields[iTargetField]);
+                SelectedAField(gameFields[iTargetField]);
 
                 PlayStep();
 
@@ -293,12 +303,12 @@ public class Piece : MonoBehaviour
             //else if (pieace.GetComponent<Player>().Types == ItemType.Soldado)
             else if (Types == ItemType.Soldado)
             {
-                sDebug = "Move to " + pieace.GetComponent<Piece>().iFieldLive + " - " + "Name of house " + gameFields[iTargetField].GetComponent<GameField>().gameObject.name;
+                sDebug = "Move to " + pieace.GetComponent<Piece>().indexCurrentField + " - " + "Name of house " + gameFields[iTargetField].GetComponent<GameField>().gameObject.name;
 
                 Debug.Log(sDebug);
                 //debugTotext.ShowDebug(sDebug);
 
-                SetCurrentField(gameFields[iTargetField]);
+                SelectedAField(gameFields[iTargetField]);
 
                 PlayStep();
 
@@ -316,7 +326,7 @@ public class Piece : MonoBehaviour
             }
             else if (Types == ItemType.Soldado)
             {
-                SetCurrentField(gameFields[iTargetField]);
+                SelectedAField(gameFields[iTargetField]);
 
                 PlayStep();
 
@@ -325,29 +335,6 @@ public class Piece : MonoBehaviour
             }
 
          }
-    }
-
-    enum Rules
-    {
-        BandeiraBomba,
-        Outros,
-        Soldado
-    }
-
-    Rules GetRule()
-    {
-        if (Types == ItemType.Bandeira || Types == ItemType.Bomba)
-        {
-            return Rules.BandeiraBomba;
-        }
-        else if (Types == ItemType.Soldado)
-        {
-            return Rules.Soldado;
-        }
-        else
-        {
-            return Rules.Outros;
-        }
     }
 
     private void PlayStep()
@@ -395,11 +382,10 @@ public class Piece : MonoBehaviour
     private int IndexHouse(int index)
     {
         int indexfield = 0;
-        GameField[] fcs = board.GetGameFieldFromFields();
 
         int indexloop = 0;
 
-        foreach (GameField fc in fcs)
+        foreach (GameField fc in gameFields)
         {
             if (fc.index == index)
             {
@@ -421,7 +407,7 @@ public class Piece : MonoBehaviour
 
         int indexfield = 0;
 
-        indexfield = IndexHouse(iFieldLive);
+        indexfield = IndexHouse(indexCurrentField);
 
         int iColumnCount = FindObjectOfType<BoardController>().ColumnLength()+1;
 
@@ -519,7 +505,7 @@ public class Piece : MonoBehaviour
 
         int indexfield = 0;
 
-        indexfield = IndexHouse(iFieldLive);
+        indexfield = IndexHouse(indexCurrentField);
 
         int iColumnCount = FindObjectOfType<BoardController>().ColumnLength() + 1;
 
@@ -608,19 +594,6 @@ public class Piece : MonoBehaviour
         return ihouses;
     }
 
-    public virtual void SetFirstField(GameField field)
-    {
-        SetCurrentField(field);
-        transform.position = currentField.transform.position;
-        transform.Rotate(0, 0, 0, Space.Self);
-    }
-
-    public void SelectedAField(GameField field)
-    {
-        if (finished) return;
-        SetCurrentField(field);
-    }
-
     public void OpenChest()
     {
         AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
@@ -632,7 +605,6 @@ public class Piece : MonoBehaviour
 
         IEnumerator enumerator = IEWin(1.5f);
         StartCoroutine(enumerator);
-
     }
 
     private IEnumerator IEWin(float waitTime)
@@ -996,7 +968,7 @@ public class Piece : MonoBehaviour
         {
             if (turn.currentePiece)
             {
-                turn.currentePiece.GetComponent<Piece>().SetTakeHome(iFieldLive);
+                turn.currentePiece.GetComponent<Piece>().SetTakeHome(indexCurrentField);
             }
             sDebug = "DestroyAfterDie - Name = " + name + " - bDieCounter = " + bDieCounter;
             Debug.Log(sDebug);
@@ -1009,10 +981,10 @@ public class Piece : MonoBehaviour
         {
             if (turn.currentePiece)
             {
-                sDebug = "DestroyAfterDie - SetTakeHome iFieldLive = " + iFieldLive;
+                sDebug = "DestroyAfterDie - SetTakeHome iFieldLive = " + indexCurrentField;
                 Debug.Log(sDebug);
                 //debugTotext.ShowDebug(sDebug);
-                turn.currentePiece.GetComponent<Piece>().SetTakeHome(iFieldLive);
+                turn.currentePiece.GetComponent<Piece>().SetTakeHome(indexCurrentField);
             }
             sDebug = "DestroyAfterDie - Name = " + name + " - bDieCounter = " + bDieCounter;
             Debug.Log(sDebug);
@@ -1025,7 +997,7 @@ public class Piece : MonoBehaviour
         {
             if (turn.currentePiece)
             {
-                turn.currentePiece.GetComponent<Piece>().SetTakeHome(iFieldLive);
+                turn.currentePiece.GetComponent<Piece>().SetTakeHome(indexCurrentField);
             }
             sDebug = "DestroyAfterDie - Name = " + name + " - bDieCounter = " + bDieCounter;
             Debug.Log(sDebug);
@@ -1116,11 +1088,10 @@ public class Piece : MonoBehaviour
     }
 
     public void ReleaseHouses()
-    {
-        GameField[] fcs = board.GetGameFieldFromFields();   
-        foreach (GameField fd in fcs)
+    { 
+        foreach (GameField fd in gameFields)
         {
-            if (fd.index == iFieldLive)
+            if (fd.index == indexCurrentField)
             {
                 fd.SetPiece(null);
             }

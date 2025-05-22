@@ -167,7 +167,6 @@ public class GameField : Field
     public void Selection()
     {
         turn.Liberate = false;
-
         turn.currentePiece.SelectedAField(this);
     }
 

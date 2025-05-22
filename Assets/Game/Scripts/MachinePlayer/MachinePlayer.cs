@@ -118,7 +118,7 @@ public class MachinePlayer : MonoBehaviour
         foreach (Piece player in lplayers)
         {
             Debug.Log("MachinePlayer - player name = " + player.name);
-            Debug.Log("MachinePlayer - player iFieldLive = " + player.iFieldLive);
+            Debug.Log("MachinePlayer - player iFieldLive = " + player.indexCurrentField);
             Debug.Log("MachinePlayer - player.HousesFree().Length = " + player.HousesFree().Length);
 
             //array para colocar as casas livres
@@ -131,19 +131,19 @@ public class MachinePlayer : MonoBehaviour
                     if (player.Types != Piece.ItemType.Bandeira)
                     {
 
-                        Debug.Log("MachinePlayer player iFieldLive = " + player.iFieldLive);
+                        Debug.Log("MachinePlayer player iFieldLive = " + player.indexCurrentField);
 
-                        ipeaces[icountmypeaces] = player.iFieldLive;
+                        ipeaces[icountmypeaces] = player.indexCurrentField;
 
                         foreach (int i in iHousesFree)
                         {
-                            Debug.Log("MachinePlayer player iFieldLive = " + player.iFieldLive + " - iHousesFree = " + i);
+                            Debug.Log("MachinePlayer player iFieldLive = " + player.indexCurrentField + " - iHousesFree = " + i);
 
                             iHouseSelect = i;
 
                             if (iHouseSelect > 0)
                             {
-                                mypeaces.Add(new MyPeaces() { indexPeace = player.iFieldLive, indexHouse = i });
+                                mypeaces.Add(new MyPeaces() { indexPeace = player.indexCurrentField, indexHouse = i });
                             }
                         }
 
@@ -212,7 +212,7 @@ public class MachinePlayer : MonoBehaviour
     {
         foreach (Piece player in lplayers)
         {
-            if (player.iFieldLive == iPart)
+            if (player.indexCurrentField == iPart)
             {
                 PlayerSelect = player;
             }
@@ -340,19 +340,19 @@ public class MachinePlayer : MonoBehaviour
                     {
                         if (player.Types != Piece.ItemType.Bomba)
                         {
-                            Debug.Log("MachinePlayer player iFieldLive = " + player.iFieldLive);
+                            Debug.Log("MachinePlayer player iFieldLive = " + player.indexCurrentField);
 
-                            ipeaces[icountmypeaces] = player.iFieldLive;
+                            ipeaces[icountmypeaces] = player.indexCurrentField;
 
                             foreach (int i in iHousesFree)
                             {
-                                Debug.Log("MachinePlayer player iFieldLive = " + player.iFieldLive + " - iHousesFree = " + i);
+                                Debug.Log("MachinePlayer player iFieldLive = " + player.indexCurrentField + " - iHousesFree = " + i);
 
                                 iHouseSelect = i;
 
                                 if (iHouseSelect > 0)
                                 {
-                                    mypeaces.Add(new MyPeaces() { indexPeace = player.iFieldLive, indexHouse = i });
+                                    mypeaces.Add(new MyPeaces() { indexPeace = player.indexCurrentField, indexHouse = i });
                                 }
                             }
 
@@ -399,7 +399,7 @@ public class MachinePlayer : MonoBehaviour
 
         foreach (Piece player in lplayers)
         {
-            if (player.iFieldLive == ipeaces[iRandomHouse])
+            if (player.indexCurrentField == ipeaces[iRandomHouse])
             {
                 PlayerSelect = player;
             }
@@ -407,7 +407,7 @@ public class MachinePlayer : MonoBehaviour
 
         if (PlayerSelect)
         {
-            Debug.Log("MachinePlayer PlayerSelect =" + PlayerSelect.name + " - iFieldLive = " + PlayerSelect.iFieldLive);
+            Debug.Log("MachinePlayer PlayerSelect =" + PlayerSelect.name + " - iFieldLive = " + PlayerSelect.indexCurrentField);
             PlayerSelect.SelectPeace();
             IEnumerator enumerator = SelectHouse(ihouses[iRandomHouse], 1.0f);
             StartCoroutine(enumerator);

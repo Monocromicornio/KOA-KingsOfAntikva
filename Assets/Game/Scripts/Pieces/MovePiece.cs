@@ -9,147 +9,67 @@ public class MovePiece : MonoBehaviour
     private BoardController board => matchController.boardController;
     private Turn turn => matchController.turn;
     private Piece piece;
+    private SelectField selectField;
 
     private bool finished => matchController.finished;
-    private GameField currentField => piece.GetCurrentField();
+    private GameField targetGameField;
+    private Transform target => targetGameField.transform;
+
+    [SerializeField]
+    [Min(0)]
+    float moveSpeed = 1;
 
     private void Awake()
     {
         piece = GetComponent<Piece>();
+        selectField = GetComponent<SelectField>();
     }
 
-    private void ChangeField()
+    public void NewTarget()
     {
         if (finished) return;
 
-        transform.LookAt(currentField.transform);
+        GameField fieldPiece = piece.targetField;
+        targetGameField = selectField.GetEmptyFieldFromActive(fieldPiece);
+
+        if (targetGameField == null) return;
+
+        transform.LookAt(target);
         //PlayStep(); -> Sound
         StartCoroutine(Moveto());
     }
 
     IEnumerator Moveto()
     {
-        float SpeedPlus = 0;
+        piece.SetAnimation("Walk", true);
 
-        if (CanRun(currentField.transform))
+        while (IsFarFromTarget())
         {
-            SpeedPlus = 1.0f;
-        }
-
-        while (!DistanceTarget(currentField.transform))
-        {
-            print("B");
-            piece.SetAnimation("Walk", true);
-            transform.Translate(Vector3.forward * Time.deltaTime * (piece.MoveSpeed + SpeedPlus));
+            transform.Translate(Vector3.forward * Time.deltaTime * GetSpeed());
             yield return null;
         }
 
-        if (!turn.bChangeTurn)
-        {
-            turn.ChangeTurn();
-        }
-        //StopStep(); -> Sound
-        //SetAnimation("Walk", false);
-        
-        yield return 0;
+        transform.position = target.position;
+        piece.SetAnimation("Walk", false);
     }
 
-    private bool CanRun(Transform target)
+    private bool IsFarFromTarget()
     {
-        bool bRun = false;
-        float dist;
+        if (target == null) return false;
 
-        float MaxDist = board.GetDistance() * 2;
-
-        if (target)
-        {
-            dist = Vector3.Distance(target.position, transform.position);           
-
-            if (dist >= MaxDist)
-            {
-                bRun = true;
-            }
-        }
-
-        return bRun;
-
+        Vector3 targetPos = target.position;
+        float dist = Vector3.Distance(targetPos, transform.position);
+        return dist > 0.1f;
     }
 
-    IEnumerator MovetoAttack(GameObject pieace, bool attack)
+    private float GetSpeed()
     {
-        if (finished) yield return null;
-        
-        turn.Liberate = false;
-        //CancelMovement();
+        if (target == null) return 0;
+        Vector3 targetPos = target.position;
 
-        Debug.Log("MovetoAttack pieace = " + pieace.name + " - attack = " + attack);
+        float max = board.GetDistance() * 2;
+        float dist = Vector3.Distance(targetPos, transform.position);
 
-        float SpeedPlus = 0;
-
-        if(CanRun(currentField.transform))
-        {
-            SpeedPlus = 1.0f;
-        }
-
-        while (!DistanceAttack(currentField.transform))
-        {
-            piece.SetAnimation("Walk", true);
-            //transform.Translate(Vector3.forward * Time.deltaTime * (MoveSpeed + SpeedPlus));
-            yield return null;
-        }
-        /*if (attack)
-        {
-            soundController.PreAttack();
-            IEnumerator enumerator = IEattack(pieace, 1.0f);
-            StartCoroutine(enumerator);
-        }
-        else
-        {
-            soundController.PreAttack();
-            pieace.GetComponent<Piece>().CounterAttack(gameObject);
-        }
-
-        StopStep();
-        SetAnimation("Walk", false);*/
-        
-        yield return 0;
-    }
-
-    private bool DistanceTarget(Transform target)
-    {
-        bool bdistance = false;
-        float dist;
-
-        if (target)
-        {
-            dist = Vector3.Distance(target.position, transform.position);
-            if (dist <= 0.1f)            
-            {
-                bdistance = true;                
-            }
-        }
-
-        return bdistance;
-
-    }
-
-    private bool DistanceAttack(Transform target)
-    {
-        bool bdistance = false;
-        float dist;
-
-        if (target)
-        {
-            dist = Vector3.Distance(target.position, transform.position);
-            //print("Distance to other: " + dist);
-
-            if (dist <= 1.5f)
-            {
-                bdistance = true;                
-            }
-        }
-
-        return bdistance;
-
+        return dist < max ? moveSpeed : moveSpeed + 1;
     }
 }

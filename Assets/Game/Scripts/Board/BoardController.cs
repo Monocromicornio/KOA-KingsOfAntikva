@@ -11,6 +11,8 @@ public class BoardController : MonoBehaviour
     [SerializeField] private Field field;
 
     public List<Field> fields { get; private set; }
+    public GameField[] gameFields { get; private set; }
+    public EditableField[] editableFields { get; private set; }
 
     void Awake()
     {
@@ -62,6 +64,8 @@ public class BoardController : MonoBehaviour
             fPosZ += distance;
         }
 
+        gameFields = GetGameFieldFromFields();
+        editableFields = GetEditableFieldsFromFields();
         boardData.isFinished = true;
     }
 
@@ -90,7 +94,7 @@ public class BoardController : MonoBehaviour
         return boardData.distance;
     }
 
-    public EditableField[] GetEditableFieldsFromFields()
+    private EditableField[] GetEditableFieldsFromFields()
     {
         List<EditableField> editables = new List<EditableField>();
 
@@ -105,7 +109,7 @@ public class BoardController : MonoBehaviour
         return editables.ToArray();
     }
     
-    public GameField[] GetGameFieldFromFields(){
+    private GameField[] GetGameFieldFromFields(){
         List<GameField> gamefields = new List<GameField>();
 
         foreach(Field field in this.fields){
