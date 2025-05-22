@@ -32,7 +32,6 @@ public class SelectField : MonoBehaviour
 
     public void EndTurn()
     {
-        print("AAAAAAAA");
         Deselect();
     }
 

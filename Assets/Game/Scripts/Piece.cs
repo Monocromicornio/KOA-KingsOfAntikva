@@ -99,18 +99,14 @@ public class Piece : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        StopAttack();
-    }
-
     private void OnMouseDown()
     {
         if (!turn.isPlayerTurn) return;
 
-        if (Attacked == true)
+        if (turn.currentePiece != null && turn.currentePiece.tag != tag)
         {
-            SetAttack();
+            print("ME ATAQUE " + gameObject.name);
+            turn.currentePiece.SelectedAField(field);
         }
 
         bool myTurn = tag == "Player" == turn.isPlayerTurn;
@@ -166,199 +162,6 @@ public class Piece : MonoBehaviour
     }
 
 //@
-    GameObject gEnemyPieace;
-
-    void SetAttack()
-    {       
-        Piece gpieace = turn.currentePiece;
-
-        if (gpieace)
-        {
-            turn.Liberate = false;
-            gpieace.AttackRules(gameObject);
-        }
-    }    
-
-    public void AttackRules(GameObject pieace)
-    {
-        iTargetField = pieace.GetComponent<Piece>().indexCurrentField;
-        gEnemyPieace = pieace;
-        LookEnemy(pieace.transform);
-
-        if (pieace.GetComponent<Piece>().Types != ItemType.Bomba)
-        {
-            if (pieace.GetComponent<Piece>().Types != ItemType.Bandeira)
-            {
-                pieace.GetComponent<Piece>().LookEnemy(transform);
-            }
-        }
-
-        if (pieace.GetComponent<Piece>().Types == ItemType.Bandeira)
-        {
-            if (Types != ItemType.Soldado)
-            {
-                sDebug = "Attack pieace.GetComponent<Player>().Types = " + pieace.GetComponent<Piece>().Types;
-                Debug.Log(sDebug);
-                //debugTotext.ShowDebug(sDebug);
-
-                soundController.PreAttack();
-
-                IEnumerator enumerator = IEattack(pieace, 1.0f);
-                StartCoroutine(enumerator);
-
-            }
-            //else if (pieace.GetComponent<Player>().Types == ItemType.Soldado)
-            else if (Types == ItemType.Soldado)
-            {
-                SelectedAField(gameFields[iTargetField]);
-
-                PlayStep();
-
-                /*IEnumerator enumerator = MovetoAttack(pieace, true);
-                StartCoroutine(enumerator);*/
-
-            }
-        }
-        else if (Types == ItemType.Antibomba && pieace.GetComponent<Piece>().Types == ItemType.Bomba)
-        {
-
-            if (pieace.GetComponent<Piece>().Types != ItemType.Soldado)
-            {
-
-                sDebug = "Pieace " + pieace.name + " is dead";
-                Debug.Log(sDebug);
-                //debugTotext.ShowDebug(sDebug);
-
-                soundController.PreAttack();
-
-                IEnumerator enumerator = IEattack(pieace, 1.0f);
-                StartCoroutine(enumerator);
-            }
-            else if (pieace.GetComponent<Piece>().Types == ItemType.Soldado)
-            {
-                sDebug = "Move to " + pieace.GetComponent<Piece>().indexCurrentField + " - " + "Name of house " + gameFields[iTargetField].GetComponent<GameField>().gameObject.name;
-
-                Debug.Log(sDebug);
-                //debugTotext.ShowDebug(sDebug);
-
-                SelectedAField(gameFields[iTargetField]);
-
-                PlayStep();
-
-                /*IEnumerator enumerator = MovetoAttack(pieace, true);
-                StartCoroutine(enumerator);*/
-                
-            }
-
-        }
-        else if (Types != ItemType.Antibomba && pieace.GetComponent<Piece>().Types == ItemType.Bomba)
-        {
-            if (Types != ItemType.Soldado)
-            {
-                soundController.PreAttack();
-                pieace.GetComponent<Piece>().CounterAttack(gameObject);
-            }
-            else if (Types == ItemType.Soldado)
-            {
-                sDebug = "Move to " + pieace.GetComponent<Piece>().indexCurrentField + " - " + "Name of house " + gameFields[iTargetField].GetComponent<GameField>().gameObject.name;
-
-                Debug.Log(sDebug);
-                //debugTotext.ShowDebug(sDebug);
-
-                SelectedAField(gameFields[iTargetField]);
-
-                PlayStep();
-
-                /*IEnumerator enumerator = MovetoAttack(pieace, false);
-                StartCoroutine(enumerator);*/
-            }
-
-
-        }
-        else if (Types == ItemType.Espia && pieace.GetComponent<Piece>().Force == 9)
-        {
-
-            soundController.PreAttack();
-
-            IEnumerator enumerator = IEattack(pieace, 1.0f);
-            StartCoroutine(enumerator);
-
-
-        } 
-        else if (Force >= pieace.GetComponent<Piece>().Force && pieace.GetComponent<Piece>().Types != ItemType.Bomba)
-        {
-            //if (pieace.GetComponent<Player>().Types != ItemType.Soldado)
-            if (Types != ItemType.Soldado)
-            {
-                sDebug = "Attack pieace.GetComponent<Player>().Types = " + pieace.GetComponent<Piece>().Types;
-                Debug.Log(sDebug);
-                //debugTotext.ShowDebug(sDebug);
-
-                soundController.PreAttack();
-
-                IEnumerator enumerator = IEattack(pieace, 1.0f);
-                StartCoroutine(enumerator);
-               
-            }
-            //else if (pieace.GetComponent<Player>().Types == ItemType.Soldado)
-            else if (Types == ItemType.Soldado)
-            {
-                sDebug = "Move to " + pieace.GetComponent<Piece>().indexCurrentField + " - " + "Name of house " + gameFields[iTargetField].GetComponent<GameField>().gameObject.name;
-
-                Debug.Log(sDebug);
-                //debugTotext.ShowDebug(sDebug);
-
-                SelectedAField(gameFields[iTargetField]);
-
-                PlayStep();
-
-                /*IEnumerator enumerator = MovetoAttack(pieace,true);
-                StartCoroutine(enumerator);*/
-                
-            }
-        }
-        else if (Force < pieace.GetComponent<Piece>().Force)
-        {            
-            if (Types != ItemType.Soldado)
-            {
-                soundController.PreAttack();
-                pieace.GetComponent<Piece>().CounterAttack(gameObject);
-            }
-            else if (Types == ItemType.Soldado)
-            {
-                SelectedAField(gameFields[iTargetField]);
-
-                PlayStep();
-
-                /*IEnumerator enumerator = MovetoAttack(pieace,false);
-                StartCoroutine(enumerator);*/
-            }
-
-         }
-    }
-
-    private void PlayStep()
-    {
-        if (Types == ItemType.Soldado
-        || (gameType != GameMode.GameType.Training && tag == "Enemy"))
-        {
-            soundController.Run();
-        }
-
-        soundController.Steps();
-    }
-
-    private void StopStep()
-    {
-        if (Types == ItemType.Soldado
-        || (gameType != GameMode.GameType.Training && tag == "Enemy"))
-        {
-            soundController.StopRun();
-        }
-
-        soundController.StopSteps();
-    }
-
     public string GetForceType()
     {
         string sforcetype = Force.ToString();
@@ -617,6 +420,7 @@ public class Piece : MonoBehaviour
     {
         CelebrateVitory();
     }
+    
     void CelebrateVitory()
     {
         if (!finished) return;
@@ -634,132 +438,7 @@ public class Piece : MonoBehaviour
     public void SetAnimation(string AnimName, bool bstatus)
     {
         anim.SetBool(AnimName, bstatus);
-    }
-
-    /// <summary>
-    /// Arrumar Anim para remover essa função
-    /// </summary>
-    void StopAttack()
-    {
-        if (anim)
-        {
-            if (anim.GetBool("Attack"))
-            {
-                AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
-
-                if (currentBaseState.IsName("Attack"))
-                {
-                    anim.SetBool("Attack", false);
-                }
-            }
-        }
-    }
-
-    bool bAttack = false;
-
-    private bool isWalk()
-    {
-        bool bWalk = false;
-
-        if (anim)
-        {
-            AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
-
-            if (currentBaseState.IsName("Walk"))
-            {
-                bWalk = true;
-            }
-        }
-
-        return bWalk;
-    }
-
-    private IEnumerator IEattack(GameObject pieace, float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        turn.Liberate = false;
-        //Ativa animação de ataque
-        SetAnimation("Attack", true);
-        bAttack = true;
-
-        if (gameType == GameMode.GameType.Normal || gameType == GameMode.GameType.Hard)
-        {
-            if (tag == "Enemy")
-            {
-                soundController.AttackSoldier();
-            }
-            else
-            {
-                if (auAttackYell)
-                {
-                    auAttackYell.Play();
-                }
-            }
-        }
-        else
-        {
-            if (auAttackYell)
-            {
-                auAttackYell.Play();
-            }
-        }
-        IEnumerator coKillEnemy = KillEnemy(pieace, 0.5f);
-        StartCoroutine(coKillEnemy);
-    }
-
-    private IEnumerator KillEnemy(GameObject pieace,  float waitTime)
-    {
-        while (bAttack)
-        {            
-            print("KillEnemy = " + waitTime);            
-            yield return new WaitForSeconds(waitTime);
-            StartEffectAttack();
-            
-            if (pieace.GetComponent<Piece>().Types == ItemType.Bandeira)
-            {
-                pieace.GetComponent<Piece>().OpenChest();
-            }
-            else
-            {
-                gEnemyPieace.GetComponent<Piece>().SetDie();
-            }
-            bAttack = false;                        
-        }
-    }
-
-    void StartEffectAttack()
-    {
-        if(AttackEffect)
-        {
-            if (gameType == GameMode.GameType.Normal || gameType == GameMode.GameType.Hard)
-            {
-                if (tag == "Enemy")
-                {
-                    if (AttackEffectSoldier)
-                    {
-                        Instantiate(AttackEffectSoldier, AttackEffectPos.position, transform.rotation);
-                    }
-                }
-                else
-                {
-                    if (auAttackYell)
-                    {
-                        Instantiate(AttackEffect, AttackEffectPos.position, transform.rotation);
-                    }
-                }
-            }
-            else
-            {
-                if (auAttackYell)
-                {
-                    Instantiate(AttackEffect, AttackEffectPos.position, transform.rotation);
-                }
-            }           
-
-        }
-    }
-
-    bool bTakeHome = false;    
+    }  
 
     public void SetTakeHome(int iGoField)
     {
@@ -826,69 +505,7 @@ public class Piece : MonoBehaviour
 
     }
 
-    public void CounterAttack(GameObject pieace)
-    {
-        IEnumerator enumerator = IECounterAttack(pieace, 1.0f);
-        StartCoroutine(enumerator);
-    }
-
-    private IEnumerator IECounterAttack(GameObject pieace, float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        turn.Liberate = false;
-        //Ativa animação de ataque
-        SetAnimation("Attack", true);
-        bAttack = true;
-
-        if (gameType == GameMode.GameType.Normal || gameType == GameMode.GameType.Hard)
-        {
-            if (tag == "Enemy")
-            {
-                soundController.AttackSoldier();
-            }
-            else
-            {
-                if (auAttackYell)
-                {
-                    auAttackYell.Play();
-                }
-            }
-        }
-        else
-        {
-            if (auAttackYell)
-            {
-                auAttackYell.Play();
-            }
-        }
-        IEnumerator coKillEnemy = CounterKillEnemy(pieace, 0.5f);
-        StartCoroutine(coKillEnemy);
-    }
-
     bool bDieCounter = false;
-
-    private IEnumerator CounterKillEnemy(GameObject pieace, float waitTime)
-    {
-        while (bAttack)
-        {
-            gEnemyPieace = pieace;
-            print("KillEnemy = " + waitTime);
-            yield return new WaitForSeconds(waitTime);
-            StartEffectAttack();
-            gEnemyPieace.GetComponent<Piece>().SetDie();
-            bAttack = false;
-            gEnemyPieace.GetComponent<Piece>().EndTurnEnemy();
-
-            if(Types == ItemType.Bomba)
-            {
-                bDieCounter = true;
-                SetDie();
-            }
-
-            //IEnumerator enumerator = EndTurn(3.0f);
-            //StartCoroutine(enumerator);
-        }
-    }
 
     public void EndTurnEnemy()
     {
@@ -905,12 +522,7 @@ public class Piece : MonoBehaviour
         //CancelMovement();
         ReleaseHouses();
 
-    }
-
-    public void LookEnemy(Transform Target)
-    {
-        transform.LookAt(Target);
-    }    
+    } 
 
     public void SetDie()
     {
@@ -952,7 +564,7 @@ public class Piece : MonoBehaviour
     
     }
 
-        public bool isDie()
+    public bool isDie()
     {
         return bDie;
     }

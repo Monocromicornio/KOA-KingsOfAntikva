@@ -7,7 +7,6 @@ public class MovePiece : MonoBehaviour
 {
     private MatchController matchController => MatchController.instance;
     private BoardController board => matchController.boardController;
-    private Turn turn => matchController.turn;
     private Piece piece;
     private SelectField selectField;
 
@@ -72,4 +71,26 @@ public class MovePiece : MonoBehaviour
 
         return dist < max ? moveSpeed : moveSpeed + 1;
     }
+
+    /*private void PlayStep()
+    {
+        if (Types == ItemType.Soldado
+        || (gameType != GameMode.GameType.Training && tag == "Enemy"))
+        {
+            soundController.Run();
+        }
+
+        soundController.Steps();
+    }
+
+    private void StopStep()
+    {
+        if (Types == ItemType.Soldado
+        || (gameType != GameMode.GameType.Training && tag == "Enemy"))
+        {
+            soundController.StopRun();
+        }
+
+        soundController.StopSteps();
+    }*/
 }
