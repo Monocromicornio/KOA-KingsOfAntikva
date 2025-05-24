@@ -13,18 +13,17 @@ public class TurnUI : MonoBehaviour
     [SerializeField]
     AudioSource auTurnChange;
 
-    Turn turn;
+    MatchController turn;
     
     void Start()
     {
-        turn = FindObjectOfType<Turn>();
+        turn = FindObjectOfType<MatchController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if(turn.Liberate && turn.isPlayerTurn)
+        if(turn.isBlueTurn)
         {
             gTurnOn.SetActive(true);
             gTurnOff.SetActive(false);

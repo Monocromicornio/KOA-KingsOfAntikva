@@ -16,24 +16,23 @@ public class FakePiece : Piece
         fake = Instantiate(fake, vector3, transform.rotation);
         fake.transform.parent = transform;
 
-        obj.SetActive(false);
-        fake.SetActive(true);
+        /*=obj.SetActive(false);
+        fake.SetActive(true);*/
         fake.transform.rotation = transform.rotation;
 
         AnimPiece anim = GetComponent<AnimPiece>();
         if(anim) anim.ChangeAnim(fake);
 
-        if (gChest != null) gChest.SetActive(false);
+        //if (gChest != null) gChest.SetActive(false);
     }
 
     protected override void OnMouseDown()
     {
-        if (!turn.isPlayerTurn) return;
+        if (!matchController.isBlueTurn) return;
 
-        if (turn.currentePiece != null)
+        if (matchController.currentePiece != null)
         {
-            print("ME ATAQUE " + gameObject.name);
-            turn.currentePiece.SelectedAField(field);
+            matchController.currentePiece.SelectedAField(field);
         }
     }
 
@@ -43,15 +42,15 @@ public class FakePiece : Piece
         {
             //In normal mode only exclude soldier
             case GameMode.GameType.Normal:
-                if (Types == ItemType.Soldado) return;
+                if (type == PieceType.Soldier) return;
                 break;
             //in hard mode include only bandeira e bomba
             case GameMode.GameType.Hard:
-                if (Types != ItemType.Bandeira && Types != ItemType.Bomba) return;
+                if (type != PieceType.Flag && type != PieceType.Bomb) return;
                 break;
         }
 
-        if (Types == ItemType.Bandeira)
+        if (type == PieceType.Flag)
         {
             gChest.SetActive(true);
         }

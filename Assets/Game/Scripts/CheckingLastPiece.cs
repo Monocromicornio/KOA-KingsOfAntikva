@@ -26,9 +26,9 @@ public class CheckingLastPiece : MonoBehaviour
         {
             if(gameField.piece.gameObject.tag == sType)
             {
-                if (gameField.piece.GetComponent<Piece>().Types != Piece.ItemType.Bomba)
+                if (gameField.piece.GetComponent<Piece>().type != PieceType.Bomb)
                 {
-                    if (gameField.piece.GetComponent<Piece>().Types != Piece.ItemType.Bandeira)
+                    if (gameField.piece.GetComponent<Piece>().type != PieceType.Flag)
                     {
                         count++;
                     }

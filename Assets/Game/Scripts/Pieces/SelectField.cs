@@ -37,6 +37,7 @@ public class SelectField : MonoBehaviour
 
     private void Select()
     {
+        getted = true;
         ActiveSelectablesFields();
 
         if (selectedFields.Count == 0) return;
@@ -46,6 +47,7 @@ public class SelectField : MonoBehaviour
 
     private void Deselect()
     {
+        getted = false;
         foreach (List<GameField> fields in selectedFields.Values)
         {
             foreach (GameField gameField in fields)
@@ -87,7 +89,6 @@ public class SelectField : MonoBehaviour
             if (pieceTag == tag) return;
 
             gameField.Select();
-            gameField.AttackMode = true;
         }
 
         gameField.Select();

@@ -26808,10 +26808,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2951428384837395379, guid: a14ed4230c482f244b3e91d7e2cd876d,
+    - target: {fileID: 7107614780625465283, guid: 7f810f9a8491a7745a5737673a193c78,
         type: 3}
-      propertyPath: gParticleChest
-      value: 
+      propertyPath: type
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7107614780625465283, guid: 7f810f9a8491a7745a5737673a193c78,
         type: 3}
@@ -26877,7 +26877,12 @@ PrefabInstance:
     - target: {fileID: 7107614780625465293, guid: 7f810f9a8491a7745a5737673a193c78,
         type: 3}
       propertyPath: m_Name
-      value: XF Variant
+      value: XF Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951428384837395379, guid: a14ed4230c482f244b3e91d7e2cd876d,
+        type: 3}
+      propertyPath: gParticleChest
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

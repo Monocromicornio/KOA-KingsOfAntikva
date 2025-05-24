@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class MachinePlayer : MonoBehaviour
 {
-    Turn turn;
+    MatchController turn;
     List<Piece> lplayers;
 
     [SerializeField]
-    bool bPlayed = false;
+    bool played = false;
 
-    // Start is called before the first frame update   
     void Start()
     {
-        turn = FindObjectOfType<Turn>();
+        turn = FindObjectOfType<MatchController>();
 
         lplayers = new List<Piece>();
     }
@@ -21,24 +20,24 @@ public class MachinePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!turn.isPlayerTurn)
+        if(!turn.isBlueTurn)
         {           
-            if (turn.Liberate == true)
+            //if (turn.Liberate == true)
             {
-                if (!bPlayed)
+                if (!played)
                 {
                     //StartCoroutine(ResetPlay(3.5f));
-                    bPlayed = true;
+                    played = true;
                     StartCoroutine(GetListParts(0.7f));
                     Debug.Log("GetListPeaces()");                    
-                    Debug.Log("bPlayed() = " + bPlayed);
+                    Debug.Log("bPlayed() = " + played);
                 }
             }
         }
 
-        if (turn.isPlayerTurn)
+        if (turn.isBlueTurn)
         {
-            bPlayed = false;
+            played = false;
         }
 
      }
@@ -60,9 +59,9 @@ public class MachinePlayer : MonoBehaviour
         {
             if(player.tag == "Enemy")
             {
-                if (player.Types != Piece.ItemType.Bomba)
+                if (player.type != PieceType.Bomb)
                 {
-                    if (player.Types != Piece.ItemType.Bandeira)
+                    if (player.type != PieceType.Flag)
                     {
                         lplayers.Add(player);
                     }
@@ -83,14 +82,14 @@ public class MachinePlayer : MonoBehaviour
     private IEnumerator ResetPlay(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        Debug.Log("ResetPlay - bPlayed = " + bPlayed);
-        if (!turn.isPlayerTurn)
+        Debug.Log("ResetPlay - bPlayed = " + played);
+        if (!turn.isBlueTurn)
         {
-            if (turn.Liberate == true)
+            //if (turn.Liberate == true)
             {
-                if (bPlayed)
+                if (played)
                 {
-                    bPlayed = false;
+                    played = false;
                 }
             }
         }
@@ -100,7 +99,8 @@ public class MachinePlayer : MonoBehaviour
 
     private void SelectPartsFreeHouse()
     {
-        List<MyPeaces> mypeaces = new List<MyPeaces>();
+        return;
+        /*List<MyPeaces> mypeaces = new List<MyPeaces>();
 
         //Limpar lista
         mypeaces.Clear();
@@ -117,18 +117,13 @@ public class MachinePlayer : MonoBehaviour
         //Separa as peças que tem casas livres e não seja bomba, bandeira e soldado
         foreach (Piece player in lplayers)
         {
-            Debug.Log("MachinePlayer - player name = " + player.name);
-            Debug.Log("MachinePlayer - player iFieldLive = " + player.indexCurrentField);
-            Debug.Log("MachinePlayer - player.HousesFree().Length = " + player.HousesFree().Length);
-
-            //array para colocar as casas livres
             int[] iHousesFree = player.HousesFree();
 
             if (iHousesFree.Length > 0)
             {
-                if (player.Types != Piece.ItemType.Bomba)
+                if (player.type != PieceType.Bomb)
                 {
-                    if (player.Types != Piece.ItemType.Bandeira)
+                    if (player.type != PieceType.Flag)
                     {
 
                         Debug.Log("MachinePlayer player iFieldLive = " + player.indexCurrentField);
@@ -167,7 +162,7 @@ public class MachinePlayer : MonoBehaviour
             ChoosePart(mypeaces);
         }
 
-
+*/
     }
 
     private void ChoosePart(List<MyPeaces> mypeaces)
@@ -309,7 +304,8 @@ public class MachinePlayer : MonoBehaviour
 
     private void SelectPeace()
     {
-
+        return;
+        /*
         //Lista das peças do computador
         List<MyPeaces> mypeaces = new List<MyPeaces>();
 
@@ -334,11 +330,11 @@ public class MachinePlayer : MonoBehaviour
 
             if (iHousesFree.Length > 0)
             {
-                if (player.Types != Piece.ItemType.Soldado)
+                if (player.type != PieceType.Soldier)
                 {
-                    if (player.Types != Piece.ItemType.Bandeira)
+                    if (player.type != PieceType.Flag)
                     {
-                        if (player.Types != Piece.ItemType.Bomba)
+                        if (player.type != PieceType.Bomb)
                         {
                             Debug.Log("MachinePlayer player iFieldLive = " + player.indexCurrentField);
 
@@ -412,6 +408,7 @@ public class MachinePlayer : MonoBehaviour
             IEnumerator enumerator = SelectHouse(ihouses[iRandomHouse], 1.0f);
             StartCoroutine(enumerator);
         }
+        */
     }
 
     private IEnumerator SelectHouse(int house, float waitTime)

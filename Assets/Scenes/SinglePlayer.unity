@@ -3585,7 +3585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc80630e24e883947a044ba84bcab976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bPlayed: 0
+  played: 0
 --- !u!1 &499367442
 GameObject:
   m_ObjectHideFlags: 0
@@ -11726,101 +11726,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1001 &1482224162
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5176796210475676356, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_Name
-      value: Turn
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676357, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: bChangeTurn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676357, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: auChangeTurn
-      value: 
-      objectReference: {fileID: 1192037787}
-    - target: {fileID: 5176796210475676358, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676358, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 21.168621
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676358, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.29296875
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676358, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10.641039
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676358, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676358, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676358, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676358, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676358, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676358, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176796210475676358, guid: 3aac2a42200b81a46890bd2982e5c05b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3aac2a42200b81a46890bd2982e5c05b, type: 3}
---- !u!114 &1488220869 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5176796210475676357, guid: 3aac2a42200b81a46890bd2982e5c05b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1482224162}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73b853a119c946a4cbb8ea9495a65785, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1493011777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12819,7 +12724,6 @@ GameObject:
   - component: {fileID: 1690787741}
   - component: {fileID: 1690787744}
   - component: {fileID: 1690787742}
-  - component: {fileID: 1690787743}
   m_Layer: 0
   m_Name: Match Controller
   m_TagString: Untagged
@@ -12855,19 +12759,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameType: 2
---- !u!114 &1690787743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690787740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37cce5c853cb45d45b8c1961f58c9350, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gGame: {fileID: 1576172671}
 --- !u!114 &1690787744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12881,9 +12772,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardController: {fileID: 1327107612}
-  turn: {fileID: 1488220869}
   gameMode: {fileID: 1690787742}
+  game: {fileID: 1576172671}
   soundController: {fileID: 824042235}
+  auChangeTurn: {fileID: 0}
 --- !u!1001 &1726688224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15687,7 +15579,6 @@ SceneRoots:
   - {fileID: 1443747290}
   - {fileID: 437714837}
   - {fileID: 1690787741}
-  - {fileID: 1482224162}
   - {fileID: 1327107611}
   - {fileID: 419605700}
   - {fileID: 824042234}

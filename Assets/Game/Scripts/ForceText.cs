@@ -4,6 +4,7 @@
 public class ForceText : MonoBehaviour
 {
     [SerializeField]
+    private InteractivePiece piece;
     private string txtForce;
 
     public string force
@@ -17,19 +18,15 @@ public class ForceText : MonoBehaviour
     }
     private TextMesh textMesh;
 
-    void Awake()
+    private void Awake()
     {
         textMesh ??= GetComponent<TextMesh>();
         UpdateText();
     }
 
-    public void SetForceText(string force)
+    private void UpdateText()
     {
-        this.force = force;
-    }
-
-    void UpdateText()
-    {
+        txtForce = piece?.force.ToString();
         bool txtEmpty = txtForce == "B" || txtForce != "F";
         textMesh.text = txtEmpty ? "" : txtForce;
     }

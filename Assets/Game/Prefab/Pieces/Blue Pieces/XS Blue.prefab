@@ -71471,6 +71471,11 @@ PrefabInstance:
       objectReference: {fileID: 3568920415813411715}
     - target: {fileID: 6116150707825085799, guid: b29345deedc79fe428f4f586e73c35db,
         type: 3}
+      propertyPath: type
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116150707825085799, guid: b29345deedc79fe428f4f586e73c35db,
+        type: 3}
       propertyPath: Types
       value: 9
       objectReference: {fileID: 0}
@@ -71571,14 +71576,19 @@ PrefabInstance:
       propertyPath: AttackEffectPos
       value: 
       objectReference: {fileID: 2873035908677203733}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7590941205639062000, guid: b29345deedc79fe428f4f586e73c35db, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6116150707825085800, guid: b29345deedc79fe428f4f586e73c35db,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8300229179116202059}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6116150707825085801, guid: b29345deedc79fe428f4f586e73c35db,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3599956304620483410}
   m_SourcePrefab: {fileID: 100100000, guid: b29345deedc79fe428f4f586e73c35db, type: 3}
 --- !u!4 &2873035907260097954 stripped
 Transform:
@@ -71586,6 +71596,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8304633617544718538}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2873035907260097955 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6116150707825085801, guid: b29345deedc79fe428f4f586e73c35db,
+    type: 3}
+  m_PrefabInstance: {fileID: 8304633617544718538}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3599956304620483410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2873035907260097955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04d9aaef0af9084490491eb1bde95bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 3835484665385618521}
+  force: 0
+  AttackEffect: {fileID: 5004953754998910068, guid: 34be9bb42c135c24d834766d72ef3384,
+    type: 3}
+  AttackEffectPos: {fileID: 2873035908677203733}
+  toDestroy: 08000000
 --- !u!4 &2873035908677203733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6116150706272493535, guid: b29345deedc79fe428f4f586e73c35db,
@@ -71598,7 +71632,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8304633617544718538}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2873035907260097955}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a13b478129e46e1488dab10e0e1d0804, type: 3}

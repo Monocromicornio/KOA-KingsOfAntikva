@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MatchController : MonoBehaviour
@@ -6,31 +7,54 @@ public class MatchController : MonoBehaviour
 
     public BoardController boardController;
 
-    public Turn turn;
     public GameMode gameMode;
-    public GameMode.GameType gameType
-    {
-        get
-        {
-            return gameMode.type;
-        }
-    }
+    public GameMode.GameType gameType => gameMode.type;
 
-    public bool finished { get; private set;  }
+    public bool finished { get; private set; }
+
+    public Piece currentePiece { get; private set; }
+    public bool isBlueTurn { get; private set; }
+
+    [SerializeField]
+    GameObject game;
 
     [Header("Feedback")]
     public SoundController soundController;
+    [SerializeField]
+    AudioSource auChangeTurn;
 
-    void Awake()
+    private void Awake()
     {
         instance = this;
+        
+        game.SetActive(false);
+        isBlueTurn = true;
+        StartCoroutine(LoadGame());
     }
 
-    void Start()
+    private IEnumerator LoadGame()
     {
-
+        while (!boardController.isFinished())
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        game.SetActive(true);
     }
-    
+
+    public void SetPiece(Piece piece)
+    {
+        currentePiece = piece;
+    }
+
+    public void ChangeTurn()
+    {
+        if (finished) return;
+        isBlueTurn = !isBlueTurn;
+        //Verify Victory
+    }
+
+    //Verify Check mate a "matar" as peças sobrando
+
     public void WinGame()
     {
         //if(tag == "Player")
@@ -40,7 +64,7 @@ public class MatchController : MonoBehaviour
 
             foreach (GameObject enemy in Enemies)
             {
-                if (enemy.GetComponent<Piece>().Types != Piece.ItemType.Bandeira)
+                if (enemy.GetComponent<Piece>().type != PieceType.Flag)
                 {
                     enemy.GetComponent<Piece>().SetDie();
                 }
@@ -51,9 +75,7 @@ public class MatchController : MonoBehaviour
 
             foreach (GameObject player in Players)
             {
-                player.GetComponent<Piece>().SetVictory();
-                //Debug.Log("player = " + player.name);
-                //Destroy(player);
+                player.GetComponent<Piece>().CelebrateVitory();
             }
         }
         else
@@ -62,7 +84,7 @@ public class MatchController : MonoBehaviour
 
             foreach (GameObject player in Players)
             {
-                if (player.GetComponent<Piece>().Types != Piece.ItemType.Bandeira)
+                if (player.GetComponent<Piece>().type != PieceType.Flag)
                 {
                     player.GetComponent<Piece>().SetDie();
                 }
@@ -72,9 +94,38 @@ public class MatchController : MonoBehaviour
 
             foreach (GameObject enemy in Enemies)
             {
-                enemy.GetComponent<Piece>().SetVictory();
+                enemy.GetComponent<Piece>().CelebrateVitory();
                 //Destroy(enemy);
             }
         }
     }
+    
+    /*void VictoryVerify()
+    {
+        if (iEnemyCountVictory == 0)
+        {
+            matchController.WinGame();
+            currentePiece = null;
+
+            GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
+
+            foreach (GameObject player in Players)
+            {
+                player.GetComponent<Piece>().SetVictory();
+            }
+        }
+
+        if (iPlayerCountVictory == 0)
+        {
+            matchController.WinGame();
+            currentePiece = null;
+
+            GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            foreach (GameObject enemy in Enemies)
+            {
+                enemy.GetComponent<Piece>().SetVictory();
+            }
+        }
+    }*/
 }

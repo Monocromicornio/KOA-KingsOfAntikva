@@ -15,9 +15,14 @@ public class AnimPiece : MonoBehaviour
         piece = GetComponent<Piece>();
     }
 
-    public void SetAnimation(string AnimName, bool bstatus)
+    public void SetAnimation(string animName)
     {
-        anim.SetBool(AnimName, bstatus);
+        anim.SetTrigger(animName);
+    }
+
+    public void SetAnimation(string animName, bool value)
+    {
+        anim.SetBool(animName, value);
     }
 
     public void ChangeAnim(Animator newAnim)
