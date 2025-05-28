@@ -34,7 +34,9 @@ public class InteractivePiece : MonoBehaviour
     {
         if (this.force < force)
         {
-            piece.SetDie();
+            var options = SendMessageOptions.DontRequireReceiver;
+            SendMessage("Destroy", options);
+            target.SendMessage("Sucess", options);
             return;
         }
 
@@ -50,12 +52,14 @@ public class InteractivePiece : MonoBehaviour
 
     protected void Attack(InteractivePiece target)
     {
+        if (target == null) return;
         soundController.PreAttack();
         StartCoroutine(FeedbackAttack(target, force));
     }
 
     protected void Kill(InteractivePiece target)
     {
+        if (target == null) return;
         soundController.PreAttack();
         StartCoroutine(FeedbackAttack(target, int.MaxValue));
     }

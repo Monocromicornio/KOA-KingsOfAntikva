@@ -66,7 +66,7 @@ public class MatchController : MonoBehaviour
             {
                 if (enemy.GetComponent<Piece>().type != PieceType.Flag)
                 {
-                    enemy.GetComponent<Piece>().SetDie();
+                    enemy.SendMessage("Destroy");
                 }
                 //Destroy(enemy);
             }
@@ -75,7 +75,7 @@ public class MatchController : MonoBehaviour
 
             foreach (GameObject player in Players)
             {
-                player.GetComponent<Piece>().CelebrateVitory();
+                player.SendMessage("CelebrateVitory");
             }
         }
         else
@@ -86,7 +86,7 @@ public class MatchController : MonoBehaviour
             {
                 if (player.GetComponent<Piece>().type != PieceType.Flag)
                 {
-                    player.GetComponent<Piece>().SetDie();
+                    player.SendMessage("Destroy");
                 }
             }
 
@@ -94,7 +94,7 @@ public class MatchController : MonoBehaviour
 
             foreach (GameObject enemy in Enemies)
             {
-                enemy.GetComponent<Piece>().CelebrateVitory();
+                enemy.SendMessage("CelebrateVitory");
                 //Destroy(enemy);
             }
         }

@@ -22,14 +22,25 @@ public class AttackPiece : InteractivePiece
         if (finished) return;
 
         GameField fieldPiece = piece.targetField;
-        if (!fieldPiece.hasPiece) return;
+        if (fieldPiece == null || !fieldPiece.hasPiece) return;
 
-        fieldAtk = selectField.GetEmptyFieldFromActive(fieldPiece);
         target = fieldPiece.piece;
+        fieldAtk = selectField.GetEmptyFieldFromActive(fieldPiece);
 
         if (posToAtk != null) StopCoroutine(posToAtk);
         posToAtk = PositionToAttack();
         StartCoroutine(posToAtk);
+    }
+
+    private void Sucess()
+    {
+        StartCoroutine(WaitToAttack());
+    }
+
+    private IEnumerator WaitToAttack()
+    {
+        yield return new WaitForSeconds(3.5f);
+        SendMessage("NewTarget");
     }
 
     private IEnumerator PositionToAttack()
@@ -40,6 +51,7 @@ public class AttackPiece : InteractivePiece
         }
 
         ReadyToAttack();
+        EndAttack();
     }
 
     protected InteractivePiece GetCombatPiece()
@@ -57,5 +69,11 @@ public class AttackPiece : InteractivePiece
     {
         InteractivePiece combatTarget = GetCombatPiece();
         Attack(combatTarget);
+    }
+
+    private void EndAttack()
+    {
+        target = null;
+        fieldAtk = null;
     }
 }

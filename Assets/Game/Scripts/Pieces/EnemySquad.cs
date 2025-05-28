@@ -18,7 +18,7 @@ public class EnemySquad : Squad
 
         // Shuffle the pieces
         List<Piece> pieces = new List<Piece>(defaultPieces);
-        for (int i = 0; i < pieces.Count; i++)
+        for (int i = 1; i < pieces.Count; i++)
         {
             int rnd = Random.Range(i, pieces.Count);
             Piece temp = pieces[i];
@@ -29,7 +29,10 @@ public class EnemySquad : Squad
         // Position each piece in a random field within the range
         for (int i = 0; i < pieces.Count && fieldIndexes.Count > 0; i++)
         {
-            int rndField = Random.Range(0, fieldIndexes.Count);
+            int rndField;
+            if (i == 0) rndField = 6;
+            else rndField = Random.Range(0, fieldIndexes.Count);
+
             int fieldIndex = fieldIndexes[rndField];
             fieldIndexes.RemoveAt(rndField);
 

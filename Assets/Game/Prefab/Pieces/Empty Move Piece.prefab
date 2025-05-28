@@ -84,6 +84,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7590941205639062000}
   m_SourcePrefab: {fileID: 100100000, guid: 7f810f9a8491a7745a5737673a193c78, type: 3}
+--- !u!82 &6116150706762156295 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7107614781682756515, guid: 7f810f9a8491a7745a5737673a193c78,
+    type: 3}
+  m_PrefabInstance: {fileID: 3910179276700525220}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6116150707825085801 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7107614780625465293, guid: 7f810f9a8491a7745a5737673a193c78,
@@ -103,6 +109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  gDie: {fileID: 6930496545603783166, guid: 8bbb9615441ef8e4786fb47ee3e76bf7, type: 3}
+  auDie: {fileID: 6116150706762156295}
+  auDown: {fileID: 0}
 --- !u!114 &4885110244601262093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,8 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  Types: 0
-  Force: 0
+  force: 0
   AttackEffect: {fileID: 0}
-  AttackEffectSoldier: {fileID: 0}
   AttackEffectPos: {fileID: 0}

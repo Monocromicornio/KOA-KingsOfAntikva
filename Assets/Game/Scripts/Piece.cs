@@ -11,7 +11,7 @@ public class Piece : MonoBehaviour
 
     protected BoardController board => matchController.boardController;
     protected GameField[] gameFields => board.gameFields;
-    
+
     protected GameMode.GameType gameType => matchController.gameType;
 
     protected bool finished => matchController.finished;
@@ -23,16 +23,7 @@ public class Piece : MonoBehaviour
     public PieceType type;
 
     [SerializeField]
-    private GameObject gDie;
-
-    [SerializeField]
     private GameObject gParticleChest;
-
-    [Header("Sound")]
-    [SerializeField]
-    private AudioSource auDie, auDown;
-
-    bool die = false;
 
     protected GameObject gChest;
 
@@ -87,8 +78,8 @@ public class Piece : MonoBehaviour
     {
         if (finished) return;
         targetField = field;
-        SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
-        CheckPieceOnField();
+        bool onField = CheckPieceOnField();
+        if(!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
     }
 
     public bool CheckPieceOnField()
@@ -105,33 +96,11 @@ public class Piece : MonoBehaviour
             field.SetPiece(this);
 
             SendMessage("ChangeField", targetField, SendMessageOptions.DontRequireReceiver);
-            print("--------------END TURN------------------");
-            SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
-            matchController.ChangeTurn();
+            ChangeTurn();
             return true;
         }
 
         return false;
-    }
-
-    //@
-    private int IndexHouse(int index)
-    {
-        int indexfield = 0;
-
-        int indexloop = 0;
-
-        foreach (GameField fc in gameFields)
-        {
-            if (fc.index == index)
-            {
-                indexfield = indexloop;
-            }
-
-            indexloop++;
-        }
-
-        return indexfield;
     }
 
     public void OpenChest()
@@ -146,146 +115,22 @@ public class Piece : MonoBehaviour
         */
     }
 
-    public void CelebrateVitory()
+    void Destroy()
     {
-        if (!finished) return;
-
-        /*
-        SetAnimation("Win", true);
-        yield return new WaitForSeconds(waitTime);
-        soundController.VictoryPeaple();
-        */
+        field.SetPiece(null);
+        StartCoroutine(WaitToDestroy());
     }
 
-    public void SetDie()
+    private IEnumerator WaitToDestroy()
     {
-        /*if(AttackEffect)
-        {
-            if (gameType == GameMode.GameType.Normal || gameType == GameMode.GameType.Hard)
-            {
-                if (tag == "Enemy")
-                {
-                    if (AttackEffectSoldier)
-                    {
-                        Instantiate(AttackEffectSoldier, AttackEffectPos.position, transform.rotation);
-                    }
-                }
-                else
-                {
-                    if (auAttackYell)
-                    {
-                        Instantiate(AttackEffect, AttackEffectPos.position, transform.rotation);
-                    }
-                }
-            }
-            else
-            {
-                if (auAttackYell)
-                {
-                    Instantiate(AttackEffect, AttackEffectPos.position, transform.rotation);
-                }
-            }           
-
-        }*/
-
-        //anim.SetBool("Die", true);
-        die = true;
-        StartCoroutine(ShouPain(0.5f));
-        StartCoroutine(ManDown(2.5f));
-        StartCoroutine(IEDestroyAfterDying(3.5f));
-    }
-
-    public bool isDie()
-    {
-        return die;
-    }
-
-    private IEnumerator IEDestroyAfterDying(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-
-        //if (type != PieceType.Bomb && bDieCounter)
-        {
-            if (matchController.currentePiece)
-            {
-                //matchController.currentePiece.GetComponent<Piece>().SetTakeHome(indexCurrentField);
-            }
-            matchController.ChangeTurn();
-        }
-        //if (type == PieceType.Bomb && !bDieCounter)
-        {
-            if (matchController.currentePiece)
-            {
-                //matchController.currentePiece.GetComponent<Piece>().SetTakeHome(indexCurrentField);
-            }
-            //turn.ChangeTurn();
-        }
-        //else if (type != PieceType.Bomb && !bDieCounter)
-        {
-            if (matchController.currentePiece)
-            {
-                //matchController.currentePiece.GetComponent<Piece>().SetTakeHome(indexCurrentField);
-            }
-            matchController.ChangeTurn();
-        }
-        //if (type == PieceType.Bomb && bDieCounter)
-        {
-            //CancelMovement();
-            //turn.ChangeTurn();
-        }
-        //turn.ChangeTurn();
+        yield return new WaitForSeconds(3.5f);
+        ChangeTurn();
         Destroy(gameObject);
     }
 
-    private IEnumerator ShouPain(float waitTime)
+    private void ChangeTurn()
     {
-        yield return new WaitForSeconds(waitTime);
-        if (gameType == GameMode.GameType.Hard)
-        {
-            if (tag == "Enemy")
-            {
-                soundController.DieSoldier();
-            }
-            else
-            {
-                auDie.Play();
-            }
-        }
-        else
-        {
-            auDie.Play();
-        }
-    }
-
-    private IEnumerator ManDown(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-
-        if (gameType == GameMode.GameType.Hard)
-        {
-            if (tag == "Enemy")
-            {
-                soundController.DownSoldier();
-            }
-            else
-            {
-                if (auDown)
-                {
-                    auDown.Play();
-                }
-            }
-        }
-        else
-        {
-            if (auDown)
-            {
-                auDown.Play();
-            }
-        }
-
-        yield return new WaitForSeconds(waitTime);
-        //Instantiate(gDie, auDie.transform.position, auDie.transform.rotation);
-        Instantiate(gDie, transform.position, gDie.transform.rotation);
-        //Colar o player no chão
+        SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
+        matchController.ChangeTurn();
     }
 }

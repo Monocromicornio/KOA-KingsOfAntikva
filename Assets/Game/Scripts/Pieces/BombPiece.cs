@@ -10,7 +10,7 @@ public class BombPiece : InteractivePiece
         base.Hitted(target, force);
 
         if (this.force < force) return;
-        
-        piece.SetDie();
+
+        SendMessage("Destroy");
     }
 }

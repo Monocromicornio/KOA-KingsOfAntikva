@@ -16,7 +16,7 @@ public class FakePiece : Piece
         fake = Instantiate(fake, vector3, transform.rotation);
         fake.transform.parent = transform;
 
-        /*=obj.SetActive(false);
+        /*obj.SetActive(false);
         fake.SetActive(true);*/
         fake.transform.rotation = transform.rotation;
 

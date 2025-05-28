@@ -53,6 +53,7 @@ public class MovePiece : MonoBehaviour
 
         transform.position = target.position;
         anim.SetAnimation("Walk", false);
+        piece.CheckPieceOnField();
     }
 
     private bool IsFarFromTarget()
