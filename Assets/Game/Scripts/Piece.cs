@@ -60,11 +60,6 @@ public class Piece : MonoBehaviour
         }
     }
 
-    public void SelectPeace()
-    {
-        matchController.ChangeTurn();
-    }
-
     public virtual void SetFirstField(GameField field)
     {
         this.field = field;
@@ -115,22 +110,29 @@ public class Piece : MonoBehaviour
         */
     }
 
+    void OnDestroy()
+    {
+        if (activePiece == this) activePiece = null;
+        field.SetPiece(null);
+        matchController.RemovePieceFromSquad(this);
+    }
+
     void Destroy()
     {
-        field.SetPiece(null);
+        OnDestroy();
         StartCoroutine(WaitToDestroy());
     }
 
     private IEnumerator WaitToDestroy()
     {
         yield return new WaitForSeconds(3.5f);
-        ChangeTurn();
         Destroy(gameObject);
     }
 
     private void ChangeTurn()
     {
+        string n = transform.parent.name;
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
-        matchController.ChangeTurn();
+        matchController.ChangeTurn(n + " : " + name);
     }
 }

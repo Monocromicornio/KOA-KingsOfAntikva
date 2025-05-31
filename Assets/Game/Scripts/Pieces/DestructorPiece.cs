@@ -12,7 +12,7 @@ public class DestructorPiece : AttackPiece
         Piece targetPiece = combatTarget.piece;
         if (toDestroy.Contains(targetPiece.type))
         {
-            Kill(combatTarget);
+            CounterAttack(combatTarget);
         }
 
         Attack(combatTarget);

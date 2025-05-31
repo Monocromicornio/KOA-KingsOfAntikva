@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class EnemySquad : Squad
 {
+    public List<FakePiece> fakePieces { get; private set; }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        fakePieces = new List<FakePiece>();
+    }
+
     protected override void LoadPieces()
     {
         int pieceCount = defaultPieces.Length;
@@ -36,8 +44,12 @@ public class EnemySquad : Squad
             int fieldIndex = fieldIndexes[rndField];
             fieldIndexes.RemoveAt(rndField);
 
-            gameFields[fieldIndex].SetPiece(pieces[i]);
-            pieces[i].SetFirstField(gameFields[fieldIndex]);
+            FakePiece piece = pieces[i].GetComponent<FakePiece>();
+
+            if (piece == null) continue;
+
+            LinkPieceToGameField(piece, gameFields[fieldIndex]);
+            fakePieces.Add(piece);
         }
     }
 }

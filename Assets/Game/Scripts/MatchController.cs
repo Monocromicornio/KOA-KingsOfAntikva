@@ -1,10 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MatchController : MonoBehaviour
 {
     public static MatchController instance;
 
+    [Header("Game objs")]
     public BoardController boardController;
 
     public GameMode gameMode;
@@ -16,19 +18,20 @@ public class MatchController : MonoBehaviour
     public bool isBlueTurn { get; private set; }
 
     [SerializeField]
-    GameObject game;
+    private GameObject game;
+    public PlayerSquad playerSquad;
+    public EnemySquad enemySquad;
+    public MachinePlayer machinePlayer;
 
     [Header("Feedback")]
     public SoundController soundController;
     [SerializeField]
-    AudioSource auChangeTurn;
+    private AudioSource auChangeTurn;
 
     private void Awake()
     {
         instance = this;
-        
         game.SetActive(false);
-        isBlueTurn = true;
         StartCoroutine(LoadGame());
     }
 
@@ -39,6 +42,9 @@ public class MatchController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         game.SetActive(true);
+        yield return new WaitForSeconds(2);
+        isBlueTurn = true;
+        ChangeTurn(name);
     }
 
     public void SetPiece(Piece piece)
@@ -46,11 +52,39 @@ public class MatchController : MonoBehaviour
         currentePiece = piece;
     }
 
-    public void ChangeTurn()
+    public void RemovePieceFromSquad(Piece piece)
+    {
+        List<Piece> pieces;
+        FakePiece fakePiece = piece.GetComponent<FakePiece>();
+        if (fakePiece != null) {
+            pieces = enemySquad.pieces;
+            enemySquad.fakePieces.Remove(fakePiece);
+        } else {
+            pieces = playerSquad.pieces;
+        }
+
+        if (!pieces.Contains(piece)) return;
+        pieces.Remove(piece);
+    }
+
+    public void ChangeTurn(string n)
     {
         if (finished) return;
-        isBlueTurn = !isBlueTurn;
         //Verify Victory
+        print("called by " + n);
+        StartCoroutine(ChangeTurn(1));
+    }
+
+    private IEnumerator ChangeTurn(float time)
+    {
+        print("TROCA DE TURNO");
+        yield return new WaitForSeconds(1);
+        isBlueTurn = !isBlueTurn;
+        print("É a vez do " + (isBlueTurn ? "player" : " maquina "));
+        if (!isBlueTurn)
+        {
+            machinePlayer.StartTurn();
+        }
     }
 
     //Verify Check mate a "matar" as peças sobrando

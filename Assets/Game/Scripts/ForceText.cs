@@ -3,6 +3,8 @@
 [RequireComponent(typeof(TextMesh))]
 public class ForceText : MonoBehaviour
 {
+    private TextMesh textMesh;
+    
     [SerializeField]
     private InteractivePiece piece;
     private string txtForce;
@@ -12,22 +14,19 @@ public class ForceText : MonoBehaviour
         set
         {
             txtForce = string.IsNullOrEmpty(value) ? "" : value.Substring(0, 1);
-            textMesh ??= GetComponent<TextMesh>();
-            UpdateText();
+            if (txtForce == "B" || txtForce != "F")
+            {
+                txtForce = "";
+            }
+
+            if (textMesh == null) return;
+            textMesh.text = txtForce;
         }
     }
-    private TextMesh textMesh;
 
     private void Awake()
     {
         textMesh ??= GetComponent<TextMesh>();
-        UpdateText();
-    }
-
-    private void UpdateText()
-    {
-        txtForce = piece?.force.ToString();
-        bool txtEmpty = txtForce == "B" || txtForce != "F";
-        textMesh.text = txtEmpty ? "" : txtForce;
+        if(piece != null) force = piece.force.ToString();
     }
 }

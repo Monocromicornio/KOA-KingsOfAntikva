@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(SelectField))]
+[RequireComponent(typeof(SelectablePiece))]
 public class AttackPiece : InteractivePiece
 {
-    private SelectField selectField;
+    private SelectablePiece selectField;
 
     private GameField fieldAtk;
     private Piece target;
@@ -14,7 +14,7 @@ public class AttackPiece : InteractivePiece
     protected override void Awake()
     {
         base.Awake();
-        selectField = GetComponent<SelectField>();
+        selectField = GetComponent<SelectablePiece>();
     }
 
     private void NewTarget()
@@ -27,6 +27,8 @@ public class AttackPiece : InteractivePiece
         target = fieldPiece.piece;
         fieldAtk = selectField.GetEmptyFieldFromActive(fieldPiece);
 
+        if (fieldAtk == null) fieldAtk = piece.field;
+
         if (posToAtk != null) StopCoroutine(posToAtk);
         posToAtk = PositionToAttack();
         StartCoroutine(posToAtk);
@@ -37,9 +39,15 @@ public class AttackPiece : InteractivePiece
         StartCoroutine(WaitToAttack());
     }
 
+    private void Failed()
+    {
+        CancelAttack();
+    }
+
     private IEnumerator WaitToAttack()
     {
         yield return new WaitForSeconds(3.5f);
+        EndAttack();
         SendMessage("NewTarget");
     }
 
@@ -50,8 +58,8 @@ public class AttackPiece : InteractivePiece
             yield return new WaitForEndOfFrame();
         }
 
+        transform.LookAt(target.transform);
         ReadyToAttack();
-        EndAttack();
     }
 
     protected InteractivePiece GetCombatPiece()
@@ -59,7 +67,7 @@ public class AttackPiece : InteractivePiece
         InteractivePiece combatTarget = target.GetComponent<InteractivePiece>();
         if (combatTarget == null)
         {
-            piece.SelectedAField(fieldAtk);
+            CancelAttack();
             return null;
         }
         return combatTarget;
@@ -69,6 +77,12 @@ public class AttackPiece : InteractivePiece
     {
         InteractivePiece combatTarget = GetCombatPiece();
         Attack(combatTarget);
+    }
+
+    private void CancelAttack()
+    {
+        piece.SelectedAField(fieldAtk);
+        EndAttack();
     }
 
     private void EndAttack()

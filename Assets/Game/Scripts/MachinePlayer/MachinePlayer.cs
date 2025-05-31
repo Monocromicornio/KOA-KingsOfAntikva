@@ -1,222 +1,166 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MachinePlayer : MonoBehaviour
 {
-    MatchController turn;
-    List<Piece> lplayers;
+    MatchController matchController => MatchController.instance;
+    List<FakePiece> pieces => matchController.enemySquad.fakePieces;
+    List<SelectablePiece> selectablePieces = new List<SelectablePiece>();
+
+    Piece currentPiece;
 
     [SerializeField]
     bool played = false;
 
-    void Start()
+    private void Start()
     {
-        turn = FindObjectOfType<MatchController>();
-
-        lplayers = new List<Piece>();
+        GetSelectablePieces();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartTurn()
     {
-        if(!turn.isBlueTurn)
-        {           
-            //if (turn.Liberate == true)
+        GetSelectablePieces();
+        var selectables = GetActiveSelectables();
+        int index = Random.Range(0, selectables.Count);
+        for (int i = 0; i < selectables.Count; i++)
+        {
+            Piece piece = selectables[i].piece;
+            if (piece.type == PieceType.Soldier)
             {
-                if (!played)
-                {
-                    //StartCoroutine(ResetPlay(3.5f));
-                    played = true;
-                    StartCoroutine(GetListParts(0.7f));
-                    Debug.Log("GetListPeaces()");                    
-                    Debug.Log("bPlayed() = " + played);
-                }
+                index = i;
+                break;
             }
         }
-
-        if (turn.isBlueTurn)
-        {
-            played = false;
-        }
-
-     }
-
-    private IEnumerator GetListParts(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        if (lplayers.Count > 0)
-        {
-            lplayers.Clear();
-        }               
-
-        Piece[] players = FindObjectsOfType<Piece>();
-
-        Debug.Log("players count = " + players.Length);
-        
-        //Colocar todas as peças inimigas na lista lplayers
-        foreach(Piece player in players)
-        {
-            if(player.tag == "Enemy")
-            {
-                if (player.type != PieceType.Bomb)
-                {
-                    if (player.type != PieceType.Flag)
-                    {
-                        lplayers.Add(player);
-                    }
-                }
-
-                //Debug.Log("GetListPeaces - player = " + player.name);
-            }
-        }
-
-        //Debug.Log("lplayers count = " + lplayers.Count);
-        
-        SelectPartsFreeHouse();
-        //SelectPeace();
-
-
+        ActionPiece(selectables[index]);
     }
 
-    private IEnumerator ResetPlay(float waitTime)
+    private void GetSelectablePieces()
     {
-        yield return new WaitForSeconds(waitTime);
-        Debug.Log("ResetPlay - bPlayed = " + played);
-        if (!turn.isBlueTurn)
+        selectablePieces.Clear();
+        foreach (FakePiece piece in pieces)
         {
-            //if (turn.Liberate == true)
+            SelectablePiece selectableField = piece.GetComponent<SelectablePiece>();
+            if (selectableField != null)
             {
-                if (played)
-                {
-                    played = false;
-                }
+                selectablePieces.Add(selectableField);
             }
         }
     }
 
-    Piece PlayerSelect;
-
-    private void SelectPartsFreeHouse()
+    private List<SelectablePiece> GetActiveSelectables()
     {
-        return;
-        /*List<MyPeaces> mypeaces = new List<MyPeaces>();
+        List<SelectablePiece> selectables = new List<SelectablePiece>();
+        foreach (SelectablePiece selectable in selectablePieces)
+        {
+            GameField[][] fields = selectable.GetSelectablesFields();
+            foreach (var field in fields)
+            {
+                if (field.Length > 0)
+                {
+                    selectables.Add(selectable);
+                    break;
+                }
+            }
+        }
 
-        //Limpar lista
-        mypeaces.Clear();
+        return selectables;
+    }
 
-        //Variavel que guarda a casa selecionada
-        int iHouseSelect = 0;
+    private void ActionPiece(SelectablePiece selectablePiece)
+    {
+        Piece piece = selectablePiece.piece;
+        var selectedFields = selectablePiece.selectedFields;
+        List<GameField> toSelect = new List<GameField>();
 
-        //array para as peças com casas livres
-        int[] ipeaces = new int[lplayers.Count];
+        foreach (List<GameField> fields in selectedFields.Values)
+        {
+            if (fields.Count > 0)
+            {
+                toSelect.Add(fields.Last());
+            }
+        }
 
-        //variavel para contar o loop e usar de indice
+        int index = Random.Range(0, toSelect.Count);
+        piece.SelectedAField(toSelect[index]);
+    }
+
+/// <summary>
+    /// SelectField: verificar quais peças poder fazer alguma ação*
+    /// Sortear entre essas peças para ver qual vai se mexer
+    /// Fazer a ação
+    /// </summary>
+    /*private void SelectPartsFreeHouse()
+    {
+        List<MyPeaces> mypeaces = new List<MyPeaces>();
+        int[] ipeaces = new int[pieces.Count];
         int icountmypeaces = 0;
 
-        //Separa as peças que tem casas livres e não seja bomba, bandeira e soldado
-        foreach (Piece player in lplayers)
+        foreach (Piece player in pieces)
         {
             int[] iHousesFree = player.HousesFree();
 
             if (iHousesFree.Length > 0)
             {
-                if (player.type != PieceType.Bomb)
+                ipeaces[icountmypeaces] = player.indexCurrentField;
+
+                foreach (int i in iHousesFree)
                 {
-                    if (player.type != PieceType.Flag)
+                    if (i > 0)
                     {
-
-                        Debug.Log("MachinePlayer player iFieldLive = " + player.indexCurrentField);
-
-                        ipeaces[icountmypeaces] = player.indexCurrentField;
-
-                        foreach (int i in iHousesFree)
-                        {
-                            Debug.Log("MachinePlayer player iFieldLive = " + player.indexCurrentField + " - iHousesFree = " + i);
-
-                            iHouseSelect = i;
-
-                            if (iHouseSelect > 0)
-                            {
-                                mypeaces.Add(new MyPeaces() { indexPeace = player.indexCurrentField, indexHouse = i });
-                            }
-                        }
-
-                        icountmypeaces++;
-                        
+                        mypeaces.Add(new MyPeaces(player.indexCurrentField, i));
                     }
                 }
+
+                icountmypeaces++;
             }
 
         }
 
         if (mypeaces.Count > 0)
         {
-
-            foreach (MyPeaces mypeace in mypeaces)
-            {
-                Debug.Log("SelectPartsFreeHouse mypeace indexPeace = " + mypeace.indexPeace);
-                Debug.Log("SelectPartsFreeHouse mypeace indexHouse = " + mypeace.indexHouse);
-            }
-
             ChoosePart(mypeaces);
         }
-
-*/
     }
 
     private void ChoosePart(List<MyPeaces> mypeaces)
     {
         int iPeacesCount = mypeaces.Count-1;
-
-        Debug.Log("ChoosePart - iPeacesCount = " + iPeacesCount);
-
         int iRandomIndexPart = Random.Range(0, iPeacesCount);
-
-        Debug.Log("ChoosePart - iRandomIndexPart = " + iRandomIndexPart);
-
-        int iRandomindexPeace = mypeaces[iRandomIndexPart].indexPeace;
-
-        Debug.Log("ChoosePart - iRandomindexPeace = " + iRandomindexPeace);        
+        int iRandomindexPeace = mypeaces[iRandomIndexPart].indexPeace;      
 
         List<int> lpeacehouses = new List<int>();
 
         foreach (MyPeaces p in mypeaces)
-        {            
-
+        {
             if (p.indexPeace == iRandomindexPeace)
             {
-                Debug.Log("ChoosePart - indexPeace = " + p.indexPeace + " - indexHouse = " + p.indexHouse);
                 lpeacehouses.Add(p.indexHouse);
             }
         }
 
         int iCountHouses = lpeacehouses.Count;
-        Debug.Log("ChoosePart - iCountHouses = " + iCountHouses);
-
         int iRandomHouse = Random.Range(0, iCountHouses);
-        Debug.Log("ChoosePart - iRandomHouse = " + iRandomHouse);
-
         int iSelectHouse = lpeacehouses[iRandomHouse];
-        Debug.Log("ChoosePart - iSelectHouse = " + iSelectHouse);
 
         SelectPart(iRandomindexPeace, iSelectHouse);
     }
 
     private void SelectPart(int iPart, int iHouse)
     {
-        foreach (Piece player in lplayers)
+        foreach (Piece player in pieces)
         {
             if (player.indexCurrentField == iPart)
             {
-                PlayerSelect = player;
+                currentPiece = player;
             }
         }
 
 
-        if (PlayerSelect)
+        if (currentPiece)
         {
-            PlayerSelect.SelectPeace();
+            currentPiece.SelectPeace();
             IEnumerator enumerator = IESelectHouse(iPart,1.0f);
             StartCoroutine(enumerator);
         }
@@ -304,8 +248,6 @@ public class MachinePlayer : MonoBehaviour
 
     private void SelectPeace()
     {
-        return;
-        /*
         //Lista das peças do computador
         List<MyPeaces> mypeaces = new List<MyPeaces>();
 
@@ -313,13 +255,13 @@ public class MachinePlayer : MonoBehaviour
         int iHouseSelect = 0;        
 
         //array para as peças com casas livres
-        int[] ipeaces = new int[lplayers.Count];
+        int[] ipeaces = new int[pieces.Count];
 
         //variavel para contar o loop e usar de indice
         int icountmypeaces = 0;
 
         //Separa as peças que tem casas livres e não seja bomba, bandeira e soldado
-        foreach (Piece player in lplayers)
+        foreach (Piece player in pieces)
         {
             //Debug.Log("MachinePlayer - player name = " + player.name);
             //Debug.Log("MachinePlayer - player iFieldLive = " + player.iFieldLive);
@@ -393,7 +335,7 @@ public class MachinePlayer : MonoBehaviour
 
         mypeaces.Clear();
 
-        foreach (Piece player in lplayers)
+        foreach (Piece player in pieces)
         {
             if (player.indexCurrentField == ipeaces[iRandomHouse])
             {
@@ -408,7 +350,6 @@ public class MachinePlayer : MonoBehaviour
             IEnumerator enumerator = SelectHouse(ihouses[iRandomHouse], 1.0f);
             StartCoroutine(enumerator);
         }
-        */
     }
 
     private IEnumerator SelectHouse(int house, float waitTime)
@@ -514,5 +455,5 @@ public class MachinePlayer : MonoBehaviour
             this.indexPeace = indexPeace;
             this.indexHouse = indexHouse;
         }
-    }
+    }*/
 }

@@ -5,12 +5,9 @@ public class BombPiece : InteractivePiece
         force = int.MaxValue;
     }
 
-    public override void Hitted(InteractivePiece target, int force)
+    protected override void Notify(bool sucess, InteractivePiece target)
     {
-        base.Hitted(target, force);
-
-        if (this.force < force) return;
-
-        SendMessage("Destroy");
+        base.Notify(sucess, target);
+        if(sucess) SendMessage("Destroy");
     }
 }

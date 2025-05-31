@@ -2,13 +2,13 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Piece))]
-[RequireComponent(typeof(SelectField))]
+[RequireComponent(typeof(SelectablePiece))]
 public class MovePiece : MonoBehaviour
 {
     private MatchController matchController => MatchController.instance;
     private BoardController board => matchController.boardController;
     private Piece piece;
-    private SelectField selectField;
+    private SelectablePiece selectField;
 
     private bool finished => matchController.finished;
     private GameField targetGameField;
@@ -24,7 +24,7 @@ public class MovePiece : MonoBehaviour
     private void Awake()
     {
         piece = GetComponent<Piece>();
-        selectField = GetComponent<SelectField>();
+        selectField = GetComponent<SelectablePiece>();
     }
 
     public void NewTarget()

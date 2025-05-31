@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Piece))]
 public class InteractivePiece : MonoBehaviour
@@ -30,37 +31,50 @@ public class InteractivePiece : MonoBehaviour
         piece = GetComponent<Piece>();
     }
 
-    public virtual void Hitted(InteractivePiece target, int force)
+    protected virtual void Notify(bool sucess, InteractivePiece target)
     {
-        if (this.force < force)
+        SendMessage(sucess? "Sucess": "Failed");
+        GameObject toDestroy = sucess ? target.gameObject : gameObject;
+        toDestroy.SendMessage("Destroy", SendMessageOptions.DontRequireReceiver);
+    }
+
+    protected virtual void ForceChallenge(InteractivePiece target)
+    {
+        if (force >= target.force)
         {
-            var options = SendMessageOptions.DontRequireReceiver;
-            SendMessage("Destroy", options);
-            target.SendMessage("Sucess", options);
+            Notify(true, target);
             return;
         }
 
-        Kill(target);
+        target.CounterAttack(this);
     }
 
-    private IEnumerator FeedbackAttack(InteractivePiece target, int force)
+    private IEnumerator FeedbackAttack(UnityAction action)
     {
+        soundController.PreAttack();
         yield return new WaitForSeconds(1);
         anim.SetAnimation("Attack");
-        target.Hitted(this, force);
+        action.Invoke();
     }
 
     protected void Attack(InteractivePiece target)
     {
         if (target == null) return;
-        soundController.PreAttack();
-        StartCoroutine(FeedbackAttack(target, force));
+        UnityAction action = () => ForceChallenge(target);
+        StartCoroutine(FeedbackAttack(action));
     }
 
-    protected void Kill(InteractivePiece target)
+    protected void CounterAttack(InteractivePiece target)
     {
         if (target == null) return;
-        soundController.PreAttack();
-        StartCoroutine(FeedbackAttack(target, int.MaxValue));
+        UnityAction action = () => target.Notify(false, this);
+        StartCoroutine(FeedbackAttack(action));
+    }
+
+    protected void InstaKillAttack(InteractivePiece target)
+    {
+        if (target == null) return;
+        UnityAction action = () => Notify(true, target);
+        StartCoroutine(FeedbackAttack(action));
     }
 }

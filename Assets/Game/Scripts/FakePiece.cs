@@ -16,14 +16,14 @@ public class FakePiece : Piece
         fake = Instantiate(fake, vector3, transform.rotation);
         fake.transform.parent = transform;
 
-        /*obj.SetActive(false);
-        fake.SetActive(true);*/
+        obj.SetActive(false);
+        fake.SetActive(true);
         fake.transform.rotation = transform.rotation;
 
         AnimPiece anim = GetComponent<AnimPiece>();
         if(anim) anim.ChangeAnim(fake);
 
-        //if (gChest != null) gChest.SetActive(false);
+        if (gChest != null) gChest.SetActive(false);
     }
 
     protected override void OnMouseDown()
