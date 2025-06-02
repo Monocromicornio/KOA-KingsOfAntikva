@@ -84,6 +84,7 @@ public class MachinePlayer : MonoBehaviour
 
         int index = Random.Range(0, toSelect.Count);
         piece.SelectedAField(toSelect[index]);
+        print("AçÃo -> " + piece.name + "  --  " + toSelect[index].index);
     }
 
 /// <summary>

@@ -43,8 +43,8 @@ public class MatchController : MonoBehaviour
         }
         game.SetActive(true);
         yield return new WaitForSeconds(2);
-        isBlueTurn = true;
-        ChangeTurn(name);
+        isBlueTurn = false;
+        StartCoroutine(ChangeTurn(0));
     }
 
     public void SetPiece(Piece piece)
@@ -71,14 +71,14 @@ public class MatchController : MonoBehaviour
     {
         if (finished) return;
         //Verify Victory
-        print("called by " + n);
-        StartCoroutine(ChangeTurn(1));
+        print("\n\ncalled by " + n + "\n\n");
+        StartCoroutine(ChangeTurn(2));
     }
 
     private IEnumerator ChangeTurn(float time)
     {
         print("TROCA DE TURNO");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(time);
         isBlueTurn = !isBlueTurn;
         print("É a vez do " + (isBlueTurn ? "player" : " maquina "));
         if (!isBlueTurn)

@@ -79,7 +79,11 @@ public class Piece : MonoBehaviour
 
     public bool CheckPieceOnField()
     {
-        if (field == targetField) return true;
+        if (field == targetField)
+        {
+            ChangeTurn();
+            return true;
+        }
         if (targetField == null) return false;
 
         if (transform.position == targetField.transform.position)
