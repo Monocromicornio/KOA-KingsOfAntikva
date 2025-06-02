@@ -23,7 +23,7 @@ public class InteractivePiece : MonoBehaviour
         piece = GetComponent<Piece>();
     }
 
-    protected virtual void Notify(bool sucess, InteractivePiece target)
+    public virtual void Notify(bool sucess, InteractivePiece target)
     {
         SendMessage(sucess? "Sucess": "Failed");
         GameObject toDestroy = sucess ? target.gameObject : gameObject;
@@ -41,7 +41,7 @@ public class InteractivePiece : MonoBehaviour
         target.CounterAttack(this);
     }
 
-    private IEnumerator FeedbackAttack(UnityAction action)
+    protected IEnumerator FeedbackAttack(UnityAction action)
     {
         soundController.PreAttack();
         yield return new WaitForSeconds(1);

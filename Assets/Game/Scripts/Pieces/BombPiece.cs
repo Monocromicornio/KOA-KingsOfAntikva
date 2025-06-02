@@ -1,3 +1,5 @@
+using UnityEngine.Events;
+
 public class BombPiece : InteractivePiece
 {
     void Start()
@@ -5,9 +7,16 @@ public class BombPiece : InteractivePiece
         force = int.MaxValue;
     }
 
-    protected override void Notify(bool sucess, InteractivePiece target)
+    protected override void CounterAttack(InteractivePiece target)
     {
-        base.Notify(sucess, target);
-        if(sucess) SendMessage("Destroy");
+        if (target == null) return;
+        UnityAction action = () => ActionsAfterAttack(target);
+        StartCoroutine(FeedbackAttack(action));
+    }
+
+    private void ActionsAfterAttack(InteractivePiece target)
+    {
+        target.Notify(false, this);
+        SendMessage("Destroy");
     }
 }

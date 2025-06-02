@@ -66,7 +66,8 @@ public class AttackPiece : InteractivePiece
         }
 
         transform.LookAt(target.transform);
-        ReadyToAttack();
+        InteractivePiece combatTarget = GetCombatPiece();
+        ReadyToAttack(combatTarget);
     }
 
     protected InteractivePiece GetCombatPiece()
@@ -80,9 +81,8 @@ public class AttackPiece : InteractivePiece
         return combatTarget;
     }
 
-    protected virtual void ReadyToAttack()
+    protected virtual void ReadyToAttack(InteractivePiece combatTarget)
     {
-        InteractivePiece combatTarget = GetCombatPiece();
         Attack(combatTarget);
     }
 

@@ -6,13 +6,12 @@ public class DestructorPiece : AttackPiece
     [SerializeField]
     List<PieceType> toDestroy;
 
-    protected override void ReadyToAttack()
+    protected override void ReadyToAttack(InteractivePiece combatTarget)
     {
-        InteractivePiece combatTarget = GetCombatPiece();
-        Piece targetPiece = combatTarget.piece;
-        if (toDestroy.Contains(targetPiece.type))
+        if (toDestroy.Contains(combatTarget.piece.type))
         {
-            CounterAttack(combatTarget);
+            InstaKillAttack(combatTarget);
+            return;
         }
 
         Attack(combatTarget);

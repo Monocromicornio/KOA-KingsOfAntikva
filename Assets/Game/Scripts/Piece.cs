@@ -110,6 +110,7 @@ public class Piece : MonoBehaviour
 
     public void Lose()
     {
+        print(name + " name -> " + tag);
         SendMessage("Destroy");
     }
 }

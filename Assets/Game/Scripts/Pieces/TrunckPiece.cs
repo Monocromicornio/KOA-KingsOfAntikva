@@ -21,10 +21,11 @@ public class TrunckPiece : InteractivePiece
 
     protected override void CounterAttack(InteractivePiece target)
     {
-        StartCoroutine(OpenChest());
+        OpenChest();
+        StartCoroutine(NotifyController(1));
     }
 
-    public IEnumerator OpenChest()
+    public void OpenChest()
     {
         if (!bluePiece)
         {
@@ -35,8 +36,11 @@ public class TrunckPiece : InteractivePiece
 
         particle.SetActive(true);
         soundController.VictoryConfirm();
+    }
 
-        yield return new WaitForSeconds(1);
+    private IEnumerator NotifyController(float time)
+    {
+        yield return new WaitForSeconds(time);
         matchController.OpenChest(this);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MatchController : MonoBehaviour
@@ -41,8 +42,8 @@ public class MatchController : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
+
         game.SetActive(true);
-        yield return new WaitForSeconds(2);
         isBlueTurn = false;
         StartCoroutine(ChangeTurn(0));
     }
@@ -73,7 +74,13 @@ public class MatchController : MonoBehaviour
     public void ChangeTurn()
     {
         if (finished) return;
-        //Verify Victory
+        bool endGame = CheckEndGame();
+        if (endGame)
+        {
+            WinGame();
+            return;
+        }
+        
         StartCoroutine(ChangeTurn(2));
     }
 
@@ -89,10 +96,9 @@ public class MatchController : MonoBehaviour
         }
     }
 
-    //Verify Check mate a "matar" as peças sobrando
-
     public void OpenChest(TrunckPiece piece)
     {
+        if (finished) return;
         if (piece.bluePiece)
         {
             SetEnemyWin();
@@ -100,100 +106,70 @@ public class MatchController : MonoBehaviour
         }
 
         SetPlayerWin();
+        WinGame();
     }
 
     private void SetPlayerWin()
     {
-        SetFinishGame(playerSquad.pieces.ToArray(), "Win");
-        SetFinishGame(enemySquad.pieces.ToArray(), "Lose");
+        SetFinishGame(playerSquad.pieces.ToArray(), true);
+        SetFinishGame(enemySquad.pieces.ToArray(), false);
     }
 
     private void SetEnemyWin()
     {
-        SetFinishGame(enemySquad.pieces.ToArray(), "Win");
-        SetFinishGame(playerSquad.pieces.ToArray(), "Lose");
+        SetFinishGame(enemySquad.pieces.ToArray(), true);
+        SetFinishGame(playerSquad.pieces.ToArray(), false);
     }
 
-    public void WinGame()
+    private void WinGame()
     {
-        /*/if(tag == "Player")
-        if (tag == "Enemy")
-        {
-            GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (finished) return;
+        finished = true;
 
-            foreach (GameObject enemy in Enemies)
-            {
-                if (enemy.GetComponent<Piece>().type != PieceType.Flag)
-                {
-                    enemy.SendMessage("Destroy");
-                }
-                //Destroy(enemy);
-            }
-
-            GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
-
-            foreach (GameObject player in Players)
-            {
-                player.SendMessage("CelebrateVitory");
-            }
-        }
-        else
-        {
-            GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
-
-            foreach (GameObject player in Players)
-            {
-                if (player.GetComponent<Piece>().type != PieceType.Flag)
-                {
-                    player.SendMessage("Destroy");
-                }
-            }
-
-            GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-            foreach (GameObject enemy in Enemies)
-            {
-                enemy.SendMessage("CelebrateVitory");
-                //Destroy(enemy);
-            }
-        }*/
+        //VOLTAR AO MENU
     }
 
-    public void SetFinishGame(Piece[] pieces, string message)
+    public void SetFinishGame(Piece[] pieces, bool win)
     {
         foreach (Piece piece in pieces)
         {
-            if (piece.type == PieceType.Flag) continue;
-            piece.SendMessage(message);
+            if (piece.type == PieceType.Flag)
+            {
+                piece.SendMessage("OpenChest");
+                continue;
+            }
+            piece.SendMessage(win? "Win" : "Lose");
         }
     }
-    
-    /*void VictoryVerify()
+
+    private bool CheckEndGame()
     {
-        if (iEnemyCountVictory == 0)
+        int players = CountActivePiece(playerSquad.pieces);
+        if (players == 0)
         {
-            matchController.WinGame();
-            currentePiece = null;
-
-            GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
-
-            foreach (GameObject player in Players)
-            {
-                player.GetComponent<Piece>().SetVictory();
-            }
+            SetEnemyWin();
+            return true;
         }
 
-        if (iPlayerCountVictory == 0)
+        int enemies = CountActivePiece(enemySquad.pieces);
+        if (enemies == 0)
         {
-            matchController.WinGame();
-            currentePiece = null;
-
-            GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-            foreach (GameObject enemy in Enemies)
-            {
-                enemy.GetComponent<Piece>().SetVictory();
-            }
+            SetPlayerWin();
+            return true;
         }
-    }*/
+
+        return false;
+    }
+
+    private int CountActivePiece(List<Piece> pieces)
+    {
+        int amount = 0;
+        foreach (Piece piece in pieces)
+        {
+            if (piece.type == PieceType.Flag || piece.type == PieceType.Bomb) continue;
+            amount++;
+        }
+
+        return amount;
+    }
 }
