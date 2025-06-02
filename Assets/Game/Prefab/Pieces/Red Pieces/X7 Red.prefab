@@ -84,18 +84,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3077207685811353065}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3675866406622900699 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1853016924916515890, guid: 44bbdc285684ac641b8ef6a096c0cbc5,
-    type: 3}
-  m_PrefabInstance: {fileID: 3077207685811353065}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f5203700c52d142a021fa8aca6d85b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4058399200503555717 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1361816087391196012, guid: 44bbdc285684ac641b8ef6a096c0cbc5,
@@ -114,36 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0b8e329a1fbd847879324edd26be56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceTxt: {fileID: 3675866406622900699}
-  Types: 6
-  Force: 7
-  AttackEffect: {fileID: 6474037483755172099, guid: 81724ec6cf7787540b6d6ada01995303,
-    type: 3}
-  AttackEffectSoldier: {fileID: 6474037483755172099, guid: 81724ec6cf7787540b6d6ada01995303,
-    type: 3}
-  AttackEffectPos: {fileID: 4058399201635415091}
-  gDie: {fileID: 6930496545603783166, guid: 8bbb9615441ef8e4786fb47ee3e76bf7, type: 3}
-  gParticleChest: {fileID: 0}
-  auAttackYell: {fileID: 4058399201227281663}
-  auDie: {fileID: 4058399201586143979}
-  auDown: {fileID: 0}
+  type: 6
   obj: {fileID: 2624384892292564538}
   fake: {fileID: 0}
---- !u!82 &4058399201227281663 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1361816087167148310, guid: 44bbdc285684ac641b8ef6a096c0cbc5,
-    type: 3}
-  m_PrefabInstance: {fileID: 3077207685811353065}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &4058399201586143979 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1361816088486500098, guid: 44bbdc285684ac641b8ef6a096c0cbc5,
-    type: 3}
-  m_PrefabInstance: {fileID: 3077207685811353065}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4058399201635415091 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1361816088674173402, guid: 44bbdc285684ac641b8ef6a096c0cbc5,
-    type: 3}
-  m_PrefabInstance: {fileID: 3077207685811353065}
-  m_PrefabAsset: {fileID: 0}

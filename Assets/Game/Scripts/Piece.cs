@@ -85,7 +85,7 @@ public class Piece : MonoBehaviour
         matchController.RemovePieceFromSquad(this);
     }
 
-    void Destroy()
+    protected void Destroy()
     {
         OnDestroy();
         StartCoroutine(WaitToDestroy());
@@ -105,11 +105,11 @@ public class Piece : MonoBehaviour
 
     public void Win()
     {
-        print("WIN!!!!");
+        //print("WIN!!!!");
     }
 
     public void Lose()
     {
-        Destroy();
+        SendMessage("Destroy");
     }
 }

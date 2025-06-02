@@ -102,48 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0b8e329a1fbd847879324edd26be56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceTxt: {fileID: 8873177735831063399}
-  Types: 9
-  Force: 0
-  AttackEffect: {fileID: 5004953754998910068, guid: 34be9bb42c135c24d834766d72ef3384,
-    type: 3}
-  AttackEffectSoldier: {fileID: 6474037483755172099, guid: 81724ec6cf7787540b6d6ada01995303,
-    type: 3}
-  AttackEffectPos: {fileID: 8102756058082315919}
-  gDie: {fileID: 6930496545603783166, guid: 8bbb9615441ef8e4786fb47ee3e76bf7, type: 3}
-  gParticleChest: {fileID: 0}
-  auAttackYell: {fileID: 8102756057357528643}
-  auDie: {fileID: 8102756057598941271}
-  auDown: {fileID: 0}
+  type: 9
   obj: {fileID: 2423735005375036151}
   fake: {fileID: 0}
---- !u!82 &8102756057357528643 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2873035907952400345, guid: 73e8b92c066668142a493b98fa071019,
-    type: 3}
-  m_PrefabInstance: {fileID: 6317942640327358874}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &8102756057598941271 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2873035908328006093, guid: 73e8b92c066668142a493b98fa071019,
-    type: 3}
-  m_PrefabInstance: {fileID: 6317942640327358874}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8102756058082315919 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2873035908677203733, guid: 73e8b92c066668142a493b98fa071019,
-    type: 3}
-  m_PrefabInstance: {fileID: 6317942640327358874}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8873177735831063399 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3210516198565147389, guid: 73e8b92c066668142a493b98fa071019,
-    type: 3}
-  m_PrefabInstance: {fileID: 6317942640327358874}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f5203700c52d142a021fa8aca6d85b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

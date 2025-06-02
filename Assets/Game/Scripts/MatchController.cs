@@ -95,25 +95,23 @@ public class MatchController : MonoBehaviour
     {
         if (piece.bluePiece)
         {
-            SetPlayerWin();
+            SetEnemyWin();
             return;
         }
 
-        SetEnemyWin();
+        SetPlayerWin();
     }
 
     private void SetPlayerWin()
     {
-        List<Piece> winners = playerSquad.pieces;
-        List<Piece> losers = enemySquad.pieces;
-        SetFinishGame(winners.ToArray(), losers.ToArray());
+        SetFinishGame(playerSquad.pieces.ToArray(), "Win");
+        SetFinishGame(enemySquad.pieces.ToArray(), "Lose");
     }
 
     private void SetEnemyWin()
     {
-        List<Piece> winners = enemySquad.pieces;
-        List<Piece> losers = playerSquad.pieces;
-        SetFinishGame(winners.ToArray(), losers.ToArray());
+        SetFinishGame(enemySquad.pieces.ToArray(), "Win");
+        SetFinishGame(playerSquad.pieces.ToArray(), "Lose");
     }
 
     public void WinGame()
@@ -161,16 +159,12 @@ public class MatchController : MonoBehaviour
         }*/
     }
 
-    public void SetFinishGame(Piece[] winners, Piece[] losers)
+    public void SetFinishGame(Piece[] pieces, string message)
     {
-        foreach (Piece piece in winners)
+        foreach (Piece piece in pieces)
         {
-            piece.SendMessage("Win");
-        }
-        
-        foreach (Piece piece in losers)
-        {
-            piece.SendMessage("Lose");
+            if (piece.type == PieceType.Flag) continue;
+            piece.SendMessage(message);
         }
     }
     

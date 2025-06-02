@@ -18,13 +18,6 @@ public class InteractivePiece : MonoBehaviour
     [SerializeField]
     public int force;
 
-    [Header("Effects")]
-    [SerializeField]
-    protected GameObject AttackEffect;
-
-    [SerializeField]
-    protected Transform AttackEffectPos;
-
     protected virtual void Awake()
     {
         piece = GetComponent<Piece>();
@@ -56,21 +49,21 @@ public class InteractivePiece : MonoBehaviour
         action.Invoke();
     }
 
-    protected void Attack(InteractivePiece target)
+    protected virtual void Attack(InteractivePiece target)
     {
         if (target == null) return;
         UnityAction action = () => ForceChallenge(target);
         StartCoroutine(FeedbackAttack(action));
     }
 
-    protected void CounterAttack(InteractivePiece target)
+    protected virtual void CounterAttack(InteractivePiece target)
     {
         if (target == null) return;
         UnityAction action = () => target.Notify(false, this);
         StartCoroutine(FeedbackAttack(action));
     }
 
-    protected void InstaKillAttack(InteractivePiece target)
+    protected virtual void InstaKillAttack(InteractivePiece target)
     {
         if (target == null) return;
         UnityAction action = () => Notify(true, target);

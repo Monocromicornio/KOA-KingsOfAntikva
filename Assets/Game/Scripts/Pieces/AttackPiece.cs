@@ -11,6 +11,13 @@ public class AttackPiece : InteractivePiece
 
     IEnumerator posToAtk;
 
+    [Header("Effects")]
+    [SerializeField]
+    protected GameObject AttackEffect;
+
+    [SerializeField]
+    protected Transform AttackEffectPos;
+
     protected override void Awake()
     {
         base.Awake();

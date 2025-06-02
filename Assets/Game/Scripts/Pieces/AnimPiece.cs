@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Piece))]
@@ -13,6 +15,7 @@ public class AnimPiece : MonoBehaviour
     [SerializeField]
     private Animator animator;
     public Animator anim { get; private set; }
+    private List<Animator> lastAnims = new List<Animator>();
 
     [Header("Particle")]
     [SerializeField]
@@ -43,6 +46,7 @@ public class AnimPiece : MonoBehaviour
 
     public void ChangeAnim(Animator newAnim)
     {
+        lastAnims.Add(anim);
         anim = newAnim;
     }
 
@@ -51,6 +55,12 @@ public class AnimPiece : MonoBehaviour
         Animator anim = newAnim.GetComponent<Animator>();
         if (anim == null) return;
         ChangeAnim(anim);
+    }
+
+    public void ChangetoOld()
+    {
+        if (lastAnims.Count == 0) return;
+        ChangeAnim(lastAnims.Last());
     }
 
     private void Destroy()
@@ -87,8 +97,6 @@ public class AnimPiece : MonoBehaviour
 
     public void Win()
     {
-        if (!matchController.finished) return;
-
         SetAnimation("Win", true);
         soundController.VictoryPeaple();
     }

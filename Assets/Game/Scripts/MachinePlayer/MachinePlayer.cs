@@ -24,15 +24,6 @@ public class MachinePlayer : MonoBehaviour
         GetSelectablePieces();
         var selectables = GetActiveSelectables();
         int index = Random.Range(0, selectables.Count);
-        for (int i = 0; i < selectables.Count; i++)
-        {
-            Piece piece = selectables[i].piece;
-            if (piece.type == PieceType.Soldier)
-            {
-                index = i;
-                break;
-            }
-        }
         ActionPiece(selectables[index]);
     }
 
@@ -84,7 +75,6 @@ public class MachinePlayer : MonoBehaviour
 
         int index = Random.Range(0, toSelect.Count);
         piece.SelectedAField(toSelect[index]);
-        print("AçÃo -> " + piece.name + "  --  " + toSelect[index].index);
     }
 
 /// <summary>

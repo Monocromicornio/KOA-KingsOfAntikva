@@ -11,6 +11,7 @@ public class FakePiece : Piece
 
     void Start()
     {
+        //return;
         fake.SetActive(false);
         Vector3 vector3 = new Vector3(obj.transform.position.x, 0, obj.transform.position.z);
         fake = Instantiate(fake, vector3, transform.rotation);
@@ -38,11 +39,11 @@ public class FakePiece : Piece
     {
         switch (gameType)
         {
-            //In normal mode only exclude soldier
+            //In normal not reveal soldiers
             case GameMode.GameType.Normal:
                 if (type == PieceType.Soldier) return;
                 break;
-            //in hard mode include only bandeira e bomba
+            //in hard mode only revel flags and bombs
             case GameMode.GameType.Hard:
                 if (type != PieceType.Flag && type != PieceType.Bomb) return;
                 break;
@@ -50,20 +51,19 @@ public class FakePiece : Piece
 
         obj.gameObject.SetActive(true);
         fake.SetActive(false);
+        AnimPiece anim = GetComponent<AnimPiece>();
+        if (anim) anim.ChangetoOld();
     }
 
-    public void Attack()
+    protected new void Destroy()
     {
         Reveal();
+        base.Destroy();
     }
 
-    public void Hitted()
+    public new void Win()
     {
-        Reveal();
-    }
-
-    public void Die()
-    {
+        //base.Win();
         Reveal();
     }
 
