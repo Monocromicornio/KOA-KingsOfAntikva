@@ -22,8 +22,6 @@ public class FakePiece : Piece
 
         AnimPiece anim = GetComponent<AnimPiece>();
         if(anim) anim.ChangeAnim(fake);
-
-        if (gChest != null) gChest.SetActive(false);
     }
 
     protected override void OnMouseDown()
@@ -48,11 +46,6 @@ public class FakePiece : Piece
             case GameMode.GameType.Hard:
                 if (type != PieceType.Flag && type != PieceType.Bomb) return;
                 break;
-        }
-
-        if (type == PieceType.Flag)
-        {
-            gChest.SetActive(true);
         }
 
         obj.gameObject.SetActive(true);

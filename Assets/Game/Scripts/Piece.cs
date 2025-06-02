@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
@@ -7,8 +6,6 @@ public class Piece : MonoBehaviour
     private static Piece activePiece;
 
     protected MatchController matchController => MatchController.instance;
-    protected SoundController soundController => matchController.soundController;
-
     protected BoardController board => matchController.boardController;
     protected GameField[] gameFields => board.gameFields;
 
@@ -21,27 +18,6 @@ public class Piece : MonoBehaviour
     public int indexCurrentField => field.index;
 
     public PieceType type;
-
-    [SerializeField]
-    private GameObject gParticleChest;
-
-    protected GameObject gChest;
-
-    private void Awake()
-    {
-        if (type == PieceType.Flag)
-        {
-            gChest = transform.Find("Bau").gameObject;
-        }
-    }
-
-    private void Start()
-    {
-        if (type == PieceType.Flag)
-        {
-            gChest = transform.Find("Bau").gameObject;
-        }
-    }
 
     protected virtual void OnMouseDown()
     {
@@ -74,7 +50,7 @@ public class Piece : MonoBehaviour
         if (finished) return;
         targetField = field;
         bool onField = CheckPieceOnField();
-        if(!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
+        if (!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
     }
 
     public bool CheckPieceOnField()
@@ -102,18 +78,6 @@ public class Piece : MonoBehaviour
         return false;
     }
 
-    public void OpenChest()
-    {
-        //anim.SetBool("Open", true);
-
-        gParticleChest.SetActive(true);
-        soundController.VictoryConfirm();
-        /*
-        yield return new WaitForSeconds(waitTime);
-        matchController.WinGame();
-        */
-    }
-
     void OnDestroy()
     {
         if (activePiece == this) activePiece = null;
@@ -135,8 +99,17 @@ public class Piece : MonoBehaviour
 
     private void ChangeTurn()
     {
-        string n = transform.parent.name;
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
-        matchController.ChangeTurn(n + " : " + name);
+        matchController.ChangeTurn();
+    }
+
+    public void Win()
+    {
+        print("WIN!!!!");
+    }
+
+    public void Lose()
+    {
+        Destroy();
     }
 }

@@ -56,10 +56,13 @@ public class MatchController : MonoBehaviour
     {
         List<Piece> pieces;
         FakePiece fakePiece = piece.GetComponent<FakePiece>();
-        if (fakePiece != null) {
+        if (fakePiece != null)
+        {
             pieces = enemySquad.pieces;
             enemySquad.fakePieces.Remove(fakePiece);
-        } else {
+        }
+        else
+        {
             pieces = playerSquad.pieces;
         }
 
@@ -67,17 +70,16 @@ public class MatchController : MonoBehaviour
         pieces.Remove(piece);
     }
 
-    public void ChangeTurn(string n)
+    public void ChangeTurn()
     {
         if (finished) return;
         //Verify Victory
-        print("\n\ncalled by " + n + "\n\n");
         StartCoroutine(ChangeTurn(2));
     }
 
     private IEnumerator ChangeTurn(float time)
     {
-        print("TROCA DE TURNO");
+        print("---------------------|||------------------------");
         yield return new WaitForSeconds(time);
         isBlueTurn = !isBlueTurn;
         print("É a vez do " + (isBlueTurn ? "player" : " maquina "));
@@ -89,9 +91,34 @@ public class MatchController : MonoBehaviour
 
     //Verify Check mate a "matar" as peças sobrando
 
+    public void OpenChest(TrunckPiece piece)
+    {
+        if (piece.bluePiece)
+        {
+            SetPlayerWin();
+            return;
+        }
+
+        SetEnemyWin();
+    }
+
+    private void SetPlayerWin()
+    {
+        List<Piece> winners = playerSquad.pieces;
+        List<Piece> losers = enemySquad.pieces;
+        SetFinishGame(winners.ToArray(), losers.ToArray());
+    }
+
+    private void SetEnemyWin()
+    {
+        List<Piece> winners = enemySquad.pieces;
+        List<Piece> losers = playerSquad.pieces;
+        SetFinishGame(winners.ToArray(), losers.ToArray());
+    }
+
     public void WinGame()
     {
-        //if(tag == "Player")
+        /*/if(tag == "Player")
         if (tag == "Enemy")
         {
             GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -131,6 +158,19 @@ public class MatchController : MonoBehaviour
                 enemy.SendMessage("CelebrateVitory");
                 //Destroy(enemy);
             }
+        }*/
+    }
+
+    public void SetFinishGame(Piece[] winners, Piece[] losers)
+    {
+        foreach (Piece piece in winners)
+        {
+            piece.SendMessage("Win");
+        }
+        
+        foreach (Piece piece in losers)
+        {
+            piece.SendMessage("Lose");
         }
     }
     

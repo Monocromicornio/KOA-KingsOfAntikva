@@ -70,7 +70,7 @@ public class AnimPiece : MonoBehaviour
         }
         else
         {
-            if(auDie) auDie.Play();
+            if (auDie) auDie.Play();
         }
 
         yield return new WaitForSeconds(2);
@@ -85,14 +85,11 @@ public class AnimPiece : MonoBehaviour
         }
     }
 
-    public void CelebrateVitory()
+    public void Win()
     {
-        //if (!finished) return;
+        if (!matchController.finished) return;
 
-        /*
         SetAnimation("Win", true);
-        yield return new WaitForSeconds(waitTime);
         soundController.VictoryPeaple();
-        */
     }
 }
