@@ -11,6 +11,8 @@ public class FakePiece : Piece
 
     void Start()
     {
+        myTurn = TurnState.red;
+
         fake.SetActive(false);
         Vector3 vector3 = new Vector3(obj.transform.position.x, 0, obj.transform.position.z);
         fake = Instantiate(fake, vector3, transform.rotation);
@@ -26,12 +28,8 @@ public class FakePiece : Piece
 
     protected override void OnMouseDown()
     {
-        if (!matchController.isBlueTurn) return;
-
-        if (matchController.currentePiece != null)
-        {
-            matchController.currentePiece.SelectedAField(field);
-        }
+        if (!field.select) return;
+        matchController.currentePiece?.SelectedAField(field);
     }
 
     public void Reveal()

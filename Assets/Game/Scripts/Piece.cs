@@ -12,6 +12,7 @@ public class Piece : MonoBehaviour
     protected GameMode.GameType gameType => matchController.gameType;
 
     protected bool finished => matchController.finished;
+    protected TurnState myTurn = TurnState.blue;
 
     public GameField field { get; private set; }
     public GameField targetField { get; private set; }
@@ -21,7 +22,7 @@ public class Piece : MonoBehaviour
 
     protected virtual void OnMouseDown()
     {
-        if (!matchController.isBlueTurn) return;
+        if (matchController.turn != myTurn) return;
 
         if (activePiece != this)
         {
@@ -29,11 +30,8 @@ public class Piece : MonoBehaviour
             activePiece = this;
         }
 
-        if (tag == "Player" == matchController.isBlueTurn)
-        {
-            matchController.SetPiece(this);
-            SendMessage("GetPiece", SendMessageOptions.DontRequireReceiver);
-        }
+        matchController.SetPiece(this);
+        SendMessage("GetPiece", SendMessageOptions.DontRequireReceiver);
     }
 
     public virtual void SetFirstField(GameField field)
@@ -48,6 +46,9 @@ public class Piece : MonoBehaviour
     public void SelectedAField(GameField field)
     {
         if (finished) return;
+        
+        matchController.MadeActionOnTurn();
+
         targetField = field;
         bool onField = CheckPieceOnField();
         if (!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);

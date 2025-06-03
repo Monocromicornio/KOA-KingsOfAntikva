@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class MatchController : MonoBehaviour
@@ -16,7 +15,8 @@ public class MatchController : MonoBehaviour
     public bool finished { get; private set; }
 
     public Piece currentePiece { get; private set; }
-    public bool isBlueTurn { get; private set; }
+    private bool blueTurn = false; //False to start with blue, true for red
+    public TurnState turn { get; private set; }
 
     [SerializeField]
     private GameObject game;
@@ -34,6 +34,7 @@ public class MatchController : MonoBehaviour
         instance = this;
         game.SetActive(false);
         StartCoroutine(LoadGame());
+        turn = TurnState.wait;
     }
 
     private IEnumerator LoadGame()
@@ -44,7 +45,6 @@ public class MatchController : MonoBehaviour
         }
 
         game.SetActive(true);
-        isBlueTurn = false;
         StartCoroutine(ChangeTurn(0));
     }
 
@@ -71,6 +71,11 @@ public class MatchController : MonoBehaviour
         pieces.Remove(piece);
     }
 
+    public void MadeActionOnTurn()
+    {
+        turn = TurnState.wait;
+    }
+
     public void ChangeTurn()
     {
         if (finished) return;
@@ -80,7 +85,7 @@ public class MatchController : MonoBehaviour
             WinGame();
             return;
         }
-        
+
         StartCoroutine(ChangeTurn(2));
     }
 
@@ -88,9 +93,10 @@ public class MatchController : MonoBehaviour
     {
         print("---------------------|||------------------------");
         yield return new WaitForSeconds(time);
-        isBlueTurn = !isBlueTurn;
-        print("É a vez do " + (isBlueTurn ? "player" : " maquina "));
-        if (!isBlueTurn)
+        blueTurn = !blueTurn;
+        turn = blueTurn ? TurnState.blue : TurnState.red;
+        print("É a vez do " + turn);
+        if (turn == TurnState.red)
         {
             machinePlayer.StartTurn();
         }
