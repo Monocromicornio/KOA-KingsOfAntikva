@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Xml;
 
-[CreateAssetMenu(fileName = "NewTableData", menuName = "Database/TableData")]
+[CreateAssetMenu(fileName = "NewTableData", menuName = "KOA/TableData")]
 public class TableData : ScriptableObject
 {
     [SerializeField]
@@ -45,8 +45,6 @@ public class TableData : ScriptableObject
 
         PlayerPrefs.SetString(tableName, sXmlBase);
         PlayerPrefs.Save();
-
-        Debug.Log($"Table {tableName} saved: {sXmlBase}");
     }
 
     /// <summary>
@@ -58,8 +56,6 @@ public class TableData : ScriptableObject
         {
             string sXmlBase = PlayerPrefs.GetString(tableName);
             xmlDoc.LoadXml(sXmlBase);
-
-            Debug.Log($"Table {tableName} loaded: {xmlDoc.InnerXml}");
         }
         else
         {
@@ -76,8 +72,6 @@ public class TableData : ScriptableObject
         {
             PlayerPrefs.SetString(tableName, xmlDoc.InnerXml);
             PlayerPrefs.Save();
-
-            Debug.Log($"Table {tableName} updated: {xmlDoc.InnerXml}");
         }
         else
         {
@@ -250,7 +244,6 @@ public class TableData : ScriptableObject
         if (PlayerPrefs.HasKey(tableName))
         {
             PlayerPrefs.DeleteKey(tableName);
-            Debug.Log($"Table {tableName} deleted.");
         }
     }
 }

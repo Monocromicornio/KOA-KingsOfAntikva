@@ -26827,17 +26827,17 @@ PrefabInstance:
     - target: {fileID: 7107614780625465292, guid: 7f810f9a8491a7745a5737673a193c78,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.64
+      value: -1.8899999
       objectReference: {fileID: 0}
     - target: {fileID: 7107614780625465292, guid: 7f810f9a8491a7745a5737673a193c78,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.58203125
+      value: 0.115
       objectReference: {fileID: 0}
     - target: {fileID: 7107614780625465292, guid: 7f810f9a8491a7745a5737673a193c78,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.55
+      value: -4.388
       objectReference: {fileID: 0}
     - target: {fileID: 7107614780625465292, guid: 7f810f9a8491a7745a5737673a193c78,
         type: 3}
@@ -26900,6 +26900,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6883934860476021794}
+    - targetCorrespondingSourceObject: {fileID: 7107614780625465293, guid: 7f810f9a8491a7745a5737673a193c78,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2593618028728699654}
   m_SourcePrefab: {fileID: 100100000, guid: 7f810f9a8491a7745a5737673a193c78, type: 3}
 --- !u!82 &7220416272067537064 stripped
 AudioSource:
@@ -26945,6 +26949,23 @@ MonoBehaviour:
   gDie: {fileID: 6930496545603783166, guid: 8bbb9615441ef8e4786fb47ee3e76bf7, type: 3}
   auDie: {fileID: 7220416272067537064}
   auDown: {fileID: 7220416273454063292}
+--- !u!114 &2593618028728699654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7220416273139772614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cd63f4fca86944ab19f47b5a6a7500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticSpawn: 0
+  staticId: 0
+  instancePrefabSignature: 0a085df9-ddb6-4084-b31e-dc211fe00154
+  childToDisable: []
+  childToSync: []
 --- !u!4 &7220416273139772615 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7107614780625465292, guid: 7f810f9a8491a7745a5737673a193c78,

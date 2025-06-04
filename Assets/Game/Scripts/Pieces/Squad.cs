@@ -11,7 +11,7 @@ public class Squad : MonoBehaviour
     protected GameField[] gameFields => board.gameFields;
 
     [SerializeField]
-    protected Piece[] defaultPieces;
+    protected PieceData pieceData;
     public List<Piece> pieces { get; private set; }
 
     protected virtual void Awake()
@@ -19,22 +19,31 @@ public class Squad : MonoBehaviour
         pieces = new List<Piece>();
     }
 
-    private void Start()
-    {
-        LoadPieces();
-    }
-
-    protected virtual void LoadPieces()
+    public virtual void LoadPieces()
     {
         // Implementação padrão (vazia)
     }
 
-    protected Piece GetPieceByName(string pieaceName)
+    protected Piece GetPieceByName(string pieaceName, Piece[] defaultPieces)
     {
         Piece piece = System.Array.Find(
             defaultPieces,
             p => p.name == pieaceName
         );
+
+        if (piece == null)
+        {
+            Debug.LogWarning($"No default piece found with the name {pieaceName}");
+        }
+
+        return piece;
+    }
+
+    protected Piece GetPieceByName(string pieaceName)
+    {
+        string pName = pieaceName.Substring(0, 2);
+        var pieceConfig = pieceData.pieces.Find((p) => p.name == pName);
+        Piece piece = pieceConfig.prefab;
 
         if (piece == null)
         {

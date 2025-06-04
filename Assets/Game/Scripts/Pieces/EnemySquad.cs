@@ -5,13 +5,16 @@ public class EnemySquad : Squad
 {
     public List<FakePiece> fakePieces { get; private set; }
 
+    [SerializeField]
+    Piece[] defaultPieces;
+
     protected override void Awake()
     {
         base.Awake();
         fakePieces = new List<FakePiece>();
     }
 
-    protected override void LoadPieces()
+    public override void LoadPieces()
     {
         int pieceCount = defaultPieces.Length;
         int lastIndex = gameFields.Length - 1;

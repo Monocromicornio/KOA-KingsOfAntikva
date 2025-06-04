@@ -5,21 +5,29 @@ public class EditSquad : Squad
 {
     private List<EditableField> toChange = new List<EditableField>();
 
+    [SerializeField]
+    Piece[] defaultPieces;
+
     [Header("Sources")]
     [SerializeField]
     AudioSource selectSource;
     [SerializeField]
     AudioSource confirmSource;
 
-    protected override void LoadPieces()
+    private void Start()
+    {
+        LoadPieces();
+    }
+
+    public override void LoadPieces()
     {
         if (table.Count() > 1)
         {
             for (int i = 1; i < table.Count(); i++)
             {
                 string record = table.GetRecord("Piece", i);
-                Piece piece = GetPieceByName(record);
-                if(piece == null) continue;
+                Piece piece = GetPieceByName(record, defaultPieces);
+                if (piece == null) continue;
 
                 int houseIndex = int.Parse(table.GetRecord("House", i));
                 EditableField editable = editables[houseIndex];
@@ -32,7 +40,7 @@ public class EditSquad : Squad
             for (int i = 0; i < editables.Length; i++)
             {
                 if (i < defaultPieces.Length)
-                {         
+                {
                     GameObject piece = defaultPieces[i].gameObject;
                     EditableField editable = editables[i];
 

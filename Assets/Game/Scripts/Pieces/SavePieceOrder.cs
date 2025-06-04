@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using com.onlineobject.objectnet;
 
 [RequireComponent(typeof(GameMode))]
 public class SavePieceOrder : MonoBehaviour
@@ -23,12 +24,22 @@ public class SavePieceOrder : MonoBehaviour
 
     [SerializeField]
     ToggleGameMode[] toggleGames;
+    NetworkConnectionType networkConnectionType = NetworkConnectionType.Manual;
+
+    public void PressServerButton()
+    {
+        networkConnectionType = NetworkConnectionType.Server;
+        PressButton();
+    }
+
+    public void PressClientButton()
+    {
+        networkConnectionType = NetworkConnectionType.Client;
+        PressButton();
+    }
 
     public void PressButton()
     {
-        table.DeleteTable();
-        table.SaveTable();
-
         foreach (ToggleGameMode toggleGame in toggleGames)
         {
             if (toggleGame.toggle.isOn)
@@ -36,36 +47,49 @@ public class SavePieceOrder : MonoBehaviour
                 gameMode.type = toggleGame.gameType;
             }
         }
-
         StartCoroutine(StartSavePieces());
     }
 
-    int iPiecesRecord = 0;
-
     private IEnumerator StartSavePieces()
     {
-        while (iPiecesRecord == 0)
+        table.DeleteTable();
+        table.SaveTable();
+        while (!table.Loaded())
         {
-            if (table.Loaded())
-            {
-                iPiecesRecord = table.Count();
-                SavePieces();
-                Debug.Log("table Count = " + table.Count());
-            }
             yield return null;
         }
+        SavePieces();
     }
 
     void SavePieces()
     {
         foreach (EditableField editable in editableFields)
         {
-            Debug.Log("SavePieceOrder - house.Index = " + editable.index + " - house.BusyPiece.name = " + editable.piece.name);
-
             string[] newRecord = { editable.index.ToString(), editable.piece.name.ToString() };
             table.AddRecord(newRecord);
         }
 
-        SceneManager.LoadScene("SinglePlayer");
+        if (networkConnectionType != NetworkConnectionType.Manual)
+        {
+            MatchController.online = true;
+            NetworkManager networkManager = NetworkManager.Instance();
+            networkManager.ConfigureMode(networkConnectionType);
+            networkManager.SetServerAddress("127.0.0.1");
+            networkManager.StartNetwork();
+            return;
+        }
+
+        MatchController.online = false;
+        GoToGame();
+    }
+
+    private void GoToGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    public void GoToGame(IChannel channel)
+    {
+        GoToGame();
     }
 }

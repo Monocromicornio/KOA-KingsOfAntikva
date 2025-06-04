@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using com.onlineobject.objectnet;
 using UnityEngine;
 
 public class MatchController : MonoBehaviour
 {
     public static MatchController instance;
+    public static bool online = false;
+    public NetworkManager networkManager => NetworkManager.Instance();
 
     [Header("Game objs")]
     public BoardController boardController;
@@ -29,12 +32,19 @@ public class MatchController : MonoBehaviour
     [SerializeField]
     private AudioSource auChangeTurn;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         instance = this;
         game.SetActive(false);
-        StartCoroutine(LoadGame());
         turn = TurnState.wait;
+        OnSceneLoaded("");
+    }
+
+    public void OnSceneLoaded(string sceneName)
+    {
+        //print("sceneName " + sceneName);
+        //if (!online) return;
+        StartCoroutine(LoadGame());
     }
 
     private IEnumerator LoadGame()
@@ -45,7 +55,13 @@ public class MatchController : MonoBehaviour
         }
 
         game.SetActive(true);
+        SpawnPieces();
         StartCoroutine(ChangeTurn(0));
+    }
+
+    public void SpawnPieces()
+    {
+        playerSquad.LoadPieces();
     }
 
     public void SetPiece(Piece piece)

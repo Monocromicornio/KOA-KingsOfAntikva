@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using com.onlineobject.objectnet;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
@@ -46,7 +47,7 @@ public class Piece : MonoBehaviour
     public void SelectedAField(GameField field)
     {
         if (finished) return;
-        
+
         matchController.MadeActionOnTurn();
 
         targetField = field;
@@ -81,9 +82,10 @@ public class Piece : MonoBehaviour
 
     void OnDestroy()
     {
+        print("DESTROY " + name);
         if (activePiece == this) activePiece = null;
-        field.SetPiece(null);
-        matchController.RemovePieceFromSquad(this);
+        field?.SetPiece(null);
+        matchController?.RemovePieceFromSquad(this);
     }
 
     protected void Destroy()

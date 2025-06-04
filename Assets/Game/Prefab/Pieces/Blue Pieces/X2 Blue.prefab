@@ -71492,17 +71492,17 @@ PrefabInstance:
     - target: {fileID: 6116150707825085800, guid: b29345deedc79fe428f4f586e73c35db,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.82
+      value: 1.8600001
       objectReference: {fileID: 0}
     - target: {fileID: 6116150707825085800, guid: b29345deedc79fe428f4f586e73c35db,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.58203125
+      value: 0.115
       objectReference: {fileID: 0}
     - target: {fileID: 6116150707825085800, guid: b29345deedc79fe428f4f586e73c35db,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.16
+      value: -3.138
       objectReference: {fileID: 0}
     - target: {fileID: 6116150707825085800, guid: b29345deedc79fe428f4f586e73c35db,
         type: 3}
@@ -71598,6 +71598,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7146944214241371313}
+    - targetCorrespondingSourceObject: {fileID: 6116150707825085801, guid: b29345deedc79fe428f4f586e73c35db,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4954216010386811883}
   m_SourcePrefab: {fileID: 100100000, guid: b29345deedc79fe428f4f586e73c35db, type: 3}
 --- !u!4 &5580216429972971612 stripped
 Transform:
@@ -71629,6 +71633,23 @@ MonoBehaviour:
     type: 3}
   AttackEffectPos: {fileID: 5580216430585787115}
   toDestroy: 0b000000
+--- !u!114 &-4954216010386811883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580216429972971613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cd63f4fca86944ab19f47b5a6a7500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticSpawn: 0
+  staticId: 0
+  instancePrefabSignature: 8dc9d5e9-8047-4f81-b362-3c620614c243
+  childToDisable: []
+  childToSync: []
 --- !u!4 &5580216430585787115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6116150706272493535, guid: b29345deedc79fe428f4f586e73c35db,

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewBoardData", menuName = "Board/BoardData")]
+[CreateAssetMenu(fileName = "NewBoardData", menuName = "KOA/BoardData")]
 public class BoardData : ScriptableObject
 {
     [Header("Board Settings")]
