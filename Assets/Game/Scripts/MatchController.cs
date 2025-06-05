@@ -61,7 +61,7 @@ public class MatchController : MonoBehaviour
 
     public void SpawnPieces()
     {
-        playerSquad.LoadPieces();
+        playerSquad.LoadPieces(networkManager.IsServerConnection());
     }
 
     public void SetPiece(Piece piece)
