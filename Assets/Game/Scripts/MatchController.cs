@@ -37,13 +37,12 @@ public class MatchController : MonoBehaviour
         instance = this;
         game.SetActive(false);
         turn = TurnState.wait;
-        OnSceneLoaded("");
+        if (!online) OnSceneLoaded("");
     }
 
     public void OnSceneLoaded(string sceneName)
     {
-        //print("sceneName " + sceneName);
-        //if (!online) return;
+        print("sceneName " + sceneName);
         StartCoroutine(LoadGame());
     }
 
@@ -61,7 +60,9 @@ public class MatchController : MonoBehaviour
 
     public void SpawnPieces()
     {
-        playerSquad.LoadPieces(networkManager.IsServerConnection());
+        bool fromStart = true;
+        if (online) fromStart = networkManager.IsServerConnection();
+        playerSquad.LoadPieces(fromStart);
     }
 
     public void SetPiece(Piece piece)
@@ -69,22 +70,21 @@ public class MatchController : MonoBehaviour
         currentePiece = piece;
     }
 
-    public void RemovePieceFromSquad(Piece piece)
+    public void RemovePieceFromPlayerSquad(Piece piece)
     {
-        List<Piece> pieces;
-        FakePiece fakePiece = piece.GetComponent<FakePiece>();
-        if (fakePiece != null)
+        if (!playerSquad.pieces.Contains(piece)) return;
+        playerSquad.pieces.Remove(piece);
+    }
+
+    public void RemovePieceFromEnemySquad(FakePiece piece)
+    {
+        if (enemySquad.fakePieces.Contains(piece))
         {
-            pieces = enemySquad.pieces;
-            enemySquad.fakePieces.Remove(fakePiece);
-        }
-        else
-        {
-            pieces = playerSquad.pieces;
+            enemySquad.fakePieces.Remove(piece);
         }
 
-        if (!pieces.Contains(piece)) return;
-        pieces.Remove(piece);
+        if (!enemySquad.pieces.Contains(piece)) return;
+        enemySquad.pieces.Remove(piece);
     }
 
     public void MadeActionOnTurn()

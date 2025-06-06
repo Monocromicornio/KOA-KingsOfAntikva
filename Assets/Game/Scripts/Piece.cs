@@ -19,6 +19,7 @@ public class Piece : MonoBehaviour
     public GameField targetField { get; private set; }
     public int indexCurrentField => field.index;
 
+    public GameObject body;
     public PieceType type;
 
     protected virtual void OnMouseDown()
@@ -80,12 +81,12 @@ public class Piece : MonoBehaviour
         return false;
     }
 
-    void OnDestroy()
+    protected virtual void OnDestroy()
     {
         print("DESTROY " + name);
         if (activePiece == this) activePiece = null;
         field?.SetPiece(null);
-        matchController?.RemovePieceFromSquad(this);
+        matchController?.RemovePieceFromPlayerSquad(this);
     }
 
     protected void Destroy()
@@ -113,7 +114,27 @@ public class Piece : MonoBehaviour
 
     public void Lose()
     {
-        print(name + " name -> " + tag);
         SendMessage("Destroy");
+    }
+
+    public FakePiece TurnFakePiece(GameObject prefabFake)
+    {
+        GameObject fakeBody = Instantiate(prefabFake, transform.position, transform.rotation, transform);
+
+        FakePiece fakePiece = gameObject.AddComponent<FakePiece>();
+        fakePiece.body = body;
+        fakePiece.type = type;
+        if (field != null)
+        {
+            field.SetPiece(null);
+            fakePiece.SetFirstField(field);
+        }
+        field = null;
+
+        DestroyImmediate(this);
+        fakePiece.SendMessage("Awake");
+        fakePiece.SetFakeObj(fakeBody);
+
+        return fakePiece;
     }
 }

@@ -12,11 +12,14 @@ public class Squad : MonoBehaviour
 
     [SerializeField]
     protected PieceData pieceData;
-    public List<Piece> pieces { get; private set; }
-
-    protected virtual void Awake()
+    protected List<Piece> _pieces;
+    public List<Piece> pieces
     {
-        pieces = new List<Piece>();
+        get
+        {
+            _pieces ??= new List<Piece>();
+            return _pieces;
+        }
     }
 
     public virtual void LoadPieces()

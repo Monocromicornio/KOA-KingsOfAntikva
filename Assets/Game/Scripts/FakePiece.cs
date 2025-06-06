@@ -4,26 +4,34 @@ public class FakePiece : Piece
 {
     [Header("Fake Piece")]
     [SerializeField]
-    GameObject obj;
-
-    [SerializeField]
     GameObject fake;
 
     void Start()
     {
         myTurn = TurnState.red;
+        if (fake == null) return;
+        ActiveFakePiece();
+    }
 
+    public void SetFakeObj(GameObject fake)
+    {
+        this.fake = fake;
+        ActiveFakePiece();
+    }
+
+    private void ActiveFakePiece()
+    {
         fake.SetActive(false);
-        Vector3 vector3 = new Vector3(obj.transform.position.x, 0, obj.transform.position.z);
+        Vector3 vector3 = new Vector3(body.transform.position.x, 0, body.transform.position.z);
         fake = Instantiate(fake, vector3, transform.rotation);
         fake.transform.parent = transform;
 
-        obj.SetActive(false);
+        body.SetActive(false);
         fake.SetActive(true);
         fake.transform.rotation = transform.rotation;
 
         AnimPiece anim = GetComponent<AnimPiece>();
-        if(anim) anim.ChangeAnim(fake);
+        if (anim) anim.ChangeAnim(fake);
     }
 
     protected override void OnMouseDown()
@@ -46,7 +54,7 @@ public class FakePiece : Piece
                 break;
         }
 
-        obj.gameObject.SetActive(true);
+        body.gameObject.SetActive(true);
         fake.SetActive(false);
         AnimPiece anim = GetComponent<AnimPiece>();
         if (anim) anim.ChangetoOld();
@@ -63,10 +71,11 @@ public class FakePiece : Piece
         //base.Win();
         Reveal();
     }
-
-    public override void SetFirstField(GameField field)
+    
+    protected override void OnDestroy()
     {
-        base.SetFirstField(field);
-        transform.Rotate(0, 180, 0, Space.Self);
+        print("DESTROY " + name);
+        field?.SetPiece(null);
+        matchController?.RemovePieceFromEnemySquad(this);
     }
 }

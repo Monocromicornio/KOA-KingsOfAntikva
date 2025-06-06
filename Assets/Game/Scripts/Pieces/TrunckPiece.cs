@@ -1,13 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Piece))]
 public class TrunckPiece : InteractivePiece
 {
     public bool bluePiece { get; private set; }
-
+    private GameObject trunck => piece.body;
+    
     [Header("Trunck")]
-    [SerializeField]
-    private GameObject trunck;
     [SerializeField]
     private GameObject particle;
 

@@ -3,16 +3,18 @@ using UnityEngine;
 
 public class EnemySquad : Squad
 {
-    public List<FakePiece> fakePieces { get; private set; }
+    private List<FakePiece> _fakePieces;
+    public List<FakePiece> fakePieces
+    {
+        get
+        {
+            _fakePieces ??= new List<FakePiece>();
+            return _fakePieces;
+        }
+    }
 
     [SerializeField]
     Piece[] defaultPieces;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        fakePieces = new List<FakePiece>();
-    }
 
     public override void LoadPieces()
     {
@@ -50,6 +52,9 @@ public class EnemySquad : Squad
             FakePiece piece = pieces[i].GetComponent<FakePiece>();
 
             if (piece == null) continue;
+
+            piece.transform.Rotate(0, 180, 0, Space.Self);
+            piece.gameObject.SetActive(true);
 
             LinkPieceToGameField(piece, gameFields[fieldIndex]);
             fakePieces.Add(piece);

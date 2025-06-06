@@ -88,7 +88,7 @@ public class SavePieceOrder : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
-    public void GoToGame(IChannel channel)
+    public void GoToGame(IClient client)
     {
         GoToGame();
     }
