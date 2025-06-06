@@ -218,8 +218,8 @@ public class SelectablePiece : MonoBehaviour
     {
         if (!IsItAGameFieldIndex(new[] { current, target })) return false;
 
-        int currentRow = gameFields[current].Row;
-        int targetRow = gameFields[target].Row;
+        int currentRow = gameFields[current].row;
+        int targetRow = gameFields[target].row;
 
         return currentRow == targetRow;
     }

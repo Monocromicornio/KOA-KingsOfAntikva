@@ -6,7 +6,7 @@ using UnityEngine;
 public class MatchController : MonoBehaviour
 {
     public static MatchController instance;
-    public static bool online = false;
+    public static NetworkConnectionType connection = NetworkConnectionType.Manual;
     public NetworkManager networkManager => NetworkManager.Instance();
 
     [Header("Game objs")]
@@ -32,18 +32,50 @@ public class MatchController : MonoBehaviour
     [SerializeField]
     private AudioSource auChangeTurn;
 
-    protected virtual void Awake()
+    private void Awake()
     {
         instance = this;
         game.SetActive(false);
         turn = TurnState.wait;
-        if (!online) OnSceneLoaded("");
     }
 
-    public void OnSceneLoaded(string sceneName)
+    private void Start()
     {
-        print("sceneName " + sceneName);
+        if (connection == NetworkConnectionType.Manual)
+        {
+            StartCoroutine(LoadGame());
+        }
+        else
+        {
+            StartNetwork();
+        }
+    }
+
+    private void StartNetwork()
+    {
+        networkManager.ConfigureMode(connection);
+        networkManager.SetServerAddress("127.0.0.1");
+        networkManager.StartNetwork();
+    }
+
+    public void StartGame()
+    {
         StartCoroutine(LoadGame());
+    }
+
+    public void OnConnected(IClient client)
+    {
+        StartGame();
+    }
+
+    public void OnConnectedClient(IClient client)
+    {
+        StartGame();
+    }
+
+    public void OnConnectedT(IChannel client)
+    {
+        StartGame();
     }
 
     private IEnumerator LoadGame()
@@ -60,8 +92,7 @@ public class MatchController : MonoBehaviour
 
     public void SpawnPieces()
     {
-        bool fromStart = true;
-        if (online) fromStart = networkManager.IsServerConnection();
+        bool fromStart = connection != NetworkConnectionType.Client;
         playerSquad.LoadPieces(fromStart);
     }
 
@@ -76,15 +107,15 @@ public class MatchController : MonoBehaviour
         playerSquad.pieces.Remove(piece);
     }
 
-    public void RemovePieceFromEnemySquad(FakePiece piece)
+    public void RemovePieceFromEnemySquad(FakePiece fakePiece)
     {
-        if (enemySquad.fakePieces.Contains(piece))
+        if (enemySquad.fakePieces.Contains(fakePiece))
         {
-            enemySquad.fakePieces.Remove(piece);
+            enemySquad.fakePieces.Remove(fakePiece);
         }
 
-        if (!enemySquad.pieces.Contains(piece)) return;
-        enemySquad.pieces.Remove(piece);
+        if (!enemySquad.pieces.Contains(fakePiece.piece)) return;
+        enemySquad.pieces.Remove(fakePiece.piece);
     }
 
     public void MadeActionOnTurn()

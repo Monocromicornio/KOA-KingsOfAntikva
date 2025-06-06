@@ -49,15 +49,15 @@ public class EnemySquad : Squad
             int fieldIndex = fieldIndexes[rndField];
             fieldIndexes.RemoveAt(rndField);
 
-            FakePiece piece = pieces[i].GetComponent<FakePiece>();
+            FakePiece fake = pieces[i].GetComponent<FakePiece>();
 
-            if (piece == null) continue;
+            if (fake == null) continue;
 
-            piece.transform.Rotate(0, 180, 0, Space.Self);
-            piece.gameObject.SetActive(true);
+            fake.transform.Rotate(0, 180, 0, Space.Self);
+            fake.gameObject.SetActive(true);
 
-            LinkPieceToGameField(piece, gameFields[fieldIndex]);
-            fakePieces.Add(piece);
+            LinkPieceToGameField(fake.piece, gameFields[fieldIndex]);
+            fakePieces.Add(fake);
         }
     }
 }

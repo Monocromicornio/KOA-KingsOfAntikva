@@ -1,14 +1,27 @@
 using UnityEngine;
 
-public class FakePiece : Piece
+[RequireComponent(typeof(Piece))]
+public class FakePiece : MonoBehaviour
 {
+    private MatchController matchController => MatchController.instance;
+    private GameMode.GameType gameType => matchController.gameType;
+
+    public Piece piece { get; private set; }
+    GameObject body => piece.body;
+    GameField field => piece.field;
+    PieceType type => piece.type;
+
     [Header("Fake Piece")]
     [SerializeField]
     GameObject fake;
 
-    void Start()
+    private void Awake()
     {
-        myTurn = TurnState.red;
+        piece = GetComponent<Piece>();
+    }
+
+    private void Start()
+    {
         if (fake == null) return;
         ActiveFakePiece();
     }
@@ -21,7 +34,8 @@ public class FakePiece : Piece
 
     private void ActiveFakePiece()
     {
-        fake.SetActive(false);
+        if (!body.activeSelf) return;
+
         Vector3 vector3 = new Vector3(body.transform.position.x, 0, body.transform.position.z);
         fake = Instantiate(fake, vector3, transform.rotation);
         fake.transform.parent = transform;
@@ -34,7 +48,7 @@ public class FakePiece : Piece
         if (anim) anim.ChangeAnim(fake);
     }
 
-    protected override void OnMouseDown()
+    private void OnMouseDown()
     {
         if (!field.select) return;
         matchController.currentePiece?.SelectedAField(field);
@@ -60,22 +74,13 @@ public class FakePiece : Piece
         if (anim) anim.ChangetoOld();
     }
 
-    protected new void Destroy()
+    private void Destroy()
     {
         Reveal();
-        base.Destroy();
     }
 
-    public new void Win()
+    private void Win()
     {
-        //base.Win();
         Reveal();
-    }
-    
-    protected override void OnDestroy()
-    {
-        print("DESTROY " + name);
-        field?.SetPiece(null);
-        matchController?.RemovePieceFromEnemySquad(this);
     }
 }

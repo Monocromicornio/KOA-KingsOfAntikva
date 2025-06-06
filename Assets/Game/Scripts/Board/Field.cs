@@ -3,8 +3,8 @@ using UnityEngine;
 public class Field: MonoBehaviour
 {
     public int index { get; set; }
-    public int Row { get; set; }
-    public int Column { get; set; }
+    public int row { get; set; }
+    public int column { get; set; }
     public string ColumnName { get; set; }
     public string NickName { get; set; }
 
@@ -25,19 +25,18 @@ public class Field: MonoBehaviour
     /// </summary>
     /// <param name="field">The field component (FieldController or HousePicker).</param>
     /// <param name="index">The field index.</param>
-    /// <param name="fieldIndex">The column index.</param>
-    /// <param name="rowIndex">The row index.</param>
-    public void Configure(int index, int fieldIndex, int rowIndex)
+    /// <param name="column">The column index.</param>
+    /// <param name="row">The row index.</param>
+    public void Configure(int index, int column, int row)
     {
         string [] alphabet = AlphabetHelper.GetAlphabet();
-        int iColumn = fieldIndex + 1;
-        int iRow = rowIndex + 1;
 
         this.index = index;
-        Row = iRow;
-        Column = iColumn;
-        ColumnName = alphabet[fieldIndex];
-        NickName = alphabet[fieldIndex] + iColumn.ToString();
+        this.row = row + 1;
+        this.column = column + 1;
+        
+        ColumnName = alphabet[column];
+        NickName = alphabet[column] + this.column.ToString();
     }
 
     public Component GetFieldType()

@@ -443,10 +443,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db281bea63bebcb49bdf318332ec56e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventTarget: {fileID: 0}
-  EventComponent: {fileID: 0}
-  EventMethod: 
-  EditorVisible: 0
+  EventTarget: {fileID: 1690787740}
+  EventComponent: {fileID: 1690787744}
+  EventMethod: OnConnectedClient
+  EditorVisible: 1
   ExecutionError: 
 --- !u!1 &124469667
 GameObject:
@@ -600,6 +600,11 @@ PrefabInstance:
       propertyPath: onLoginSucess
       value: 
       objectReference: {fileID: 2133030496}
+    - target: {fileID: 1002607879162877874, guid: 03e59e5a32bf45649b146ad10eaaa3da,
+        type: 3}
+      propertyPath: databaseTarget
+      value: pvp-game
+      objectReference: {fileID: 0}
     - target: {fileID: 1002607879162877874, guid: 03e59e5a32bf45649b146ad10eaaa3da,
         type: 3}
       propertyPath: onDisconnected
@@ -3948,6 +3953,148 @@ Transform:
   m_Children: []
   m_Father: {fileID: 339719051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &506730943
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4120947395742506049, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506049, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506049, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506049, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506049, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506049, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506049, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506049, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506049, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506049, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: movementType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: databaseTarget
+      value: pvp-game
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: playerSpawnMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: dontDestroyOnLoad
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: spawnPositionMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: enablePlayerSpawner
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: playerSpawnTimeMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: playerSpawnerMethod
+      value: GetPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: positionSpawnerMethod
+      value: GetSpawnPosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: playerSpawnerComponent
+      value: 
+      objectReference: {fileID: -1214424853270030171, guid: e5f742fef43211242959a2d95317771d,
+        type: 3}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: positionSpawnerComponent
+      value: 
+      objectReference: {fileID: -2328928588732664074, guid: e5f742fef43211242959a2d95317771d,
+        type: 3}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: playerSpawnerProviderObject
+      value: 
+      objectReference: {fileID: 1264768917177765265, guid: e5f742fef43211242959a2d95317771d,
+        type: 3}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: positionSpawnerProviderObject
+      value: 
+      objectReference: {fileID: 1264768917177765265, guid: e5f742fef43211242959a2d95317771d,
+        type: 3}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: multiplePositionsToSpawn.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506051, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
+      propertyPath: m_Name
+      value: NetworkManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 06ca95950c0083847af358d4eb418e28, type: 3}
 --- !u!1001 &517050646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6805,9 +6952,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventTarget: {fileID: 0}
-  EventComponent: {fileID: 0}
+  EventComponent: {fileID: 1690787744}
   EventMethod: 
-  EditorVisible: 0
+  EditorVisible: 1
   ExecutionError: 
 --- !u!1001 &882881060
 PrefabInstance:
@@ -7597,10 +7744,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db281bea63bebcb49bdf318332ec56e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventTarget: {fileID: 0}
-  EventComponent: {fileID: 0}
-  EventMethod: 
-  EditorVisible: 0
+  EventTarget: {fileID: 1690787740}
+  EventComponent: {fileID: 1690787744}
+  EventMethod: OnConnected
+  EditorVisible: 1
   ExecutionError: 
 --- !u!1001 &981321161
 PrefabInstance:
@@ -9524,10 +9671,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db281bea63bebcb49bdf318332ec56e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventTarget: {fileID: 1690787740}
+  EventTarget: {fileID: 0}
   EventComponent: {fileID: 1690787744}
-  EventMethod: OnSceneLoaded
-  EditorVisible: 1
+  EventMethod: 
+  EditorVisible: 0
   ExecutionError: 
 --- !u!1001 &1178056781
 PrefabInstance:
@@ -16154,6 +16301,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 506730943}
   - {fileID: 124531405}
   - {fileID: 440258584}
   - {fileID: 1359552651}

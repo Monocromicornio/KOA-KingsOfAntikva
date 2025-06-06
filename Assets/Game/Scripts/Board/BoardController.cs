@@ -31,10 +31,6 @@ public class BoardController : MonoBehaviour
     {
         fields = new List<Field>();
 
-        int iCount = 0;
-        int iCountFields;
-        int iCountRows = 0;
-
         float fPosX;
         float fPosXInit = transform.position.x;
         float fPosZ = transform.position.z;
@@ -42,25 +38,19 @@ public class BoardController : MonoBehaviour
         for (int z = 0; z < col; z++)
         {
             fPosX = fPosXInit;
-            iCountFields = 0;
             for (int x = 0; x < row; x++)
             {
                 Vector3 vPos = new Vector3(fPosX, field.transform.position.y, fPosZ);
                 Field fieldClone = Instantiate(field, vPos, transform.rotation);
+
                 fields.Add(fieldClone);
-
-                int iFieldCount = iCount + 1;
-
-                fieldClone.name = "Field" + iFieldCount.ToString();
-                fieldClone.Configure(iCount, iCountFields, iCountRows);
-
-                iCountFields++;
-                iCount++;
+                int fIndex = fields.IndexOf(fieldClone);
+                fieldClone.name = "Field" + (fIndex + 1).ToString();
+                fieldClone.Configure(fIndex, x, z);
 
                 fPosX += distance;
             }
 
-            iCountRows++;
             fPosZ += distance;
         }
 
@@ -108,16 +98,26 @@ public class BoardController : MonoBehaviour
 
         return editables.ToArray();
     }
-    
-    private GameField[] GetGameFieldFromFields(){
+
+    private GameField[] GetGameFieldFromFields()
+    {
         List<GameField> gamefields = new List<GameField>();
 
-        foreach(Field field in this.fields){
-            if(field.isGameField){
+        foreach (Field field in fields)
+        {
+            if (field.isGameField)
+            {
                 gamefields.Add(field.GetFieldType() as GameField);
             }
         }
 
         return gamefields.ToArray();
+    }
+    
+    public GameField GetGameField(int index){
+        if (index < 0) return null;
+        if (index >= gameFields.Length) return null;
+        
+        return gameFields[index];
     }
 }

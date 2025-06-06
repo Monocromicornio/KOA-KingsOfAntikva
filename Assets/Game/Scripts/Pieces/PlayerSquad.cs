@@ -47,7 +47,7 @@ public class PlayerSquad : Squad
         if (!fromStart) rot = Quaternion.Euler(0, 180, 0);
 
         Piece toLink;
-        if (MatchController.online)
+        if (MatchController.connection != NetworkConnectionType.Manual)
         {
             GameObject netObj = await NetworkGameObject.Instantiate(obj, pos, rot);
             toLink = netObj.GetComponent<Piece>();
@@ -58,5 +58,15 @@ public class PlayerSquad : Squad
         }
 
         LinkPieceToGameField(toLink, gameField);
+    }
+
+    public void TurnFakePiece(Piece piece)
+    {
+        if (pieces.Contains(piece))
+        {
+            pieces.Remove(piece);
+        }
+
+        piece.TurnFakePiece(pieceData.fakePiece);
     }
 }

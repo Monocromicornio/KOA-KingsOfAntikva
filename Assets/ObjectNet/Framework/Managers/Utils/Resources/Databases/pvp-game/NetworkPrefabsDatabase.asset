@@ -20,14 +20,14 @@ MonoBehaviour:
     syncPosition: 010101
     syncRotation: 010101
     syncScale: 010101
-    AnimationAutoSync: 0
+    AnimationAutoSync: 1
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
       Scripts:
       - Script: {fileID: 8773344370244739172, guid: 621d63bb591b44549ba880d9520fc575,
           type: 3}
-        Enabled: 0
+        Enabled: 1
         Delay: 0
         Variables:
           Variables:
@@ -41,18 +41,23 @@ MonoBehaviour:
             DeliveryMode: 0
             DetectionMode: 0
             Delay: 0
-          - Variable: m_InstanceID
-            Enabled: 0
-            DeliveryMode: 0
-            DetectionMode: 0
-            Delay: 0
-          - Variable: m_UnityRuntimeErrorString
+          - Variable: fieldIndex
             Enabled: 0
             DeliveryMode: 0
             DetectionMode: 0
             Delay: 0
         NetworkVariables:
-          Variables: []
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
       - Script: {fileID: 7720397006920141200, guid: 621d63bb591b44549ba880d9520fc575,
           type: 3}
         Enabled: 0
@@ -7062,12 +7067,13 @@ MonoBehaviour:
         NetworkVariables:
           Variables: []
     ShowVariables: 0
-    ShowEvents: 1
+    ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
     prefabEvents:
       onSpawnPrefab:
-        EventTarget: {fileID: 0}
+        EventTarget: {fileID: 8773344370244739178, guid: 621d63bb591b44549ba880d9520fc575,
+          type: 3}
         EventComponent: {fileID: 8773344370244739172, guid: 621d63bb591b44549ba880d9520fc575,
           type: 3}
         EventMethod: 
@@ -7103,11 +7109,11 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
-    movementType: 0
+    movementType: 2
     disableObjectGravity: 1
     enableObjectKinematic: 1
     enableObjectInterpolate: 0
@@ -7128,7 +7134,127 @@ MonoBehaviour:
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
-      Scripts: []
+      Scripts:
+      - Script: {fileID: 5580216429972971603, guid: 6eae7beefa6a28b498775ab9fca2c84e,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: myTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 6887581989218339239, guid: 6eae7beefa6a28b498775ab9fca2c84e,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 6510905491867639097, guid: 6eae7beefa6a28b498775ab9fca2c84e,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 4922578302370677321, guid: 6eae7beefa6a28b498775ab9fca2c84e,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 7146944214241371313, guid: 6eae7beefa6a28b498775ab9fca2c84e,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -7136,7 +7262,7 @@ MonoBehaviour:
     InputScripts:
       Scripts: []
     ShowVariables: 0
-    ShowEvents: 1
+    ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
     prefabEvents:
@@ -7203,7 +7329,127 @@ MonoBehaviour:
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
-      Scripts: []
+      Scripts:
+      - Script: {fileID: 1138254476122875075, guid: d1975b5038cd93c41939873a4b120d5d,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: myTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 2102783546281676087, guid: d1975b5038cd93c41939873a4b120d5d,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 1792554840290892201, guid: d1975b5038cd93c41939873a4b120d5d,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 498650306679310041, guid: d1975b5038cd93c41939873a4b120d5d,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 3635383522436024404, guid: d1975b5038cd93c41939873a4b120d5d,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -7276,7 +7522,127 @@ MonoBehaviour:
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
-      Scripts: []
+      Scripts:
+      - Script: {fileID: 4877329463306078063, guid: b364eb724c9dbcb449cdd515002d0396,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: myTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 5857691467061751451, guid: b364eb724c9dbcb449cdd515002d0396,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 6090073982224611845, guid: b364eb724c9dbcb449cdd515002d0396,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 5372700810216482165, guid: b364eb724c9dbcb449cdd515002d0396,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 9085835404630895608, guid: b364eb724c9dbcb449cdd515002d0396,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -7349,7 +7715,127 @@ MonoBehaviour:
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
-      Scripts: []
+      Scripts:
+      - Script: {fileID: 9071504627104567695, guid: 5d6673a2ce3eb5b42be608c529533763,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: myTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 7998682598958954619, guid: 5d6673a2ce3eb5b42be608c529533763,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 7696649763103321317, guid: 5d6673a2ce3eb5b42be608c529533763,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 8413883816794305429, guid: 5d6673a2ce3eb5b42be608c529533763,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 4637840110521924888, guid: 5d6673a2ce3eb5b42be608c529533763,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -7422,7 +7908,127 @@ MonoBehaviour:
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
-      Scripts: []
+      Scripts:
+      - Script: {fileID: 1871367722838763935, guid: 900f403c091b03f49aed918869378b32,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: myTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 800828279153295467, guid: 900f403c091b03f49aed918869378b32,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 1068448551774770421, guid: 900f403c091b03f49aed918869378b32,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 1213725197272632197, guid: 900f403c091b03f49aed918869378b32,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 2612353179831584008, guid: 900f403c091b03f49aed918869378b32,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -7495,7 +8101,127 @@ MonoBehaviour:
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
-      Scripts: []
+      Scripts:
+      - Script: {fileID: 1361816087391196002, guid: 44bbdc285684ac641b8ef6a096c0cbc5,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: myTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 939605444000406, guid: 44bbdc285684ac641b8ef6a096c0cbc5,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 418183645164088840, guid: 44bbdc285684ac641b8ef6a096c0cbc5,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 2001374090380882296, guid: 44bbdc285684ac641b8ef6a096c0cbc5,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 3413371051949408245, guid: 44bbdc285684ac641b8ef6a096c0cbc5,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -7568,7 +8294,127 @@ MonoBehaviour:
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
-      Scripts: []
+      Scripts:
+      - Script: {fileID: 1210346140719522908, guid: adcbf33b491604344b6910d220d8d052,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: myTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 155780397201919400, guid: adcbf33b491604344b6910d220d8d052,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 569573607196678454, guid: adcbf33b491604344b6910d220d8d052,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 1867983134081271366, guid: adcbf33b491604344b6910d220d8d052,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 3275415460258826443, guid: adcbf33b491604344b6910d220d8d052,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -7641,7 +8487,127 @@ MonoBehaviour:
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
-      Scripts: []
+      Scripts:
+      - Script: {fileID: 8227009961359656255, guid: ab34b7449df842c40be2df5dbd5306aa,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: myTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 6974184578988371147, guid: ab34b7449df842c40be2df5dbd5306aa,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 7279997002045077589, guid: ab34b7449df842c40be2df5dbd5306aa,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 8866565520648742693, guid: ab34b7449df842c40be2df5dbd5306aa,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 5734396927121271208, guid: ab34b7449df842c40be2df5dbd5306aa,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -7714,7 +8680,127 @@ MonoBehaviour:
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
-      Scripts: []
+      Scripts:
+      - Script: {fileID: 2873035907260097965, guid: 73e8b92c066668142a493b98fa071019,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: myTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 3835484665385618521, guid: 73e8b92c066668142a493b98fa071019,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 3527613341710244039, guid: 73e8b92c066668142a493b98fa071019,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 3386558803718817719, guid: 73e8b92c066668142a493b98fa071019,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 3599956304620483410, guid: 73e8b92c066668142a493b98fa071019,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -7787,7 +8873,81 @@ MonoBehaviour:
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
-      Scripts: []
+      Scripts:
+      - Script: {fileID: 7220416273139772616, guid: 6960357aea7143a4cb99e7cdfc633c4e,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: myTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 2312744823023385756, guid: 6960357aea7143a4cb99e7cdfc633c4e,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: <bluePiece>k__BackingField
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 6883934860476021794, guid: 6960357aea7143a4cb99e7cdfc633c4e,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
