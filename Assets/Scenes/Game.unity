@@ -4018,6 +4018,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
         type: 3}
+      propertyPath: ownerShipMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
+        type: 3}
       propertyPath: databaseTarget
       value: pvp-game
       objectReference: {fileID: 0}
@@ -13350,6 +13355,7 @@ MonoBehaviour:
   machinePlayer: {fileID: 466738728}
   soundController: {fileID: 824042235}
   auChangeTurn: {fileID: 0}
+  teste: {fileID: 9041021084249334171, guid: 6876983ce3ae3454e81c05e4b6f12bb4, type: 3}
 --- !u!114 &1706470809
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -51,6 +51,11 @@ public class PlayerSquad : Squad
         {
             GameObject netObj = await NetworkGameObject.Instantiate(obj, pos, rot);
             toLink = netObj.GetComponent<Piece>();
+
+            if (NetworkManager.Instance().IsClientConnection())
+            {
+                netObj.GetComponent<NetworkBehaviour>().TakeControl();
+            }
         }
         else
         {
@@ -58,15 +63,5 @@ public class PlayerSquad : Squad
         }
 
         LinkPieceToGameField(toLink, gameField);
-    }
-
-    public void TurnFakePiece(Piece piece)
-    {
-        if (pieces.Contains(piece))
-        {
-            pieces.Remove(piece);
-        }
-
-        piece.TurnFakePiece(pieceData.fakePiece);
     }
 }

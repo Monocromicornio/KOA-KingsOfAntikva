@@ -9,6 +9,8 @@ public class MatchController : MonoBehaviour
     public static NetworkConnectionType connection = NetworkConnectionType.Manual;
     public NetworkManager networkManager => NetworkManager.Instance();
 
+    public static IClient client;
+
     [Header("Game objs")]
     public BoardController boardController;
 
@@ -32,6 +34,8 @@ public class MatchController : MonoBehaviour
     [SerializeField]
     private AudioSource auChangeTurn;
 
+    public Teste teste;
+
     private void Awake()
     {
         instance = this;
@@ -51,6 +55,11 @@ public class MatchController : MonoBehaviour
         }
     }
 
+    async void SpawnTeste()
+    {
+        await NetworkGameObject.Instantiate(teste.gameObject, Vector3.up, Quaternion.identity);
+    }
+
     private void StartNetwork()
     {
         networkManager.ConfigureMode(connection);
@@ -60,6 +69,7 @@ public class MatchController : MonoBehaviour
 
     public void StartGame()
     {
+        //SpawnTeste(); return;
         StartCoroutine(LoadGame());
     }
 
@@ -73,7 +83,7 @@ public class MatchController : MonoBehaviour
         StartGame();
     }
 
-    public void OnConnectedT(IChannel client)
+    public void OnConnectedT(IChannel channel)
     {
         StartGame();
     }

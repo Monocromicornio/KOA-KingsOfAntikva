@@ -26825,10 +26825,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7107614780625465283, guid: 7f810f9a8491a7745a5737673a193c78,
         type: 3}
+      propertyPath: BehaviorlId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107614780625465283, guid: 7f810f9a8491a7745a5737673a193c78,
+        type: 3}
       propertyPath: AttackEffect
       value: 
       objectReference: {fileID: 5004953754998910068, guid: 34be9bb42c135c24d834766d72ef3384,
         type: 3}
+    - target: {fileID: 7107614780625465283, guid: 7f810f9a8491a7745a5737673a193c78,
+        type: 3}
+      propertyPath: ShowNetworkParameters
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7107614780625465292, guid: 7f810f9a8491a7745a5737673a193c78,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26884,6 +26894,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XF Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 7107614780625465293, guid: 7f810f9a8491a7745a5737673a193c78,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2951428384837395379, guid: a14ed4230c482f244b3e91d7e2cd876d,
         type: 3}
       propertyPath: gParticleChest
@@ -26936,7 +26951,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 6883934860476021794}
   force: 0
-  trunck: {fileID: 3338479853152706235}
   particle: {fileID: 2686167959100652619}
 --- !u!114 &6883934860476021794
 MonoBehaviour:

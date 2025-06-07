@@ -38,14 +38,19 @@ public class Piece : NetworkBehaviour
     public GameObject body;
     public PieceType type;
 
-    /*public void CheckColor()
+    public void PassiveUpdate()
     {
-        if (ower == Ower.Free)
-        {
-            PlayerSquad squad = matchController.playerSquad;
-            squad.TurnFakePiece(this);
-        }
-    }*/
+        if (myTurn == TurnState.red) return;
+        Debug.Log("This is a Passive Object");
+        TurnFakePiece();
+    }
+
+    public void ActiveUpdate()
+    {
+        if (myTurn == TurnState.blue) return;
+        Debug.Log("This is a Active Object");
+        TurnNormalPiece();
+    }
 
     protected virtual void OnMouseDown()
     {
@@ -146,14 +151,28 @@ public class Piece : NetworkBehaviour
         SendMessage("Destroy");
     }
 
-    public FakePiece TurnFakePiece(GameObject prefabFake)
+    public void TurnFakePiece()
     {
+        if (myTurn == TurnState.red) return;
+
         myTurn = TurnState.red;
-        GameObject fakeBody = Instantiate(prefabFake, transform.position, transform.rotation, transform);
+        FakePiece fakePiece = GetComponent<FakePiece>();
+        if (fakePiece != null)
+        {
+            fakePiece.enabled = true;
+            return;
+        }
 
-        FakePiece fakePiece = gameObject.AddComponent<FakePiece>();
-        fakePiece.SetFakeObj(fakeBody);
+        gameObject.AddComponent<FakePiece>();
+    }
 
-        return fakePiece;
+    public void TurnNormalPiece()
+    {
+        if (myTurn == TurnState.blue) return;
+
+        myTurn = TurnState.blue;
+        FakePiece fakePiece = GetComponent<FakePiece>();
+        if (fakePiece == null) return;
+        fakePiece.enabled = false;
     }
 }

@@ -7066,7 +7066,7 @@ MonoBehaviour:
             Delay: 0
         NetworkVariables:
           Variables: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -7261,7 +7261,7 @@ MonoBehaviour:
     ShowInputScripts: 0
     InputScripts:
       Scripts: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -7338,12 +7338,12 @@ MonoBehaviour:
           Variables:
           - Variable: myTurn
             Enabled: 0
-            DeliveryMode: 0
+            DeliveryMode: 1
             DetectionMode: 0
             Delay: 0
           - Variable: type
             Enabled: 0
-            DeliveryMode: 0
+            DeliveryMode: 1
             DetectionMode: 0
             Delay: 0
         NetworkVariables:
@@ -7456,7 +7456,7 @@ MonoBehaviour:
     ShowInputScripts: 0
     InputScripts:
       Scripts: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -7531,12 +7531,12 @@ MonoBehaviour:
           Variables:
           - Variable: myTurn
             Enabled: 0
-            DeliveryMode: 0
+            DeliveryMode: 1
             DetectionMode: 0
             Delay: 0
           - Variable: type
             Enabled: 0
-            DeliveryMode: 0
+            DeliveryMode: 1
             DetectionMode: 0
             Delay: 0
         NetworkVariables:
@@ -7649,7 +7649,7 @@ MonoBehaviour:
     ShowInputScripts: 0
     InputScripts:
       Scripts: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -7842,7 +7842,7 @@ MonoBehaviour:
     ShowInputScripts: 0
     InputScripts:
       Scripts: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -7917,12 +7917,12 @@ MonoBehaviour:
           Variables:
           - Variable: myTurn
             Enabled: 0
-            DeliveryMode: 0
+            DeliveryMode: 1
             DetectionMode: 0
             Delay: 0
           - Variable: type
             Enabled: 0
-            DeliveryMode: 0
+            DeliveryMode: 1
             DetectionMode: 0
             Delay: 0
         NetworkVariables:
@@ -8035,7 +8035,7 @@ MonoBehaviour:
     ShowInputScripts: 0
     InputScripts:
       Scripts: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -8228,7 +8228,7 @@ MonoBehaviour:
     ShowInputScripts: 0
     InputScripts:
       Scripts: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -8421,7 +8421,7 @@ MonoBehaviour:
     ShowInputScripts: 0
     InputScripts:
       Scripts: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -8614,7 +8614,7 @@ MonoBehaviour:
     ShowInputScripts: 0
     InputScripts:
       Scripts: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -8807,7 +8807,7 @@ MonoBehaviour:
     ShowInputScripts: 0
     InputScripts:
       Scripts: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -8954,7 +8954,7 @@ MonoBehaviour:
     ShowInputScripts: 0
     InputScripts:
       Scripts: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -9020,14 +9020,83 @@ MonoBehaviour:
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
-      Scripts: []
+      Scripts:
+      - Script: {fileID: 7885620633965204327, guid: a96857b90c286cb4fae0764bb2cef4e7,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: myTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+          - Variable: targetFieldIndex
+            Enabled: 0
+            DeliveryMode: 1
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 6363320533963642838, guid: a96857b90c286cb4fae0764bb2cef4e7,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 4719644613628545342, guid: a96857b90c286cb4fae0764bb2cef4e7,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
     ShowInputScripts: 0
     InputScripts:
       Scripts: []
-    ShowVariables: 0
+    ShowVariables: 1
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
@@ -9070,6 +9139,94 @@ MonoBehaviour:
         ExecutionError: 
     AnimationSyncMode: 1
     AnimationCount: 1
+    AnimationDefaultStatus: 
+    ownershipAccessLevel: 0
+    movementType: 0
+    disableObjectGravity: 1
+    enableObjectKinematic: 1
+    enableObjectInterpolate: 0
+    usePrefabRotation: 0
+    customSendRate: 0
+    sendRateAmount: 1
+    updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 
+  - Id: 14
+    Prefab: {fileID: 476390647182750043, guid: 6876983ce3ae3454e81c05e4b6f12bb4, type: 3}
+    AutoSync: 1
+    syncPosition: 010101
+    syncRotation: 010101
+    syncScale: 010101
+    AnimationAutoSync: 0
+    ParticlesAutoSync: 0
+    ShowScripts: 1
+    PrefabScripts:
+      Scripts:
+      - Script: {fileID: 9041021084249334171, guid: 6876983ce3ae3454e81c05e4b6f12bb4,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables: []
+        NetworkVariables:
+          Variables: []
+    ShowChilds: 0
+    ChildObjets:
+      Objects: []
+    ShowInputScripts: 0
+    InputScripts:
+      Scripts:
+      - Script: {fileID: 9041021084249334171, guid: 6876983ce3ae3454e81c05e4b6f12bb4,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables: []
+        NetworkVariables:
+          Variables: []
+    ShowVariables: 1
+    ShowEvents: 0
+    ShowTranform: 0
+    ShowChildTree: 0
+    prefabEvents:
+      onSpawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onDespawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptReleaseOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onTakeObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onReleaseObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+    AnimationSyncMode: 1
+    AnimationCount: 0
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
     movementType: 0

@@ -10,8 +10,7 @@ public class Squad : MonoBehaviour
     protected EditableField[] editables => board.editableFields;
     protected GameField[] gameFields => board.gameFields;
 
-    [SerializeField]
-    protected PieceData pieceData;
+    public PieceData pieceData;
     protected List<Piece> _pieces;
     public List<Piece> pieces
     {

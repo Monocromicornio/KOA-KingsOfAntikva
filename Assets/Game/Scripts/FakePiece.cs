@@ -14,22 +14,31 @@ public class FakePiece : MonoBehaviour
     [Header("Fake Piece")]
     [SerializeField]
     GameObject fake;
+    GameObject fakePiece;
 
     private void Awake()
     {
         piece = GetComponent<Piece>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        if (fake == null) return;
+        if (fake == null)
+        {
+            if (fakePiece == null)
+            {
+                PlayerSquad squad = matchController.playerSquad;
+                PieceData pieceData = squad.pieceData;
+                fakePiece = pieceData.fakePiece;
+            }
+            fake = Instantiate(fakePiece, transform.position, transform.rotation, transform);
+        }
         ActiveFakePiece();
     }
 
-    public void SetFakeObj(GameObject fake)
+    private void OnDisable()
     {
-        this.fake = fake;
-        ActiveFakePiece();
+        ReturnToNormal();
     }
 
     private void ActiveFakePiece()
@@ -50,8 +59,30 @@ public class FakePiece : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!field.select) return;
+        if (field == null || !field.select) return;
         matchController.currentePiece?.SelectedAField(field);
+    }
+
+    private void ReturnToNormal()
+    {
+        body?.SetActive(true);
+        FixEngineBug();
+        AnimPiece anim = GetComponent<AnimPiece>();
+        if (anim) anim.ChangetoOld();
+    }
+
+    private void FixEngineBug()
+    {
+        if (fakePiece == null) return;
+        
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            GameObject child = transform.GetChild(i).gameObject;
+            if (child.name.Contains(fakePiece.name))
+            {
+                child.SetActive(false);
+            }
+        }
     }
 
     public void Reveal()
@@ -67,11 +98,13 @@ public class FakePiece : MonoBehaviour
                 if (type != PieceType.Flag && type != PieceType.Bomb) return;
                 break;
         }
+        ReturnToNormal();
+    }
 
-        body.gameObject.SetActive(true);
-        fake.SetActive(false);
-        AnimPiece anim = GetComponent<AnimPiece>();
-        if (anim) anim.ChangetoOld();
+    private void OnDestroy()
+    {
+        ReturnToNormal();
+        matchController?.RemovePieceFromEnemySquad(this);
     }
 
     private void Destroy()
