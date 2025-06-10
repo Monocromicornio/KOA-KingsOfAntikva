@@ -443,10 +443,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db281bea63bebcb49bdf318332ec56e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventTarget: {fileID: 1690787740}
+  EventTarget: {fileID: 0}
   EventComponent: {fileID: 1690787744}
-  EventMethod: OnConnectedClient
-  EditorVisible: 1
+  EventMethod: 
+  EditorVisible: 0
   ExecutionError: 
 --- !u!1 &124469667
 GameObject:
@@ -4019,7 +4019,7 @@ PrefabInstance:
     - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
         type: 3}
       propertyPath: ownerShipMode
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4120947395742506050, guid: 06ca95950c0083847af358d4eb418e28,
         type: 3}
@@ -6956,9 +6956,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db281bea63bebcb49bdf318332ec56e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventTarget: {fileID: 0}
+  EventTarget: {fileID: 1690787740}
   EventComponent: {fileID: 1690787744}
-  EventMethod: 
+  EventMethod: Teste
   EditorVisible: 1
   ExecutionError: 
 --- !u!1001 &882881060
@@ -7751,7 +7751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EventTarget: {fileID: 1690787740}
   EventComponent: {fileID: 1690787744}
-  EventMethod: OnConnected
+  EventMethod: OnClientConnected
   EditorVisible: 1
   ExecutionError: 
 --- !u!1001 &981321161
@@ -13316,7 +13316,7 @@ Transform:
   m_GameObject: {fileID: 1690787740}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0068772, y: 0.89746094, z: 3.3595169}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13349,13 +13349,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardController: {fileID: 1327107612}
   gameMode: {fileID: 1690787742}
+  syncronize: {fileID: 9041021084249334171, guid: 6876983ce3ae3454e81c05e4b6f12bb4,
+    type: 3}
   game: {fileID: 1576172671}
   playerSquad: {fileID: 1686763110}
   enemySquad: {fileID: 1966236993}
   machinePlayer: {fileID: 466738728}
   soundController: {fileID: 824042235}
   auChangeTurn: {fileID: 0}
-  teste: {fileID: 9041021084249334171, guid: 6876983ce3ae3454e81c05e4b6f12bb4, type: 3}
 --- !u!114 &1706470809
 MonoBehaviour:
   m_ObjectHideFlags: 0

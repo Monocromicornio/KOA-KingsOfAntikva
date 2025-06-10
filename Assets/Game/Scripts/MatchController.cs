@@ -8,8 +8,7 @@ public class MatchController : MonoBehaviour
     public static MatchController instance;
     public static NetworkConnectionType connection = NetworkConnectionType.Manual;
     public NetworkManager networkManager => NetworkManager.Instance();
-
-    public static IClient client;
+    private List<Piece> allPieces;
 
     [Header("Game objs")]
     public BoardController boardController;
@@ -23,6 +22,8 @@ public class MatchController : MonoBehaviour
     private bool blueTurn = false; //False to start with blue, true for red
     public TurnState turn { get; private set; }
 
+    public SyncronizeTable syncronize;
+
     [SerializeField]
     private GameObject game;
     public PlayerSquad playerSquad;
@@ -34,30 +35,17 @@ public class MatchController : MonoBehaviour
     [SerializeField]
     private AudioSource auChangeTurn;
 
-    public Teste teste;
-
     private void Awake()
     {
         instance = this;
         game.SetActive(false);
         turn = TurnState.wait;
+        allPieces = new List<Piece>();
     }
 
     private void Start()
     {
-        if (connection == NetworkConnectionType.Manual)
-        {
-            StartCoroutine(LoadGame());
-        }
-        else
-        {
-            StartNetwork();
-        }
-    }
-
-    async void SpawnTeste()
-    {
-        await NetworkGameObject.Instantiate(teste.gameObject, Vector3.up, Quaternion.identity);
+        StartNetwork();
     }
 
     private void StartNetwork()
@@ -67,43 +55,37 @@ public class MatchController : MonoBehaviour
         networkManager.StartNetwork();
     }
 
-    public void StartGame()
+    public void Teste(IChannel channel)
+    {
+        return;
+        playerSquad.LoadPieces();
+        StartCoroutine(StartGame());
+    }
+
+    public void StartGame(TableData clientTable)
     {
         //SpawnTeste(); return;
-        StartCoroutine(LoadGame());
+        playerSquad.LoadPieces();
+        playerSquad.LoadPieces(clientTable);
+        StartCoroutine(StartGame());
     }
 
-    public void OnConnected(IClient client)
+    private IEnumerator StartGame()
     {
-        StartGame();
-    }
-
-    public void OnConnectedClient(IClient client)
-    {
-        StartGame();
-    }
-
-    public void OnConnectedT(IChannel channel)
-    {
-        StartGame();
-    }
-
-    private IEnumerator LoadGame()
-    {
-        while (!boardController.isFinished())
+        yield return new WaitForSeconds(2);
+        if (SyncronizeTable.instance == null)
         {
-            yield return new WaitForEndOfFrame();
+            ChangeTurn();
         }
-
-        game.SetActive(true);
-        SpawnPieces();
-        StartCoroutine(ChangeTurn(0));
+        else
+        {
+            SyncronizeTable.instance.SetChangeTurn();   
+        }
     }
 
-    public void SpawnPieces()
+    public async void OnClientConnected(IClient client)
     {
-        bool fromStart = connection != NetworkConnectionType.Client;
-        playerSquad.LoadPieces(fromStart);
+        await NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
     }
 
     public void SetPiece(Piece piece)
@@ -136,26 +118,39 @@ public class MatchController : MonoBehaviour
     public void ChangeTurn()
     {
         if (finished) return;
-        bool endGame = CheckEndGame();
-        if (endGame)
+        if (!game.activeSelf)
         {
-            WinGame();
-            return;
+            game.SetActive(true);
+            ActivePieces();
+        }
+        else
+        {
+            bool endGame = CheckEndGame();
+            if (endGame)
+            {
+                WinGame();
+                return;
+            }   
         }
 
-        StartCoroutine(ChangeTurn(2));
-    }
-
-    private IEnumerator ChangeTurn(float time)
-    {
-        print("---------------------|||------------------------");
-        yield return new WaitForSeconds(time);
         blueTurn = !blueTurn;
         turn = blueTurn ? TurnState.blue : TurnState.red;
-        print("É a vez do " + turn);
         if (turn == TurnState.red)
         {
             machinePlayer.StartTurn();
+        }
+    }
+
+    public void OnInstantiatedPiece(Piece piece)
+    {
+        if (allPieces.Contains(piece)) return;
+        allPieces.Add(piece);
+    }
+    public void ActivePieces()
+    {
+        foreach (Piece piece in allPieces)
+        {
+            piece.ActivePiece();
         }
     }
 

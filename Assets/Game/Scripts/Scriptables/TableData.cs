@@ -4,14 +4,10 @@ using System.Xml;
 [CreateAssetMenu(fileName = "NewTableData", menuName = "KOA/TableData")]
 public class TableData : ScriptableObject
 {
-    [SerializeField]
-    private string tableName; // The name of the table, used as the key in PlayerPrefs.
+    public string tableName; // The name of the table, used as the key in PlayerPrefs.
+    public string rootName; // The root element name in the XML structure.
 
-    [SerializeField]
-    private string rootName; // The root element name in the XML structure.
-
-    [SerializeField]
-    private string[] fields; // An array of field names (columns) for the table.
+    public string[] fields; // An array of field names (columns) for the table.
 
     [SerializeField]
     private string[] records; // An array of values representing a single record (row) in the table.
@@ -244,6 +240,27 @@ public class TableData : ScriptableObject
         if (PlayerPrefs.HasKey(tableName))
         {
             PlayerPrefs.DeleteKey(tableName);
+        }
+    }
+
+    /// <summary>
+    /// Retorna o XML atual como string.
+    /// </summary>
+    public string GetXmlString()
+    {
+        return xmlDoc != null ? xmlDoc.OuterXml : string.Empty;
+    }
+
+    /// <summary>
+    /// Carrega o XML fornecido no xmlDoc e salva no PlayerPrefs.
+    /// </summary>
+    public void LoadFromXmlString(string xml)
+    {
+        if (!string.IsNullOrEmpty(xml))
+        {
+            xmlDoc.LoadXml(xml);
+            PlayerPrefs.SetString(tableName, xml);
+            PlayerPrefs.Save();
         }
     }
 }

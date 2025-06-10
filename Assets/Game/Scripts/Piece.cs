@@ -6,16 +6,16 @@ public class Piece : NetworkBehaviour
 {
     private static Piece activePiece;
 
-    protected MatchController matchController => MatchController.instance;
-    protected BoardController board => matchController.boardController;
-    protected GameField[] gameFields => board.gameFields;
+    private MatchController matchController => MatchController.instance;
+    private BoardController board => matchController.boardController;
+    private GameField[] gameFields => board.gameFields;
 
-    protected GameMode.GameType gameType => matchController.gameType;
+    private GameMode.GameType gameType => matchController.gameType;
 
-    protected bool finished => matchController.finished;
-    protected TurnState myTurn = TurnState.blue;
+    private bool finished => matchController.finished;
+    private TurnState myTurn = TurnState.blue;
 
-    private NetworkVariable<int> fieldIndex = -1;
+    private int fieldIndex = -1;
     public GameField field
     {
         get
@@ -24,7 +24,7 @@ public class Piece : NetworkBehaviour
             return board.GetGameField((int)fieldIndex);
         }
     }
-    private NetworkVariable<int> targetFieldIndex = -1;
+    private int targetFieldIndex = -1;
     public GameField targetField
     {
         get
@@ -38,21 +38,31 @@ public class Piece : NetworkBehaviour
     public GameObject body;
     public PieceType type;
 
-    public void PassiveUpdate()
+    private void Start()
     {
-        if (myTurn == TurnState.red) return;
-        Debug.Log("This is a Passive Object");
-        TurnFakePiece();
+        if (matchController == null) return;
+        matchController.OnInstantiatedPiece(this);
+        gameObject.SetActive(false);
     }
 
-    public void ActiveUpdate()
+    public void SetControlToClient()
     {
-        if (myTurn == TurnState.blue) return;
-        Debug.Log("This is a Active Object");
-        TurnNormalPiece();
+        NetworkExecuteOnClient(SetControl);
     }
 
-    protected virtual void OnMouseDown()
+    private void SetControl()
+    {
+        TakeControl();
+    }
+
+    public void ActivePiece()
+    {
+        if (IsActive()) TurnNormalPiece();
+        else TurnFakePiece();
+        gameObject.SetActive(true);
+    }
+
+    private void OnMouseDown()
     {
         if (myTurn == TurnState.red) return;
         if (matchController.turn == TurnState.red) return;
@@ -67,15 +77,18 @@ public class Piece : NetworkBehaviour
         SendMessage("GetPiece", SendMessageOptions.DontRequireReceiver);
     }
 
-    public virtual void SetFirstField(GameField field)
+    public void SetFirstFieldIndex(int field)
     {
-        if (!IsActive()) return;
-
-        fieldIndex = field.index;
+        fieldIndex = field;
         targetFieldIndex = -1;
 
-        transform.position = field.transform.position;
+        transform.position = this.field.transform.position;
         transform.Rotate(0, 0, 0, Space.Self);
+    }
+
+    public void SetFirstField(GameField field)
+    {
+        NetworkExecute<int>(SetFirstFieldIndex, field.index);
     }
 
     public void SelectedAField(GameField field)
@@ -116,14 +129,14 @@ public class Piece : NetworkBehaviour
         return false;
     }
 
-    protected virtual void OnDestroy()
+    private void OnDestroy()
     {
         matchController?.RemovePieceFromPlayerSquad(this);
         if (activePiece == this) activePiece = null;
         field?.SetPiece(null);
     }
 
-    protected void Destroy()
+    private void Destroy()
     {
         OnDestroy();
         StartCoroutine(WaitToDestroy());

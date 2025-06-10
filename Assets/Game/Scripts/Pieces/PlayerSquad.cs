@@ -3,15 +3,7 @@ using UnityEngine;
 
 public class PlayerSquad : Squad
 {
-    private bool fromStart = false;
-
-    public void LoadPieces(bool fromStart)
-    {
-        this.fromStart = fromStart;
-        LoadPieces();
-    }
-
-    public override void LoadPieces()
+    public void LoadPieces(TableData table)
     {
         for (int i = 1; i < table.Count(); i++)
         {
@@ -24,13 +16,18 @@ public class PlayerSquad : Squad
             }
 
             int house = int.Parse(table.GetRecord("House", i));
-            InstantiatePiece(piece, GetGameField(house));
+            InstantiatePiece(piece, house, table == this.table);
         }
     }
 
-    private GameField GetGameField(int index)
+    public override void LoadPieces()
     {
-        if (!fromStart)
+        LoadPieces(table);
+    }
+
+    private GameField GetGameField(int index, bool reverse = false)
+    {
+        if (reverse)
         {
             int lastIndex = gameFields.Length - 1;
             index = lastIndex - index;
@@ -38,24 +35,21 @@ public class PlayerSquad : Squad
         return gameFields[index];
     }
 
-    private async void InstantiatePiece(Piece piece, GameField gameField)
+    private async void InstantiatePiece(Piece piece, int field, bool isMy = true)
     {
+        GameField gameField = GetGameField(field, !isMy);
+        bool isOnline = MatchController.connection != NetworkConnectionType.Manual;
+
         GameObject obj = piece.gameObject;
         Vector3 pos = gameField.transform.position;
-        Quaternion rot = Quaternion.identity;
-
-        if (!fromStart) rot = Quaternion.Euler(0, 180, 0);
+        Quaternion rot = isMy? Quaternion.identity : Quaternion.Euler(0, 180, 0);
 
         Piece toLink;
-        if (MatchController.connection != NetworkConnectionType.Manual)
+        if (isOnline)
         {
             GameObject netObj = await NetworkGameObject.Instantiate(obj, pos, rot);
             toLink = netObj.GetComponent<Piece>();
-
-            if (NetworkManager.Instance().IsClientConnection())
-            {
-                netObj.GetComponent<NetworkBehaviour>().TakeControl();
-            }
+            if (!isMy) toLink.SetControlToClient();
         }
         else
         {
