@@ -179,8 +179,8 @@ public class SelectablePiece : MonoBehaviour
 
             if (field.hasPiece)
             {
-                string pieceTag = field.piece.tag;
-                isSameSquad = pieceTag == tag;
+                TurnState turn = field.piece.turn;
+                isSameSquad = turn == piece.turn;
             }
 
             if (isSameSquad == true) break;

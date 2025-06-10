@@ -8,12 +8,10 @@ public class Piece : NetworkBehaviour
 
     private MatchController matchController => MatchController.instance;
     private BoardController board => matchController.boardController;
-    private GameField[] gameFields => board.gameFields;
-
-    private GameMode.GameType gameType => matchController.gameType;
 
     private bool finished => matchController.finished;
-    private TurnState myTurn = TurnState.blue;
+    public TurnState turn { get; private set; }
+    public PieceColor pieceColor { get; private set; }
 
     private NetworkVariable<int> fieldIndex = -1;
     public int indexCurrentField => (int)fieldIndex;
@@ -29,6 +27,12 @@ public class Piece : NetworkBehaviour
 
     public GameObject body;
     public PieceType type;
+
+    private void Awake()
+    {
+        pieceColor = PieceColor.undefined;
+        turn = TurnState.undefined;
+    }
 
     private void Start()
     {
@@ -51,18 +55,21 @@ public class Piece : NetworkBehaviour
     {
         if (IsActive())
         {
-            TurnNormalPiece();
+            TurnBluePiece();
+
             GameField gameField = board.SearchMyField(this);
             if (gameField != null) SetFirstField(gameField);
+
+            NetworkManager manager = NetworkManager.Instance();
+            turn = manager.IsServerConnection() ? TurnState.homeTeam : TurnState.awayTeam;
         }
         else
         {
-            TurnFakePiece();
+            TurnRedPiece();
         }
 
         fieldIndex.OnValueChange((int oldValue, int newValue) =>
         {
-            Debug.Log($"Value was updated from {oldValue} to {newValue} ");
             field?.SetPiece(this);
         });
 
@@ -71,8 +78,8 @@ public class Piece : NetworkBehaviour
 
     private void OnMouseDown()
     {
-        if (myTurn == TurnState.red) return;
-        if (matchController.turn == TurnState.red) return;
+        if (pieceColor == PieceColor.red) return;
+        if (matchController.turn != turn) return;
 
         if (activePiece != this)
         {
@@ -147,11 +154,12 @@ public class Piece : NetworkBehaviour
     private IEnumerator WaitToDestroy()
     {
         yield return new WaitForSeconds(3.5f);
-        Destroy(gameObject);
+        NetworkGameObject.NetworkDestroy(gameObject);
     }
 
     private void ChangeTurn()
     {
+        if (!IsActive()) return;
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
         matchController.ChangeTurn();
     }
@@ -166,11 +174,11 @@ public class Piece : NetworkBehaviour
         SendMessage("Destroy");
     }
 
-    public void TurnFakePiece()
+    public void TurnRedPiece()
     {
-        if (myTurn == TurnState.red) return;
+        if (pieceColor == PieceColor.red) return;
 
-        myTurn = TurnState.red;
+        pieceColor = PieceColor.red;
         FakePiece fakePiece = GetComponent<FakePiece>();
         if (fakePiece != null)
         {
@@ -181,11 +189,11 @@ public class Piece : NetworkBehaviour
         gameObject.AddComponent<FakePiece>();
     }
 
-    public void TurnNormalPiece()
+    public void TurnBluePiece()
     {
-        if (myTurn == TurnState.blue) return;
+        if (pieceColor == PieceColor.blue) return;
 
-        myTurn = TurnState.blue;
+        pieceColor = PieceColor.blue;
         FakePiece fakePiece = GetComponent<FakePiece>();
         if (fakePiece == null) return;
         fakePiece.enabled = false;

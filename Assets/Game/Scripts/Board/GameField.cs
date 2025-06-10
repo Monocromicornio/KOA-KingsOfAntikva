@@ -36,12 +36,9 @@ public class GameField : Field
 
     private void OnMouseDown()
     {
-        if (matchController.turn == TurnState.blue)
+        if (select)
         {
-            if (select)
-            {
-                Selection();
-            }
+            Selection();
         }
     }
 
@@ -52,10 +49,7 @@ public class GameField : Field
 
     public void Select()
     {
-        if (matchController.turn == TurnState.blue)
-        {
-            visualActive.SetActive(true);
-        }
+        visualActive.SetActive(true);
     }
 
     public void Deselect()

@@ -1,6 +1,7 @@
 public enum TurnState
 {
-    blue,
+    homeTeam,
     wait,
-    red,
+    awayTeam,
+    undefined
 }

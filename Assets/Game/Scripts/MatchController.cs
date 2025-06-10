@@ -19,7 +19,7 @@ public class MatchController : MonoBehaviour
     public bool finished { get; private set; }
 
     public Piece currentePiece { get; private set; }
-    private bool blueTurn = false; //False to start with blue, true for red
+    private bool homeTeamTurn = true; //False to start with home, true for away
     public TurnState turn { get; private set; }
 
     public SyncronizeTable syncronize;
@@ -53,13 +53,6 @@ public class MatchController : MonoBehaviour
         networkManager.ConfigureMode(connection);
         networkManager.SetServerAddress("127.0.0.1");
         networkManager.StartNetwork();
-    }
-
-    public void Teste(IChannel channel)
-    {
-        return;
-        playerSquad.LoadPieces();
-        StartCoroutine(StartGame());
     }
 
     public void StartGame(TableData clientTable)
@@ -135,12 +128,12 @@ public class MatchController : MonoBehaviour
             {
                 WinGame();
                 return;
-            }   
+            }
         }
 
-        blueTurn = !blueTurn;
-        turn = blueTurn ? TurnState.blue : TurnState.red;
-        if (turn == TurnState.red)
+        homeTeamTurn = !homeTeamTurn;
+        turn = homeTeamTurn ? TurnState.homeTeam : TurnState.awayTeam;
+        if (connection == NetworkConnectionType.Manual && turn == TurnState.awayTeam)
         {
             machinePlayer.StartTurn();
         }
