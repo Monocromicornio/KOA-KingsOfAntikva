@@ -113,11 +113,27 @@ public class BoardController : MonoBehaviour
 
         return gamefields.ToArray();
     }
-    
-    public GameField GetGameField(int index){
+
+    public GameField GetGameField(int index)
+    {
         if (index < 0) return null;
         if (index >= gameFields.Length) return null;
-        
+
         return gameFields[index];
+    }
+
+    public GameField SearchMyField(Piece piece)
+    {
+        foreach (GameField field in fields)
+        {
+            Vector3 fPos = field.transform.position;
+            Vector3 pPos = piece.transform.position;
+            if (field.piece == piece || fPos == pPos)
+            {
+                return field;
+            }
+        }
+
+        return null;
     }
 }

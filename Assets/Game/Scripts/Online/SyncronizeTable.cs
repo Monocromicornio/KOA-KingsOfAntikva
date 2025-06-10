@@ -35,7 +35,7 @@ public class SyncronizeTable : NetworkBehaviour
 
     private void ChangeTurn()
     {
-        matchController.ChangeTurn();
+        matchController.ChangeTurnImmediate();
     }
 
     private void GetTable(byte[] encondeTable, int part, int size)

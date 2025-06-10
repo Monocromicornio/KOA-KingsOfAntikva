@@ -15,25 +15,17 @@ public class Piece : NetworkBehaviour
     private bool finished => matchController.finished;
     private TurnState myTurn = TurnState.blue;
 
-    private int fieldIndex = -1;
+    private NetworkVariable<int> fieldIndex = -1;
+    public int indexCurrentField => (int)fieldIndex;
     public GameField field
     {
         get
         {
             if (fieldIndex < 0) return null;
-            return board.GetGameField((int)fieldIndex);
+            return board.GetGameField(indexCurrentField);
         }
     }
-    private int targetFieldIndex = -1;
-    public GameField targetField
-    {
-        get
-        {
-            if (targetFieldIndex < 0) return null;
-            return board.GetGameField((int)targetFieldIndex);
-        }
-    }
-    public int indexCurrentField => fieldIndex;
+    public GameField targetField;
 
     public GameObject body;
     public PieceType type;
@@ -57,8 +49,23 @@ public class Piece : NetworkBehaviour
 
     public void ActivePiece()
     {
-        if (IsActive()) TurnNormalPiece();
-        else TurnFakePiece();
+        if (IsActive())
+        {
+            TurnNormalPiece();
+            GameField gameField = board.SearchMyField(this);
+            if (gameField != null) SetFirstField(gameField);
+        }
+        else
+        {
+            TurnFakePiece();
+        }
+
+        fieldIndex.OnValueChange((int oldValue, int newValue) =>
+        {
+            Debug.Log($"Value was updated from {oldValue} to {newValue} ");
+            field?.SetPiece(this);
+        });
+
         gameObject.SetActive(true);
     }
 
@@ -77,18 +84,14 @@ public class Piece : NetworkBehaviour
         SendMessage("GetPiece", SendMessageOptions.DontRequireReceiver);
     }
 
-    public void SetFirstFieldIndex(int field)
-    {
-        fieldIndex = field;
-        targetFieldIndex = -1;
-
-        transform.position = this.field.transform.position;
-        transform.Rotate(0, 0, 0, Space.Self);
-    }
-
     public void SetFirstField(GameField field)
     {
-        NetworkExecute<int>(SetFirstFieldIndex, field.index);
+        if (!IsActive()) return;
+        fieldIndex = field.index;
+        targetField = null;
+
+        transform.position = this.field.transform.position;
+        this.field.SetPiece(this);
     }
 
     public void SelectedAField(GameField field)
@@ -96,8 +99,7 @@ public class Piece : NetworkBehaviour
         if (!IsActive() || finished) return;
 
         matchController.MadeActionOnTurn();
-
-        targetFieldIndex = field.index;
+        targetField = field;
         bool onField = CheckPieceOnField();
         if (!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
     }

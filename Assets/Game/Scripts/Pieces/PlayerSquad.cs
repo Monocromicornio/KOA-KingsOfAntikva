@@ -53,9 +53,7 @@ public class PlayerSquad : Squad
         }
         else
         {
-            toLink = Instantiate(piece, pos, rot);
+            Instantiate(piece, pos, rot);
         }
-
-        LinkPieceToGameField(toLink, gameField);
     }
 }

@@ -73,14 +73,7 @@ public class MatchController : MonoBehaviour
     private IEnumerator StartGame()
     {
         yield return new WaitForSeconds(2);
-        if (SyncronizeTable.instance == null)
-        {
-            ChangeTurn();
-        }
-        else
-        {
-            SyncronizeTable.instance.SetChangeTurn();   
-        }
+        ChangeTurn();
     }
 
     public async void OnClientConnected(IClient client)
@@ -116,6 +109,18 @@ public class MatchController : MonoBehaviour
     }
 
     public void ChangeTurn()
+    {
+        if (SyncronizeTable.instance == null)
+        {
+            ChangeTurnImmediate();
+        }
+        else
+        {
+            SyncronizeTable.instance.SetChangeTurn();   
+        }
+    }
+
+    public void ChangeTurnImmediate()
     {
         if (finished) return;
         if (!game.activeSelf)

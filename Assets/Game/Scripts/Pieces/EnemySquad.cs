@@ -56,7 +56,7 @@ public class EnemySquad : Squad
             fake.transform.Rotate(0, 180, 0, Space.Self);
             fake.gameObject.SetActive(true);
 
-            LinkPieceToGameField(fake.piece, gameFields[fieldIndex]);
+            //LinkPieceToGameField(fake.piece, gameFields[fieldIndex]);
             fakePieces.Add(fake);
         }
     }

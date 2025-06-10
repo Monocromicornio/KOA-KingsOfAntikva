@@ -54,11 +54,4 @@ public class Squad : MonoBehaviour
 
         return piece;
     }
-
-    protected void LinkPieceToGameField(Piece piece, GameField gameField)
-    {
-        gameField.SetPiece(piece);
-        piece.SetFirstField(gameField);
-        pieces.Add(piece);
-    }
 }
