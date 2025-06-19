@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using com.onlineobject.objectnet;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class MatchController : MonoBehaviour
     public bool finished { get; private set; }
 
     public Piece currentePiece { get; private set; }
-    private bool homeTeamTurn = true; //False to start with home, true for away
+    private bool homeTeamTurn = false; //False to start with home, true for away
     public TurnState turn { get; private set; }
 
     public SyncronizeTable syncronize;
@@ -96,6 +97,25 @@ public class MatchController : MonoBehaviour
         enemySquad.pieces.Remove(fakePiece.piece);
     }
 
+    public void AddPieceFromPlayerSquad(Piece piece)
+    {
+        if (playerSquad.pieces.Contains(piece)) return;
+        playerSquad.pieces.Add(piece);
+    }
+
+    public void AddPieceFromEnemySquad(FakePiece fakePiece)
+    {
+        if (!enemySquad.fakePieces.Contains(fakePiece))
+        {
+            enemySquad.fakePieces.Add(fakePiece);
+        }
+
+        if (!enemySquad.pieces.Contains(fakePiece.piece))
+        {
+            enemySquad.pieces.Add(fakePiece.piece);
+        }
+    }
+
     public void MadeActionOnTurn()
     {
         turn = TurnState.wait;
@@ -109,7 +129,7 @@ public class MatchController : MonoBehaviour
         }
         else
         {
-            SyncronizeTable.instance.SetChangeTurn();   
+            SyncronizeTable.instance.SetChangeTurn();
         }
     }
 
@@ -121,18 +141,16 @@ public class MatchController : MonoBehaviour
             game.SetActive(true);
             ActivePieces();
         }
-        else
+        else if(CheckEndGame())
         {
-            bool endGame = CheckEndGame();
-            if (endGame)
-            {
-                WinGame();
-                return;
-            }
+            print("WinGame");
+            //WinGame();
+            return;
         }
 
         homeTeamTurn = !homeTeamTurn;
         turn = homeTeamTurn ? TurnState.homeTeam : TurnState.awayTeam;
+
         if (connection == NetworkConnectionType.Manual && turn == TurnState.awayTeam)
         {
             machinePlayer.StartTurn();
@@ -187,6 +205,7 @@ public class MatchController : MonoBehaviour
 
     public void SetFinishGame(Piece[] pieces, bool win)
     {
+        if (pieces.Length == 0) return;
         foreach (Piece piece in pieces)
         {
             if (piece.type == PieceType.Flag)
@@ -194,7 +213,7 @@ public class MatchController : MonoBehaviour
                 piece.SendMessage("OpenChest");
                 continue;
             }
-            piece.SendMessage(win? "Win" : "Lose");
+            piece.SendMessage(win ? "Win" : "Lose");
         }
     }
 
@@ -219,6 +238,7 @@ public class MatchController : MonoBehaviour
 
     private int CountActivePiece(List<Piece> pieces)
     {
+        if (pieces.Count == 0) return 0;
         int amount = 0;
         foreach (Piece piece in pieces)
         {

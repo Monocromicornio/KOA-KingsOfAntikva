@@ -70,6 +70,7 @@ public class Piece : NetworkBehaviour
 
         fieldIndex.OnValueChange((int oldValue, int newValue) =>
         {
+            board.GetGameField(oldValue)?.SetPiece(null);
             field?.SetPiece(this);
         });
 
@@ -154,7 +155,7 @@ public class Piece : NetworkBehaviour
     private IEnumerator WaitToDestroy()
     {
         yield return new WaitForSeconds(3.5f);
-        NetworkGameObject.NetworkDestroy(gameObject);
+        if(IsActive()) NetworkGameObject.NetworkDestroy(gameObject);
     }
 
     private void ChangeTurn()
@@ -171,12 +172,19 @@ public class Piece : NetworkBehaviour
 
     public void Lose()
     {
+        NetworkExecute(OnLose);
+    }
+
+    private void OnLose()
+    {
         SendMessage("Destroy");
     }
 
     public void TurnRedPiece()
     {
         if (pieceColor == PieceColor.red) return;
+
+        matchController.RemovePieceFromPlayerSquad(this);
 
         pieceColor = PieceColor.red;
         FakePiece fakePiece = GetComponent<FakePiece>();
@@ -192,6 +200,8 @@ public class Piece : NetworkBehaviour
     public void TurnBluePiece()
     {
         if (pieceColor == PieceColor.blue) return;
+
+        matchController.AddPieceFromPlayerSquad(this);
 
         pieceColor = PieceColor.blue;
         FakePiece fakePiece = GetComponent<FakePiece>();

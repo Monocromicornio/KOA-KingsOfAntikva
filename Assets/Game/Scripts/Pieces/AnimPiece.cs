@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using com.onlineobject.objectnet;
 using UnityEngine;
 
 [RequireComponent(typeof(Piece))]
-public class AnimPiece : MonoBehaviour
+public class AnimPiece : NetworkBehaviour
 {
     private MatchController matchController => MatchController.instance;
     private SoundController soundController => matchController.soundController;
     private GameMode gameMode => matchController.gameMode;
-    private Piece piece;
 
     [Header("Animation")]
     [SerializeField]
@@ -31,15 +31,24 @@ public class AnimPiece : MonoBehaviour
     private void Awake()
     {
         anim = animator;
-        piece = GetComponent<Piece>();
     }
 
     public void SetAnimation(string animName)
     {
-        anim.SetTrigger(animName);
+        NetworkExecute<string>(SetTrigger, animName);
     }
 
     public void SetAnimation(string animName, bool value)
+    {
+        NetworkExecute<string, bool>(SetBool, animName, value);
+    }
+
+    private void SetTrigger(string animName)
+    {
+        anim.SetTrigger(animName);
+    }
+
+    private void SetBool(string animName, bool value)
     {
         anim.SetBool(animName, value);
     }

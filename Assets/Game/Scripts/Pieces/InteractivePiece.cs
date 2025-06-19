@@ -26,8 +26,8 @@ public class InteractivePiece : MonoBehaviour
     public virtual void Notify(bool sucess, InteractivePiece target)
     {
         SendMessage(sucess? "Sucess": "Failed");
-        GameObject toDestroy = sucess ? target.gameObject : gameObject;
-        toDestroy.SendMessage("Destroy", SendMessageOptions.DontRequireReceiver);
+        Piece toDestroy = sucess ? target.piece : piece;
+        toDestroy.Lose();
     }
 
     protected virtual void ForceChallenge(InteractivePiece target)

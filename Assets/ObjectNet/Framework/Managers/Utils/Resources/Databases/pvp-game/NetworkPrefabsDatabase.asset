@@ -20,7 +20,7 @@ MonoBehaviour:
     syncPosition: 010101
     syncRotation: 010101
     syncScale: 010101
-    AnimationAutoSync: 1
+    AnimationAutoSync: 0
     ParticlesAutoSync: 0
     ShowScripts: 0
     PrefabScripts:
@@ -31,17 +31,22 @@ MonoBehaviour:
         Delay: 0
         Variables:
           Variables:
-          - Variable: myTurn
-            Enabled: 0
-            DeliveryMode: 0
-            DetectionMode: 0
-            Delay: 0
           - Variable: type
             Enabled: 0
             DeliveryMode: 0
             DetectionMode: 0
             Delay: 0
           - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: <turn>k__BackingField
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: <pieceColor>k__BackingField
             Enabled: 0
             DeliveryMode: 0
             DetectionMode: 0
@@ -53,27 +58,12 @@ MonoBehaviour:
             DeliveryMode: 1
             DetectionMode: 0
             Delay: 0
-          - Variable: targetFieldIndex
-            Enabled: 0
-            DeliveryMode: 1
-            DetectionMode: 0
-            Delay: 0
       - Script: {fileID: 7720397006920141200, guid: 621d63bb591b44549ba880d9520fc575,
           type: 3}
         Enabled: 0
         Delay: 0
         Variables:
-          Variables:
-          - Variable: m_InstanceID
-            Enabled: 0
-            DeliveryMode: 0
-            DetectionMode: 0
-            Delay: 0
-          - Variable: m_UnityRuntimeErrorString
-            Enabled: 0
-            DeliveryMode: 0
-            DetectionMode: 0
-            Delay: 0
+          Variables: []
         NetworkVariables:
           Variables: []
       - Script: {fileID: 7992382405654813966, guid: 621d63bb591b44549ba880d9520fc575,
@@ -7304,7 +7294,7 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
@@ -7497,7 +7487,7 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
@@ -7690,7 +7680,7 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
@@ -7883,7 +7873,7 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
@@ -8076,7 +8066,7 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
@@ -8269,7 +8259,7 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
@@ -8462,7 +8452,7 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
@@ -8655,7 +8645,7 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
@@ -8848,7 +8838,7 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
@@ -8995,7 +8985,7 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
@@ -9137,7 +9127,7 @@ MonoBehaviour:
         EventMethod: 
         EditorVisible: 0
         ExecutionError: 
-    AnimationSyncMode: 1
+    AnimationSyncMode: 2
     AnimationCount: 1
     AnimationDefaultStatus: 
     ownershipAccessLevel: 0
