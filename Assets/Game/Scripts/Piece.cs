@@ -30,6 +30,7 @@ public class Piece : NetworkBehaviour
     public PieceType type;
 
     public float timeToDestroy { get; private set; }
+    private bool onValueChangeSetted = false;
 
     private void Awake()
     {
@@ -43,6 +44,17 @@ public class Piece : NetworkBehaviour
         if (matchController == null) return;
         matchController.OnInstantiatedPiece(this);
         gameObject.SetActive(false);
+    }
+
+    private void PassiveUpdate()
+    {
+        if (onValueChangeSetted) return;
+        onValueChangeSetted = true;
+        fieldIndex.OnValueChange((int oldValue, int newValue) =>
+        {
+            board.GetGameField(oldValue)?.SetPiece(null);
+            field?.SetPiece(this);
+        });
     }
 
     public void SetControlToClient()
@@ -72,12 +84,6 @@ public class Piece : NetworkBehaviour
         {
             TurnRedPiece();
         }
-
-        fieldIndex.OnValueChange((int oldValue, int newValue) =>
-        {
-            board.GetGameField(oldValue)?.SetPiece(null);
-            field?.SetPiece(this);
-        });
 
         gameObject.SetActive(true);
     }
