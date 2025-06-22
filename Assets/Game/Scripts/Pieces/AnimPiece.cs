@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using com.onlineobject.objectnet;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Piece))]
 public class AnimPiece : NetworkBehaviour
@@ -55,6 +56,8 @@ public class AnimPiece : NetworkBehaviour
 
     public void ChangeAnim(Animator newAnim)
     {
+        var animState = anim.GetCurrentAnimatorStateInfo(0);
+        newAnim.Play(animState.fullPathHash, 0, animState.normalizedTime);
         lastAnims.Add(anim);
         anim = newAnim;
     }
@@ -74,8 +77,10 @@ public class AnimPiece : NetworkBehaviour
 
     private void Destroy()
     {
-        SetAnimation("Die", true);
-        StartCoroutine(DieEffect());
+        StartCoroutine(WaitForEndOfFrame(() => {
+            SetAnimation("Die", true);
+            StartCoroutine(DieEffect());
+        }));
     }
 
     private IEnumerator DieEffect()
@@ -106,7 +111,15 @@ public class AnimPiece : NetworkBehaviour
 
     public void Win()
     {
-        SetAnimation("Win", true);
-        soundController.VictoryPeaple();
+        StartCoroutine(WaitForEndOfFrame(() => {
+            SetAnimation("Win", true);
+            soundController.VictoryPeaple();
+        }));
+    }
+
+    IEnumerator WaitForEndOfFrame(UnityAction action)
+    {
+        yield return new WaitForEndOfFrame();
+        action.Invoke();
     }
 }

@@ -116,13 +116,13 @@ public class SelectablePiece : MonoBehaviour
     public GameField GetEmptyFieldFromActive(GameField gameField)
     {
         if (gameField == null || !gameField.hasPiece) return gameField;
-
+        
         foreach (List<GameField> fields in selectedFields.Values)
         {
             if (fields.Contains(gameField))
             {
                 int index = fields.IndexOf(gameField) - 1;
-                if (index > 0) return fields[index];
+                if (index >= 0) return fields[index];
             }
         }
 

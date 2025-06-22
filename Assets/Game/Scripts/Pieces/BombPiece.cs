@@ -17,6 +17,6 @@ public class BombPiece : InteractivePiece
     private void ActionsAfterAttack(InteractivePiece target)
     {
         target.Notify(false, this);
-        piece.Lose();
+        piece.SetLose();
     }
 }

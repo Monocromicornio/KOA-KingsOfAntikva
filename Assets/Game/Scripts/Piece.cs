@@ -165,13 +165,20 @@ public class Piece : NetworkBehaviour
         matchController.ChangeTurn();
     }
 
-    public void Win()
+    public void SetWin()
     {
-        //print("WIN!!!!");
+        if (!IsActive()) return;
+        NetworkExecute(OnWin);
     }
 
-    public void Lose()
+    private void OnWin()
     {
+        SendMessage("Win");
+    }
+
+    public void SetLose()
+    {
+        if (!IsActive()) return;
         NetworkExecute(OnLose);
     }
 

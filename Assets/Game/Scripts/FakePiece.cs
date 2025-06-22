@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Piece))]
@@ -68,7 +69,6 @@ public class FakePiece : MonoBehaviour
         if (anim)
         {
             anim.ChangetoOld();
-            anim.SetAnimation("Die", true);
         }
     }
 

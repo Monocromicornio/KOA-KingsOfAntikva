@@ -6,15 +6,22 @@ public class TrunckPiece : InteractivePiece
 {
     public bool bluePiece { get; private set; }
     private GameObject trunck => piece.body;
-    
+
     [Header("Trunck")]
     [SerializeField]
     private GameObject particle;
+
+    private Animator animator => anim.anim;
+    public bool opened => animator.GetBool("Open");
 
     protected override void Awake()
     {
         base.Awake();
         force = int.MaxValue;
+    }
+
+    private void Start()
+    {
         bluePiece = GetComponent<FakePiece>() == null;
         if (!bluePiece) trunck.SetActive(false);
     }
@@ -22,7 +29,7 @@ public class TrunckPiece : InteractivePiece
     protected override void CounterAttack(InteractivePiece target)
     {
         OpenChest();
-        StartCoroutine(NotifyController(1));
+        matchController.ChangeTurn();
     }
 
     public void OpenChest()
@@ -36,11 +43,5 @@ public class TrunckPiece : InteractivePiece
 
         particle.SetActive(true);
         soundController.VictoryConfirm();
-    }
-
-    private IEnumerator NotifyController(float time)
-    {
-        yield return new WaitForSeconds(time);
-        matchController.OpenChest(this);
     }
 }

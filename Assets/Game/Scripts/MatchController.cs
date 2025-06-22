@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using com.onlineobject.objectnet;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MatchController : MonoBehaviour
 {
@@ -36,12 +37,17 @@ public class MatchController : MonoBehaviour
     [SerializeField]
     private AudioSource auChangeTurn;
 
+    [Header("UI")]
+    [SerializeField]
+    private Button exit;
+
     private void Awake()
     {
         instance = this;
         game.SetActive(false);
         turn = TurnState.wait;
         allPieces = new List<Piece>();
+        exit.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -58,7 +64,6 @@ public class MatchController : MonoBehaviour
 
     public void StartGame(TableData clientTable)
     {
-        //SpawnTeste(); return;
         playerSquad.LoadPieces();
         playerSquad.LoadPieces(clientTable);
         StartCoroutine(StartGame());
@@ -73,6 +78,12 @@ public class MatchController : MonoBehaviour
     public async void OnClientConnected(IClient client)
     {
         await NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
+    }
+
+    public void GoToMenu()
+    {
+        networkManager.StopNetwork();
+        SceneManager.LoadScene("PositionParts");
     }
 
     public void SetPiece(Piece piece)
@@ -143,8 +154,7 @@ public class MatchController : MonoBehaviour
         }
         else if(CheckEndGame())
         {
-            print("WinGame");
-            //WinGame();
+            FinishGame();
             return;
         }
 
@@ -162,25 +172,13 @@ public class MatchController : MonoBehaviour
         if (allPieces.Contains(piece)) return;
         allPieces.Add(piece);
     }
+    
     public void ActivePieces()
     {
         foreach (Piece piece in allPieces)
         {
             piece.ActivePiece();
         }
-    }
-
-    public void OpenChest(TrunckPiece piece)
-    {
-        if (finished) return;
-        if (piece.bluePiece)
-        {
-            SetEnemyWin();
-            return;
-        }
-
-        SetPlayerWin();
-        WinGame();
     }
 
     private void SetPlayerWin()
@@ -195,12 +193,12 @@ public class MatchController : MonoBehaviour
         SetFinishGame(playerSquad.pieces.ToArray(), false);
     }
 
-    private void WinGame()
+    private void FinishGame()
     {
         if (finished) return;
         finished = true;
-
-        //VOLTAR AO MENU
+        turn = TurnState.wait;
+        exit.gameObject.SetActive(true);
     }
 
     public void SetFinishGame(Piece[] pieces, bool win)
@@ -208,12 +206,8 @@ public class MatchController : MonoBehaviour
         if (pieces.Length == 0) return;
         foreach (Piece piece in pieces)
         {
-            if (piece.type == PieceType.Flag)
-            {
-                piece.SendMessage("OpenChest");
-                continue;
-            }
-            piece.SendMessage(win ? "Win" : "Lose");
+            if (win) piece.SetWin();
+            else piece.SetLose();
         }
     }
 
@@ -242,7 +236,14 @@ public class MatchController : MonoBehaviour
         int amount = 0;
         foreach (Piece piece in pieces)
         {
-            if (piece.type == PieceType.Flag || piece.type == PieceType.Bomb) continue;
+            if (piece.type == PieceType.Flag)
+            {
+                TrunckPiece trunckPiece = piece.GetComponent<TrunckPiece>();
+                if (trunckPiece.opened) return 0;
+                continue;
+            }
+
+            if (piece.type == PieceType.Bomb) continue;
             amount++;
         }
 
