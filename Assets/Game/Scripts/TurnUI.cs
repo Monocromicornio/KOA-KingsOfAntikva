@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TurnUI : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField]
     GameObject gTurnOn;
     [SerializeField]
@@ -13,18 +10,11 @@ public class TurnUI : MonoBehaviour
     [SerializeField]
     AudioSource auTurnChange;
 
-    Turn turn;
-    
-    void Start()
-    {
-        turn = FindObjectOfType<Turn>();
-    }
+    MatchController matchController => MatchController.instance;
 
-    // Update is called once per frame
     void Update()
     {
-
-        if(turn.Liberate && turn.TurnPlayer == "Player")
+        if(matchController.currentTurn == TurnState.homeTeam)
         {
             gTurnOn.SetActive(true);
             gTurnOff.SetActive(false);
@@ -35,6 +25,4 @@ public class TurnUI : MonoBehaviour
             gTurnOff.SetActive(true);
         }
     }
-
-
 }

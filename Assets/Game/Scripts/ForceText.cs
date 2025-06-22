@@ -1,33 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(TextMesh))]
 public class ForceText : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private TextMesh textMesh;
+    
     [SerializeField]
-    string sForce;
-    TextMesh txtForce;    
+    private InteractivePiece piece;
+    private string txtForce;
 
-    void Start()
-    {        
+    public string force
+    {
+        set
+        {
+            txtForce = string.IsNullOrEmpty(value) ? "" : value.Substring(0, 1);
+            if (txtForce == "B" || txtForce != "F")
+            {
+                txtForce = "";
+            }
 
-        if (sForce != "B")
-        {
-            txtForce = transform.Find("TxtForce").GetComponent<TextMesh>();
-            txtForce.text = sForce;
+            if (textMesh == null) return;
+            textMesh.text = txtForce;
         }
-        else if (sForce != "F")
-        {
-            txtForce = transform.Find("TxtForce").GetComponent<TextMesh>();
-            txtForce.text = sForce;
-        }
-        else
-        {
-            txtForce = transform.Find("TxtForce").GetComponent<TextMesh>();
-            txtForce.text = "";
-        }
-
     }
 
+    private void Awake()
+    {
+        textMesh ??= GetComponent<TextMesh>();
+        if(piece != null) force = piece.force.ToString();
+    }
 }

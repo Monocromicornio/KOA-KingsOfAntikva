@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &476390647182750043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7062443357076136779}
+  - component: {fileID: 9041021084249334171}
+  - component: {fileID: -5882959065493738794}
+  m_Layer: 0
+  m_Name: Syncronize
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7062443357076136779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476390647182750043}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9041021084249334171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476390647182750043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11798d1863f21fd4bbff675e64af8bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerEvents: []
+  ActionsEvents: []
+  InternalEventsHidden: 0
+  ListenersEventsHidden: 0
+  ActionsEventsHidden: 0
+  databaseTarget: Default
+  onSpawnPrefab: {fileID: 0}
+  onDespawnPrefab: {fileID: 0}
+  onAcceptOwnerShip: {fileID: 0}
+  onAcceptReleaseOwnerShip: {fileID: 0}
+  onTakeObjectOwnerShip: {fileID: 0}
+  onReleaseObjectOwnerShip: {fileID: 0}
+  transport: {fileID: 0}
+  behaviorMode: 2
+  deliveryMode: 1
+  ownerShipAccessLevel: 0
+  movementType: 0
+  syncPosition: 010101
+  syncRotation: 010101
+  syncScale: 010101
+  disableObjectGravity: 1
+  enableObjectKinematic: 1
+  enablePhysicsInterpolation: 0
+  usePrefabRotation: 0
+  remoteControls: 0
+  syncAnimation: 0
+  syncAnimationMode: 0
+  animationLayerCount: 1
+  animationDefaultStatus: 
+  syncParticles: 0
+  ShowNetworkParameters: 1
+  BehaviorlId: 1
+  table: {fileID: 11400000, guid: 957da6f4d6e27e2488de1e33dc6473c8, type: 2}
+--- !u!114 &-5882959065493738794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476390647182750043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cd63f4fca86944ab19f47b5a6a7500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticSpawn: 0
+  staticId: 0
+  instancePrefabSignature: 36cb15a0-f893-4bad-8eda-4fac4ddf5601
+  childToDisable: []
+  childToSync: []

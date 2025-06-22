@@ -1,37 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameMode : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public enum GameType
+    {
+        Training = 1, // Show pieces any time
+        Normal = 2,   // Show pieces when dying
+        Hard = 3      // No show pieces
+    }
+
     [SerializeField]
-    int itype = 0;
-    void Start()
-    {
-        
-    }
+    private GameType gameType = GameType.Training;
 
-    // Update is called once per frame
-    void Update()
+    public GameType type
     {
-        
-    }
-
-    public int GetGameType()
-    {
-        if(itype==0)
+        get
         {
-            itype = PlayerPrefs.GetInt("GameMode");
+            if (gameType == 0)
+            {
+                gameType = (GameType)PlayerPrefs.GetInt("GameMode", (int)GameType.Training);
+            }
+            return gameType;
         }
-        //Type 1 = Trannig - Show pieces any time
-        //Type 2 = Normal - Show pieces when dying
-        //Type 3 = Hard - No show pieces
-        return itype;
-    }
-
-    public void SetGameType(int gametype)
-    {
-        PlayerPrefs.SetInt("GameMode", gametype);
+        set
+        {
+            gameType = value;
+            PlayerPrefs.SetInt("GameMode", (int)gameType);
+        }
     }
 }
