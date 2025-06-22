@@ -209,7 +209,7 @@ public class MatchController : MonoBehaviour
         finished = true;
         currentTurn = TurnState.undefined;
         turn = currentTurn;
-        exit?.gameObject.SetActive(true);
+        if(exit != null) exit.gameObject.SetActive(true);
     }
 
     public void SetFinishGame(Piece[] pieces, bool win)

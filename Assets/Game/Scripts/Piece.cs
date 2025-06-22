@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using com.onlineobject.objectnet;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Piece : NetworkBehaviour
 {
@@ -178,23 +177,23 @@ public class Piece : NetworkBehaviour
 
     public void SetWin()
     {
-        if (!IsActive()) return;
         NetworkExecute(OnWin);
     }
 
     private void OnWin()
     {
+        if (!IsActive()) return;
         SendMessage("Win");
     }
 
     public void SetLose()
     {
-        if (!IsActive()) return;
         NetworkExecute(OnLose);
     }
 
     private void OnLose()
     {
+        if (!IsActive()) return;
         SendMessage("Destroy");
     }
 

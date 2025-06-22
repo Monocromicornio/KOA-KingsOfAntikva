@@ -25,9 +25,19 @@ public class InteractivePiece : MonoBehaviour
 
     public virtual void Notify(bool sucess, InteractivePiece target)
     {
-        SendMessage(sucess? "Sucess": "Failed");
         Piece toDestroy = sucess ? target.piece : piece;
+
+        string message = sucess ? "Sucess" : "Failed";
+        float time = sucess? toDestroy.timeToDestroy: 0;
+        StartCoroutine(WaitToDestroy(time + 1, message));
+
         toDestroy.SetLose();
+    }
+
+    private IEnumerator WaitToDestroy(float time, string message)
+    {
+        yield return new WaitForSeconds(time);
+        SendMessage(message);
     }
 
     protected virtual void ForceChallenge(InteractivePiece target)

@@ -43,19 +43,13 @@ public class AttackPiece : InteractivePiece
 
     private void Sucess()
     {
-        StartCoroutine(WaitToAttack());
+        EndAttack();
+        SendMessage("NewTarget");
     }
 
     private void Failed()
     {
         CancelAttack();
-    }
-
-    private IEnumerator WaitToAttack()
-    {
-        yield return new WaitForSeconds(3.5f);
-        EndAttack();
-        SendMessage("NewTarget");
     }
 
     private IEnumerator PositionToAttack()
