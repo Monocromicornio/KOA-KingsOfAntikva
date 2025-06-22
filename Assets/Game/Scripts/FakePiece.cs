@@ -91,7 +91,7 @@ public class FakePiece : MonoBehaviour
     private void OnDestroy()
     {
         ReturnToNormal();
-        matchController?.RemovePieceFromEnemySquad(this);
+        matchController?.OnDestroyFakePiece(this);
     }
 
     private void Destroy()

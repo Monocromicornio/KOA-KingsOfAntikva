@@ -14,7 +14,7 @@ public class TurnUI : MonoBehaviour
 
     void Update()
     {
-        if(matchController.turn == TurnState.homeTeam)
+        if(matchController.currentTurn == TurnState.homeTeam)
         {
             gTurnOn.SetActive(true);
             gTurnOff.SetActive(false);

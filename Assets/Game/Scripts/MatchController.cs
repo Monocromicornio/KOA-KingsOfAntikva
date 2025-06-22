@@ -22,6 +22,7 @@ public class MatchController : MonoBehaviour
 
     public Piece currentePiece { get; private set; }
     private bool homeTeamTurn = false; //False to start with home, true for away
+    public TurnState currentTurn { get; private set; }
     public TurnState turn { get; private set; }
 
     public SyncronizeTable syncronize;
@@ -45,7 +46,8 @@ public class MatchController : MonoBehaviour
     {
         instance = this;
         game.SetActive(false);
-        turn = TurnState.wait;
+        currentTurn = TurnState.wait;
+        turn = TurnState.undefined;
         allPieces = new List<Piece>();
         exit.gameObject.SetActive(false);
     }
@@ -91,21 +93,31 @@ public class MatchController : MonoBehaviour
         currentePiece = piece;
     }
 
-    public void RemovePieceFromPlayerSquad(Piece piece)
+    public void OnDestroyPiece(Piece piece)
     {
         if (!playerSquad.pieces.Contains(piece)) return;
         playerSquad.pieces.Remove(piece);
+
+        CheckEndGame();
     }
 
-    public void RemovePieceFromEnemySquad(FakePiece fakePiece)
+    public void OnDestroyFakePiece(FakePiece fakePiece)
     {
+        bool remove = false;
+
         if (enemySquad.fakePieces.Contains(fakePiece))
         {
+            remove = true;
             enemySquad.fakePieces.Remove(fakePiece);
         }
 
-        if (!enemySquad.pieces.Contains(fakePiece.piece)) return;
-        enemySquad.pieces.Remove(fakePiece.piece);
+        if (enemySquad.pieces.Contains(fakePiece.piece))
+        {
+            remove = true;
+            enemySquad.pieces.Remove(fakePiece.piece);   
+        }
+
+        if(remove) CheckEndGame();
     }
 
     public void AddPieceFromPlayerSquad(Piece piece)
@@ -129,7 +141,7 @@ public class MatchController : MonoBehaviour
 
     public void MadeActionOnTurn()
     {
-        turn = TurnState.wait;
+        currentTurn = TurnState.wait;
     }
 
     public void ChangeTurn()
@@ -152,16 +164,14 @@ public class MatchController : MonoBehaviour
             game.SetActive(true);
             ActivePieces();
         }
-        else if(CheckEndGame())
-        {
-            FinishGame();
-            return;
-        }
+
+        if (CheckEndGame()) return;
 
         homeTeamTurn = !homeTeamTurn;
-        turn = homeTeamTurn ? TurnState.homeTeam : TurnState.awayTeam;
+        currentTurn = homeTeamTurn ? TurnState.homeTeam : TurnState.awayTeam;
+        turn = currentTurn;
 
-        if (connection == NetworkConnectionType.Manual && turn == TurnState.awayTeam)
+        if (connection == NetworkConnectionType.Manual && currentTurn == TurnState.awayTeam)
         {
             machinePlayer.StartTurn();
         }
@@ -197,7 +207,8 @@ public class MatchController : MonoBehaviour
     {
         if (finished) return;
         finished = true;
-        turn = TurnState.wait;
+        currentTurn = TurnState.undefined;
+        turn = currentTurn;
         exit.gameObject.SetActive(true);
     }
 
@@ -213,10 +224,13 @@ public class MatchController : MonoBehaviour
 
     private bool CheckEndGame()
     {
+        if (finished) return true;
+
         int players = CountActivePiece(playerSquad.pieces);
         if (players == 0)
         {
             SetEnemyWin();
+            FinishGame();
             return true;
         }
 
@@ -224,6 +238,7 @@ public class MatchController : MonoBehaviour
         if (enemies == 0)
         {
             SetPlayerWin();
+            FinishGame();
             return true;
         }
 

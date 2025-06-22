@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using com.onlineobject.objectnet;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Piece : NetworkBehaviour
 {
@@ -28,10 +29,13 @@ public class Piece : NetworkBehaviour
     public GameObject body;
     public PieceType type;
 
+    public float timeToDestroy { get; private set; }
+
     private void Awake()
     {
         pieceColor = PieceColor.undefined;
         turn = TurnState.undefined;
+        timeToDestroy = 3.5f;
     }
 
     private void Start()
@@ -57,11 +61,12 @@ public class Piece : NetworkBehaviour
         {
             TurnBluePiece();
 
-            GameField gameField = board.SearchMyField(this);
-            if (gameField != null) SetFirstField(gameField);
-
             NetworkManager manager = NetworkManager.Instance();
             turn = manager.IsServerConnection() ? TurnState.homeTeam : TurnState.awayTeam;
+
+            GameField gameField = board.SearchMyField(this);
+            if (gameField != null) SetFirstField(gameField);
+            else Debug.LogWarning($"Gamefield null on {name} ({turn})");
         }
         else
         {
@@ -80,7 +85,7 @@ public class Piece : NetworkBehaviour
     private void OnMouseDown()
     {
         if (pieceColor == PieceColor.red) return;
-        if (matchController.turn != turn) return;
+        if (matchController.currentTurn != turn) return;
 
         if (activePiece != this)
         {
@@ -141,7 +146,7 @@ public class Piece : NetworkBehaviour
 
     private void OnDestroy()
     {
-        matchController?.RemovePieceFromPlayerSquad(this);
+        matchController?.OnDestroyPiece(this);
         if (activePiece == this) activePiece = null;
         field?.SetPiece(null);
     }
@@ -154,13 +159,13 @@ public class Piece : NetworkBehaviour
 
     private IEnumerator WaitToDestroy()
     {
-        yield return new WaitForSeconds(3.5f);
-        if(IsActive()) NetworkGameObject.NetworkDestroy(gameObject);
+        yield return new WaitForSeconds(timeToDestroy);
+        if (IsActive()) NetworkGameObject.NetworkDestroy(gameObject);
     }
 
     private void ChangeTurn()
     {
-        if (!IsActive()) return;
+        if (!IsActive() || matchController.turn != turn) return;
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
         matchController.ChangeTurn();
     }
@@ -191,7 +196,7 @@ public class Piece : NetworkBehaviour
     {
         if (pieceColor == PieceColor.red) return;
 
-        matchController.RemovePieceFromPlayerSquad(this);
+        matchController.OnDestroyPiece(this);
 
         pieceColor = PieceColor.red;
         FakePiece fakePiece = GetComponent<FakePiece>();
