@@ -18,13 +18,13 @@ MonoBehaviour:
     Server: com.onlineobject.objectnet.embedded.ObjectNetServer
     Client: com.onlineobject.objectnet.embedded.ObjectNetClient
     AllowToRemove: 0
-    Active: 1
+    Active: 0
   - Code: 2
     Name: UnityTransport
     Server: com.onlineobject.objectnet.UnityServer
     Client: com.onlineobject.objectnet.UnityClient
     AllowToRemove: 0
-    Active: 0
+    Active: 1
   - Code: 3
     Name: SteamTransport
     Server: com.onlineobject.objectnet.steamworks.SteamNetworkServer
