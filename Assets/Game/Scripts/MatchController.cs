@@ -10,6 +10,7 @@ public class MatchController : MonoBehaviour
     public static MatchController instance;
     public static NetworkConnectionType connection = NetworkConnectionType.Client;//REMOVE AFTER
     public NetworkManager networkManager => NetworkManager.Instance();
+    public NetworkSteamManager steamManager => NetworkSteamManager.Instance();
     private List<Piece> allPieces;
 
     [Header("Game objs")]
@@ -72,7 +73,8 @@ public class MatchController : MonoBehaviour
 
     public void GoToMenu()
     {
-        networkManager.StopNetwork();
+        steamManager.LeaveLobby();
+        //networkManager.StopNetwork();
         SceneManager.LoadScene("PositionParts");
     }
 
