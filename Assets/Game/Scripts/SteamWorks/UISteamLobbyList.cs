@@ -104,13 +104,21 @@ namespace com.onlineobject.objectnet.integration {
         private void LateUpdate() {
             // Only update the lobby list if not in relay mode.
             if (NetworkManager.Instance().InEmbeddedMode()) {
+                print(" Add new lobbies ");
                 // Add new lobbies to the UI.
-                foreach (SteamLobby lobby in NetworkSteamManager.Instance().GetLobbies()) {
-                    if (!this.Lobbies.ContainsKey(lobby)) {
+                foreach (SteamLobby lobby in NetworkSteamManager.Instance().GetLobbies())
+                {
+                    print("SteamId ");
+                    print(lobby.SteamId);
+                    print("LobbyName ");
+                    print(lobby["LobbyName"]);
+                    if (!this.Lobbies.ContainsKey(lobby))
+                    {
                         GameObject newItem = Instantiate(this.LobbyItem);
                         UILobbyItem lobbyItem = newItem.GetComponent<UILobbyItem>();
                         lobbyItem.label.text = lobby["LobbyName"];
-                        lobbyItem.button.onClick.AddListener(() => {
+                        lobbyItem.button.onClick.AddListener(() =>
+                        {
                             NetworkSteamManager.Instance().RequestToJoin(lobby.SteamId, (bool joined) =>
                             {
                                 // Deactivate the current game object (likely the UI panel).

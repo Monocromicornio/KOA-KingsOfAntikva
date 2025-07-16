@@ -3699,7 +3699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b08b101f69ef877478a65e5de20d5795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a: {fileID: 0}
   table: {fileID: 11400000, guid: 957da6f4d6e27e2488de1e33dc6473c8, type: 2}
   gameMode: {fileID: 1306742279}
   toggleGames:
@@ -6288,13 +6287,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2010118442063652476, guid: 517bcb4ccce1c88438ac78f957334464,
         type: 3}
+      propertyPath: lobbyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2010118442063652476, guid: 517bcb4ccce1c88438ac78f957334464,
+        type: 3}
       propertyPath: steamEvents
       value: 
       objectReference: {fileID: 1639561663}
     - target: {fileID: 2010118442063652476, guid: 517bcb4ccce1c88438ac78f957334464,
         type: 3}
       propertyPath: maximumOfPlayers
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4738166051190640252, guid: 517bcb4ccce1c88438ac78f957334464,
         type: 3}
