@@ -71,15 +71,14 @@ public class Piece : NetworkBehaviour
     {
         if (IsActive())
         {
+            NetworkManager manager = NetworkManager.Instance();
+            turn = manager.IsServerConnection() ? TurnState.homeTeam : TurnState.awayTeam;
             TurnBluePiece();
         }
         else
         {
             TurnRedPiece();
         }
-
-        NetworkManager manager = NetworkManager.Instance();
-        turn = manager.IsServerConnection() ? TurnState.homeTeam : TurnState.awayTeam;
 
         GameField gameField = board.SearchMyField(this);
         if (gameField != null) SetFirstField(gameField);
