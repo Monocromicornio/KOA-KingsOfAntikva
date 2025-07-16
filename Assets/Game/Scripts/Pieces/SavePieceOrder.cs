@@ -8,8 +8,6 @@ using System.Collections.Generic;
 [RequireComponent(typeof(GameMode))]
 public class SavePieceOrder : MonoBehaviour
 {
-    [SerializeField]
-    GameObject a;
     public TableData table;
 
     [System.Serializable]
