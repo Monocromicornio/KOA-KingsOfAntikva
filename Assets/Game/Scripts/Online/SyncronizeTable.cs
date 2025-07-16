@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Text;
 using com.onlineobject.objectnet;
 using UnityEngine;
@@ -20,12 +21,21 @@ public class SyncronizeTable : NetworkBehaviour
     void Start()
     {
         if (networkManager.IsServerConnection()) return;
+        StartCoroutine(WaitConnection());
+    }
+
+    IEnumerator WaitConnection()
+    {
+        yield return new WaitForSeconds(2);
         string encondeTable = EncodeTableDataXml();
         byte[] bytesToEncode = Encoding.UTF8.GetBytes(encondeTable);
 
         var parts = SplitBytes(bytesToEncode, 5);
         for (int i = 0; i < parts.Length; i++)
+        {
+            Debug.Log("Send " + (i + 1) + " of " + parts.Length);
             NetworkExecuteOnServer<byte[], int, int>(GetTable, parts[i], i, parts.Length);
+        }
     }
 
     public void SetChangeTurn()
