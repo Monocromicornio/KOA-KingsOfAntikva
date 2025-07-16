@@ -21,12 +21,11 @@ public class SyncronizeTable : NetworkBehaviour
     void Start()
     {
         if (networkManager.IsServerConnection()) return;
-        StartCoroutine(WaitConnection());
+        StartCoroutine(SendPartsToServer());
     }
 
-    IEnumerator WaitConnection()
+    IEnumerator SendPartsToServer()
     {
-        yield return new WaitForSeconds(2);
         string encondeTable = EncodeTableDataXml();
         byte[] bytesToEncode = Encoding.UTF8.GetBytes(encondeTable);
 
@@ -35,6 +34,7 @@ public class SyncronizeTable : NetworkBehaviour
         {
             Debug.Log("Send " + (i + 1) + " of " + parts.Length);
             NetworkExecuteOnServer<byte[], int, int>(GetTable, parts[i], i, parts.Length);
+            yield return new WaitForSeconds(1);
         }
     }
 
