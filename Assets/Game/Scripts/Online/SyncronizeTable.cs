@@ -34,7 +34,7 @@ public class SyncronizeTable : NetworkBehaviour
         {
             Debug.Log("Send " + (i + 1) + " of " + parts.Length);
             NetworkExecuteOnServer<byte[], int, int>(GetTable, parts[i], i, parts.Length);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
