@@ -26,11 +26,6 @@ public class SavePieceOrder : MonoBehaviour
     [SerializeField]
     ToggleGameMode[] toggleGames;
 
-    void Start()
-    {
-        print(a.name);
-    }
-
     public void PressServerButton()
     {
         MatchController.connection = NetworkConnectionType.Server;
