@@ -853,6 +853,8 @@ namespace com.onlineobject.objectnet {
             SteamMatchmaking.LeaveLobby(new CSteamID(currentLobbyID));
             currentLobbyID = 0;
             // Close network connection
+            NetworkManager.Instance().DisableAutoReconnect();
+            NetworkManager.Instance().ConfigureMode(NetworkConnectionType.Manual);
             NetworkManager.Instance().StopNetwork();
         }
 #endif

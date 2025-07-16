@@ -3,6 +3,7 @@ using Steamworks;
 using System.Collections.Generic;
 #endif
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace com.onlineobject.objectnet.integration {
@@ -51,14 +52,19 @@ namespace com.onlineobject.objectnet.integration {
         /// StartServerMode is called when the Start Server button is clicked.
         /// It configures the network manager to server mode, sets the server address, and starts the network.
         /// </summary>
-        private void CreateSteamLobby() {
-            if (string.IsNullOrEmpty(this.LobbyKey)) {
+        private void CreateSteamLobby()
+        {
+            if (string.IsNullOrEmpty(this.LobbyKey))
+            {
                 NetworkSteamManager.Instance().CreateLobby(this.LobbyName.text);
-            } else {
+            }
+            else
+            {
                 NetworkSteamManager.Instance().CreateLobby(this.LobbyName.text, (MY_LOBBY_FILTER_KEY, this.LobbyKey));
             }
-            // Deactivate the current game object (likely the UI panel).
+            
             this.gameObject.SetActive(false);
+            SceneManager.LoadScene("Game");
         }
 
         /// <summary>
@@ -105,9 +111,11 @@ namespace com.onlineobject.objectnet.integration {
                         UILobbyItem lobbyItem = newItem.GetComponent<UILobbyItem>();
                         lobbyItem.label.text = lobby["LobbyName"];
                         lobbyItem.button.onClick.AddListener(() => {
-                            NetworkSteamManager.Instance().RequestToJoin(lobby.SteamId, (bool joined) => {
+                            NetworkSteamManager.Instance().RequestToJoin(lobby.SteamId, (bool joined) =>
+                            {
                                 // Deactivate the current game object (likely the UI panel).
                                 this.gameObject.SetActive(false);
+                                SceneManager.LoadScene("Game");
                             }); // Send lobby join request.
                         });
                         newItem.transform.SetParent(this.LobbyItemsRoot.transform, false);

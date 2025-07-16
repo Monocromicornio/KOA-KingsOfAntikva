@@ -3,10 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using com.onlineobject.objectnet;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(GameMode))]
 public class SavePieceOrder : MonoBehaviour
 {
+    [SerializeField]
+    GameObject a;
     public TableData table;
 
     [System.Serializable]
@@ -24,6 +27,11 @@ public class SavePieceOrder : MonoBehaviour
 
     [SerializeField]
     ToggleGameMode[] toggleGames;
+
+    void Start()
+    {
+        print(a.name);
+    }
 
     public void PressServerButton()
     {
@@ -72,6 +80,13 @@ public class SavePieceOrder : MonoBehaviour
 
     private void GoToGame()
     {
+        var networkManager = NetworkManager.Instance();
+        var connection = MatchController.connection;
+
+        networkManager.ConfigureMode(connection);
+        networkManager.SetServerAddress("127.0.0.1");
+        networkManager.StartNetwork();
+
         SceneManager.LoadScene("Game");
     }
 }

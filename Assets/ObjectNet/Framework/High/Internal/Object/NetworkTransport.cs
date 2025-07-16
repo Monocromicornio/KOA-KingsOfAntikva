@@ -1517,6 +1517,11 @@ namespace com.onlineobject.objectnet {
                                 }
                                 // Enable the first camera found on the player.
                                 cameras[0].enabled = true;
+                                // Enable audio founbd on camera
+                                AudioListener audioPlayerControl = cameras[0].GetComponent<AudioListener>();
+                                if (audioPlayerControl != null) {
+                                    audioPlayerControl.enabled = true;
+                                }
                                 // Detach the camera from the player prefab if required.
                                 if (NetworkManager.Instance().IsToDetachPlayerCamera()) {
                                     cameras[0].gameObject.transform.parent = null;
@@ -1534,6 +1539,11 @@ namespace com.onlineobject.objectnet {
                                 }
                                 // Enable the first camera found on the player.
                                 cameras[0].enabled = true;
+                                // Enable audio founbd on camera
+                                AudioListener audioPlayerControl = cameras[0].GetComponent<AudioListener>();
+                                if (audioPlayerControl != null) {
+                                    audioPlayerControl.enabled = true;
+                                }
                             }
                         }
                     }

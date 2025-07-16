@@ -57,7 +57,11 @@ namespace com.onlineobject.objectnet.embedded {
         /// Disconnect transport system
         /// </summary>
         public override void Disconnect() {
-            this.client.Disconnect();
+            if (this.client != null) {
+                this.client.Disconnect();
+            } else if (this.connection != null) {
+                this.connection.LocalDisconnect();
+            }
         }
 
         /// <summary>

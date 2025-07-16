@@ -1719,6 +1719,10 @@ namespace com.onlineobject.objectnet {
                                 }
                                 // Enable the first camera found on the player
                                 cameras[0].enabled = true;
+                                AudioListener playerCameraAudio = cameras[0].GetComponent<AudioListener>();
+                                if (playerCameraAudio != null) {
+                                    playerCameraAudio.enabled = true;
+                                }
                                 // Detach the camera from the player if required
                                 if (this.detachPlayerCamera) {
                                     cameras[0].gameObject.transform.parent = null;
@@ -5431,7 +5435,7 @@ namespace com.onlineobject.objectnet {
                         IClient clientToDisconnect = removedClients[0];
                         removedClients.RemoveAt(0);
                         // Disconnect this client
-                        clientToDisconnect.GetChannel().GetTransport().Disconnect();
+                        clientToDisconnect.GetTransport().Disconnect();
                     }
                     // Load server scene
                     if ((RemoteSceneLoadMode.LoadAfter.Equals(this.remoteSceneLoadingMode)) ||

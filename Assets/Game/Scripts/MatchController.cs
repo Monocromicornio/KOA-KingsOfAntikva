@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class MatchController : MonoBehaviour
 {
     public static MatchController instance;
-    public static NetworkConnectionType connection = NetworkConnectionType.Manual;
+    public static NetworkConnectionType connection = NetworkConnectionType.Client;//REMOVE AFTER
     public NetworkManager networkManager => NetworkManager.Instance();
     private List<Piece> allPieces;
 
@@ -50,18 +50,6 @@ public class MatchController : MonoBehaviour
         turn = TurnState.undefined;
         allPieces = new List<Piece>();
         exit.gameObject.SetActive(false);
-    }
-
-    private void Start()
-    {
-        StartNetwork();
-    }
-
-    private void StartNetwork()
-    {
-        networkManager.ConfigureMode(connection);
-        networkManager.SetServerAddress("127.0.0.1");
-        networkManager.StartNetwork();
     }
 
     public void StartGame(TableData clientTable)
