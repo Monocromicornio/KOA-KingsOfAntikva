@@ -32,7 +32,6 @@ public class SyncronizeTable : NetworkBehaviour
         var parts = SplitBytes(bytesToEncode, 5);
         for (int i = 0; i < parts.Length; i++)
         {
-            Debug.Log("Send " + (i + 1) + " of " + parts.Length);
             NetworkExecuteOnServer<byte[], int, int>(GetTable, parts[i], i, parts.Length);
             yield return new WaitForSeconds(0.2f);
         }

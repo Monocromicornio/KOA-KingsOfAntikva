@@ -13,13 +13,14 @@ public class Piece : NetworkBehaviour
     public TurnState turn { get; private set; }
     public PieceColor pieceColor { get; private set; }
 
+    private GameField firstField;
     private NetworkVariable<int> fieldIndex = -1;
     public int indexCurrentField => (int)fieldIndex;
     public GameField field
     {
         get
         {
-            if (fieldIndex < 0) return null;
+            if (fieldIndex < 0) return firstField;
             return board.GetGameField(indexCurrentField);
         }
     }
@@ -71,18 +72,18 @@ public class Piece : NetworkBehaviour
         if (IsActive())
         {
             TurnBluePiece();
-
-            NetworkManager manager = NetworkManager.Instance();
-            turn = manager.IsServerConnection() ? TurnState.homeTeam : TurnState.awayTeam;
-
-            GameField gameField = board.SearchMyField(this);
-            if (gameField != null) SetFirstField(gameField);
-            else Debug.LogWarning($"Gamefield null on {name} ({turn})");
         }
         else
         {
             TurnRedPiece();
         }
+
+        NetworkManager manager = NetworkManager.Instance();
+        turn = manager.IsServerConnection() ? TurnState.homeTeam : TurnState.awayTeam;
+
+        GameField gameField = board.SearchMyField(this);
+        if (gameField != null) SetFirstField(gameField);
+        else Debug.LogWarning($"Gamefield null on {name} ({turn})");
 
         gameObject.SetActive(true);
     }
@@ -104,6 +105,7 @@ public class Piece : NetworkBehaviour
 
     public void SetFirstField(GameField field)
     {
+        firstField = field;
         if (!IsActive()) return;
         fieldIndex = field.index;
         targetField = null;
