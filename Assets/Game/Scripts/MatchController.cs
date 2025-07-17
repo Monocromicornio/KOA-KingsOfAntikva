@@ -53,20 +53,6 @@ public class MatchController : MonoBehaviour
         exit.gameObject.SetActive(false);
     }
 
-    void Start()
-    {
-        StartGame(syncronize.table);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            print("troca turno");
-            ChangeTurnImmediate();
-        }
-    }
-
     public void StartGame(TableData clientTable)
     {
         playerSquad.LoadPieces();
@@ -228,7 +214,6 @@ public class MatchController : MonoBehaviour
 
     private bool CheckEndGame()
     {
-        return false;
         if (finished) return true;
 
         int players = CountActivePiece(playerSquad.pieces);

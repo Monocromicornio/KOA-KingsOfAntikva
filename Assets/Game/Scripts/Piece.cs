@@ -84,17 +84,6 @@ public class Piece : NetworkBehaviour
         if (gameField != null) SetFirstField(gameField);
         else Debug.LogWarning($"Gamefield null on {name} ({turn})");
 
-        if (gameField.index < 16)
-        {
-            turn = TurnState.homeTeam;
-            TurnBluePiece();
-        }
-        else
-        {
-            turn = TurnState.awayTeam;
-            TurnRedPiece();
-        }
-
         gameObject.SetActive(true);
     }
 
