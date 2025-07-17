@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using com.onlineobject.objectnet;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(GameMode))]
 public class SavePieceOrder : MonoBehaviour
@@ -28,17 +29,15 @@ public class SavePieceOrder : MonoBehaviour
 
     public void PressServerButton()
     {
-        MatchController.connection = NetworkConnectionType.Server;
-        PressButton();
+        PressButton(true);
     }
 
     public void PressClientButton()
     {
-        MatchController.connection = NetworkConnectionType.Client;
-        PressButton();
+        PressButton(false);
     }
 
-    private void PressButton()
+    private void PressButton(bool isServer)
     {
         foreach (ToggleGameMode toggleGame in toggleGames)
         {
@@ -47,10 +46,10 @@ public class SavePieceOrder : MonoBehaviour
                 gameMode.type = toggleGame.gameType;
             }
         }
-        StartCoroutine(StartSavePieces());
+        StartCoroutine(StartSavePieces(() => GoToGame(isServer)));
     }
 
-    private IEnumerator StartSavePieces()
+    private IEnumerator StartSavePieces(UnityAction action)
     {
         table.DeleteTable();
         table.SaveTable();
@@ -59,6 +58,7 @@ public class SavePieceOrder : MonoBehaviour
             yield return null;
         }
         SavePieces();
+        action.Invoke();
     }
 
     private void SavePieces()
@@ -68,15 +68,13 @@ public class SavePieceOrder : MonoBehaviour
             string[] newRecord = { editable.index.ToString(), editable.piece.name.ToString() };
             table.AddRecord(newRecord);
         }
-        GoToGame();
     }
 
-    private void GoToGame()
+    private void GoToGame(bool isServer)
     {
         var networkManager = NetworkManager.Instance();
-        var connection = MatchController.connection;
-
-        networkManager.ConfigureMode(connection);
+        
+        networkManager.ConfigureMode(isServer ? NetworkConnectionType.Server : NetworkConnectionType.Client);
         networkManager.SetServerAddress("127.0.0.1");
         networkManager.StartNetwork();
 
