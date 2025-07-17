@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerSquad : Squad
 {
-    public void LoadPieces(TableData table)
+    private void LoadPieces(TableData table, bool isMy)
     {
         for (int i = 1; i < table.Count(); i++)
         {
@@ -16,13 +16,18 @@ public class PlayerSquad : Squad
             }
 
             int house = int.Parse(table.GetRecord("House", i));
-            InstantiatePiece(piece, house, table == this.table);
+            InstantiatePiece(piece, house, isMy);
         }
+    }
+
+    public void LoadPieces(TableData table)
+    {
+        LoadPieces(table, false);
     }
 
     public override void LoadPieces()
     {
-        LoadPieces(table);
+        LoadPieces(table, true);
     }
 
     private GameField GetGameField(int index, bool reverse = false)
