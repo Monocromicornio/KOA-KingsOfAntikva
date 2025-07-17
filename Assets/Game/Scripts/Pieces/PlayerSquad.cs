@@ -43,7 +43,7 @@ public class PlayerSquad : Squad
     private async void InstantiatePiece(Piece piece, int field, bool isMy = true)
     {
         GameField gameField = GetGameField(field, !isMy);
-        bool isOnline = MatchController.connection != NetworkConnectionType.Manual;
+        bool isOnline = NetworkManager.Instance().HasConnection();
 
         GameObject obj = piece.gameObject;
         Vector3 pos = gameField.transform.position;

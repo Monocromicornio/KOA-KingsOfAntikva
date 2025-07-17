@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class MatchController : MonoBehaviour
 {
     public static MatchController instance;
-    public static NetworkConnectionType connection = NetworkConnectionType.Client;//REMOVE AFTER
     public NetworkManager networkManager => NetworkManager.Instance();
     public NetworkSteamManager steamManager => NetworkSteamManager.Instance();
     private List<Piece> allPieces;
@@ -74,7 +73,6 @@ public class MatchController : MonoBehaviour
     public void GoToMenu()
     {
         steamManager.LeaveLobby();
-        //networkManager.StopNetwork();
         SceneManager.LoadScene("PositionParts");
     }
 
@@ -161,7 +159,7 @@ public class MatchController : MonoBehaviour
         currentTurn = homeTeamTurn ? TurnState.homeTeam : TurnState.awayTeam;
         turn = currentTurn;
 
-        if (connection == NetworkConnectionType.Manual && currentTurn == TurnState.awayTeam)
+        if (!networkManager.HasConnection() && currentTurn == TurnState.awayTeam)
         {
             machinePlayer.StartTurn();
         }
