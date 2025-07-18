@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Events;
 
 public class BombPiece : InteractivePiece
@@ -10,6 +11,7 @@ public class BombPiece : InteractivePiece
     protected override void CounterAttack(InteractivePiece target)
     {
         if (target == null) return;
+        SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
         UnityAction action = () => ActionsAfterAttack(target);
         StartCoroutine(FeedbackAttack(action));
     }

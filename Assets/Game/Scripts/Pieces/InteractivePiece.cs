@@ -44,7 +44,6 @@ public class InteractivePiece : MonoBehaviour
     {
         if (force >= target.force)
         {
-            target.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
             Notify(true, target);
             return;
         }
