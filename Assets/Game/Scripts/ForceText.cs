@@ -27,7 +27,7 @@ public class ForceText : MonoBehaviour
 
     private string GetTextByPieceType(InteractivePiece piece)
     {
-        if (piece == null) return "";
+        if (piece == null || piece.piece.pieceColor == PieceColor.red) return "";
 
         PieceType pieceType = piece.piece.type;
         if (pieceType == PieceType.Bomb

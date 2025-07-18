@@ -75,7 +75,6 @@ public class Field : MonoBehaviour
             return;
         }
 
-        if (piece.pieceColor == PieceColor.red) return;
         forceText.piece = piece.GetComponent<InteractivePiece>();;
     }
 }

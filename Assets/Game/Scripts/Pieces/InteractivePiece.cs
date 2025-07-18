@@ -44,6 +44,7 @@ public class InteractivePiece : MonoBehaviour
     {
         if (force >= target.force)
         {
+            target.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
             Notify(true, target);
             return;
         }
@@ -62,7 +63,6 @@ public class InteractivePiece : MonoBehaviour
     protected virtual void Attack(InteractivePiece target)
     {
         if (target == null) return;
-        target.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
         UnityAction action = () => ForceChallenge(target);
         StartCoroutine(FeedbackAttack(action));
     }
