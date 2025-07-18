@@ -4,12 +4,6 @@ using UnityEngine.Events;
 public class EditableField : Field
 {
     public bool select { get; private set; }
-    
-    public bool hasPiece => piece != null;
-    public GameObject piece { get; private set; }
-
-    [SerializeField]
-    TextMesh txtForce;
 
     [Header("Feedback")]
     [SerializeField]
@@ -40,9 +34,15 @@ public class EditableField : Field
         visualActive.SetActive(false);
     }
 
-    public void SetPiece(GameObject piece, UnityAction call = null){
-        this.piece = piece;
-        this.piece.transform.position = transform.position;
-        if (call != null) onSelect.AddListener(call);
+    public override void SetPiece(Piece piece)
+    {
+        base.SetPiece(piece);
+        piece.transform.position = transform.position;
+    }
+
+    public void SetSelecteblePiece(Piece piece, UnityAction onSelect)
+    {
+        SetPiece(piece);
+        this.onSelect.AddListener(onSelect);
     }
 }

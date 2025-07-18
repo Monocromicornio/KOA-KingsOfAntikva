@@ -4,29 +4,40 @@
 public class ForceText : MonoBehaviour
 {
     private TextMesh textMesh;
-    
-    [SerializeField]
-    private InteractivePiece piece;
-    private string txtForce;
 
-    public string force
+    [SerializeField]
+    private InteractivePiece startPiece;
+    public InteractivePiece piece
     {
         set
         {
-            txtForce = string.IsNullOrEmpty(value) ? "" : value.Substring(0, 1);
-            if (txtForce == "B" || txtForce != "F")
-            {
-                txtForce = "";
-            }
+            txtForce = GetTextByPieceType(value);
 
+            textMesh ??= GetComponent<TextMesh>();
             if (textMesh == null) return;
             textMesh.text = txtForce;
         }
     }
+    private string txtForce;
 
-    private void Awake()
+    private void Start()
     {
-        textMesh ??= GetComponent<TextMesh>();
-        if(piece != null) force = piece.force.ToString();
+        piece = startPiece;
+    }
+
+    private string GetTextByPieceType(InteractivePiece piece)
+    {
+        if (piece == null || piece.piece.pieceColor == PieceColor.red) return "";
+
+        PieceType pieceType = piece.piece.type;
+        if (pieceType == PieceType.Bomb
+        ||  pieceType == PieceType.Flag)
+        {
+            return "";
+        }
+
+        if (pieceType == PieceType.Spy) return "S";
+        
+        return piece.force.ToString();
     }
 }
