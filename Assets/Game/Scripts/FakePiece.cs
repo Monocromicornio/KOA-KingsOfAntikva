@@ -50,7 +50,7 @@ public class FakePiece : MonoBehaviour
         body.SetActive(false);
         fake.SetActive(true);
         fake.transform.rotation = transform.rotation;
-        
+
         if (anim) anim.ChangeAnim(fake);
     }
 
@@ -62,6 +62,8 @@ public class FakePiece : MonoBehaviour
 
     private void ReturnToNormal()
     {
+        if (body.activeSelf && !fake.activeSelf) return;
+
         body?.SetActive(true);
         fake?.SetActive(false);
 

@@ -8399,6 +8399,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1093712201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1093712202}
+  m_Layer: 0
+  m_Name: CameraPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1093712202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093712201}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1443747291}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1097043636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11618,7 +11650,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1093712202}
     m_Modifications:
     - target: {fileID: 2895601557566234000, guid: f58a8615bffd84b42822f9aa30c1777a,
         type: 3}
@@ -11658,12 +11690,12 @@ PrefabInstance:
     - target: {fileID: 2895601557566234001, guid: f58a8615bffd84b42822f9aa30c1777a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2895601557566234001, guid: f58a8615bffd84b42822f9aa30c1777a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2895601557566234001, guid: f58a8615bffd84b42822f9aa30c1777a,
         type: 3}
@@ -11708,6 +11740,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1409863125}
   m_SourcePrefab: {fileID: 100100000, guid: f58a8615bffd84b42822f9aa30c1777a, type: 3}
+--- !u!4 &1443747291 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2895601557566234001, guid: f58a8615bffd84b42822f9aa30c1777a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1443747290}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1461137303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13209,6 +13247,7 @@ MonoBehaviour:
   playerSquad: {fileID: 1686763110}
   enemySquad: {fileID: 1966236993}
   machinePlayer: {fileID: 466738728}
+  cameraPos: {fileID: 1093712202}
   soundController: {fileID: 824042235}
   auChangeTurn: {fileID: 0}
   exit: {fileID: 1714038189}
@@ -16435,7 +16474,7 @@ SceneRoots:
   - {fileID: 124531405}
   - {fileID: 440258584}
   - {fileID: 1359552651}
-  - {fileID: 1443747290}
+  - {fileID: 1093712202}
   - {fileID: 437714837}
   - {fileID: 1690787741}
   - {fileID: 1327107611}

@@ -32,6 +32,7 @@ public class MatchController : MonoBehaviour
     public PlayerSquad playerSquad;
     public EnemySquad enemySquad;
     public MachinePlayer machinePlayer;
+    public Transform cameraPos;
 
     [Header("Feedback")]
     public SoundController soundController;
@@ -50,6 +51,11 @@ public class MatchController : MonoBehaviour
         turn = TurnState.undefined;
         allPieces = new List<Piece>();
         exit.gameObject.SetActive(false);
+
+        if (cameraPos && networkManager.IsClientConnection())
+        {
+            cameraPos.transform.eulerAngles = new Vector3(0, 180, 0);
+        }
     }
 
     void Start()

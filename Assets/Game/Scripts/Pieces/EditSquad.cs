@@ -32,7 +32,7 @@ public class EditSquad : Squad
                 int houseIndex = int.Parse(table.GetRecord("House", i));
                 EditableField editable = editables[houseIndex];
 
-                editable.SetPiece(piece.gameObject, () => ChangePiece(editable));
+                editable.SetSelecteblePiece(piece, () => ChangePiece(editable));
             }
         }
         else
@@ -41,10 +41,8 @@ public class EditSquad : Squad
             {
                 if (i < defaultPieces.Length)
                 {
-                    GameObject piece = defaultPieces[i].gameObject;
                     EditableField editable = editables[i];
-
-                    editable.SetPiece(piece, () => ChangePiece(editable));
+                    editable.SetSelecteblePiece(defaultPieces[i], () => ChangePiece(editable));
                 }
             }
         }
@@ -66,10 +64,10 @@ public class EditSquad : Squad
             if(confirmSource) confirmSource.Play();
 
             EditableField from = toChange[0];
-            GameObject fromPiece = from.piece;
+            Piece fromPiece = from.piece;
 
             EditableField to = toChange[1];
-            GameObject toPiece = to.piece;
+            Piece toPiece = to.piece;
 
             if(toPiece != null){
                 from.SetPiece(toPiece);

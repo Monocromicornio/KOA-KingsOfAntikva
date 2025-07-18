@@ -62,6 +62,7 @@ public class InteractivePiece : MonoBehaviour
     protected virtual void Attack(InteractivePiece target)
     {
         if (target == null) return;
+        target.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
         UnityAction action = () => ForceChallenge(target);
         StartCoroutine(FeedbackAttack(action));
     }
