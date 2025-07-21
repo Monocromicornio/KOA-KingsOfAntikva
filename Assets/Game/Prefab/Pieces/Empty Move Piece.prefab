@@ -8,6 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7107614780625465283, guid: 7f810f9a8491a7745a5737673a193c78,
+        type: 3}
+      propertyPath: BehaviorlId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107614780625465283, guid: 7f810f9a8491a7745a5737673a193c78,
+        type: 3}
+      propertyPath: ShowNetworkParameters
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7107614780625465292, guid: 7f810f9a8491a7745a5737673a193c78,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -108,6 +118,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13b478129e46e1488dab10e0e1d0804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ListenerEvents: []
+  ActionsEvents: []
+  InternalEventsHidden: 0
+  ListenersEventsHidden: 0
+  ActionsEventsHidden: 0
+  databaseTarget: Default
+  onSpawnPrefab: {fileID: 0}
+  onDespawnPrefab: {fileID: 0}
+  onAcceptOwnerShip: {fileID: 0}
+  onAcceptReleaseOwnerShip: {fileID: 0}
+  onTakeObjectOwnerShip: {fileID: 0}
+  onReleaseObjectOwnerShip: {fileID: 0}
+  transport: {fileID: 0}
+  behaviorMode: 2
+  deliveryMode: 1
+  ownerShipAccessLevel: 0
+  movementType: 0
+  syncPosition: 010101
+  syncRotation: 010101
+  syncScale: 010101
+  disableObjectGravity: 1
+  enableObjectKinematic: 1
+  enablePhysicsInterpolation: 0
+  usePrefabRotation: 0
+  remoteControls: 0
+  syncAnimation: 0
+  syncAnimationMode: 0
+  animationLayerCount: 1
+  animationDefaultStatus: 
+  syncParticles: 0
+  ShowNetworkParameters: 1
+  BehaviorlId: 2
   animator: {fileID: 0}
   gDie: {fileID: 6930496545603783166, guid: 8bbb9615441ef8e4786fb47ee3e76bf7, type: 3}
   auDie: {fileID: 6116150706762156295}

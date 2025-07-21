@@ -53,9 +53,10 @@ public class EditSquad : Squad
             return;
         }
 
-        if(toChange.Contains(editable)){
-            toChange.Clear();
-            ResetChange(new []{editable});
+        if (toChange.Contains(editable))
+        {
+            ResetChange(new[] { editable });
+            return;
         }
 
         toChange.Add(editable);
@@ -85,11 +86,13 @@ public class EditSquad : Squad
         }
     }
 
-    void ResetChange(EditableField [] deselects = null){
+    void ResetChange(EditableField[] deselects = null)
+    {
         toChange.Clear();
 
-        if(deselects == null) return;
-        foreach(EditableField toDeselect in deselects){
+        if (deselects == null) return;
+        foreach (EditableField toDeselect in deselects)
+        {
             toDeselect.Deselect();
         }
     }

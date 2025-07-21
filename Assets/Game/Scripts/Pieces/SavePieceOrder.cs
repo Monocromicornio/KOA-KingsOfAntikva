@@ -27,17 +27,22 @@ public class SavePieceOrder : MonoBehaviour
     [SerializeField]
     ToggleGameMode[] toggleGames;
 
-    public void PressServerButton()
+    public void Server()
     {
-        PressButton(true);
+        PressButton(() => GoToGame(true));
     }
 
-    public void PressClientButton()
+    public void Client()
     {
-        PressButton(false);
+        PressButton(() => GoToGame(false));
     }
 
-    private void PressButton(bool isServer)
+    public void SavePieces()
+    {
+        PressButton(null);
+    }
+
+    private void PressButton(UnityAction action)
     {
         foreach (ToggleGameMode toggleGame in toggleGames)
         {
@@ -46,22 +51,21 @@ public class SavePieceOrder : MonoBehaviour
                 gameMode.type = toggleGame.gameType;
             }
         }
-        StartCoroutine(StartSavePieces(() => GoToGame(isServer)));
+        StartCoroutine(StartSavePieces(action));
     }
 
     private IEnumerator StartSavePieces(UnityAction action)
     {
         table.DeleteTable();
         table.SaveTable();
-        while (!table.Loaded())
-        {
-            yield return null;
-        }
-        SavePieces();
-        action.Invoke();
+        while (!table.Loaded()) yield return null;
+
+        Save();
+
+        if (action != null) action.Invoke();
     }
 
-    private void SavePieces()
+    private void Save()
     {
         foreach (EditableField editable in editableFields)
         {
