@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using com.onlineobject.objectnet;
@@ -74,6 +75,17 @@ public class MatchController : MonoBehaviour
     public async void OnClientConnected(IClient client)
     {
         await NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
+    }
+
+    public void Disconnected(IClient client)
+    {
+        GoToMenu();
+    }
+
+    public void OnError(Exception error)
+    {
+        Debug.Log("ERROR: " + error.Message);
+        GoToMenu();
     }
 
     public void GoToMenu()

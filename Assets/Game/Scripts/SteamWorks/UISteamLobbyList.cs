@@ -48,6 +48,11 @@ namespace com.onlineobject.objectnet.integration {
             this.RefreshLobbyButton.onClick.AddListener(RefreshLobby);
         }
 
+        void OnEnable()
+        {
+            RefreshLobby();
+        }
+
         /// <summary>
         /// StartServerMode is called when the Start Server button is clicked.
         /// It configures the network manager to server mode, sets the server address, and starts the network.
@@ -62,7 +67,7 @@ namespace com.onlineobject.objectnet.integration {
             {
                 NetworkSteamManager.Instance().CreateLobby(this.LobbyName.text, (MY_LOBBY_FILTER_KEY, this.LobbyKey));
             }
-            
+
             this.gameObject.SetActive(false);
             SceneManager.LoadScene("Game");
         }
@@ -104,14 +109,9 @@ namespace com.onlineobject.objectnet.integration {
         private void LateUpdate() {
             // Only update the lobby list if not in relay mode.
             if (NetworkManager.Instance().InEmbeddedMode()) {
-                print(" Add new lobbies ");
                 // Add new lobbies to the UI.
                 foreach (SteamLobby lobby in NetworkSteamManager.Instance().GetLobbies())
                 {
-                    print("SteamId ");
-                    print(lobby.SteamId);
-                    print("LobbyName ");
-                    print(lobby["LobbyName"]);
                     if (!this.Lobbies.ContainsKey(lobby))
                     {
                         GameObject newItem = Instantiate(this.LobbyItem);
