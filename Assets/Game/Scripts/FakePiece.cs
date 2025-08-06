@@ -62,6 +62,7 @@ public class FakePiece : MonoBehaviour
 
     private void ReturnToNormal()
     {
+        if (body == null || fake == null) return;
         if (body.activeSelf && !fake.activeSelf) return;
 
         body?.SetActive(true);
