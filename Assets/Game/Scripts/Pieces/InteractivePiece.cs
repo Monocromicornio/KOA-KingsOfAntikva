@@ -29,12 +29,12 @@ public class InteractivePiece : MonoBehaviour
 
         string message = sucess ? "Sucess" : "Failed";
         float time = sucess? toDestroy.timeToDestroy: 0;
-        StartCoroutine(WaitToSendMessage(time + 1, message));
+        StartCoroutine(WaitToDestroy(time + 1, message));
 
         toDestroy.SetLose();
     }
 
-    private IEnumerator WaitToSendMessage(float time, string message)
+    private IEnumerator WaitToDestroy(float time, string message)
     {
         yield return new WaitForSeconds(time);
         SendMessage(message);
