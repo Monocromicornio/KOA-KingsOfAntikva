@@ -60,7 +60,7 @@ public class MatchController : MonoBehaviour
 
     void Start()
     {
-        StartGame(syncronize.table);
+        //StartGame(syncronize.table);
     }
 
     void Update()
