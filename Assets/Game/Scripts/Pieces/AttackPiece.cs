@@ -44,8 +44,7 @@ public class AttackPiece : InteractivePiece
     private void Sucess()
     {
         EndAttack();
-        var mover = GetComponent<MovePiece>();
-        mover?.NewTarget();
+        SendMessage("NewTarget");
     }
 
     private void Failed()
