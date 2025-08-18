@@ -12,8 +12,6 @@ public class FakePiece : MonoBehaviour
     GameObject body => piece.body;
     GameField field => piece.field;
 
-      private bool registered;
-
     [Header("Fake Piece")]
     [SerializeField]
     GameObject fake;
@@ -21,39 +19,12 @@ public class FakePiece : MonoBehaviour
     private void Awake()
     {
         piece = GetComponent<Piece>();
-        anim = GetComponent<AnimPiece>();        
-    }
-
-    private void Start()
-    {
-        if (matchController != null)
-        {
-            matchController.AddPieceFromEnemySquad(this);
-            registered = true;
-        }
-        else
-        {
-            Debug.LogWarning("MatchController not ready for FakePiece registration.", this);
-        }
+        anim = GetComponent<AnimPiece>();
+        matchController.AddPieceFromEnemySquad(this);
     }
 
     private void OnEnable()
     {
-        if (!registered)
-        {
-            if (matchController != null)
-            {
-                matchController.AddPieceFromEnemySquad(this);
-                registered = true;
-            }
-            else
-            {
-                StartCoroutine(TryRegisterAgain());
-            }
-        }
-
-        if (matchController == null) return;
-
         if (fake == null)
         {
             PlayerSquad squad = matchController.playerSquad;
@@ -61,21 +32,6 @@ public class FakePiece : MonoBehaviour
             fake = Instantiate(pieceData.fakePiece, transform.position, transform.rotation, transform);
         }
         ActiveFakePiece();
-            
-    }
-
-     IEnumerator TryRegisterAgain()
-    {
-        while (!registered && matchController == null)
-        {
-            yield return null;
-        }
-
-        if (!registered && matchController != null)
-        {
-            matchController.AddPieceFromEnemySquad(this);
-            registered = true;
-        }
     }
 
     private void OnDisable()
