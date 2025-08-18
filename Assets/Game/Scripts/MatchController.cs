@@ -90,7 +90,7 @@ public class MatchController : MonoBehaviour
     private IEnumerator StartOffline()
     {
         // Wait one frame to ensure pieces register before activating
-        yield return null;
+        yield return new WaitForEndOfFrame();
         ChangeTurnImmediate();
     }
 
