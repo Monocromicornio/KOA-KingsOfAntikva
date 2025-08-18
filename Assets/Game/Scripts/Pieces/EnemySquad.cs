@@ -49,6 +49,12 @@ public class EnemySquad : Squad
             int fieldIndex = fieldIndexes[rndField];
             fieldIndexes.RemoveAt(rndField);
 
+             if (pieces[i] == null)
+            {
+                Debug.LogWarning($"EnemySquad.LoadPieces: default piece at index {i} is null");
+                continue;
+            }
+
             FakePiece fake = pieces[i].GetComponent<FakePiece>();
 
             if (fake == null) continue;

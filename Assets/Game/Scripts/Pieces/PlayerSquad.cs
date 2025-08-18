@@ -58,7 +58,12 @@ public class PlayerSquad : Squad
         }
         else
         {
-            Instantiate(piece, pos, rot);
+           GameObject localObj = Instantiate(obj, pos, rot);
+            toLink = localObj.GetComponent<Piece>();
+            if (isMy && !NetworkManager.Instance().HasConnection())
+            {
+                toLink.TurnBluePiece();
+            }
         }
     }
 }

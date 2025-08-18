@@ -59,6 +59,14 @@ public class MatchController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "SinglePlayer" || !networkManager.HasConnection())
+        {
+            StartOfflineGame();
+        }
+    }
+
     public void StartGame(TableData clientTable)
     {
         playerSquad.LoadPieces();
@@ -76,7 +84,14 @@ public class MatchController : MonoBehaviour
     {
         playerSquad.LoadPieces();
         enemySquad.LoadPieces();
-        ChangeTurn();
+        StartCoroutine(StartOffline());
+    }
+
+    private IEnumerator StartOffline()
+    {
+        // Wait one frame to ensure pieces register before activating
+        yield return null;
+        ChangeTurnImmediate();
     }
 
     public async void OnClientConnected(IClient client)
