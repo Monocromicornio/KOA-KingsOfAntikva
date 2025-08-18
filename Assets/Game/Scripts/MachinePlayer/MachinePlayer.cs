@@ -9,10 +9,17 @@ public class MachinePlayer : MonoBehaviour
     List<FakePiece> pieces => matchController.enemySquad.fakePieces;
     List<SelectablePiece> selectablePieces = new List<SelectablePiece>();
 
+    GameMode.GameType gameDifficulty => matchController.gameMode.machineDifficulty;
+
     Piece currentPiece;
 
     [SerializeField]
     bool played = false;
+
+    [Header("Decision time per difficulty")]
+    [SerializeField] float trainingDelay = 1.5f;
+    [SerializeField] float normalDelay = 1f;
+    [SerializeField] float hardDelay = 0.5f;
 
     private void Start()
     {
@@ -21,10 +28,17 @@ public class MachinePlayer : MonoBehaviour
 
     public void StartTurn()
     {
+        StartCoroutine(StartTurnRoutine());
+    }
+
+
+    private IEnumerator StartTurnRoutine()
+    {
         GetSelectablePieces();
+        yield return new WaitForSeconds(GetDecisionDelay());
         var selectables = GetActiveSelectables();
-        int index = Random.Range(0, selectables.Count);
-        ActionPiece(selectables[index]);
+        var selectable = ChooseSelectable(selectables);
+        ActionPiece(selectable);
     }
 
     private void GetSelectablePieces()
@@ -73,8 +87,67 @@ public class MachinePlayer : MonoBehaviour
             }
         }
 
-        int index = Random.Range(0, toSelect.Count);
-        piece.SelectedAField(toSelect[index]);
+        GameField target;
+
+        if (gameDifficulty == GameMode.GameType.Hard)
+        {
+            var attackFields = toSelect.Where(f => f.hasPiece && f.piece.tag == "Player").ToList();
+            target = attackFields.Count > 0 ? attackFields[Random.Range(0, attackFields.Count)] : toSelect[Random.Range(0, toSelect.Count)];
+        }
+        else
+        {
+            target = toSelect[Random.Range(0, toSelect.Count)];
+        }
+
+        piece.SelectedAField(target);
+    }
+
+    private float GetDecisionDelay()
+    {
+        switch (gameDifficulty)
+        {
+            case GameMode.GameType.Training:
+                return trainingDelay;
+            case GameMode.GameType.Hard:
+                return hardDelay;
+            default:
+                return normalDelay;
+        }
+    }
+
+    private SelectablePiece ChooseSelectable(List<SelectablePiece> selectables)
+    {
+        if (gameDifficulty == GameMode.GameType.Hard)
+        {
+            var aggressive = GetAggressiveSelectables(selectables);
+            if (aggressive.Count > 0)
+            {
+                return aggressive[Random.Range(0, aggressive.Count)];
+            }
+        }
+
+        return selectables[Random.Range(0, selectables.Count)];
+    }
+
+    private List<SelectablePiece> GetAggressiveSelectables(List<SelectablePiece> selectables)
+    {
+        List<SelectablePiece> aggressive = new List<SelectablePiece>();
+
+        foreach (SelectablePiece selectable in selectables)
+        {
+            foreach (List<GameField> fields in selectable.selectedFields.Values)
+            {
+                if (fields.Count == 0) continue;
+                GameField field = fields.Last();
+                if (field.hasPiece && field.piece.tag == "Player")
+                {
+                    aggressive.Add(selectable);
+                    break;
+                }
+            }
+        }
+
+        return aggressive;
     }
 
 /// <summary>

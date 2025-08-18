@@ -27,6 +27,9 @@ public class SavePieceOrder : MonoBehaviour
     [SerializeField]
     ToggleGameMode[] toggleGames;
 
+    [SerializeField]
+    GameObject onlineUI;
+
     public void Server()
     {
         PressButton(() => GoToGame(true));
@@ -40,6 +43,17 @@ public class SavePieceOrder : MonoBehaviour
     public void SavePieces()
     {
         PressButton(null);
+    }
+
+    public void StartOfflineGame()
+    {
+        PressButton(GoToOfflineGame);
+    }
+
+
+    public void SinglePlayer()
+    {
+        PressButton(GoToSinglePlayer);
     }
 
     private void PressButton(UnityAction action)
@@ -77,11 +91,31 @@ public class SavePieceOrder : MonoBehaviour
     private void GoToGame(bool isServer)
     {
         var networkManager = NetworkManager.Instance();
-        
+
         networkManager.ConfigureMode(isServer ? NetworkConnectionType.Server : NetworkConnectionType.Client);
         networkManager.SetServerAddress("127.0.0.1");
         networkManager.StartNetwork();
 
         SceneManager.LoadScene("Game");
     }
+
+    private void GoToSinglePlayer()
+    {
+        SceneManager.LoadScene("SinglePlayer");
+    }
+    
+     private void GoToOfflineGame()
+    {
+        var networkManager = NetworkManager.Instance();
+        networkManager.ResetConnectionMode();
+
+        if (onlineUI != null)
+        {
+            onlineUI.SetActive(false);
+        }
+
+        SceneManager.LoadScene("SinglePlayer");
+    }
+
+
 }

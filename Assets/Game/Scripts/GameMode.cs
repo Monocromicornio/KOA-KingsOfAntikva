@@ -28,4 +28,7 @@ public class GameMode : MonoBehaviour
             PlayerPrefs.SetInt("GameMode", (int)gameType);
         }
     }
+
+     public GameType machineDifficulty => type;
+
 }
