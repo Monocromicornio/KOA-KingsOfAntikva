@@ -72,13 +72,6 @@ public class MatchController : MonoBehaviour
         ChangeTurn();
     }
 
-    public void StartOfflineGame()
-    {
-        playerSquad.LoadPieces();
-        enemySquad.LoadPieces();
-        ChangeTurn();
-    }
-
     public async void OnClientConnected(IClient client)
     {
         await NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
