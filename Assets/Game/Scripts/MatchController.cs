@@ -20,10 +20,9 @@ public class MatchController : MonoBehaviour
     public GameMode.GameType gameType => gameMode.type;
 
     public bool finished { get; private set; }
-
-    public Piece currentePiece { get; private set; }
     private bool homeTeamTurn = false; //False to start with home, true for away
     public TurnState currentTurn { get; private set; }
+    public TurnState myTurn { get; private set; }
     public TurnState turn { get; private set; }
 
     public SyncronizeTable syncronize;
@@ -50,6 +49,7 @@ public class MatchController : MonoBehaviour
         game.SetActive(false);
         currentTurn = TurnState.wait;
         turn = TurnState.undefined;
+        myTurn = networkManager.IsServerConnection() ? TurnState.homeTeam : TurnState.awayTeam;
         allPieces = new List<Piece>();
         exit.gameObject.SetActive(false);
 
@@ -92,11 +92,6 @@ public class MatchController : MonoBehaviour
     {
         steamManager.LeaveLobby();
         SceneManager.LoadScene("PositionParts");
-    }
-
-    public void SetPiece(Piece piece)
-    {
-        currentePiece = piece;
     }
 
     public void OnDestroyPiece(Piece piece)
@@ -181,6 +176,11 @@ public class MatchController : MonoBehaviour
         {
             machinePlayer.StartTurn();
         }
+    }
+
+    public bool IsMyTurn()
+    {
+        return myTurn == turn;
     }
 
     public void OnInstantiatedPiece(Piece piece)

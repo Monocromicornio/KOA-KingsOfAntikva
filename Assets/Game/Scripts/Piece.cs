@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Piece : NetworkBehaviour
 {
-    private static Piece activePiece;
+    public static Piece activePiece { get; private set; }
 
     private MatchController matchController => MatchController.instance;
     private BoardController board => matchController.boardController;
 
     private bool finished => matchController.finished;
-    public TurnState turn { get; private set; }
     public PieceColor pieceColor { get; private set; }
 
     private GameField firstField;
@@ -35,7 +34,6 @@ public class Piece : NetworkBehaviour
     private void Awake()
     {
         pieceColor = PieceColor.undefined;
-        turn = TurnState.undefined;
         timeToDestroy = 3.5f;
     }
 
@@ -71,8 +69,6 @@ public class Piece : NetworkBehaviour
     {
         if (IsActive())
         {
-            NetworkManager manager = NetworkManager.Instance();
-            turn = manager.IsServerConnection() ? TurnState.homeTeam : TurnState.awayTeam;
             TurnBluePiece();
         }
         else
@@ -82,15 +78,15 @@ public class Piece : NetworkBehaviour
 
         GameField gameField = board.SearchMyField(this);
         if (gameField != null) SetFirstField(gameField);
-        else Debug.LogWarning($"Gamefield null on {name} ({turn})");
+        else Debug.LogWarning($"Gamefield null on {name} ({matchController.myTurn})");
 
         gameObject.SetActive(true);
     }
 
-    private void OnMouseDown()
+    public virtual void Select()
     {
         if (pieceColor == PieceColor.red) return;
-        if (matchController.currentTurn != turn) return;
+        if (!matchController.IsMyTurn()) return;
 
         if (activePiece != this)
         {
@@ -98,7 +94,6 @@ public class Piece : NetworkBehaviour
             activePiece = this;
         }
 
-        matchController.SetPiece(this);
         SendMessage("GetPiece", SendMessageOptions.DontRequireReceiver);
     }
 
@@ -171,7 +166,7 @@ public class Piece : NetworkBehaviour
 
     private void ChangeTurn()
     {
-        if (!IsActive() || matchController.turn != turn) return;
+        if (!IsActive() || !matchController.IsMyTurn()) return;
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
         matchController.ChangeTurn();
     }

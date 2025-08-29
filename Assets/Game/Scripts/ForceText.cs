@@ -11,6 +11,7 @@ public class ForceText : MonoBehaviour
     {
         set
         {
+            startPiece ??= value;
             txtForce = GetTextByPieceType(value);
 
             textMesh ??= GetComponent<TextMesh>();
@@ -28,7 +29,7 @@ public class ForceText : MonoBehaviour
     private string GetTextByPieceType(InteractivePiece piece)
     {
         if (piece == null || piece.piece.pieceColor == PieceColor.red) return "";
-
+        
         PieceType pieceType = piece.piece.type;
         if (pieceType == PieceType.Bomb
         ||  pieceType == PieceType.Flag)

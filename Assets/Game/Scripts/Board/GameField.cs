@@ -4,36 +4,70 @@ public class GameField : Field
 {
     private MatchController matchController => MatchController.instance;
 
-    public bool select => visualActive.activeSelf;
+    public bool select => selectFeedback.activeSelf;
+    public bool canSelect => canSelectFeedback.activeSelf;
 
     [SerializeField]
-    GameObject visualActive;
+    GameObject selectFeedback, canSelectFeedback;
 
     private void Awake()
     {
-        visualActive?.SetActive(false);
+        selectFeedback?.SetActive(false);
+        canSelectFeedback?.SetActive(false);
+    }
+
+    private void Start()
+    {
+        if (matchController == null) return;
+
+        if (matchController.networkManager.IsClientConnection())
+        {
+            forceText.transform.eulerAngles = new Vector3(90, 0, 180);
+        }
+    }
+
+    private void Update()
+    {
+        if (matchController == null) return;
+
+        if (canSelectFeedback.activeSelf && !matchController.IsMyTurn())
+        {
+            canSelectFeedback.SetActive(false);
+        }
+    }
+
+    private void OnMouseOver()
+    {
+        if (matchController == null || !matchController.IsMyTurn()) return;
+
+        canSelectFeedback.SetActive(true);
+    }
+
+    private void OnMouseExit()
+    {
+        canSelectFeedback.SetActive(false);
     }
 
     private void OnMouseDown()
     {
+        if (!canSelect) return;
+
         if (select)
         {
-            Selection();
+            Piece.activePiece?.SelectedAField(this);
+            return;
         }
-    }
-
-    public void Selection()
-    {
-        matchController.currentePiece.SelectedAField(this);
+        
+        piece?.Select();
     }
 
     public void Select()
     {
-        visualActive.SetActive(true);
+        selectFeedback.SetActive(true);
     }
 
     public void Deselect()
     {
-        visualActive.SetActive(false);
+        selectFeedback.SetActive(false);
     }
 }
