@@ -3,8 +3,9 @@ using UnityEngine.Events;
 
 public class BombPiece : InteractivePiece
 {
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         force = int.MaxValue;
     }
 

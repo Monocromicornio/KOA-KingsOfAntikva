@@ -64,7 +64,7 @@ public class Field : MonoBehaviour
             return null; // Retorna null se não for nenhum dos dois tipos.
         }
     }
-    
+
     public virtual void SetPiece(Piece piece)
     {
         this.piece = piece;
@@ -75,6 +75,6 @@ public class Field : MonoBehaviour
             return;
         }
 
-        forceText.piece = piece.GetComponent<InteractivePiece>();;
+        forceText.piece = piece.GetComponent<InteractivePiece>();
     }
 }

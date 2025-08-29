@@ -54,12 +54,6 @@ public class FakePiece : MonoBehaviour
         if (anim) anim.ChangeAnim(fake);
     }
 
-    private void OnMouseDown()
-    {
-        if (field == null || !field.select) return;
-        matchController.currentePiece?.SelectedAField(field);
-    }
-
     private void ReturnToNormal()
     {
         if (body == null || fake == null) return;

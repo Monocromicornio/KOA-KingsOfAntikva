@@ -179,8 +179,7 @@ public class SelectablePiece : MonoBehaviour
 
             if (field.hasPiece)
             {
-                TurnState turn = field.piece.turn;
-                isSameSquad = turn == piece.turn;
+                isSameSquad = field.piece.pieceColor == piece.pieceColor;
             }
 
             if (isSameSquad == true) break;

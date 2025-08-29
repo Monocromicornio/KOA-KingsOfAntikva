@@ -71,8 +71,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceText: {fileID: 6240723941624387995}
-  visualActive: {fileID: 5602004190205561929}
-  Confirm: {fileID: 0}
+  selectFeedback: {fileID: 5602004190205561929}
+  canSelectFeedback: {fileID: 0}
 --- !u!1 &5602004190188200994
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +382,7 @@ TextMesh:
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
-  m_Anchor: 0
+  m_Anchor: 4
   m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 12
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f5203700c52d142a021fa8aca6d85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piece: {fileID: 0}
+  startPiece: {fileID: 0}
 --- !u!1 &7335062435121092060
 GameObject:
   m_ObjectHideFlags: 0
