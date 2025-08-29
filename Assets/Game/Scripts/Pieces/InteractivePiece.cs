@@ -42,7 +42,6 @@ public class InteractivePiece : MonoBehaviour
 
     protected virtual void ForceChallenge(InteractivePiece target)
     {
-        print("force: " + force + " target " + target.force);
         if (force >= target.force)
         {
             Notify(true, target);
