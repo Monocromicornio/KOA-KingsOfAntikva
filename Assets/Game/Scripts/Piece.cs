@@ -7,6 +7,7 @@ public class Piece : NetworkBehaviour
     public static Piece activePiece { get; private set; }
 
     private MatchController matchController => MatchController.instance;
+    private bool hasConnection => matchController.hasConnection;
     private BoardController board => matchController.boardController;
 
     private bool finished => matchController.finished;
@@ -68,7 +69,7 @@ public class Piece : NetworkBehaviour
 
     public void ActivePiece()
     {
-        if (NetworkManager.Instance().HasConnection())
+        if (hasConnection)
         {
             if (IsActive())
             {
@@ -78,6 +79,10 @@ public class Piece : NetworkBehaviour
             {
                 TurnRedPiece();
             }
+        }
+        else if (pieceColor == PieceColor.undefined)
+        {
+            TurnBluePiece();
         }
 
         GameField gameField = board.SearchMyField(this);
@@ -164,13 +169,15 @@ public class Piece : NetworkBehaviour
 
     private IEnumerator WaitToDestroy()
     {
+        if (!IsActive()) yield break;
+
         yield return new WaitForSeconds(timeToDestroy);
-        if (IsActive()) NetworkGameObject.NetworkDestroy(gameObject);
+        if (hasConnection) NetworkGameObject.NetworkDestroy(gameObject);
+        else Destroy(gameObject);
     }
 
     private void ChangeTurn()
     {
-
         if (!IsActive() || !matchController.IsMyTurn()) return;
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
         matchController.ChangeTurn();
@@ -178,7 +185,8 @@ public class Piece : NetworkBehaviour
 
     public void SetWin()
     {
-        NetworkExecute(OnWin);
+        if (hasConnection) NetworkExecute(OnWin);
+        else SetWin();
     }
 
     private void OnWin()
@@ -189,7 +197,8 @@ public class Piece : NetworkBehaviour
 
     public void SetLose()
     {
-        NetworkExecute(OnLose);
+        if (hasConnection) NetworkExecute(OnLose);
+        else OnLose();
     }
 
     private void OnLose()

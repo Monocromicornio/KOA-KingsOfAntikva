@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -18,6 +19,12 @@ public class MachinePlayer : MonoBehaviour
 
     public void StartTurn()
     {
+        StartCoroutine(Turn());
+    }
+
+    IEnumerator Turn()
+    {
+        yield return new WaitForSeconds(1);
         GetSelectablePieces();
         var selectables = GetActiveSelectables();
         int index = Random.Range(0, selectables.Count);

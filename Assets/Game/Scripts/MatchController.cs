@@ -10,6 +10,7 @@ public class MatchController : MonoBehaviour
 {
     public static MatchController instance;
     public NetworkManager networkManager => NetworkManager.Instance();
+    public bool hasConnection => networkManager.HasConnection();
     public NetworkSteamManager steamManager => NetworkSteamManager.Instance();
     private List<Piece> allPieces;
 
@@ -177,13 +178,11 @@ public class MatchController : MonoBehaviour
             ActivePieces();
         }
 
-        if (CheckEndGame()) return;
-
         homeTeamTurn = !homeTeamTurn;
         currentTurn = homeTeamTurn ? TurnState.homeTeam : TurnState.awayTeam;
         turn = currentTurn;
 
-        if (!networkManager.HasConnection() && currentTurn == TurnState.awayTeam)
+        if (!hasConnection && currentTurn == TurnState.awayTeam)
         {
             machinePlayer.gameObject.SetActive(true);
             machinePlayer.StartTurn();
@@ -192,7 +191,7 @@ public class MatchController : MonoBehaviour
 
     public bool IsMyTurn()
     {
-        if (!NetworkManager.Instance().HasConnection()) return true;
+        if (!hasConnection) return true;
         return myTurn == turn;
     }
 
@@ -212,12 +211,14 @@ public class MatchController : MonoBehaviour
 
     private void SetPlayerWin()
     {
+        print("SetPlayerWin");
         SetFinishGame(playerSquad.pieces.ToArray(), true);
         SetFinishGame(enemySquad.pieces.ToArray(), false);
     }
 
     private void SetEnemyWin()
     {
+        print("SetEnemyWin");
         SetFinishGame(enemySquad.pieces.ToArray(), true);
         SetFinishGame(playerSquad.pieces.ToArray(), false);
     }
@@ -246,6 +247,7 @@ public class MatchController : MonoBehaviour
         if (finished) return true;
 
         int players = CountActivePiece(playerSquad.pieces);
+        print("players: " + players);
         if (players == 0)
         {
             SetEnemyWin();
@@ -254,6 +256,7 @@ public class MatchController : MonoBehaviour
         }
 
         int enemies = CountActivePiece(enemySquad.pieces);
+        print("enemies: " + enemies);
         if (enemies == 0)
         {
             SetPlayerWin();

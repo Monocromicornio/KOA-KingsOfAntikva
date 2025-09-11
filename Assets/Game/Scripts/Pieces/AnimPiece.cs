@@ -9,6 +9,7 @@ using UnityEngine.Events;
 public class AnimPiece : NetworkBehaviour
 {
     private MatchController matchController => MatchController.instance;
+    private bool hasConnection => matchController.hasConnection;
     private SoundController soundController => matchController.soundController;
     private GameMode gameMode => matchController.gameMode;
 
@@ -36,12 +37,14 @@ public class AnimPiece : NetworkBehaviour
 
     public void SetAnimation(string animName)
     {
-        NetworkExecute<string>(SetTrigger, animName);
+        if (hasConnection) NetworkExecute<string>(SetTrigger, animName);
+        else SetTrigger(animName);
     }
 
     public void SetAnimation(string animName, bool value)
     {
-        NetworkExecute<string, bool>(SetBool, animName, value);
+        if (hasConnection) NetworkExecute<string, bool>(SetBool, animName, value);
+        else SetBool(animName, value);
     }
 
     private void SetTrigger(string animName)
