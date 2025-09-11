@@ -60,7 +60,13 @@ public class MatchController : MonoBehaviour
 
     void Start()
     {
-        //StartGame(syncronize.table);
+        if (!networkManager.IsConnected())
+        {
+            myTurn = TurnState.homeTeam;
+            playerSquad.LoadPieces();
+            enemySquad.LoadPieces();
+            StartCoroutine(StartGame());
+        }
     }
 
     void Update()
@@ -175,12 +181,14 @@ public class MatchController : MonoBehaviour
 
         if (!networkManager.HasConnection() && currentTurn == TurnState.awayTeam)
         {
+            machinePlayer.gameObject.SetActive(true);
             machinePlayer.StartTurn();
         }
     }
 
     public bool IsMyTurn()
     {
+        if (!NetworkManager.Instance().HasConnection()) return true;
         return myTurn == turn;
     }
 

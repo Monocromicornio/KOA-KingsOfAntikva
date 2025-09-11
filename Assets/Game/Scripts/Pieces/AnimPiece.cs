@@ -56,6 +56,7 @@ public class AnimPiece : NetworkBehaviour
 
     public void ChangeAnim(Animator newAnim)
     {
+        if (anim == null) return;
         var animState = anim.GetCurrentAnimatorStateInfo(0);
         newAnim.Play(animState.fullPathHash, 0, animState.normalizedTime);
         lastAnims.Add(anim);
