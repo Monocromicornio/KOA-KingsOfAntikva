@@ -96,6 +96,7 @@ public class Piece : NetworkBehaviour
     {
         if (pieceColor == PieceColor.red) return;
         if (!matchController.IsMyTurn()) return;
+        if (!hasConnection && matchController.turn == TurnState.awayTeam) return;
 
         if (activePiece != this)
         {
@@ -186,7 +187,7 @@ public class Piece : NetworkBehaviour
     public void SetWin()
     {
         if (hasConnection) NetworkExecute(OnWin);
-        else SetWin();
+        else OnWin();
     }
 
     private void OnWin()

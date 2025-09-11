@@ -58,7 +58,6 @@ public class EnemySquad : Squad
 
             //Set as fake
             piece.TurnRedPiece();
-            fakePieces.Add(piece.GetComponent<FakePiece>());
         }
     }
 }

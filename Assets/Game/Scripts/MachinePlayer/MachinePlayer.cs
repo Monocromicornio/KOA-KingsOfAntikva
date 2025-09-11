@@ -36,6 +36,10 @@ public class MachinePlayer : MonoBehaviour
         selectablePieces.Clear();
         foreach (FakePiece piece in pieces)
         {
+            if (piece == null)
+            {
+                continue;
+            }
             SelectablePiece selectableField = piece.GetComponent<SelectablePiece>();
             if (selectableField != null)
             {
