@@ -59,6 +59,17 @@ public class MatchController : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        if (!networkManager.IsConnected())
+        {
+            myTurn = TurnState.homeTeam;
+            playerSquad.LoadPieces();
+            enemySquad.LoadPieces();
+            StartCoroutine(StartGame());
+        }
+    }
+
     public void StartGame(TableData clientTable)
     {
         playerSquad.LoadPieces();
@@ -174,12 +185,14 @@ public class MatchController : MonoBehaviour
 
         if (!networkManager.HasConnection() && currentTurn == TurnState.awayTeam)
         {
+            machinePlayer.gameObject.SetActive(true);
             machinePlayer.StartTurn();
         }
     }
 
     public bool IsMyTurn()
     {
+        if (!NetworkManager.Instance().HasConnection()) return true;
         return myTurn == turn;
     }
 

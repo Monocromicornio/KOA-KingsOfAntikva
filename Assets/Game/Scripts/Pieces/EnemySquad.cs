@@ -42,22 +42,23 @@ public class EnemySquad : Squad
         // Position each piece in a random field within the range
         for (int i = 0; i < pieces.Count && fieldIndexes.Count > 0; i++)
         {
+            //Select a random field
             int rndField;
             if (i == 0) rndField = 6;
             else rndField = Random.Range(0, fieldIndexes.Count);
-
             int fieldIndex = fieldIndexes[rndField];
+
+            //Remove from list
             fieldIndexes.RemoveAt(rndField);
 
-            FakePiece fake = pieces[i].GetComponent<FakePiece>();
+            //Get a piece
+            Vector3 pos = gameFields[fieldIndex].transform.position;
+            Quaternion rot = Quaternion.Euler(0, 180, 0);
+            Piece piece = Instantiate(pieces[i], pos, rot);
 
-            if (fake == null) continue;
-
-            fake.transform.Rotate(0, 180, 0, Space.Self);
-            fake.gameObject.SetActive(true);
-
-            //LinkPieceToGameField(fake.piece, gameFields[fieldIndex]);
-            fakePieces.Add(fake);
+            //Set as fake
+            piece.TurnRedPiece();
+            fakePieces.Add(piece.GetComponent<FakePiece>());
         }
     }
 }

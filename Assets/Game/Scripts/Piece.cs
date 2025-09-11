@@ -23,6 +23,7 @@ public class Piece : NetworkBehaviour
             return board.GetGameField(indexCurrentField);
         }
     }
+    [HideInInspector]
     public GameField targetField;
 
     public GameObject body;
@@ -67,13 +68,16 @@ public class Piece : NetworkBehaviour
 
     public void ActivePiece()
     {
-        if (IsActive())
+        if (NetworkManager.Instance().HasConnection())
         {
-            TurnBluePiece();
-        }
-        else
-        {
-            TurnRedPiece();
+            if (IsActive())
+            {
+                TurnBluePiece();
+            }
+            else
+            {
+                TurnRedPiece();
+            }
         }
 
         GameField gameField = board.SearchMyField(this);
@@ -166,6 +170,7 @@ public class Piece : NetworkBehaviour
 
     private void ChangeTurn()
     {
+
         if (!IsActive() || !matchController.IsMyTurn()) return;
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
         matchController.ChangeTurn();

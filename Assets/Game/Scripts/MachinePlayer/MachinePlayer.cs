@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,8 +7,6 @@ public class MachinePlayer : MonoBehaviour
     MatchController matchController => MatchController.instance;
     List<FakePiece> pieces => matchController.enemySquad.fakePieces;
     List<SelectablePiece> selectablePieces = new List<SelectablePiece>();
-
-    Piece currentPiece;
 
     [SerializeField]
     bool played = false;
