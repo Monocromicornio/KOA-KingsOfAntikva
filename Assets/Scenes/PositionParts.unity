@@ -1477,7 +1477,17 @@ PrefabInstance:
     - target: {fileID: 2895601557566234014, guid: f58a8615bffd84b42822f9aa30c1777a,
         type: 3}
       propertyPath: field of view
-      value: 60
+      value: 60.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2895601557566234014, guid: f58a8615bffd84b42822f9aa30c1777a,
+        type: 3}
+      propertyPath: m_FOVAxisMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2895601557566234014, guid: f58a8615bffd84b42822f9aa30c1777a,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2895601557566234014, guid: f58a8615bffd84b42822f9aa30c1777a,
         type: 3}
@@ -1703,7 +1713,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 80339b542abf8cc46ad9fa6f928f9d78, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 80339b542abf8cc46ad9fa6f928f9d78, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2923,7 +2933,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7df5bcdd038682248aa9a3906efd9d36, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 7df5bcdd038682248aa9a3906efd9d36, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -3920,7 +3930,7 @@ GameObject:
   - component: {fileID: 656143407}
   - component: {fileID: 656143406}
   m_Layer: 5
-  m_Name: BtnJogar (1)
+  m_Name: BtnJogarOffline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

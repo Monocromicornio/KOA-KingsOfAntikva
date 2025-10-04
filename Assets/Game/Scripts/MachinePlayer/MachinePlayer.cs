@@ -75,10 +75,19 @@ public class MachinePlayer : MonoBehaviour
 
         foreach (List<GameField> fields in selectedFields.Values)
         {
-            if (fields.Count > 0)
+            if (fields.Count == 0)
             {
-                toSelect.Add(fields.Last());
+                continue;
             }
+
+            GameField targetField = fields.Last();
+
+            if (targetField.hasPiece && targetField.piece.pieceColor == piece.pieceColor)
+            {
+                continue;
+            }
+
+            toSelect.Add(targetField);
         }
 
         int index = Random.Range(0, toSelect.Count);
