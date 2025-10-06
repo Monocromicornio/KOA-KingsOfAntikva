@@ -69,7 +69,7 @@ namespace com.onlineobject.objectnet.integration {
             }
 
             this.gameObject.SetActive(false);
-            SceneManager.LoadScene("Game");
+            //SceneManager.LoadScene("Game");
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace com.onlineobject.objectnet.integration {
                             {
                                 // Deactivate the current game object (likely the UI panel).
                                 this.gameObject.SetActive(false);
-                                SceneManager.LoadScene("Game");
+                                //SceneManager.LoadScene("Game");
                             }); // Send lobby join request.
                         });
                         newItem.transform.SetParent(this.LobbyItemsRoot.transform, false);

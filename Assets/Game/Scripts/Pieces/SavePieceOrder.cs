@@ -82,11 +82,21 @@ public class SavePieceOrder : MonoBehaviour
     private void GoToGame(bool isServer)
     {
         var networkManager = NetworkManager.Instance();
-        
+
         networkManager.ConfigureMode(isServer ? NetworkConnectionType.Server : NetworkConnectionType.Client);
         networkManager.SetServerAddress("127.0.0.1");
         networkManager.StartNetwork();
 
+        //SceneManager.LoadScene("Game");
+    }
+
+    public void OnConnected(IClient client)
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    public void OnServer(IChannel channel)
+    {
         SceneManager.LoadScene("Game");
     }
 }

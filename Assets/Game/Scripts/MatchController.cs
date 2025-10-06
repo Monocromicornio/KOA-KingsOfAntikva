@@ -62,7 +62,11 @@ public class MatchController : MonoBehaviour
 
     void Start()
     {
-        if (!networkManager.IsConnected())
+        if (networkManager.IsConnected())
+        {
+            _ = NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
+        }
+        else if (!networkManager.IsServerConnection())
         {
             myTurn = TurnState.homeTeam;
             playerSquad.LoadPieces();
