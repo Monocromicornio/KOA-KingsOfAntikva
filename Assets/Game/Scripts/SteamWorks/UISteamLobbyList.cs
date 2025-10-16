@@ -46,6 +46,9 @@ namespace com.onlineobject.objectnet.integration {
         public SteamLobbyWaitManager steamLobbyWaitManager;
         public SavePieceOrder savePieceOrder;
 
+        [Header("Lobby Settings")]
+        public int maxPlayersPerLobby = 2;
+
         private bool disableAutoSceneLoad = false;
 
         private bool isSearching = false;
@@ -84,6 +87,24 @@ namespace com.onlineobject.objectnet.integration {
             {
                 this.searchingPanel.SetActive(false);
             }
+
+            SetMaxPlayers(maxPlayersPerLobby);
+        }
+
+        private void SetMaxPlayers(int maxPlayers)
+        {
+            var networkSteamManager = NetworkSteamManager.Instance();
+            if (networkSteamManager != null)
+            {
+                var field = networkSteamManager.GetType().GetField("maximumOfPlayers", 
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                
+                if (field != null)
+                {
+                    field.SetValue(networkSteamManager, maxPlayers);
+                    Debug.Log($"[UISteamLobbyList] Limite de jogadores configurado para: {maxPlayers}");
+                }
+            }
         }
 
         void OnEnable()
@@ -108,6 +129,16 @@ namespace com.onlineobject.objectnet.integration {
         /// </summary>
         private void CreateSteamLobby()
         {
+            SetMaxPlayers(maxPlayersPerLobby);
+
+            NetworkAutoLoadController.DisableAutoLoadForMatchmaking();
+
+            if (savePieceOrder != null)
+            {
+                savePieceOrder.enabled = false;
+                Debug.Log("[UISteamLobbyList] SavePieceOrder desabilitado para criação manual");
+            }
+
             if (string.IsNullOrEmpty(this.LobbyKey))
             {
                 NetworkSteamManager.Instance().CreateLobby(this.LobbyName.text);
@@ -117,7 +148,8 @@ namespace com.onlineobject.objectnet.integration {
                 NetworkSteamManager.Instance().CreateLobby(this.LobbyName.text, (MY_LOBBY_FILTER_KEY, this.LobbyKey));
             }
 
-            this.gameObject.SetActive(false);
+            Debug.Log($"[UISteamLobbyList] Criando lobby manual com limite de {maxPlayersPerLobby} jogadores");
+            StartCoroutine(NotifyPlayerWaitController());
         }
 
         private void StartQuickPlay()
@@ -126,6 +158,8 @@ namespace com.onlineobject.objectnet.integration {
             searchStartTime = Time.time;
             currentRetry = 0;
             disableAutoSceneLoad = true;
+
+            SetMaxPlayers(maxPlayersPerLobby);
 
             NetworkAutoLoadController.DisableAutoLoadForMatchmaking();
 
@@ -140,6 +174,7 @@ namespace com.onlineobject.objectnet.integration {
                 searchingPanel.SetActive(true);
             }
 
+            Debug.Log($"[UISteamLobbyList] Iniciando busca por lobbies com {maxPlayersPerLobby} jogadores...");
             SearchForLobbies();
         }
 
@@ -205,6 +240,8 @@ namespace com.onlineobject.objectnet.integration {
 
         private void CreateQuickPlayLobby()
         {
+            SetMaxPlayers(maxPlayersPerLobby);
+
             string lobbyName = "Sala_" + Random.Range(1000, 9999);
 
             if (string.IsNullOrEmpty(this.LobbyKey))
@@ -216,6 +253,7 @@ namespace com.onlineobject.objectnet.integration {
                 NetworkSteamManager.Instance().CreateLobby(lobbyName, (MY_LOBBY_FILTER_KEY, this.LobbyKey));
             }
 
+            Debug.Log($"[UISteamLobbyList] Criando lobby Quick Play '{lobbyName}' com limite de {maxPlayersPerLobby} jogadores");
             OnMatchFound();
         }
 
@@ -354,10 +392,24 @@ namespace com.onlineobject.objectnet.integration {
                         {
                             NetworkSteamManager.Instance().RequestToJoin(lobby.SteamId, (bool joined) =>
                             {
-                                // Deactivate the current game object (likely the UI panel).
-                                this.gameObject.SetActive(false);
-                                //SceneManager.LoadScene("Game");
-                            }); // Send lobby join request.
+                                if (joined)
+                                {
+                                    NetworkAutoLoadController.DisableAutoLoadForMatchmaking();
+
+                                    if (savePieceOrder != null)
+                                    {
+                                        savePieceOrder.enabled = false;
+                                        Debug.Log("[UISteamLobbyList] SavePieceOrder desabilitado para join manual");
+                                    }
+
+                                    StartCoroutine(NotifyPlayerWaitController());
+                                }
+                                else
+                                {
+                                    Debug.LogWarning("[UISteamLobbyList] Falha ao entrar no lobby");
+                                    this.gameObject.SetActive(false);
+                                }
+                            });
                         });
                         newItem.transform.SetParent(this.LobbyItemsRoot.transform, false);
                         this.Lobbies.Add(lobby, newItem);
