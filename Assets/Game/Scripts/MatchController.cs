@@ -97,7 +97,7 @@ public class MatchController : MonoBehaviour
 
     public void GoToMenu()
     {
-        steamManager.LeaveLobby();
+   //    steamManager.LeaveLobby();
         SceneManager.LoadScene("PositionParts");
     }
 
