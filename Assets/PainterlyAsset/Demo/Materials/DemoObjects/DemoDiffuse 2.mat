@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DemoSmooth 3
+  m_Name: DemoDiffuse 2
   m_Shader: {fileID: -6465566751694194690, guid: b2c58a39b59af42b081d22622f1969e6,
     type: 3}
   m_Parent: {fileID: 0}
@@ -40,7 +40,7 @@ Material:
     m_TexEnvs:
     - _AO_r_metalic_g:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AmbientOcclusion:
         m_Texture: {fileID: 0}
@@ -48,7 +48,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BC_rgb_smoothness_a:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColor_1:
         m_Texture: {fileID: 0}
@@ -87,10 +87,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _PainterlyMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -142,7 +138,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Metalic: -3.3
+    - _Metalic: 0
     - _Metallic: 0
     - _NormalScale: 1
     - _OcclusionStrength: 1
@@ -150,26 +146,26 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: -0.93
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StrokeBlendingNoiseScale: 1000
-    - _StrokeBlendingNoiseStrength: 0.336
-    - _StrokeRandomness: 0.461
-    - _StrokeScale: 2
+    - _StrokeBlendingNoiseScale: 500
+    - _StrokeBlendingNoiseStrength: 0.205
+    - _StrokeRandomness: 0.545
+    - _StrokeScale: 4
     - _Surface: 0
     - _UseBlendingNoise: 1
-    - _Variation: 0.065
+    - _Variation: 0.5
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.4716981, g: 0.33576947, b: 0.15352438, a: 1}
+    - _BaseColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _VariationColorA: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0}
-    - _VariationColorB: {r: 1, g: 1, b: 1, a: 0}
+    - _VariationColorA: {r: 0.44143826, g: 0.5155793, b: 0.6037736, a: 0}
+    - _VariationColorB: {r: 0.30210927, g: 0.3510141, b: 0.6886792, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
