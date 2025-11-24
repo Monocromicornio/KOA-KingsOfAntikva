@@ -106,7 +106,36 @@ public class MatchController : MonoBehaviour
 
     public void GoToMenu()
     {
-        if(hasConnection) steamManager.LeaveLobby();
+        Debug.Log("[MatchController] Saindo da partida...");
+        
+        if (hasConnection)
+        {
+            Debug.Log("[MatchController] Desconectando da rede e saindo do lobby...");
+            
+            try
+            {
+                steamManager.LeaveLobby();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning($"[MatchController] Erro ao sair do lobby: {e.Message}");
+            }
+            
+            try
+            {
+                networkManager.StopNetwork();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning($"[MatchController] Erro ao parar rede: {e.Message}");
+            }
+        }
+        
+        SyncronizeTable.ResetAll();
+        
+        StopAllCoroutines();
+        
+        Debug.Log("[MatchController] Carregando cena PositionParts...");
         SceneManager.LoadScene("PositionParts");
     }
 

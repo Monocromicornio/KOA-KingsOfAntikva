@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using Steamworks;
@@ -99,6 +99,56 @@ public class PlayerProfileManager : MonoBehaviour
     {
         rankingPosition = newRank;
         StartCoroutine(UpdatePlayerData());
+    }
+    
+    public int GetOpponentPoints(ulong opponentSteamId)
+    {
+        if (opponentSteamId == playerID)
+        {
+            return pontuation;
+        }
+        
+        if (!gameObject.activeInHierarchy)
+        {
+            Debug.LogWarning("[PlayerProfileManager] GameObject está inativo, não é possível buscar pontos do oponente");
+            return -1;
+        }
+        
+        StartCoroutine(FetchOpponentPoints(opponentSteamId));
+        return -1;
+    }
+    
+    private IEnumerator FetchOpponentPoints(ulong opponentSteamId)
+    {
+        string url = $"{GET_URL}?api_key={API_KEY}&player_id={opponentSteamId}";
+        using (UnityWebRequest www = UnityWebRequest.Get(url))
+        {
+            yield return www.SendWebRequest();
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"[PlayerProfileManager] Erro ao buscar pontos do oponente: {www.error}");
+                yield break;
+            }
+
+            string json = www.downloadHandler.text;
+            if (json.Contains("not_found"))
+            {
+                Debug.Log($"[PlayerProfileManager] Oponente não encontrado no servidor: {opponentSteamId}");
+                yield break;
+            }
+
+            PlayerData data = JsonUtility.FromJson<PlayerData>(json);
+            Debug.Log($"[PlayerProfileManager] Pontos do oponente carregados: {data.pontuation}");
+            
+            var opponentDisplay = FindObjectsOfType<PlayerProfileDisplay>();
+            foreach (var display in opponentDisplay)
+            {
+                if (!display.IsLocalPlayer())
+                {
+                    display.UpdateOpponentPoints(data.pontuation);
+                }
+            }
+        }
     }
 
     [System.Serializable]

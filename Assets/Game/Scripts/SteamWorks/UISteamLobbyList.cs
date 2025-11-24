@@ -8,28 +8,20 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-namespace com.onlineobject.objectnet.integration {
-    /// <summary>
-    /// The UILobbyList class manages the lobby UI elements and interactions in a multiplayer game.
-    /// </summary>
-    public class UISteamLobbyList : MonoBehaviour {
-
-        // UI button to create a new lobby.
+namespace com.onlineobject.objectnet.integration
+{
+    public class UISteamLobbyList : MonoBehaviour
+    {
         public Button CreateLobbyButton;
 
-        // UI button to refresh the list of available lobbies.
         public Button RefreshLobbyButton;
 
-        // UI button to start auto matchmaking.
         public Button QuickPlayButton;
 
-        // Input field for entering the name of a new lobby.
         public InputField LobbyName;
 
-        // The root GameObject where lobby items will be instantiated.
         public GameObject LobbyItemsRoot;
 
-        // The prefab for an individual lobby item in the list.
         public GameObject LobbyItem;
 
         public string LobbyKey = "MyObjectNetGameName";
@@ -61,15 +53,11 @@ namespace com.onlineobject.objectnet.integration {
 
         public const string MY_LOBBY_FILTER_KEY = "MyLobbyKey";
 
-#if STEAMWORKS_NET
-        // A dictionary to keep track of the current lobbies and their associated GameObjects.
+#if STEAMWORKS_NET        
         private Dictionary<SteamLobby, GameObject> Lobbies = new Dictionary<SteamLobby, GameObject>();
 
-        /// <summary>
-        /// Awake is called when the script instance is being loaded.
-        /// Here we are setting up listeners for the Create and Refresh lobby buttons.
-        /// </summary>
-        void Awake() {
+        void Awake()
+        {
             this.CreateLobbyButton.onClick.AddListener(CreateSteamLobby);
             this.RefreshLobbyButton.onClick.AddListener(RefreshLobby);
 
@@ -96,13 +84,51 @@ namespace com.onlineobject.objectnet.integration {
             var networkSteamManager = NetworkSteamManager.Instance();
             if (networkSteamManager != null)
             {
-                var field = networkSteamManager.GetType().GetField("maximumOfPlayers", 
+                var field = networkSteamManager.GetType().GetField("maximumOfPlayers",
                     System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                
+
                 if (field != null)
                 {
                     field.SetValue(networkSteamManager, maxPlayers);
                     Debug.Log($"[UISteamLobbyList] Limite de jogadores configurado para: {maxPlayers}");
+                }
+            }
+        }
+
+        private IEnumerator EnforceLobbyMemberLimit(int maxPlayers)
+        {
+            yield return new WaitForSeconds(0.3f);
+
+            var networkSteamManager = NetworkSteamManager.Instance();
+            if (networkSteamManager != null)
+            {
+                var field = networkSteamManager.GetType().GetField("currentLobbyID",
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+                if (field != null)
+                {
+                    ulong currentLobbyID = (ulong)field.GetValue(networkSteamManager);
+                    if (currentLobbyID != 0)
+                    {
+                        CSteamID lobbyID = new CSteamID(currentLobbyID);
+                        bool success = SteamMatchmaking.SetLobbyMemberLimit(lobbyID, maxPlayers);
+
+                        int actualLimit = SteamMatchmaking.GetLobbyMemberLimit(lobbyID);
+                        Debug.Log($"[UISteamLobbyList] ✓ SetLobbyMemberLimit({maxPlayers}) aplicado! Limite real: {actualLimit}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("[UISteamLobbyList] Tentando novamente configurar limite...");
+                        yield return new WaitForSeconds(0.3f);
+
+                        currentLobbyID = (ulong)field.GetValue(networkSteamManager);
+                        if (currentLobbyID != 0)
+                        {
+                            CSteamID lobbyID = new CSteamID(currentLobbyID);
+                            SteamMatchmaking.SetLobbyMemberLimit(lobbyID, maxPlayers);
+                            Debug.Log($"[UISteamLobbyList] ✓ Limite configurado na 2ª tentativa: {maxPlayers}");
+                        }
+                    }
                 }
             }
         }
@@ -123,10 +149,6 @@ namespace com.onlineobject.objectnet.integration {
             }
         }
 
-        /// <summary>
-        /// StartServerMode is called when the Start Server button is clicked.
-        /// It configures the network manager to server mode, sets the server address, and starts the network.
-        /// </summary>
         private void CreateSteamLobby()
         {
             SetMaxPlayers(maxPlayersPerLobby);
@@ -149,6 +171,7 @@ namespace com.onlineobject.objectnet.integration {
             }
 
             Debug.Log($"[UISteamLobbyList] Criando lobby manual com limite de {maxPlayersPerLobby} jogadores");
+            StartCoroutine(EnforceLobbyMemberLimit(maxPlayersPerLobby));
             StartCoroutine(NotifyPlayerWaitController());
         }
 
@@ -211,17 +234,80 @@ namespace com.onlineobject.objectnet.integration {
 
             if (lobbies != null && lobbies.Length > 0)
             {
-                NetworkSteamManager.Instance().RequestToJoin(lobbies[0].SteamId, (bool joined) =>
+                bool foundAvailableLobby = false;
+
+                foreach (SteamLobby lobby in lobbies)
                 {
-                    if (joined)
+                    CSteamID lobbyID = new CSteamID((ulong)lobby.SteamId);
+                    int numMembers = SteamMatchmaking.GetNumLobbyMembers(lobbyID);
+                    int memberLimit = SteamMatchmaking.GetLobbyMemberLimit(lobbyID);
+
+                    Debug.Log($"[UISteamLobbyList] Lobby {lobby.SteamId}: {numMembers}/{memberLimit} jogadores");
+
+                    if (numMembers < memberLimit || memberLimit == 0)
                     {
-                        OnMatchFound();
+                        foundAvailableLobby = true;
+                        Debug.Log($"[UISteamLobbyList] Tentando entrar no lobby {lobby.SteamId}...");
+
+                        bool callbackReceived = false;
+                        bool joinSucceeded = false;
+
+                        NetworkSteamManager.Instance().RequestToJoin(lobby.SteamId, (bool joined) =>
+                        {
+                            callbackReceived = true;
+                            joinSucceeded = joined;
+
+                            if (joined)
+                            {
+                                Debug.Log($"[UISteamLobbyList] ✓ Entrou no lobby {lobby.SteamId}!");
+                                OnMatchFound();
+                            }
+                            else
+                            {
+                                Debug.LogWarning($"[UISteamLobbyList] ✗ Falha ao entrar no lobby {lobby.SteamId}");
+                            }
+                        });
+
+                        float timeout = 3f;
+                        float elapsed = 0f;
+
+                        while (!callbackReceived && elapsed < timeout)
+                        {
+                            elapsed += Time.deltaTime;
+                            yield return null;
+                        }
+
+                        if (!callbackReceived)
+                        {
+                            Debug.LogWarning($"[UISteamLobbyList] Timeout ao tentar entrar no lobby {lobby.SteamId}");
+                        }
+
+                        if (joinSucceeded)
+                        {
+                            yield break;
+                        }
+
+                        break;
                     }
                     else
                     {
-                        RetrySearch();
+                        Debug.Log($"[UISteamLobbyList] Lobby {lobby.SteamId} está cheio ({numMembers}/{memberLimit}), pulando...");
                     }
-                });
+                }
+
+                if (!foundAvailableLobby)
+                {
+                    Debug.Log("[UISteamLobbyList] Nenhum lobby disponível encontrado");
+                    RetrySearch();
+                }
+                else if (!isSearching)
+                {
+                    yield break;
+                }
+                else
+                {
+                    RetrySearch();
+                }
             }
             else
             {
@@ -229,10 +315,12 @@ namespace com.onlineobject.objectnet.integration {
 
                 if (currentRetry >= maxSearchRetries)
                 {
+                    Debug.Log($"[UISteamLobbyList] Nenhum lobby encontrado após {currentRetry} tentativas. Criando novo lobby...");
                     CreateQuickPlayLobby();
                 }
                 else
                 {
+                    Debug.Log($"[UISteamLobbyList] Nenhum lobby encontrado. Tentativa {currentRetry}/{maxSearchRetries}");
                     SearchForLobbies();
                 }
             }
@@ -254,6 +342,7 @@ namespace com.onlineobject.objectnet.integration {
             }
 
             Debug.Log($"[UISteamLobbyList] Criando lobby Quick Play '{lobbyName}' com limite de {maxPlayersPerLobby} jogadores");
+            StartCoroutine(EnforceLobbyMemberLimit(maxPlayersPerLobby));
             OnMatchFound();
         }
 
@@ -286,7 +375,7 @@ namespace com.onlineobject.objectnet.integration {
             {
                 System.Reflection.FieldInfo field = NetworkSteamManager.Instance().GetType()
                     .GetField("currentLobbyID", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                
+
                 if (field != null)
                 {
                     ulong currentLobbyID = (ulong)field.GetValue(NetworkSteamManager.Instance());
@@ -318,14 +407,22 @@ namespace com.onlineobject.objectnet.integration {
 
         private void RetrySearch()
         {
+            if (!isSearching)
+            {
+                Debug.Log("[UISteamLobbyList] Busca cancelada pelo usuário");
+                return;
+            }
+
             currentRetry++;
 
             if (currentRetry >= maxSearchRetries)
             {
+                Debug.Log($"[UISteamLobbyList] Limite de tentativas atingido ({currentRetry}). Criando novo lobby...");
                 CreateQuickPlayLobby();
             }
             else
             {
+                Debug.Log($"[UISteamLobbyList] Tentando novamente... ({currentRetry}/{maxSearchRetries})");
                 SearchForLobbies();
             }
         }
@@ -343,44 +440,30 @@ namespace com.onlineobject.objectnet.integration {
             StopAllCoroutines();
         }
 
-        /// <summary>
-        /// Sends a request to refresh the list of available lobbies.
-        /// </summary>
-        private void RefreshLobby() {
-            if (string.IsNullOrEmpty(this.LobbyKey)) {
+        private void RefreshLobby()
+        {
+            if (string.IsNullOrEmpty(this.LobbyKey))
+            {
                 NetworkSteamManager.Instance().RequestLobbyList();
-            } else {
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                // To filter lobbies you can use this instead
-                // Note : Using this filter the value defined on "Lobby Distance" into SteamManager will be ignored 
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////            
+            }
+            else
+            {
                 NetworkSteamManager.Instance().RequestLobbyList(() => {
-                    /*
-                    // This is an example about how you can add multiple filter on your lobby search
-                    // Use one of those of multiple to filter the listed lobbies                    
-                    SteamMatchmaking.AddRequestLobbyListStringFilter("KeyToMatch", "ValueToMatch", ELobbyComparison.k_ELobbyComparisonEqual);
-                    SteamMatchmaking.AddRequestLobbyListNearValueFilter("KeyToMatch", 100);
-                    SteamMatchmaking.AddRequestLobbyListNumericalFilter("KeyToMatch", 1, ELobbyComparison.k_ELobbyComparisonEqual);
-                    SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(4); // At least 4 slots avaiable
-                    */
-                    // I'm going to filter by my lobby to9 list only lobbyes relatred to by game ( because i'm using public STEAM ID )
                     SteamMatchmaking.AddRequestLobbyListStringFilter(MY_LOBBY_FILTER_KEY, this.LobbyKey, ELobbyComparison.k_ELobbyComparisonEqual);
-                    SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(1); // At least 1 slots avaiable
-                    foreach (ELobbyDistanceFilter filter in this.FilterTypes) {
+                    SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(1);
+                    foreach (ELobbyDistanceFilter filter in this.FilterTypes)
+                    {
                         SteamMatchmaking.AddRequestLobbyListDistanceFilter(filter);
-                    }                    
+                    }
                 });
             }
         }
 
-        /// <summary>
-        /// LateUpdate is called every frame, if the MonoBehaviour is enabled.
-        /// It is used here to update the lobby list UI based on the latest lobby information.
-        /// </summary>
-        private void LateUpdate() {
-            // Only update the lobby list if not in relay mode.
-            if (NetworkManager.Instance().InEmbeddedMode()) {
-                // Add new lobbies to the UI.
+        private void LateUpdate()
+        {
+
+            if (NetworkManager.Instance().InEmbeddedMode())
+            {
                 foreach (SteamLobby lobby in NetworkSteamManager.Instance().GetLobbies())
                 {
                     if (!this.Lobbies.ContainsKey(lobby))
@@ -415,25 +498,29 @@ namespace com.onlineobject.objectnet.integration {
                         this.Lobbies.Add(lobby, newItem);
                     }
                 }
-                // Remove lobbies that are no longer available.
+
                 List<SteamLobby> removedLobbies = new List<SteamLobby>();
-                foreach (SteamLobby lobby in this.Lobbies.Keys) {
+                foreach (SteamLobby lobby in this.Lobbies.Keys)
+                {
                     bool found = false;
-                    foreach (SteamLobby lobbyData in NetworkSteamManager.Instance().GetLobbies()) {
+                    foreach (SteamLobby lobbyData in NetworkSteamManager.Instance().GetLobbies())
+                    {
                         found |= (lobby.Equals(lobbyData));
                     }
-                    if (!found) {
+                    if (!found)
+                    {
                         removedLobbies.Add(lobby);
                     }
                 }
-                while (removedLobbies.Count > 0) {
+                while (removedLobbies.Count > 0)
+                {
                     GameObject objToRemove = this.Lobbies[removedLobbies[0]];
                     this.Lobbies.Remove(removedLobbies[0]);
                     removedLobbies.RemoveAt(0);
                     objToRemove.transform.SetParent(null);
                     Destroy(objToRemove);
                 }
-            }            
+            }
         }
 #endif
     }

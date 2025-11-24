@@ -59,10 +59,50 @@ namespace com.onlineobject.objectnet.integration
 
         private void OnPlayButtonClicked()
         {
-            if (!isSearching)
+            if (isSearching)
             {
+                Debug.Log("[AutoMatchmaking] Já estamos buscando uma partida");
+                return;
+            }
+            
+            var networkManager = NetworkManager.Instance();
+            
+            if (networkManager != null && networkManager.HasConnection())
+            {
+                Debug.Log("[AutoMatchmaking] Já existe uma conexão ativa. Desconectando antes de buscar nova partida...");
+                
+                try
+                {
+                    NetworkSteamManager.Instance().LeaveLobby();
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogWarning($"[AutoMatchmaking] Erro ao sair do lobby: {e.Message}");
+                }
+                
+                try
+                {
+                    networkManager.StopNetwork();
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogWarning($"[AutoMatchmaking] Erro ao parar rede: {e.Message}");
+                }
+                
+                StartCoroutine(WaitAndStartMatchmaking(0.5f));
+            }
+            else
+            {
+                SyncronizeTable.ResetAll();
                 StartMatchmaking();
             }
+        }
+        
+        private IEnumerator WaitAndStartMatchmaking(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            SyncronizeTable.ResetAll();
+            StartMatchmaking();
         }
 
         private void StartMatchmaking()

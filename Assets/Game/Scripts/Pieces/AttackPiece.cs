@@ -43,8 +43,11 @@ public class AttackPiece : InteractivePiece
 
     private void Sucess()
     {
+        if (fieldAtk != null)
+        {
+            piece.SelectedAField(fieldAtk);
+        }
         EndAttack();
-        SendMessage("NewTarget");
     }
 
     private void Failed()
