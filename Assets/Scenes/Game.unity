@@ -10849,7 +10849,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1037412890}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1448642503}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1037412890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11621,14 +11633,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093712201}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.06544241, y: -0, z: -0, w: 0.99785644}
-  m_LocalPosition: {x: 0, y: 0.71, z: -1.62}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.46, z: -0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1443747291}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -7.505, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1129730824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15645,12 +15657,12 @@ PrefabInstance:
     - target: {fileID: 2895601557566234001, guid: f58a8615bffd84b42822f9aa30c1777a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8
+      value: 8.05
       objectReference: {fileID: 0}
     - target: {fileID: 2895601557566234001, guid: f58a8615bffd84b42822f9aa30c1777a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6
+      value: -5.99
       objectReference: {fileID: 0}
     - target: {fileID: 2895601557566234001, guid: f58a8615bffd84b42822f9aa30c1777a,
         type: 3}

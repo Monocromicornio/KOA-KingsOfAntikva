@@ -69,27 +69,9 @@ namespace com.onlineobject.objectnet.integration
             
             if (networkManager != null && networkManager.HasConnection())
             {
-                Debug.Log("[AutoMatchmaking] Já existe uma conexão ativa. Desconectando antes de buscar nova partida...");
-                
-                try
-                {
-                    NetworkSteamManager.Instance().LeaveLobby();
-                }
-                catch (System.Exception e)
-                {
-                    Debug.LogWarning($"[AutoMatchmaking] Erro ao sair do lobby: {e.Message}");
-                }
-                
-                try
-                {
-                    networkManager.StopNetwork();
-                }
-                catch (System.Exception e)
-                {
-                    Debug.LogWarning($"[AutoMatchmaking] Erro ao parar rede: {e.Message}");
-                }
-                
-                StartCoroutine(WaitAndStartMatchmaking(0.5f));
+                Debug.Log("[AutoMatchmaking] Conexão ativa detectada. Fechando lobby anterior...");
+                LobbyCleanupHelper.CloseLobbyProperly();
+                StartCoroutine(WaitAndStartMatchmaking(1f));
             }
             else
             {

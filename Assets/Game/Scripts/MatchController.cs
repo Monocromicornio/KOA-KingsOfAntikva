@@ -110,25 +110,8 @@ public class MatchController : MonoBehaviour
         
         if (hasConnection)
         {
-            Debug.Log("[MatchController] Desconectando da rede e saindo do lobby...");
-            
-            try
-            {
-                steamManager.LeaveLobby();
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogWarning($"[MatchController] Erro ao sair do lobby: {e.Message}");
-            }
-            
-            try
-            {
-                networkManager.StopNetwork();
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogWarning($"[MatchController] Erro ao parar rede: {e.Message}");
-            }
+            Debug.Log("[MatchController] Fechando lobby e desconectando...");
+            LobbyCleanupHelper.CloseLobbyProperly();
         }
         
         SyncronizeTable.ResetAll();
