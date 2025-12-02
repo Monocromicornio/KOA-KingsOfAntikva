@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 8745968276671781583}
   - component: {fileID: 6582686768798050283}
   - component: {fileID: 6870450741110409866}
+  - component: {fileID: 5915757320643567642}
   m_Layer: 0
   m_Name: SO Blue
   m_TagString: Player
@@ -296,6 +297,23 @@ MonoBehaviour:
   AttackEffect: {fileID: 6474037483755172099, guid: 81724ec6cf7787540b6d6ada01995303,
     type: 3}
   AttackEffectPos: {fileID: 6220108821752562370}
+--- !u!114 &5915757320643567642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2964531555182091127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cd63f4fca86944ab19f47b5a6a7500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticSpawn: 0
+  staticId: 0
+  instancePrefabSignature: 9d0ddba2-c522-4688-8b0b-6a3a0282334e
+  childToDisable: []
+  childToSync: []
 --- !u!1 &6664247475854314482
 GameObject:
   m_ObjectHideFlags: 0
