@@ -21,6 +21,27 @@ public class MovePiece : MonoBehaviour
     [Min(0)]
     float moveSpeed = 1;
 
+    [Header("Configurações de Animação de Movimento")]
+    [SerializeField]
+    [Min(0)]
+    float liftHeight = 0.5f;
+
+    [SerializeField]
+    [Min(0)]
+    float liftDuration = 0.3f;
+
+    [SerializeField]
+    [Min(0)]
+    float flyDuration = 1f;
+
+    [SerializeField]
+    [Min(0)]
+    float landDuration = 0.3f;
+
+    [SerializeField]
+    [Min(0)]
+    float tiltAngle = 15f;
+
     private void Awake()
     {
         piece = GetComponent<Piece>();
@@ -37,8 +58,59 @@ public class MovePiece : MonoBehaviour
         if (targetGameField == null) return;
 
         transform.LookAt(target);
-        //PlayStep(); -> Sound
-        StartCoroutine(Moveto());
+        StartCoroutine(MovetoAnimated());
+    }
+
+    IEnumerator MovetoAnimated()
+    {
+        anim.SetAnimation("Walk", true);
+
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = target.position;
+
+        iTween.MoveTo(gameObject, iTween.Hash(
+            "y", startPosition.y + liftHeight,
+            "time", liftDuration,
+            "easetype", iTween.EaseType.easeOutQuad
+        ));
+
+        yield return new WaitForSeconds(liftDuration);
+
+        float totalFlyTime = flyDuration;
+        
+        iTween.RotateTo(gameObject, iTween.Hash(
+            "x", transform.eulerAngles.x - tiltAngle,
+            "time", totalFlyTime * 0.2f,
+            "easetype", iTween.EaseType.easeInOutQuad
+        ));
+
+        yield return new WaitForSeconds(totalFlyTime * 0.2f);
+
+        iTween.MoveTo(gameObject, iTween.Hash(
+            "position", new Vector3(targetPosition.x, targetPosition.y + liftHeight, targetPosition.z),
+            "time", totalFlyTime * 0.6f,
+            "easetype", iTween.EaseType.linear
+        ));
+
+        iTween.RotateTo(gameObject, iTween.Hash(
+            "x", transform.eulerAngles.x + tiltAngle,
+            "time", totalFlyTime * 0.6f,
+            "easetype", iTween.EaseType.easeInOutQuad
+        ));
+
+        yield return new WaitForSeconds(totalFlyTime * 0.6f);
+
+        iTween.MoveTo(gameObject, iTween.Hash(
+            "y", targetPosition.y,
+            "time", landDuration,
+            "easetype", iTween.EaseType.easeInQuad
+        ));
+
+        yield return new WaitForSeconds(landDuration);
+
+        transform.position = targetPosition;
+        anim.SetAnimation("Walk", false);
+        piece.CheckPieceOnField();
     }
 
     IEnumerator Moveto()

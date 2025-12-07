@@ -57,7 +57,8 @@ public class AttackPiece : InteractivePiece
 
     private IEnumerator PositionToAttack()
     {
-        while (transform.position != fieldAtk.transform.position)
+        const float distanceThreshold = 0.1f;
+        while (Vector3.Distance(transform.position, fieldAtk.transform.position) > distanceThreshold)
         {
             yield return new WaitForEndOfFrame();
         }
