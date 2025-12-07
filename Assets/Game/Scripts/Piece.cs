@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using com.onlineobject.objectnet;
 using UnityEngine;
 
@@ -139,7 +139,8 @@ public class Piece : NetworkBehaviour
         }
         if (targetField == null) return false;
 
-        if (transform.position == targetField.transform.position)
+        const float distanceThreshold = 0.1f;
+        if (Vector3.Distance(transform.position, targetField.transform.position) <= distanceThreshold)
         {
             targetField.SetPiece(null);
             field?.SetPiece(null);

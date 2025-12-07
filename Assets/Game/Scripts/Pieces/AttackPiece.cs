@@ -43,9 +43,10 @@ public class AttackPiece : InteractivePiece
 
     private void Sucess()
     {
-        if (fieldAtk != null)
+        GameField targetFieldToOccupy = piece.targetField;
+        if (targetFieldToOccupy != null)
         {
-            piece.SelectedAField(fieldAtk);
+            piece.SelectedAField(targetFieldToOccupy);
         }
         EndAttack();
     }
