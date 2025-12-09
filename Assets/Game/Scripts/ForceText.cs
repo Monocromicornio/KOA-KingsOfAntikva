@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [RequireComponent(typeof(TextMesh))]
 public class ForceText : MonoBehaviour
@@ -7,6 +7,7 @@ public class ForceText : MonoBehaviour
 
     [SerializeField]
     private InteractivePiece startPiece;
+    
     public InteractivePiece piece
     {
         set
@@ -19,6 +20,19 @@ public class ForceText : MonoBehaviour
             textMesh.text = txtForce;
         }
     }
+
+    public OfflineInteractivePiece offlinePiece
+    {
+        set
+        {
+            txtForce = GetTextByPieceType(value);
+
+            textMesh ??= GetComponent<TextMesh>();
+            if (textMesh == null) return;
+            textMesh.text = txtForce;
+        }
+    }
+
     private string txtForce;
 
     private void Start()
@@ -27,6 +41,22 @@ public class ForceText : MonoBehaviour
     }
 
     private string GetTextByPieceType(InteractivePiece piece)
+    {
+        if (piece == null || piece.piece.pieceColor == PieceColor.red) return "";
+        
+        PieceType pieceType = piece.piece.type;
+        if (pieceType == PieceType.Bomb
+        ||  pieceType == PieceType.Flag)
+        {
+            return "";
+        }
+
+        if (pieceType == PieceType.Spy) return "S";
+        
+        return piece.force.ToString();
+    }
+
+    private string GetTextByPieceType(OfflineInteractivePiece piece)
     {
         if (piece == null || piece.piece.pieceColor == PieceColor.red) return "";
         

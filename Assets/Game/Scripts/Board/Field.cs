@@ -24,11 +24,22 @@ public class Field : MonoBehaviour
         }
     }
 
-    public bool hasPiece => piece != null;
+    public bool hasPiece => piece != null || offlinePiece != null;
     public Piece piece { get; protected set; }
+    public OfflinePiece offlinePiece { get; protected set; }
 
     [SerializeField]
     protected ForceText forceText;
+
+    public void ClearPiece()
+    {
+        piece = null;
+        offlinePiece = null;
+        if (forceText != null)
+        {
+            forceText.piece = null;
+        }
+    }
 
     /// <summary>
     /// Configures the board fields.
@@ -65,16 +76,45 @@ public class Field : MonoBehaviour
         }
     }
 
-    public virtual void SetPiece(Piece piece)
+    public virtual void SetPiece(Piece newPiece)
     {
-        this.piece = piece;
+        if (newPiece == null && this.piece == null)
+        {
+            return;
+        }
 
-        if (piece == null)
+        this.piece = newPiece;
+        this.offlinePiece = null;
+
+        if (forceText == null) return;
+
+        if (newPiece == null)
         {
             forceText.piece = null;
             return;
         }
 
-        forceText.piece = piece.GetComponent<InteractivePiece>();
+        forceText.piece = newPiece.GetComponent<InteractivePiece>();
+    }
+
+    public virtual void SetOfflinePiece(OfflinePiece newPiece)
+    {
+        if (newPiece == null && this.offlinePiece == null)
+        {
+            return;
+        }
+
+        this.offlinePiece = newPiece;
+        this.piece = null;
+
+        if (forceText == null) return;
+
+        if (newPiece == null)
+        {
+            forceText.offlinePiece = null;
+            return;
+        }
+
+        forceText.offlinePiece = newPiece.GetComponent<OfflineInteractivePiece>();
     }
 }

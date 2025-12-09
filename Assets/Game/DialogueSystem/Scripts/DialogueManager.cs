@@ -1,11 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
-using UnityEngine.Localization.Tables;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -44,32 +41,47 @@ public class DialogueManager : MonoBehaviour
         boxDialogue.gameObject.SetActive(false);
     }
 
-    void LoadStrings(StringTable stringTable)
+    private void Update()
     {
-        if (dialogueBase == null) return;
-
-        foreach (DialogueBase.Info info in dialogueBase.dialogueInfo)
+        if (boxDialogue.gameObject.activeInHierarchy)
         {
-            info.text = GetLocalizedString(stringTable, info.stringId);
-            dialogueInfo.Enqueue(info);
+            if (UnityEngine.Input.GetMouseButtonDown(0) || UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Space) || UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Return))
+            {
+                if (dialogueInfo.Count > 0 || isCurrentlyTyping)
+                {
+                    DequeueDialogue();
+                }
+                else
+                {
+                    EndDialogue();
+                }
+            }
         }
-
-        DequeueDialogue();
-    }
-
-    string GetLocalizedString(StringTable table, string entryName)
-    {
-        var entry = table.GetEntry(entryName);
-        return entry.GetLocalizedString();
     }
 
     public void EnqueueDialogue(DialogueBase db)
     {
+        Debug.Log($"[DialogueManager] EnqueueDialogue called with: {db?.name}");
+        
         boxDialogue.gameObject.SetActive(true);
         dialogueInfo.Clear();
 
         dialogueBase = db;
-        dialogueBase.stringTable.TableChanged += LoadStrings;
+        
+        if (db != null && db.dialogueInfo != null)
+        {
+            foreach (DialogueBase.Info info in db.dialogueInfo)
+            {
+                dialogueInfo.Enqueue(info);
+            }
+            
+            Debug.Log($"[DialogueManager] Enqueued {dialogueInfo.Count} dialogue entries");
+            DequeueDialogue();
+        }
+        else
+        {
+            Debug.LogWarning("[DialogueManager] DialogueBase or dialogueInfo is null!");
+        }
     }
 
     public void DequeueDialogue()
@@ -117,6 +129,14 @@ public class DialogueManager : MonoBehaviour
     private void CompleteText()
     {
         dialogueText.text = completeText;
+    }
+
+    private void EndDialogue()
+    {
+        Debug.Log("[DialogueManager] EndDialogue called");
+        boxDialogue.gameObject.SetActive(false);
+        dialogueInfo.Clear();
+        isCurrentlyTyping = false;
     }
     
 }

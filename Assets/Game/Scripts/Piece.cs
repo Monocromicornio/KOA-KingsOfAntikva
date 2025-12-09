@@ -95,14 +95,22 @@ public class Piece : NetworkBehaviour
     public virtual void Select()
     {
         if (pieceColor == PieceColor.red) return;
-        if (!matchController.IsMyTurn()) return;
-        if (!hasConnection && matchController.turn == TurnState.awayTeam) return;
+        
+        bool isTutorialMode = TutorialModeController.IsTutorialActive();
+        
+        if (!isTutorialMode)
+        {
+            if (!matchController.IsMyTurn()) return;
+            if (!hasConnection && matchController.turn == TurnState.awayTeam) return;
+        }
 
         if (activePiece != this)
         {
             activePiece?.SendMessage("Deselect", SendMessageOptions.DontRequireReceiver);
             activePiece = this;
         }
+
+        TutorialEvents.TriggerPieceSelected(this);
 
         SendMessage("GetPiece", SendMessageOptions.DontRequireReceiver);
     }
@@ -122,7 +130,13 @@ public class Piece : NetworkBehaviour
     {
         if (!IsActive() || finished) return;
 
-        matchController.MadeActionOnTurn();
+        bool isTutorialMode = TutorialModeController.IsTutorialActive();
+        
+        if (!isTutorialMode)
+        {
+            matchController.MadeActionOnTurn();
+        }
+        
         targetField = field;
         bool onField = CheckPieceOnField();
         if (!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
@@ -142,11 +156,15 @@ public class Piece : NetworkBehaviour
         const float distanceThreshold = 0.1f;
         if (Vector3.Distance(transform.position, targetField.transform.position) <= distanceThreshold)
         {
+            GameField oldField = field;
+            
             targetField.SetPiece(null);
             field?.SetPiece(null);
 
             fieldIndex = targetField.index;
             field.SetPiece(this);
+
+            TutorialEvents.TriggerPieceMoved(this, oldField, field);
 
             SendMessage("ChangeField", targetField, SendMessageOptions.DontRequireReceiver);
             ChangeTurn();
@@ -180,9 +198,23 @@ public class Piece : NetworkBehaviour
 
     private void ChangeTurn()
     {
-        if (!IsActive() || !matchController.IsMyTurn()) return;
+        bool isTutorialMode = TutorialModeController.IsTutorialActive();
+        
+        if (!isTutorialMode)
+        {
+            if (!IsActive() || !matchController.IsMyTurn()) return;
+        }
+        else
+        {
+            if (!IsActive()) return;
+        }
+        
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
-        matchController.ChangeTurn();
+        
+        if (!isTutorialMode)
+        {
+            matchController.ChangeTurn();
+        }
     }
 
     public void SetWin()

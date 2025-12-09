@@ -62,6 +62,9 @@ public class InteractivePiece : MonoBehaviour
     protected virtual void Attack(InteractivePiece target)
     {
         if (target == null) return;
+        
+        TutorialEvents.TriggerPieceAttacked(piece, target.piece);
+        
         UnityAction action = () => ForceChallenge(target);
         StartCoroutine(FeedbackAttack(action));
     }

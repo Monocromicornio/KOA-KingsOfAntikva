@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class GameField : Field
 {
@@ -28,16 +28,29 @@ public class GameField : Field
 
     private void Update()
     {
-        if (matchController == null) return;
-
-        if (canSelectFeedback.activeSelf && !matchController.IsMyTurn())
+        bool isTutorialMode = TutorialModeController.IsTutorialActive();
+        
+        if (!isTutorialMode)
         {
-            canSelectFeedback.SetActive(false);
+            if (matchController == null) return;
+
+            if (canSelectFeedback.activeSelf && !matchController.IsMyTurn())
+            {
+                canSelectFeedback.SetActive(false);
+            }
         }
     }
 
     private void OnMouseOver()
     {
+        bool isTutorialMode = TutorialModeController.IsTutorialActive();
+        
+        if (isTutorialMode)
+        {
+            canSelectFeedback.SetActive(true);
+            return;
+        }
+        
         if (matchController == null || !matchController.IsMyTurn()) return;
 
         canSelectFeedback.SetActive(true);
@@ -55,10 +68,12 @@ public class GameField : Field
         if (select)
         {
             Piece.activePiece?.SelectedAField(this);
+            OfflinePiece.activePiece?.SelectedAField(this);
             return;
         }
         
         piece?.Select();
+        offlinePiece?.Select();
     }
 
     public void Select()

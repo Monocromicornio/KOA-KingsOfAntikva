@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class EditableField : Field
@@ -37,7 +37,19 @@ public class EditableField : Field
     public override void SetPiece(Piece piece)
     {
         base.SetPiece(piece);
-        piece.transform.position = transform.position;
+        if (piece != null)
+        {
+            piece.transform.position = transform.position;
+        }
+    }
+
+    public override void SetOfflinePiece(OfflinePiece piece)
+    {
+        base.SetOfflinePiece(piece);
+        if (piece != null)
+        {
+            piece.transform.position = transform.position;
+        }
     }
 
     public void SetSelecteblePiece(Piece piece, UnityAction onSelect)
