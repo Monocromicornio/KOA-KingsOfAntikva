@@ -13,18 +13,52 @@ MonoBehaviour:
   m_Name: Intro
   m_EditorClassIdentifier: 
   dialogueInfo:
-  - text: aosihjdioashjiod
-    speaker: Rei
-    portraitLeft: {fileID: 0}
-    portraitRight: {fileID: 21300000, guid: c33f47a85b209b74b8e372787c9bc275, type: 3}
+  - text: "Ol\xE1 comandante, eu sou o Rei de Antikva"
+    speaker: Rei azul
+    portraitLeft: {fileID: 21300000, guid: d8b01af8e6e51414ca3507f148203b90, type: 3}
+    portraitRight: {fileID: 21300000, guid: d8b01af8e6e51414ca3507f148203b90, type: 3}
+    myEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    isRightPortrait: 0
+  - text: "Voc\xEA N\xC3O \xE9 o Rei de Antikva, eu quem sou"
+    speaker: Rei Vermelho
+    portraitLeft: {fileID: 21300000, guid: d8b01af8e6e51414ca3507f148203b90, type: 3}
+    portraitRight: {fileID: 21300000, guid: 470d54fe304c8f54e9bf114bdcd23b8d, type: 3}
     myEvent:
       m_PersistentCalls:
         m_Calls: []
     isRightPortrait: 1
-  - text: adasdasd
-    speaker: Rei
-    portraitLeft: {fileID: 21300000, guid: 66722d8b44848cd468ec3d7c450ad6ea, type: 3}
-    portraitRight: {fileID: 21300000, guid: c33f47a85b209b74b8e372787c9bc275, type: 3}
+  - text: "N\xC3O, SOU EU "
+    speaker: Rei Azul
+    portraitLeft: {fileID: 21300000, guid: d8b01af8e6e51414ca3507f148203b90, type: 3}
+    portraitRight: {fileID: 21300000, guid: 470d54fe304c8f54e9bf114bdcd23b8d, type: 3}
+    myEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    isRightPortrait: 0
+  - text: "N\xC3O, SOU EU "
+    speaker: Rei Vermelho
+    portraitLeft: {fileID: 21300000, guid: d8b01af8e6e51414ca3507f148203b90, type: 3}
+    portraitRight: {fileID: 21300000, guid: 470d54fe304c8f54e9bf114bdcd23b8d, type: 3}
+    myEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    isRightPortrait: 1
+  - text: 'Como voce pode ver preciso de sua ajuda para derrotar este impostor e
+      me tornar o unico e verdadeiro rei de Antikva '
+    speaker: Rei Azul
+    portraitLeft: {fileID: 21300000, guid: d8b01af8e6e51414ca3507f148203b90, type: 3}
+    portraitRight: {fileID: 21300000, guid: 470d54fe304c8f54e9bf114bdcd23b8d, type: 3}
+    myEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    isRightPortrait: 0
+  - text: Como vou lutar ao lado dos meus homens na linha de frente eu preciso de
+      sua ajuda para comandar minhas topas, venha, vou lhe mostrar como
+    speaker: Rei Azul
+    portraitLeft: {fileID: 21300000, guid: d8b01af8e6e51414ca3507f148203b90, type: 3}
+    portraitRight: {fileID: 21300000, guid: 470d54fe304c8f54e9bf114bdcd23b8d, type: 3}
     myEvent:
       m_PersistentCalls:
         m_Calls: []
