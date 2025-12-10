@@ -5,7 +5,19 @@ using UnityEngine.Events;
 [RequireComponent(typeof(OfflinePiece))]
 public class OfflineInteractivePiece : MonoBehaviour
 {
-    public OfflinePiece piece { get; private set; }
+    private OfflinePiece _piece;
+    public OfflinePiece piece 
+    { 
+        get 
+        {
+            if (_piece == null)
+            {
+                _piece = GetComponent<OfflinePiece>();
+            }
+            return _piece;
+        }
+        private set => _piece = value;
+    }
 
     [SerializeField]
     protected OfflineAnimPiece anim;

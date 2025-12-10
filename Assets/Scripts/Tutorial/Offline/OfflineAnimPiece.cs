@@ -77,6 +77,11 @@ public class OfflineAnimPiece : MonoBehaviour
         ChangeAnim(lastAnims.Last());
     }
 
+    private void Destroy()
+    {
+        PlayDieAnimation();
+    }
+
     public void PlayDieAnimation()
     {
         StartCoroutine(WaitForEndOfFrame(() => {

@@ -98,6 +98,19 @@ public class OfflinePiece : MonoBehaviour
             return;
         }
 
+        if (field.hasPiece)
+        {
+            Debug.LogWarning($"[OfflinePiece] Field {field.index} já tem uma peça! Limpando antes de spawnar {name}");
+            if (field.offlinePiece != null)
+            {
+                field.SetOfflinePiece(null);
+            }
+            else if (field.piece != null)
+            {
+                field.SetPiece(null);
+            }
+        }
+
         firstField = field;
         fieldIndex = field.index;
         targetField = null;
@@ -108,10 +121,16 @@ public class OfflinePiece : MonoBehaviour
 
     public void SelectedAField(GameField field)
     {
+        Debug.Log($"[OfflinePiece] SelectedAField called on {name}. Target field: {field?.index ?? -1}");
+        
         targetField = field;
         bool onField = CheckPieceOnField();
+        
+        Debug.Log($"[OfflinePiece] CheckPieceOnField returned: {onField}");
+        
         if (!onField) 
         {
+            Debug.Log($"[OfflinePiece] Sending NewTarget message");
             SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
         }
     }

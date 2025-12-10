@@ -18,7 +18,7 @@ public class DialogueManager : MonoBehaviour
     public float delay = 0.001f;
 
     [SerializeField]
-    Image boxDialogue, dialoguePortrait;
+    Image boxDialogue, portraitLeft, portraitRight;
     [SerializeField]
     TMP_Text dialogueText, dialogueName;
     Queue<DialogueBase.Info> dialogueInfo = new Queue<DialogueBase.Info>();
@@ -39,6 +39,8 @@ public class DialogueManager : MonoBehaviour
             instance = this;
         }
         boxDialogue.gameObject.SetActive(false);
+        portraitLeft.gameObject.SetActive(false);
+        portraitRight.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -61,9 +63,8 @@ public class DialogueManager : MonoBehaviour
 
     public void EnqueueDialogue(DialogueBase db)
     {
-        Debug.Log($"[DialogueManager] EnqueueDialogue called with: {db?.name}");
-        
         boxDialogue.gameObject.SetActive(true);
+
         dialogueInfo.Clear();
 
         dialogueBase = db;
@@ -73,9 +74,8 @@ public class DialogueManager : MonoBehaviour
             foreach (DialogueBase.Info info in db.dialogueInfo)
             {
                 dialogueInfo.Enqueue(info);
-            }
-            
-            Debug.Log($"[DialogueManager] Enqueued {dialogueInfo.Count} dialogue entries");
+            }           
+        
             DequeueDialogue();
         }
         else
@@ -105,7 +105,19 @@ public class DialogueManager : MonoBehaviour
 
         dialogueName.text = info.speaker;
         dialogueText.text = info.text;
-        dialoguePortrait.sprite = info.portrait;
+
+        if (!info.isRightPortrait)
+        {
+            portraitLeft.sprite = info.portraitLeft;
+            portraitLeft.gameObject.SetActive(info.portraitLeft != null);
+            portraitRight.gameObject.SetActive(false);
+        }
+        else
+        {
+            portraitRight.sprite = info.portraitRight;
+            portraitRight.gameObject.SetActive(info.portraitRight != null);
+            portraitLeft.gameObject.SetActive(false);
+        }        
         
         dialogueText.text = "";
         StartCoroutine(TypeText(info));
@@ -135,6 +147,8 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("[DialogueManager] EndDialogue called");
         boxDialogue.gameObject.SetActive(false);
+        portraitLeft.gameObject.SetActive(false);
+        portraitRight.gameObject.SetActive(false);
         dialogueInfo.Clear();
         isCurrentlyTyping = false;
     }

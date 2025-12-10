@@ -6,17 +6,15 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "New Dialogue", menuName = "Tutorial/Dialogues")]
 public class DialogueBase : ScriptableObject
 {
-   
-
     [System.Serializable]
     public class Info
-    {
-        [HideInInspector]
-        public string text;
-        public string stringId;
+    {        
+        public string text;       
         public string speaker;
-        public Sprite portrait;
+        public Sprite portraitLeft;
+        public Sprite portraitRight;
         public UnityEvent myEvent;        
+        public bool isRightPortrait;
     }
 
     public Info[] dialogueInfo;

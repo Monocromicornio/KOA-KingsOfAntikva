@@ -9467,7 +9467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd13b4b04e3b8ba4596afee1aad7ec20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 1
+  distance: 8
 --- !u!114 &5780862102623665264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9481,9 +9481,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4406783998426399807}
-  force: 0
-  AttackEffect: {fileID: 0}
-  AttackEffectPos: {fileID: 0}
+  force: 1
+  AttackEffect: {fileID: 6474037483755172099, guid: 81724ec6cf7787540b6d6ada01995303,
+    type: 3}
+  AttackEffectPos: {fileID: 3535930866467483930}
 --- !u!114 &7166282776751284007
 MonoBehaviour:
   m_ObjectHideFlags: 0

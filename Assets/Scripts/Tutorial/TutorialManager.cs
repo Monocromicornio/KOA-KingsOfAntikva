@@ -184,10 +184,12 @@ public class TutorialManager : MonoBehaviour
                 if (spawnData.isPlayerPiece)
                 {
                     offlinePiece.TurnBluePiece();
+                    Debug.Log($"[TutorialManager] Spawned BLUE piece: {offlinePiece.name} at field {targetField.index}");
                 }
                 else
                 {
                     offlinePiece.TurnRedPiece();
+                    Debug.Log($"[TutorialManager] Spawned RED piece: {offlinePiece.name} at field {targetField.index}");
                 }
                 
                 offlinePiece.ActivePiece();
@@ -205,10 +207,21 @@ public class TutorialManager : MonoBehaviour
 
     private void ClearSpawnedPieces()
     {
+        Debug.Log($"[TutorialManager] Clearing {spawnedPieces.Count} spawned pieces");
+        
         foreach (MonoBehaviour piece in spawnedPieces)
         {
             if (piece != null)
             {
+                if (piece is Piece onlinePiece && onlinePiece.field != null)
+                {
+                    onlinePiece.field.SetPiece(null);
+                }
+                else if (piece is OfflinePiece offlinePiece && offlinePiece.field != null)
+                {
+                    offlinePiece.field.SetOfflinePiece(null);
+                }
+                
                 Destroy(piece.gameObject);
             }
         }

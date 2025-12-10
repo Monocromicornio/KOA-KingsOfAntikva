@@ -10,17 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50d3a9a3287be674da0d6f479b510a90, type: 3}
-  m_Name: Tutorial_Step1
+  m_Name: Tutorial_Step3
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 11400000, guid: e4697542bbe2e7c4e88df371cd09ad23, type: 2}
-  stepType: 0
-  piecesToSpawn: []
+  dialogue: {fileID: 0}
+  stepType: 2
+  piecesToSpawn:
+  - piecePrefab: {fileID: 8859737722418511149, guid: 6baeb6053404c814da2dba70dbec542a,
+      type: 3}
+    fieldIndex: 11
+    isPlayerPiece: 1
+    spawnedPiece: {fileID: 0}
+  - piecePrefab: {fileID: 3456265060332113610, guid: 943c1979370a03e45a7ba92b3517a7ad,
+      type: 3}
+    fieldIndex: 25
+    isPlayerPiece: 0
+    spawnedPiece: {fileID: 0}
   clearBoardBeforeSpawn: 1
-  waitForDialogueEnd: 1
+  waitForDialogueEnd: 0
   onStepStart:
     m_PersistentCalls:
       m_Calls: []
   onStepComplete:
     m_PersistentCalls:
       m_Calls: []
-  delayBeforeNextStep: 1
+  delayBeforeNextStep: 5

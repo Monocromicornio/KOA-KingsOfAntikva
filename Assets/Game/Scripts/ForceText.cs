@@ -42,7 +42,9 @@ public class ForceText : MonoBehaviour
 
     private string GetTextByPieceType(InteractivePiece piece)
     {
-        if (piece == null || piece.piece.pieceColor == PieceColor.red) return "";
+        if (piece == null) return "";
+        if (piece.piece == null) return "";
+        if (piece.piece.pieceColor == PieceColor.red) return "";
         
         PieceType pieceType = piece.piece.type;
         if (pieceType == PieceType.Bomb
@@ -58,7 +60,9 @@ public class ForceText : MonoBehaviour
 
     private string GetTextByPieceType(OfflineInteractivePiece piece)
     {
-        if (piece == null || piece.piece.pieceColor == PieceColor.red) return "";
+        if (piece == null) return "";
+        if (piece.piece == null) return "";
+        if (piece.piece.pieceColor == PieceColor.red) return "";
         
         PieceType pieceType = piece.piece.type;
         if (pieceType == PieceType.Bomb

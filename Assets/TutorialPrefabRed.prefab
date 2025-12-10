@@ -4373,7 +4373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd13b4b04e3b8ba4596afee1aad7ec20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 1
+  distance: 8
 --- !u!114 &6107259716075658186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4387,9 +4387,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 9162967463374536029}
-  force: 0
-  AttackEffect: {fileID: 0}
-  AttackEffectPos: {fileID: 0}
+  force: 1
+  AttackEffect: {fileID: 6474037483755172099, guid: 81724ec6cf7787540b6d6ada01995303,
+    type: 3}
+  AttackEffectPos: {fileID: 6995226793505705164}
 --- !u!114 &252695191498343340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4422,6 +4423,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fake: {fileID: 0}
+  fakePiecePrefab: {fileID: 1081960598004890, guid: 39ea64b1ce1e4f3469797db4e54e8b54,
+    type: 3}
 --- !u!1 &3557853899696398703
 GameObject:
   m_ObjectHideFlags: 0

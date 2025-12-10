@@ -9,9 +9,20 @@ public class InteractivePiece : MonoBehaviour
     protected SoundController soundController => matchController.soundController;
     protected bool finished => matchController.finished;
 
-    public Piece piece { get; private set; }
+    private Piece _piece;
+    public Piece piece 
+    { 
+        get 
+        {
+            if (_piece == null)
+            {
+                _piece = GetComponent<Piece>();
+            }
+            return _piece;
+        }
+        private set => _piece = value;
+    }
 
-    //Inspector
     [SerializeField]
     protected AnimPiece anim;
 
