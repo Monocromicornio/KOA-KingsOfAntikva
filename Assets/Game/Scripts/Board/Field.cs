@@ -88,6 +88,8 @@ public class Field : MonoBehaviour
 
         if (forceText == null) return;
 
+        
+
         if (newPiece == null)
         {
             forceText.piece = null;
@@ -108,7 +110,7 @@ public class Field : MonoBehaviour
         this.piece = null;
 
         if (forceText == null) return;
-
+        forceText.gameObject.name = "Txtforce" + gameObject.GetComponentInParent<Transform>().name;
         if (newPiece == null)
         {
             forceText.offlinePiece = null;

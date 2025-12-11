@@ -110,6 +110,12 @@ public class TutorialManager : MonoBehaviour
             Debug.Log("[Tutorial] No dialogue for this step");
         }
 
+        if (step.highlightTarget != null && step.highlightTarget.targetType != HighlightTarget.TargetType.None)
+        {
+            Debug.Log($"[Tutorial] Showing highlight for target type: {step.highlightTarget.targetType}");
+            step.highlightTarget.Show();
+        }
+
         if (step.waitForDialogueEnd && step.dialogue != null)
         {
             Debug.Log("[Tutorial] Waiting for dialogue to end...");
@@ -266,6 +272,13 @@ public class TutorialManager : MonoBehaviour
         if (!tutorialActive) return;
 
         isWaitingForCondition = false;
+        
+        if (currentStep != null && currentStep.highlightTarget != null)
+        {
+            Debug.Log("[Tutorial] Hiding highlight");
+            currentStep.highlightTarget.Hide();
+        }
+        
         currentStep.onStepComplete?.Invoke();
 
         StartCoroutine(WaitAndProceed());

@@ -6,6 +6,7 @@ public class TutorialStepEditor : Editor
 {
     private SerializedProperty dialogueProp;
     private SerializedProperty stepTypeProp;
+    private SerializedProperty highlightTargetProp;
     private SerializedProperty piecesToSpawnProp;
     private SerializedProperty clearBoardProp;
     private SerializedProperty waitForDialogueProp;
@@ -17,6 +18,7 @@ public class TutorialStepEditor : Editor
     {
         dialogueProp = serializedObject.FindProperty("dialogue");
         stepTypeProp = serializedObject.FindProperty("stepType");
+        highlightTargetProp = serializedObject.FindProperty("highlightTarget");
         piecesToSpawnProp = serializedObject.FindProperty("piecesToSpawn");
         clearBoardProp = serializedObject.FindProperty("clearBoardBeforeSpawn");
         waitForDialogueProp = serializedObject.FindProperty("waitForDialogueEnd");
@@ -35,6 +37,10 @@ public class TutorialStepEditor : Editor
 
         EditorGUILayout.PropertyField(dialogueProp);
         EditorGUILayout.PropertyField(stepTypeProp);
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("Highlight", EditorStyles.boldLabel);
+        DrawHighlightTarget(highlightTargetProp);
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Board Setup", EditorStyles.boldLabel);
@@ -85,5 +91,41 @@ public class TutorialStepEditor : Editor
             default:
                 return "";
         }
+    }
+
+    private void DrawHighlightTarget(SerializedProperty property)
+    {
+        var targetTypeProp = property.FindPropertyRelative("targetType");
+        var uiTargetProp = property.FindPropertyRelative("uiTarget");
+        var worldTargetProp = property.FindPropertyRelative("worldTarget");
+        var gameObjectNameProp = property.FindPropertyRelative("gameObjectName");
+
+        EditorGUILayout.PropertyField(targetTypeProp, new GUIContent("Target Type"));
+
+        HighlightTarget.TargetType targetType = (HighlightTarget.TargetType)targetTypeProp.enumValueIndex;
+
+        EditorGUI.indentLevel++;
+        switch (targetType)
+        {
+            case HighlightTarget.TargetType.UIElement:
+                EditorGUILayout.PropertyField(uiTargetProp, new GUIContent("UI Target"));
+                EditorGUILayout.HelpBox("Arraste um RectTransform de um elemento de UI (ex: botão, painel)", MessageType.Info);
+                break;
+
+            case HighlightTarget.TargetType.WorldObject:
+                EditorGUILayout.PropertyField(worldTargetProp, new GUIContent("World Target"));
+                EditorGUILayout.HelpBox("Arraste um Transform de um objeto 3D no mundo (ex: peça, field)", MessageType.Info);
+                break;
+
+            case HighlightTarget.TargetType.GameObjectByName:
+                EditorGUILayout.PropertyField(gameObjectNameProp, new GUIContent("GameObject Name"));
+                EditorGUILayout.HelpBox("Digite o nome exato do GameObject na cena (ex: 'TutorialPrefab(Clone)', 'Field43')", MessageType.Info);
+                break;
+
+            case HighlightTarget.TargetType.None:
+                EditorGUILayout.HelpBox("Nenhum highlight será mostrado neste step", MessageType.None);
+                break;
+        }
+        EditorGUI.indentLevel--;
     }
 }

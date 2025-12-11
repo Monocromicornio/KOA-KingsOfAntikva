@@ -10,6 +10,10 @@ public class TutorialStep : ScriptableObject
     [Header("Step Configuration")]
     public TutorialStepType stepType = TutorialStepType.DialogueOnly;
 
+    [Header("Highlight")]
+    [Tooltip("Configure o highlight para destacar elementos específicos durante este step")]
+    public HighlightTarget highlightTarget;
+
     [Header("Board Setup")]
     public TutorialSpawnData[] piecesToSpawn;
     public bool clearBoardBeforeSpawn = true;
