@@ -10,26 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50d3a9a3287be674da0d6f479b510a90, type: 3}
-  m_Name: Tutorial_Step5
+  m_Name: Tutorial_Step7_Bomb
   m_EditorClassIdentifier: Assembly-CSharp::TutorialStep
-  dialogue: {fileID: 11400000, guid: 9fda371cd0bd6fe49928aef9e805a408, type: 2}
-  stepType: 2
+  dialogue: {fileID: 11400000, guid: 452778f8aaa09114993645dbaaadaccc, type: 2}
+  stepType: 0
   highlightTarget:
     targetType: 0
     uiTarget: {fileID: 0}
     worldTarget: {fileID: 0}
     gameObjectName: TxtforceField29
-  piecesToSpawn:
-  - piecePrefab: {fileID: 1848718186971166627, guid: 8b36f9798e9b08444860891653770eab,
-      type: 3}
-    fieldIndex: 27
-    isPlayerPiece: 1
-    spawnedPiece: {fileID: 0}
-  - piecePrefab: {fileID: 8859737722418511149, guid: 6baeb6053404c814da2dba70dbec542a,
-      type: 3}
-    fieldIndex: 26
-    isPlayerPiece: 0
-    spawnedPiece: {fileID: 0}
+  piecesToSpawn: []
   clearBoardBeforeSpawn: 1
   waitForDialogueEnd: 1
   onStepStart:
