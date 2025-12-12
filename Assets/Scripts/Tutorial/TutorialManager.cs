@@ -247,12 +247,21 @@ public class TutorialManager : MonoBehaviour
 
     private void OnPieceAttacked(MonoBehaviour attacker, MonoBehaviour target)
     {
+        Debug.Log($"[Tutorial] Piece attacked - Attacker: {attacker.name}, Target: {target.name}");
+        Debug.Log($"[Tutorial] isWaitingForCondition: {isWaitingForCondition}, stepType: {currentStep?.stepType}");
+        Debug.Log($"[Tutorial] spawnedPieces count: {spawnedPieces.Count}, contains attacker: {spawnedPieces.Contains(attacker)}");
+        
         if (!isWaitingForCondition) return;
         if (currentStep.stepType != TutorialStepType.WaitForAttack) return;
 
         if (spawnedPieces.Contains(attacker))
         {
+            Debug.Log($"[Tutorial] Attack condition met! Completing step.");
             CompleteStep();
+        }
+        else
+        {
+            Debug.LogWarning($"[Tutorial] Attacker {attacker.name} not in spawned pieces list!");
         }
     }
 

@@ -93,8 +93,14 @@ public class OfflineAttackPiece : OfflineInteractivePiece
         Debug.Log($"[OfflineAttackPiece] Reached attack position. Looking at target and initiating combat");
         
         transform.LookAt(target.transform);
+        
+        Debug.Log($"[OfflineAttackPiece] Getting combat piece component from target: {target?.name ?? "null"}");
         OfflineInteractivePiece combatTarget = GetCombatPiece();
+        
+        Debug.Log($"[OfflineAttackPiece] Combat target obtained: {combatTarget?.name ?? "null"}. Calling ReadyToAttack");
         ReadyToAttack(combatTarget);
+        
+        Debug.Log($"[OfflineAttackPiece] ReadyToAttack completed");
     }
 
     protected OfflineInteractivePiece GetCombatPiece()

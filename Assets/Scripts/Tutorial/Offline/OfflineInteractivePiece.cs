@@ -72,8 +72,11 @@ public class OfflineInteractivePiece : MonoBehaviour
 
     protected virtual void Attack(OfflineInteractivePiece target)
     {
+        Debug.Log($"[OfflineInteractivePiece] Attack called! Attacker: {piece.name}, Target: {(target != null ? target.name : "null")}");
+        
         if (target == null) return;
         
+        Debug.Log($"[OfflineInteractivePiece] Triggering piece attacked event");
         TutorialEvents.TriggerPieceAttacked(piece, target.piece);
         
         UnityAction action = () => ForceChallenge(target);
@@ -89,7 +92,13 @@ public class OfflineInteractivePiece : MonoBehaviour
 
     protected virtual void InstaKillAttack(OfflineInteractivePiece target)
     {
+        Debug.Log($"[OfflineInteractivePiece] InstaKillAttack called! Attacker: {piece.name}, Target: {(target != null ? target.name : "null")}");
+        
         if (target == null) return;
+        
+        Debug.Log($"[OfflineInteractivePiece] Triggering piece attacked event for InstaKill");
+        TutorialEvents.TriggerPieceAttacked(piece, target.piece);
+        
         UnityAction action = () => Notify(true, target);
         StartCoroutine(FeedbackAttack(action));
     }
