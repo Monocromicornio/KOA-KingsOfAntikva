@@ -10,26 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50d3a9a3287be674da0d6f479b510a90, type: 3}
-  m_Name: Tutorial_Step8_Killer
-  m_EditorClassIdentifier: Assembly-CSharp::TutorialStep
-  dialogue: {fileID: 11400000, guid: 5661eccf8a463474982bc12f0c9deeab, type: 2}
-  stepType: 2
+  m_Name: Tutorial_Step9_go_to_game
+  m_EditorClassIdentifier: 
+  dialogue: {fileID: 11400000, guid: 89862024122365140aa4cad7eb8b1a25, type: 2}
+  stepType: 0
   highlightTarget:
     targetType: 0
     uiTarget: {fileID: 0}
     worldTarget: {fileID: 0}
-    gameObjectName: TxtforceField29
-  piecesToSpawn:
-  - piecePrefab: {fileID: 7983211869703137356, guid: ff2bbc3aea3bd74488dba33c0181f2da,
-      type: 3}
-    fieldIndex: 27
-    isPlayerPiece: 0
-    spawnedPiece: {fileID: 0}
-  - piecePrefab: {fileID: 7453536430768499971, guid: 17b7ac4c8512f104683a26a1117b24c7,
-      type: 3}
-    fieldIndex: 26
-    isPlayerPiece: 1
-    spawnedPiece: {fileID: 0}
+    gameObjectName: 
+  piecesToSpawn: []
   clearBoardBeforeSpawn: 1
   waitForDialogueEnd: 1
   onStepStart:
@@ -38,4 +28,4 @@ MonoBehaviour:
   onStepComplete:
     m_PersistentCalls:
       m_Calls: []
-  delayBeforeNextStep: 7
+  delayBeforeNextStep: 1
