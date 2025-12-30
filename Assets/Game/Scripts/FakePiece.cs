@@ -20,16 +20,32 @@ public class FakePiece : MonoBehaviour
     {
         piece = GetComponent<Piece>();
         anim = GetComponent<AnimPiece>();
-        matchController.AddPieceFromEnemySquad(this);
+        if (matchController != null)
+            matchController.AddPieceFromEnemySquad(this);
     }
 
     private void OnEnable()
     {
-        if (fake == null)
+        if (fake == null && matchController != null)
         {
             PlayerSquad squad = matchController.playerSquad;
-            PieceData pieceData = squad.pieceData;
-            fake = Instantiate(pieceData.fakePiece, transform.position, transform.rotation, transform);
+            if (squad != null)
+            {
+                PieceData pieceData = squad.pieceData;
+                if (pieceData != null && pieceData.fakePiece != null)
+                {
+                    fake = Instantiate(pieceData.fakePiece, transform.position, transform.rotation, transform);
+                    Debug.Log($"[FakePiece] Created fake piece for {gameObject.name}");
+                }
+                else
+                {
+                    Debug.LogWarning($"[FakePiece] Cannot create fake: pieceData={pieceData}, fakePiece={pieceData?.fakePiece}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[FakePiece] Cannot create fake: playerSquad is null");
+            }
         }
         ActiveFakePiece();
     }
@@ -41,6 +57,7 @@ public class FakePiece : MonoBehaviour
 
     private void ActiveFakePiece()
     {
+        if (fake == null || body == null) return;
         if (!body.activeSelf) return;
 
         Vector3 vector3 = new Vector3(body.transform.position.x, 0, body.transform.position.z);

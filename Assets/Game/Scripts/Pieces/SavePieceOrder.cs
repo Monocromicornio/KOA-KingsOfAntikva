@@ -39,7 +39,7 @@ public class SavePieceOrder : MonoBehaviour
 
     public void Offline()
     {
-        PressButton(() => SceneManager.LoadScene("Game"));
+        PressButton(() => SceneManager.LoadScene("GameOffline"));
     }
 
     public void SavePieces()

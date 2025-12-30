@@ -245,7 +245,8 @@ public class Piece : NetworkBehaviour
     {
         if (pieceColor == PieceColor.red) return;
 
-        matchController.OnDestroyPiece(this);
+        if (matchController != null)
+            matchController.OnDestroyPiece(this);
 
         pieceColor = PieceColor.red;
         FakePiece fakePiece = GetComponent<FakePiece>();

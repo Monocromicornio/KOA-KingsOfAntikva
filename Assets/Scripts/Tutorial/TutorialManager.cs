@@ -228,7 +228,7 @@ public class TutorialManager : MonoBehaviour
                     offlinePiece.field.SetOfflinePiece(null);
                 }
                 
-                Destroy(piece.gameObject);
+                DestroyImmediate(piece.gameObject);
             }
         }
         spawnedPieces.Clear();

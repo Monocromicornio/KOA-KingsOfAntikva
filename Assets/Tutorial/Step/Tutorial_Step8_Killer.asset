@@ -20,15 +20,15 @@ MonoBehaviour:
     worldTarget: {fileID: 0}
     gameObjectName: TxtforceField29
   piecesToSpawn:
-  - piecePrefab: {fileID: 7983211869703137356, guid: ff2bbc3aea3bd74488dba33c0181f2da,
-      type: 3}
-    fieldIndex: 27
-    isPlayerPiece: 0
-    spawnedPiece: {fileID: 0}
   - piecePrefab: {fileID: 7453536430768499971, guid: 17b7ac4c8512f104683a26a1117b24c7,
       type: 3}
-    fieldIndex: 26
+    fieldIndex: 27
     isPlayerPiece: 1
+    spawnedPiece: {fileID: 0}
+  - piecePrefab: {fileID: 7983211869703137356, guid: ff2bbc3aea3bd74488dba33c0181f2da,
+      type: 3}
+    fieldIndex: 26
+    isPlayerPiece: 0
     spawnedPiece: {fileID: 0}
   clearBoardBeforeSpawn: 1
   waitForDialogueEnd: 1

@@ -867,7 +867,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 53455722}
-  - component: {fileID: 53455723}
   m_Layer: 5
   m_Name: TurnControl
   m_TagString: Untagged
@@ -898,21 +897,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &53455723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 53455721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 424e07eb81a15054fa0ae6d60ee9913f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gTurnOn: {fileID: 813857621}
-  gTurnOff: {fileID: 2096003856}
-  auTurnChange: {fileID: 1192037787}
 --- !u!1001 &60072207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1585,7 +1569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventTarget: {fileID: 0}
-  EventComponent: {fileID: 1690787744}
+  EventComponent: {fileID: 0}
   EventMethod: 
   EditorVisible: 0
   ExecutionError: 
@@ -3011,10 +2995,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2719817689665461072, guid: 80d5b9cc7004a28449873ffe72c96a6f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2719817689665461072, guid: 80d5b9cc7004a28449873ffe72c96a6f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2719817689665461072, guid: 80d5b9cc7004a28449873ffe72c96a6f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 2719817689665461072, guid: 80d5b9cc7004a28449873ffe72c96a6f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28
+      objectReference: {fileID: 0}
+    - target: {fileID: 2719817689665461072, guid: 80d5b9cc7004a28449873ffe72c96a6f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3865105966404892804, guid: 80d5b9cc7004a28449873ffe72c96a6f,
+        type: 3}
+      propertyPath: enemyProfileDisplay
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6817042221426126992, guid: 80d5b9cc7004a28449873ffe72c96a6f,
+        type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: ed3720298f6d432488b5002e31fbe99c, type: 3}
+    m_RemovedComponents:
+    - {fileID: 8844051796815424074, guid: 80d5b9cc7004a28449873ffe72c96a6f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 822271215291708926, guid: 80d5b9cc7004a28449873ffe72c96a6f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 223387115}
   m_SourcePrefab: {fileID: 100100000, guid: 80d5b9cc7004a28449873ffe72c96a6f, type: 3}
 --- !u!224 &223387109 stripped
 RectTransform:
@@ -3022,6 +3046,52 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 223387108}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &223387110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3455898621853032324, guid: 80d5b9cc7004a28449873ffe72c96a6f,
+    type: 3}
+  m_PrefabInstance: {fileID: 223387108}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &223387111 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2638799901550718947, guid: 80d5b9cc7004a28449873ffe72c96a6f,
+    type: 3}
+  m_PrefabInstance: {fileID: 223387108}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &223387114 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 822271215291708926, guid: 80d5b9cc7004a28449873ffe72c96a6f,
+    type: 3}
+  m_PrefabInstance: {fileID: 223387108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &223387115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223387114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 733d45ddb9c24b74d9aadd2cceb334c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OfflinePlayerProfileDisplay
+  playerNameText: {fileID: 223387111}
+  playerLevelText: {fileID: 0}
+  offlinePlayerName: Jogador
+  offlinePlayerLevel: 1
 --- !u!1001 &223472123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4787,10 +4857,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerProfile
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2836043382714900872, guid: 64d31e75afa0638489fa9bf309df9c57, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3969521270351364901, guid: 64d31e75afa0638489fa9bf309df9c57,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 389465704}
   m_SourcePrefab: {fileID: 100100000, guid: 64d31e75afa0638489fa9bf309df9c57, type: 3}
 --- !u!224 &389465698 stripped
 RectTransform:
@@ -4798,6 +4873,40 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 389465697}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &389465700 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7961675703769422975, guid: 64d31e75afa0638489fa9bf309df9c57,
+    type: 3}
+  m_PrefabInstance: {fileID: 389465697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &389465703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3969521270351364901, guid: 64d31e75afa0638489fa9bf309df9c57,
+    type: 3}
+  m_PrefabInstance: {fileID: 389465697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &389465704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389465703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 733d45ddb9c24b74d9aadd2cceb334c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OfflinePlayerProfileDisplay
+  playerNameText: {fileID: 389465700}
+  playerLevelText: {fileID: 0}
+  offlinePlayerName: Jogador
+  offlinePlayerLevel: 1
 --- !u!1001 &398774753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7671,7 +7780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventTarget: {fileID: 0}
-  EventComponent: {fileID: 1690787744}
+  EventComponent: {fileID: 0}
   EventMethod: 
   EditorVisible: 0
   ExecutionError: 
@@ -9120,7 +9229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventTarget: {fileID: 0}
-  EventComponent: {fileID: 1690787744}
+  EventComponent: {fileID: 0}
   EventMethod: 
   EditorVisible: 0
   ExecutionError: 
@@ -10177,7 +10286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventTarget: {fileID: 1690787740}
-  EventComponent: {fileID: 1690787744}
+  EventComponent: {fileID: 0}
   EventMethod: OnClientConnected
   EditorVisible: 1
   ExecutionError: 
@@ -12363,7 +12472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventTarget: {fileID: 0}
-  EventComponent: {fileID: 1690787744}
+  EventComponent: {fileID: 0}
   EventMethod: 
   EditorVisible: 0
   ExecutionError: 
@@ -19269,8 +19378,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1690787741}
-  - component: {fileID: 1690787744}
   - component: {fileID: 1690787742}
+  - component: {fileID: 1690787743}
   m_Layer: 0
   m_Name: Match Controller
   m_TagString: Untagged
@@ -19306,7 +19415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameType: 2
---- !u!114 &1690787744
+--- !u!114 &1690787743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19315,13 +19424,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1690787740}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f23794cef2bcaed43b6c240000eb50f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a978d4939b53c647bf3cc4112116d23, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::OfflineMatchController
   boardController: {fileID: 1327107612}
   gameMode: {fileID: 1690787742}
-  syncronize: {fileID: 9041021084249334171, guid: 6876983ce3ae3454e81c05e4b6f12bb4,
-    type: 3}
+  syncronize: {fileID: 0}
   game: {fileID: 1576172671}
   playerSquad: {fileID: 1686763110}
   enemySquad: {fileID: 1966236993}
@@ -19718,7 +19826,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1690787744}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MatchController, Assembly-CSharp
         m_MethodName: GoToMenu
         m_Mode: 1
@@ -22031,6 +22139,67 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1900756764}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1910725757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1910725758}
+  - component: {fileID: 1910725759}
+  - component: {fileID: 1910725760}
+  m_Layer: 0
+  m_Name: OfflineGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1910725758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910725757}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1910725759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910725757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89bfda1417a9f6a4386b509f2ce3ad3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OfflineGameManager
+--- !u!114 &1910725760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910725757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347f4dbdf0f7c7146ae608bbd9eee62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OfflineOpponentProfileLoader
+  opponentNameText: {fileID: 223387111}
+  opponentLevelText: {fileID: 223387110}
+  offlineOpponentName: Rei Azul
+  offlineOpponentLevel: 1000
 --- !u!1001 &1911140455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25432,3 +25601,4 @@ SceneRoots:
   - {fileID: 5214833450652478262}
   - {fileID: 1168259847}
   - {fileID: 821216675}
+  - {fileID: 1910725758}
