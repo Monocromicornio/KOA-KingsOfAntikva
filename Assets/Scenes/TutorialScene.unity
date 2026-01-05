@@ -3245,6 +3245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 303704857}
+  - component: {fileID: 303704858}
   m_Layer: 0
   m_Name: ClearPlayerPrefs
   m_TagString: Untagged
@@ -3267,6 +3268,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &303704858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303704856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16dc0ddda56946046b352a52538c7665, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForceClearPlayerPrefs
 --- !u!1 &319456441
 GameObject:
   m_ObjectHideFlags: 0
@@ -21128,6 +21141,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DialogueBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826138634607519798, guid: 1660b1df3c1aa014c90cbafafac15913,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.9321289
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826138634607519798, guid: 1660b1df3c1aa014c90cbafafac15913,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -31.203003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151501843990472879, guid: 1660b1df3c1aa014c90cbafafac15913,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7874431531876056044, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
