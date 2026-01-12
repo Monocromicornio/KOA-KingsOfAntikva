@@ -138,6 +138,7 @@ namespace com.onlineobject.objectnet.integration
                 Debug.Log("[SteamLobbyWait] SavePieceOrder reabilitado");
             }
 
+            Debug.Log("Loading game scen via Steam Lobby Wait Manager");
             SceneManager.LoadScene(gameSceneName);
         }
 

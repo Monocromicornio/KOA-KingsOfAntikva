@@ -92,11 +92,14 @@ public class SavePieceOrder : MonoBehaviour
 
     public void OnConnected(IClient client)
     {
-        SceneManager.LoadScene("Game");
+        Debug.Log("Piece Order on Connected Callback");
+
+       // SceneManager.LoadScene("Game");
     }
 
     public void OnServer(IChannel channel)
     {
-        SceneManager.LoadScene("Game");
+        Debug.Log("Piece Order on Sever Callback");
+        //SceneManager.LoadScene("Game");
     }
 }

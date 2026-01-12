@@ -138,6 +138,7 @@ namespace com.onlineobject.objectnet.integration
                 NetworkManager.Instance().StartNetwork();
             }
 
+            Debug.Log("Loading game scen via Lobby Player Wait Controller");
             SceneManager.LoadScene(gameSceneName);
         }
 
