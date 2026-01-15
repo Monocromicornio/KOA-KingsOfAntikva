@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using com.onlineobject.objectnet;
+using com.onlineobject.objectnet.embedded;
+using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,6 +27,11 @@ public class MatchController : MonoBehaviour
     public TurnState currentTurn { get; private set; }
     public TurnState myTurn { get; private set; }
     public TurnState turn { get; private set; }
+
+    Callback<ClientDisconnectedEventArgs> clientDisconnected;
+    Callback<ServerDisconnectedEventArgs> serverDisconnected;
+
+    Callback<SteamNetConnectionStatusChangedCallback_t> steamConnectionStatusChanged;
 
     public SyncronizeTable syncronize;
 
@@ -75,6 +82,20 @@ public class MatchController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        // clientDisconnected = Callback<ClientDisconnectedEventArgs>.Create(OnClientDisconnected);
+        // serverDisconnected = Callback<ServerDisconnectedEventArgs>.Create(OnServerDisconnected);
+        steamConnectionStatusChanged = Callback<SteamNetConnectionStatusChangedCallback_t>.Create(OnSteamConnectionStatusChanged);
+    }
+
+    private void OnDisable()
+    {
+        //clientDisconnected.Dispose();
+       // serverDisconnected.Dispose();
+        steamConnectionStatusChanged.Dispose();
+    }
+
     public void StartGame(TableData clientTable)
     {
         playerSquad.LoadPieces();
@@ -88,11 +109,34 @@ public class MatchController : MonoBehaviour
         ChangeTurn();
     }
 
+    public void OnSteamConnectionStatusChanged(SteamNetConnectionStatusChangedCallback_t callback)
+    {
+        Debug.Log("[MatchController] Steam Connection Status Changed to " + callback.m_info.m_eState);
+        if (callback.m_info.m_eState == ESteamNetworkingConnectionState.k_ESteamNetworkingConnectionState_None)
+        {
+            FinishGame();
+        }
+       
+    }
+
+
     public async void OnClientConnected(IClient client)
     {
+        Debug.Log("[MatchController] Client connected");
         await NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
     }
 
+    public void OnClientDisconnected(ClientDisconnectedEventArgs client)
+    {
+        Debug.Log("[MatchController] Client disconnected with id " + client.Id);
+        FinishGame();
+    }
+
+    public void OnServerDisconnected(ServerDisconnectedEventArgs server)
+    {
+        Debug.Log("[MatchController] Server disconnected");
+        FinishGame();
+    }
     public void Disconnected(IClient client)
     {
         GoToMenu();
@@ -107,19 +151,24 @@ public class MatchController : MonoBehaviour
     public void GoToMenu()
     {
         Debug.Log("[MatchController] Saindo da partida...");
-        
+
+        CloseLobby();
+
+        StopAllCoroutines();
+
+        Debug.Log("[MatchController] Carregando cena PositionParts...");
+        SceneManager.LoadScene("PositionParts");
+    }
+
+    public void CloseLobby()
+    {
         if (hasConnection)
         {
             Debug.Log("[MatchController] Fechando lobby e desconectando...");
             LobbyCleanupHelper.CloseLobbyProperly();
         }
-        
+
         SyncronizeTable.ResetAll();
-        
-        StopAllCoroutines();
-        
-        Debug.Log("[MatchController] Carregando cena PositionParts...");
-        SceneManager.LoadScene("PositionParts");
     }
 
     public void OnDestroyPiece(Piece piece)
@@ -230,13 +279,17 @@ public class MatchController : MonoBehaviour
         SetFinishGame(playerSquad.pieces.ToArray(), false);
     }
 
-    private void FinishGame()
+    public void FinishGame()
     {
         if (finished) return;
         finished = true;
         currentTurn = TurnState.undefined;
         turn = currentTurn;
+
+
         if(exit != null) exit.gameObject.SetActive(true);
+
+        CloseLobby();
     }
 
     public void SetFinishGame(Piece[] pieces, bool win)
