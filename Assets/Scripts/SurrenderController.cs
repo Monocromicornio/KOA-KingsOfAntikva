@@ -95,6 +95,8 @@ public class SurrenderController : MonoBehaviour
         {
             SurrenderLocal();
         }
+
+        matchController.FinishGame();
     }
     
     private void SurrenderLocal()
@@ -112,19 +114,19 @@ public class SurrenderController : MonoBehaviour
     {
         matchController.SetFinishGame(matchController.playerSquad.pieces.ToArray(), false);
         matchController.SetFinishGame(matchController.enemySquad.pieces.ToArray(), true);
-        
+
+        Debug.Log("[SurrenderController] Rendição executada. Saindo da partida em 3 segundos...");
+        Invoke(nameof(GoToMenu), 3f);
+
         if (surrenderButton != null)
         {
             surrenderButton.gameObject.SetActive(false);
         }
-        
-        Debug.Log("[SurrenderController] Rendição executada. Saindo da partida em 3 segundos...");
-        StartCoroutine(GoToMenuAfterDelay(3f));
+       
     }
     
-    private System.Collections.IEnumerator GoToMenuAfterDelay(float delay)
+    private void GoToMenu()
     {
-        yield return new WaitForSeconds(delay);
         matchController.GoToMenu();
     }
 }
