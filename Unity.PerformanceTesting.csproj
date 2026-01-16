@@ -48,20 +48,27 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.0f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Meters\StopWatch.cs" />
-    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Data\Project.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Measurements\ScopeMeasurement.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Data\Hardware.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Data\Editor.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Measurements\FramesMeasurement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Data\Player.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Measure.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Measurements\ProfilerMeasurement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\PerformanceTestHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Attributes\RequiredMemberAttribute.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Measurements\MethodMeasurement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\PerformanceTestException.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Statistics\ConfidenceLevel.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Meters\StopWatch.cs" />
+    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Data\Project.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\PlayerCallbacks.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Statistics\NormalDistributionHelper.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Statistics\MeasurementsStatistics.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Metadata.cs" />
-    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Measurements\FramesMeasurement.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Statistics\ConfidenceLevelExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\ResourcesLoader.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Data\SampleGroup.cs" />
-    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Data\Player.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Measurements\ProfilerMarkerMeasurement.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Data\SampleUnit.cs" />
@@ -70,21 +77,14 @@
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Meters\IStopWatch.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Attributes\VersionAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Data\RunSettings.cs" />
-    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Measure.cs" />
-    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Measurements\ProfilerMeasurement.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Attributes\PerformanceAttribute.cs" />
-    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\PerformanceTestHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Attributes\RequiredMemberAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Data\PerformanceTestResult.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Statistics\OutlierMode.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\PerformanceTest.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.PerformanceTests.Internal\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Measurements\MethodMeasurement.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\SampleGroup.cs" />
-    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\PerformanceTestException.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Utils.cs" />
     <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Statistics\StudentDistributionHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Statistics\ConfidenceLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.test-framework.performance@0840f58e4562\Runtime\Unity.PerformanceTesting.asmdef" />

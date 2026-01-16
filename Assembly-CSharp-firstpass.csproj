@@ -49,9 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\MoveSample.cs" />
-    <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\RotateSample.cs" />
     <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\SampleInfo.cs" />
     <Compile Include="Assets\Plugins\Pixelplacement\iTween\iTween.cs" />
+    <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\RotateSample.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
@@ -1123,9 +1123,10 @@
     <ProjectReference Include="Unity.Timeline.csproj" />
     <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.csproj" />
     <ProjectReference Include="Unity.AI.Navigation.Editor.csproj" />
-    <ProjectReference Include="PPv2URPConverters.csproj" />
+    <ProjectReference Include="Unity.Formats.Fbx.Runtime.csproj" />
     <ProjectReference Include="Unity.EditorCoroutines.Editor.csproj" />
     <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.csproj" />
+    <ProjectReference Include="PPv2URPConverters.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.Shared.csproj" />
     <ProjectReference Include="Heathen.Core.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.2D.Runtime.csproj" />
@@ -1142,6 +1143,7 @@
     <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj" />
     <ProjectReference Include="com.rlabrecque.steamworks.net.editor.csproj" />
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj" />
+    <ProjectReference Include="Autodesk.Fbx.csproj" />
     <ProjectReference Include="UnityEngine.XR.LegacyInputHelpers.csproj" />
     <ProjectReference Include="Unity.VisualStudio.Editor.csproj" />
     <ProjectReference Include="Unity.2D.Tilemap.Editor.csproj" />
@@ -1157,12 +1159,14 @@
     <ProjectReference Include="Heathen.Core.csproj" />
     <ProjectReference Include="Unity.InternalAPIEngineBridge.004.csproj" />
     <ProjectReference Include="Unity.Multiplayer.Center.Editor.csproj" />
+    <ProjectReference Include="Unity.Formats.Fbx.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.csproj" />
     <ProjectReference Include="Unity.Postprocessing.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.Config.Runtime.csproj" />
     <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj" />
-    <ProjectReference Include="Heathen.Steamworks.csproj" />
+    <ProjectReference Include="Autodesk.Fbx.Editor.csproj" />
     <ProjectReference Include="Unity.Collections.Editor.csproj" />
+    <ProjectReference Include="Heathen.Steamworks.csproj" />
     <ProjectReference Include="Unity.ShaderGraph.Editor.csproj" />
     <ProjectReference Include="Unity.2D.Sprite.AIIntegration.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Core.Editor.Shared.csproj" />

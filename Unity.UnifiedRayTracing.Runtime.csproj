@@ -49,39 +49,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Hardware\HardwareRayTracingAccelStruct.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\IRayTracingAccelStruct.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\GeometryPool\GeometryPool.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\BLASPositionsPool.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\UnifiedRayTracingException.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\RadeonRaysAPI.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\ComputeRayTracingBackend.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\StringIDs.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\AccelStructInstances.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\TerrainToMesh.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\Common.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\IRayTracingShader.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\Utilities\BackendHelpers.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\HlbvhBuilder.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Hardware\HardwareRayTracingShader.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\RestructureBvh.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\ComputeRayTracingShader.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\HlbvhTopLevelBuilder.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\Scan.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\Utilities\PersistentGPUArray.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\BvhCheck.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\Utilities\Utils.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\RayTracingContext.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\ComputeRayTracingAccelStruct.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\Utilities\GraphicsHelpers.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\StringIDs.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\RayTracingResources.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\AccelStructAdapter.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\GeometryPool\GeometryPoolDefs.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\RadixSort.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\IRayTracingBackend.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\IRayTracingAccelStruct.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\BLASPositionsPool.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\RadeonRaysAPI.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\AccelStructInstances.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\TerrainToMesh.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\Common.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\Utilities\BackendHelpers.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Hardware\HardwareRayTracingShader.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\ComputeRayTracingShader.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\HlbvhTopLevelBuilder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\Utilities\PersistentGPUArray.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\BvhCheck.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\StringIDs.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\AccelStructAdapter.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Hardware\HardwareRayTracingBackend.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Common\Utilities\BlockAllocator.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.render-pipelines.core@33b0f6d355dd\Runtime\UnifiedRayTracing\Compute\RadeonRays\kernels\aabb.hlsl" />
