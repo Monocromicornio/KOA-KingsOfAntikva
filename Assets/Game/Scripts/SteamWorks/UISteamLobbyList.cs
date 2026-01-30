@@ -163,11 +163,11 @@ namespace com.onlineobject.objectnet.integration
 
             if (string.IsNullOrEmpty(this.LobbyKey))
             {
-                NetworkSteamManager.Instance().CreateLobby(this.LobbyName.text);
+                NetworkSteamManager.Instance().CreateLobby(this.LobbyName.text, ("ranked", "no"));
             }
             else
             {
-                NetworkSteamManager.Instance().CreateLobby(this.LobbyName.text, (MY_LOBBY_FILTER_KEY, this.LobbyKey));
+                NetworkSteamManager.Instance().CreateLobby(this.LobbyName.text, (MY_LOBBY_FILTER_KEY, this.LobbyKey), ("ranked" , "no"));
             }
 
             Debug.Log($"[UISteamLobbyList] Criando lobby manual com limite de {maxPlayersPerLobby} jogadores");
@@ -212,6 +212,7 @@ namespace com.onlineobject.objectnet.integration
                 NetworkSteamManager.Instance().RequestLobbyList(() =>
                 {
                     SteamMatchmaking.AddRequestLobbyListStringFilter(MY_LOBBY_FILTER_KEY, this.LobbyKey, ELobbyComparison.k_ELobbyComparisonEqual);
+                    SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "yes", ELobbyComparison.k_ELobbyComparisonEqual);
                     SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(1);
                     foreach (ELobbyDistanceFilter filter in this.FilterTypes)
                     {
@@ -339,6 +340,7 @@ namespace com.onlineobject.objectnet.integration
             else
             {
                 NetworkSteamManager.Instance().CreateLobby(lobbyName, (MY_LOBBY_FILTER_KEY, this.LobbyKey));
+                SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "yes", ELobbyComparison.k_ELobbyComparisonEqual);
             }
 
             Debug.Log($"[UISteamLobbyList] Criando lobby Quick Play '{lobbyName}' com limite de {maxPlayersPerLobby} jogadores");
@@ -363,7 +365,7 @@ namespace com.onlineobject.objectnet.integration
             }
             else
             {
-                this.gameObject.SetActive(false);
+               // this.gameObject.SetActive(false);
             }
         }
 
@@ -402,7 +404,7 @@ namespace com.onlineobject.objectnet.integration
                 }
             }
 
-            this.gameObject.SetActive(false);
+          //  this.gameObject.SetActive(false);
         }
 
         private void RetrySearch()
@@ -450,6 +452,7 @@ namespace com.onlineobject.objectnet.integration
             {
                 NetworkSteamManager.Instance().RequestLobbyList(() => {
                     SteamMatchmaking.AddRequestLobbyListStringFilter(MY_LOBBY_FILTER_KEY, this.LobbyKey, ELobbyComparison.k_ELobbyComparisonEqual);
+                    SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "no", ELobbyComparison.k_ELobbyComparisonEqual);
                     SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(1);
                     foreach (ELobbyDistanceFilter filter in this.FilterTypes)
                     {
@@ -490,7 +493,7 @@ namespace com.onlineobject.objectnet.integration
                                 else
                                 {
                                     Debug.LogWarning("[UISteamLobbyList] Falha ao entrar no lobby");
-                                    this.gameObject.SetActive(false);
+                                   // this.gameObject.SetActive(false);
                                 }
                             });
                         });

@@ -269,12 +269,20 @@ public class MatchController : MonoBehaviour
 
     private void SetPlayerWin()
     {
+        PlayerProfileManager.Instance.AddPoints(50);   // Ganha 50 pts
+       
+        //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posição no ranking:
+
         SetFinishGame(playerSquad.pieces.ToArray(), true);
         SetFinishGame(enemySquad.pieces.ToArray(), false);
     }
 
     private void SetEnemyWin()
     {
+        PlayerProfileManager.Instance.AddPoints(-20);  // Perde 20 pts (mínimo 0)
+
+        //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posição no ranking:
+
         SetFinishGame(enemySquad.pieces.ToArray(), true);
         SetFinishGame(playerSquad.pieces.ToArray(), false);
     }
