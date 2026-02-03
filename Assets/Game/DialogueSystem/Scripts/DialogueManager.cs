@@ -25,6 +25,7 @@ public class DialogueManager : MonoBehaviour
 
     private bool isCurrentlyTyping;
     private string completeText;
+    private bool canCloseDialogue = true;
 
     DialogueBase dialogueBase;
 
@@ -53,7 +54,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     DequeueDialogue();
                 }
-                else
+                else if (canCloseDialogue)
                 {
                     EndDialogue();
                 }
@@ -151,6 +152,13 @@ public class DialogueManager : MonoBehaviour
         portraitRight.gameObject.SetActive(false);
         dialogueInfo.Clear();
         isCurrentlyTyping = false;
+        canCloseDialogue = true;
+    }
+
+    public void SetDialogueClosable(bool closable)
+    {
+        canCloseDialogue = closable;
+        Debug.Log($"[DialogueManager] Diálogo pode ser fechado: {canCloseDialogue}");
     }
     
 }
