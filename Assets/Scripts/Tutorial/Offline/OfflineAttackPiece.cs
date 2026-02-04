@@ -70,7 +70,7 @@ public class OfflineAttackPiece : OfflineInteractivePiece
         GameField targetFieldToOccupy = piece.targetField;
         if (targetFieldToOccupy != null)
         {
-            piece.SelectedAField(targetFieldToOccupy);
+            piece.ForceSelectField(targetFieldToOccupy);
         }
         EndAttack();
     }
@@ -131,7 +131,7 @@ public class OfflineAttackPiece : OfflineInteractivePiece
 
     private void CancelAttack()
     {
-        piece.SelectedAField(fieldAtk);
+        piece.ForceSelectField(fieldAtk);
         EndAttack();
     }
 

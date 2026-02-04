@@ -46,7 +46,7 @@ public class AttackPiece : InteractivePiece
         GameField targetFieldToOccupy = piece.targetField;
         if (targetFieldToOccupy != null)
         {
-            piece.SelectedAField(targetFieldToOccupy);
+            piece.ForceSelectField(targetFieldToOccupy);
         }
         EndAttack();
     }
@@ -87,7 +87,7 @@ public class AttackPiece : InteractivePiece
 
     private void CancelAttack()
     {
-        piece.SelectedAField(fieldAtk);
+        piece.ForceSelectField(fieldAtk);
         EndAttack();
     }
 

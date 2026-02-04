@@ -240,6 +240,8 @@ public class MatchController : MonoBehaviour
         currentTurn = homeTeamTurn ? TurnState.homeTeam : TurnState.awayTeam;
         turn = currentTurn;
 
+        ResetPiecesForNewTurn();
+
         if (!hasConnection && currentTurn == TurnState.awayTeam)
         {
             machinePlayer.gameObject.SetActive(true);
@@ -267,11 +269,19 @@ public class MatchController : MonoBehaviour
         }
     }
 
+    public void ResetPiecesForNewTurn()
+    {
+        foreach (Piece piece in allPieces)
+        {
+            piece.ResetTurnAction();
+        }
+    }
+
     private void SetPlayerWin()
     {
         PlayerProfileManager.Instance.AddPoints(50);   // Ganha 50 pts
        
-        //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posição no ranking:
+        //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posiï¿½ï¿½o no ranking:
 
         SetFinishGame(playerSquad.pieces.ToArray(), true);
         SetFinishGame(enemySquad.pieces.ToArray(), false);
@@ -279,9 +289,9 @@ public class MatchController : MonoBehaviour
 
     private void SetEnemyWin()
     {
-        PlayerProfileManager.Instance.AddPoints(-20);  // Perde 20 pts (mínimo 0)
+        PlayerProfileManager.Instance.AddPoints(-20);  // Perde 20 pts (mï¿½nimo 0)
 
-        //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posição no ranking:
+        //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posiï¿½ï¿½o no ranking:
 
         SetFinishGame(enemySquad.pieces.ToArray(), true);
         SetFinishGame(playerSquad.pieces.ToArray(), false);

@@ -32,6 +32,7 @@ public class Piece : NetworkBehaviour
 
     public float timeToDestroy { get; private set; }
     private bool onValueChangeSetted = false;
+    private bool hasActedThisTurn = false;
 
     private void Awake()
     {
@@ -69,6 +70,8 @@ public class Piece : NetworkBehaviour
 
     public void ActivePiece()
     {
+        hasActedThisTurn = false;
+        
         if (hasConnection)
         {
             if (IsActive())
@@ -92,9 +95,15 @@ public class Piece : NetworkBehaviour
         gameObject.SetActive(true);
     }
 
+    public void ResetTurnAction()
+    {
+        hasActedThisTurn = false;
+    }
+
     public virtual void Select()
     {
         if (pieceColor == PieceColor.red) return;
+        if (hasActedThisTurn) return;
         
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
         
@@ -102,6 +111,7 @@ public class Piece : NetworkBehaviour
         {
             if (!matchController.IsMyTurn()) return;
             if (!hasConnection && matchController.turn == TurnState.awayTeam) return;
+            if (matchController.currentTurn == TurnState.wait) return;
         }
 
         if (activePiece != this)
@@ -129,6 +139,7 @@ public class Piece : NetworkBehaviour
     public void SelectedAField(GameField field)
     {
         if (!IsActive() || finished) return;
+        if (hasActedThisTurn) return;
 
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
         
@@ -137,9 +148,25 @@ public class Piece : NetworkBehaviour
             matchController.MadeActionOnTurn();
         }
         
+        hasActedThisTurn = true;
         targetField = field;
+        
         bool onField = CheckPieceOnField();
         if (!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
+        
+        SendMessage("Deselect", SendMessageOptions.DontRequireReceiver);
+    }
+
+    public void ForceSelectField(GameField field)
+    {
+        if (!IsActive() || finished) return;
+
+        targetField = field;
+        
+        bool onField = CheckPieceOnField();
+        if (!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
+        
+        SendMessage("Deselect", SendMessageOptions.DontRequireReceiver);
     }
 
     public bool CheckPieceOnField()

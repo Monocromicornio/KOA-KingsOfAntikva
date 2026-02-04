@@ -29,6 +29,7 @@ public class OfflinePiece : MonoBehaviour
     public PieceType type;
 
     public float timeToDestroy { get; private set; }
+    private bool hasActedThisTurn = false;
 
     private void Awake()
     {
@@ -57,6 +58,8 @@ public class OfflinePiece : MonoBehaviour
 
     public void ActivePiece()
     {
+        hasActedThisTurn = false;
+        
         if (pieceColor == PieceColor.undefined)
         {
             TurnBluePiece();
@@ -65,9 +68,15 @@ public class OfflinePiece : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    public void ResetTurnAction()
+    {
+        hasActedThisTurn = false;
+    }
+
     public virtual void Select()
     {
         if (pieceColor == PieceColor.red) return;
+        if (hasActedThisTurn) return;
 
         if (activePiece != this)
         {
@@ -121,9 +130,13 @@ public class OfflinePiece : MonoBehaviour
 
     public void SelectedAField(GameField field)
     {
+        if (hasActedThisTurn) return;
+        
         Debug.Log($"[OfflinePiece] SelectedAField called on {name}. Target field: {field?.index ?? -1}");
         
+        hasActedThisTurn = true;
         targetField = field;
+        
         bool onField = CheckPieceOnField();
         
         Debug.Log($"[OfflinePiece] CheckPieceOnField returned: {onField}");
@@ -133,6 +146,22 @@ public class OfflinePiece : MonoBehaviour
             Debug.Log($"[OfflinePiece] Sending NewTarget message");
             SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
         }
+        
+        SendMessage("Deselect", SendMessageOptions.DontRequireReceiver);
+    }
+
+    public void ForceSelectField(GameField field)
+    {
+        targetField = field;
+        
+        bool onField = CheckPieceOnField();
+        
+        if (!onField) 
+        {
+            SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
+        }
+        
+        SendMessage("Deselect", SendMessageOptions.DontRequireReceiver);
     }
 
     public bool CheckPieceOnField()
