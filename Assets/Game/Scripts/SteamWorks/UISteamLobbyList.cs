@@ -213,7 +213,7 @@ namespace com.onlineobject.objectnet.integration
                 {
                     SteamMatchmaking.AddRequestLobbyListStringFilter(MY_LOBBY_FILTER_KEY, this.LobbyKey, ELobbyComparison.k_ELobbyComparisonEqual);
                     SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "yes", ELobbyComparison.k_ELobbyComparisonEqual);
-                    SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(3);
+                    SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(1);
                     foreach (ELobbyDistanceFilter filter in this.FilterTypes)
                     {
                         SteamMatchmaking.AddRequestLobbyListDistanceFilter(filter);
@@ -452,7 +452,7 @@ namespace com.onlineobject.objectnet.integration
                 NetworkSteamManager.Instance().RequestLobbyList(() => {
                     SteamMatchmaking.AddRequestLobbyListStringFilter(MY_LOBBY_FILTER_KEY, this.LobbyKey, ELobbyComparison.k_ELobbyComparisonEqual);
                     SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "no", ELobbyComparison.k_ELobbyComparisonEqual);
-                    SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(3);
+                    SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(1);
                     foreach (ELobbyDistanceFilter filter in this.FilterTypes)
                     {
                         SteamMatchmaking.AddRequestLobbyListDistanceFilter(filter);
