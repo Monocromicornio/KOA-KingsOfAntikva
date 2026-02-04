@@ -205,7 +205,10 @@ namespace com.onlineobject.objectnet.integration
         {
             if (string.IsNullOrEmpty(this.LobbyKey))
             {
-                NetworkSteamManager.Instance().RequestLobbyList();
+                NetworkSteamManager.Instance().RequestLobbyList(() =>
+                {
+                    SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "yes", ELobbyComparison.k_ELobbyComparisonEqual);
+                });
             }
             else
             {
@@ -335,7 +338,7 @@ namespace com.onlineobject.objectnet.integration
 
             if (string.IsNullOrEmpty(this.LobbyKey))
             {
-                NetworkSteamManager.Instance().CreateLobby(lobbyName);
+                NetworkSteamManager.Instance().CreateLobby(lobbyName, ("ranked", "yes"));
             }
             else
             {
@@ -446,7 +449,10 @@ namespace com.onlineobject.objectnet.integration
         {
             if (string.IsNullOrEmpty(this.LobbyKey))
             {
-                NetworkSteamManager.Instance().RequestLobbyList();
+                NetworkSteamManager.Instance().RequestLobbyList(() =>
+                {
+                    SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "no", ELobbyComparison.k_ELobbyComparisonEqual);
+                });
             }
             else
             {
