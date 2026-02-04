@@ -205,10 +205,7 @@ namespace com.onlineobject.objectnet.integration
         {
             if (string.IsNullOrEmpty(this.LobbyKey))
             {
-                NetworkSteamManager.Instance().RequestLobbyList(() =>
-                {
-                    SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "yes", ELobbyComparison.k_ELobbyComparisonEqual);
-                });
+                NetworkSteamManager.Instance().RequestLobbyList();
             }
             else
             {
@@ -216,7 +213,7 @@ namespace com.onlineobject.objectnet.integration
                 {
                     SteamMatchmaking.AddRequestLobbyListStringFilter(MY_LOBBY_FILTER_KEY, this.LobbyKey, ELobbyComparison.k_ELobbyComparisonEqual);
                     SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "yes", ELobbyComparison.k_ELobbyComparisonEqual);
-                    SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(1);
+                    SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(3);
                     foreach (ELobbyDistanceFilter filter in this.FilterTypes)
                     {
                         SteamMatchmaking.AddRequestLobbyListDistanceFilter(filter);
@@ -342,8 +339,7 @@ namespace com.onlineobject.objectnet.integration
             }
             else
             {
-                NetworkSteamManager.Instance().CreateLobby(lobbyName, (MY_LOBBY_FILTER_KEY, this.LobbyKey));
-                SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "yes", ELobbyComparison.k_ELobbyComparisonEqual);
+                NetworkSteamManager.Instance().CreateLobby(lobbyName, (MY_LOBBY_FILTER_KEY, this.LobbyKey),("ranked", "yes"));
             }
 
             Debug.Log($"[UISteamLobbyList] Criando lobby Quick Play '{lobbyName}' com limite de {maxPlayersPerLobby} jogadores");
@@ -449,17 +445,14 @@ namespace com.onlineobject.objectnet.integration
         {
             if (string.IsNullOrEmpty(this.LobbyKey))
             {
-                NetworkSteamManager.Instance().RequestLobbyList(() =>
-                {
-                    SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "no", ELobbyComparison.k_ELobbyComparisonEqual);
-                });
+                NetworkSteamManager.Instance().RequestLobbyList();
             }
             else
             {
                 NetworkSteamManager.Instance().RequestLobbyList(() => {
                     SteamMatchmaking.AddRequestLobbyListStringFilter(MY_LOBBY_FILTER_KEY, this.LobbyKey, ELobbyComparison.k_ELobbyComparisonEqual);
                     SteamMatchmaking.AddRequestLobbyListStringFilter("ranked", "no", ELobbyComparison.k_ELobbyComparisonEqual);
-                    SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(1);
+                    SteamMatchmaking.AddRequestLobbyListFilterSlotsAvailable(3);
                     foreach (ELobbyDistanceFilter filter in this.FilterTypes)
                     {
                         SteamMatchmaking.AddRequestLobbyListDistanceFilter(filter);
