@@ -93,6 +93,10 @@ public class TutorialManager : MonoBehaviour
         {
             ClearSpawnedPieces();
         }
+        else
+        {
+            ResetAllSpawnedPieces();
+        }
 
         if (step.piecesToSpawn != null && step.piecesToSpawn.Length > 0)
         {
@@ -291,6 +295,30 @@ public class TutorialManager : MonoBehaviour
         currentStep.onStepComplete?.Invoke();
 
         StartCoroutine(WaitAndProceed());
+    }
+
+    private void ResetPieceAction(MonoBehaviour piece)
+    {
+        if (piece is Piece onlinePiece)
+        {
+            onlinePiece.ResetTurnAction();
+        }
+        else if (piece is OfflinePiece offlinePiece)
+        {
+            offlinePiece.ResetTurnAction();
+        }
+    }
+
+    private void ResetAllSpawnedPieces()
+    {
+        Debug.Log($"[Tutorial] Resetting {spawnedPieces.Count} spawned pieces for new step");
+        foreach (MonoBehaviour piece in spawnedPieces)
+        {
+            if (piece != null)
+            {
+                ResetPieceAction(piece);
+            }
+        }
     }
 
     private IEnumerator WaitAndProceed()

@@ -72,11 +72,13 @@ public class OfflineAttackPiece : OfflineInteractivePiece
         {
             piece.ForceSelectField(targetFieldToOccupy);
         }
+        piece.ResetTurnAction();
         EndAttack();
     }
 
     private void Failed()
     {
+        piece.ResetTurnAction();
         CancelAttack();
     }
 
@@ -132,6 +134,7 @@ public class OfflineAttackPiece : OfflineInteractivePiece
     private void CancelAttack()
     {
         piece.ForceSelectField(fieldAtk);
+        piece.ResetTurnAction();
         EndAttack();
     }
 

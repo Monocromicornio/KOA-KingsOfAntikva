@@ -70,6 +70,7 @@ public class OfflinePiece : MonoBehaviour
 
     public void ResetTurnAction()
     {
+        Debug.Log($"[OfflinePiece] ResetTurnAction called on {name}. Was: {hasActedThisTurn}, Now: false");
         hasActedThisTurn = false;
     }
 
@@ -132,7 +133,7 @@ public class OfflinePiece : MonoBehaviour
     {
         if (hasActedThisTurn) return;
         
-        Debug.Log($"[OfflinePiece] SelectedAField called on {name}. Target field: {field?.index ?? -1}");
+        Debug.Log($"[OfflinePiece] SelectedAField called on {name}. Target field: {field?.index ?? -1}. Setting hasActedThisTurn = true");
         
         hasActedThisTurn = true;
         targetField = field;
@@ -168,6 +169,7 @@ public class OfflinePiece : MonoBehaviour
     {
         if (field == targetField)
         {
+            ResetTurnAction();
             ChangeTurn();
             return true;
         }
@@ -196,6 +198,8 @@ public class OfflinePiece : MonoBehaviour
             TutorialEvents.TriggerPieceMoved(this, oldField, field);
 
             SendMessage("ChangeField", targetField, SendMessageOptions.DontRequireReceiver);
+            
+            ResetTurnAction();
             ChangeTurn();
             return true;
         }
