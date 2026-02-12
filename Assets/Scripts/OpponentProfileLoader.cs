@@ -18,6 +18,13 @@ public class OpponentProfileLoader : MonoBehaviour
     {
         Debug.Log("[OpponentProfileLoader] Iniciando sistema de perfil do oponente");
         
+        if (!IsOnlineGame())
+        {
+            Debug.Log("[OpponentProfileLoader] Jogo em modo offline - sistema de perfil do oponente desativado");
+            enemyProfileDisplay?.gameObject.SetActive(false);
+            return;
+        }
+        
         SyncronizeTable.OnOpponentSteamIdReceived += OnOpponentSteamIdReceived;
         
         StartCoroutine(WaitForOpponentSteamId());
@@ -62,7 +69,7 @@ public class OpponentProfileLoader : MonoBehaviour
                 }
             }
             
-            Debug.Log($"[OpponentProfileLoader] Aguardando Steam ID do oponente... ({searchTime:F0}s)");
+           // Debug.Log($"[OpponentProfileLoader] Aguardando Steam ID do oponente... ({searchTime:F0}s)");
         }
         
         if (!foundOpponent)
@@ -88,6 +95,13 @@ public class OpponentProfileLoader : MonoBehaviour
     public void ForceRefresh()
     {
         Debug.Log("[OpponentProfileLoader] ForceRefresh chamado");
+        
+        if (!IsOnlineGame())
+        {
+            Debug.Log("[OpponentProfileLoader] Jogo em modo offline - ForceRefresh ignorado");
+            return;
+        }
+        
         foundOpponent = false;
         searchTime = 0f;
         
@@ -99,5 +113,16 @@ public class OpponentProfileLoader : MonoBehaviour
         {
             StartCoroutine(WaitForOpponentSteamId());
         }
+    }
+    
+    private bool IsOnlineGame()
+    {
+        if (MatchController.instance == null)
+        {
+            Debug.LogWarning("[OpponentProfileLoader] MatchController.instance não encontrado");
+            return false;
+        }
+        
+        return MatchController.instance.hasConnection;
     }
 }
