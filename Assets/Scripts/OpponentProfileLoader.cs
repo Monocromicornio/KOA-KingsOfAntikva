@@ -4,6 +4,8 @@ using System.Collections;
 
 public class OpponentProfileLoader : MonoBehaviour
 {
+    public static System.Action OnOpponentProfileLoaded;
+
     [Header("References")]
     [SerializeField]
     private PlayerProfileDisplay enemyProfileDisplay;
@@ -85,6 +87,8 @@ public class OpponentProfileLoader : MonoBehaviour
             Debug.Log($"[OpponentProfileLoader] Configurando perfil do oponente com Steam ID: {steamId}");
             enemyProfileDisplay.SetCustomSteamId(steamId);
             enemyProfileDisplay.gameObject.SetActive(true);
+            
+            OnOpponentProfileLoaded?.Invoke();
         }
         else
         {

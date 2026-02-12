@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -39,7 +39,7 @@ public class SavePieceOrder : MonoBehaviour
 
     public void Offline()
     {
-        PressButton(() => SceneManager.LoadScene("Game"));
+        PressButton(() => SceneLoadingHandler.LoadSceneWithLoading("Game", "Carregando partida offline..."));
     }
 
     public void SavePieces()

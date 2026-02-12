@@ -139,7 +139,7 @@ namespace com.onlineobject.objectnet.integration
             }
 
             Debug.Log("Loading game scen via Steam Lobby Wait Manager");
-            SceneManager.LoadScene(gameSceneName);
+            SceneLoadingHandler.LoadSceneWithLoading(gameSceneName, "Iniciando partida...");
         }
 
         private void OnLeaveLobby()
