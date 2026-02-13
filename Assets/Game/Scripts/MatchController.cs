@@ -24,6 +24,7 @@ public class MatchController : MonoBehaviour
 
     public bool finished { get; private set; }
     private bool homeTeamTurn = false; //False to start with home, true for away
+
     public TurnState currentTurn { get; private set; }
     public TurnState myTurn { get; private set; }
     public TurnState turn { get; private set; }
@@ -116,11 +117,15 @@ public class MatchController : MonoBehaviour
     public void OnSteamConnectionStatusChanged(SteamNetConnectionStatusChangedCallback_t callback)
     {
         Debug.Log("[MatchController] Steam Connection Status Changed to " + callback.m_info.m_eState);
-        if (callback.m_info.m_eState == ESteamNetworkingConnectionState.k_ESteamNetworkingConnectionState_None)
+        if (callback.m_info.m_eState == ESteamNetworkingConnectionState.k_ESteamNetworkingConnectionState_ClosedByPeer)
+        {
+            SetPlayerWin();
+            FinishGame();
+        }
+        else if (callback.m_info.m_eState == ESteamNetworkingConnectionState.k_ESteamNetworkingConnectionState_None)
         {
             FinishGame();
         }
-       
     }
 
 
@@ -293,8 +298,12 @@ public class MatchController : MonoBehaviour
 
     private void SetPlayerWin()
     {
-        PlayerProfileManager.Instance.AddPoints(50);   // Ganha 50 pts
-       
+        if (finished) return;
+        Debug.Log("Won Game");
+        if (MatchEvents.isRanked == true)
+        {
+            PlayerProfileManager.Instance.AddPoints(50);   // Ganha 50 pts
+        }
         //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posi��o no ranking:
 
         SetFinishGame(playerSquad.pieces.ToArray(), true);
@@ -303,8 +312,12 @@ public class MatchController : MonoBehaviour
 
     private void SetEnemyWin()
     {
-        PlayerProfileManager.Instance.AddPoints(-20);  // Perde 20 pts (m�nimo 0)
-
+        if (finished) return;
+        Debug.Log("Lost Game");
+        if (MatchEvents.isRanked == true)
+        {
+            PlayerProfileManager.Instance.AddPoints(-20);  // Perde 20 pts (m�nimo 0)
+        }
         //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posi��o no ranking:
 
         SetFinishGame(enemySquad.pieces.ToArray(), true);
@@ -325,9 +338,14 @@ public class MatchController : MonoBehaviour
 
         if(exit != null) exit.gameObject.SetActive(true);
 
-        CloseLobby();
+        Invoke(nameof(CloseLobby), 2f);
     }
 
+    public void Surrender()
+    {
+        SetEnemyWin();
+        FinishGame();
+    }
     public void SetFinishGame(Piece[] pieces, bool win)
     {
         if (pieces.Length == 0) return;
@@ -340,12 +358,11 @@ public class MatchController : MonoBehaviour
 
     private bool CheckEndGame()
     {
-        if (finished) return true;
-
         int players = CountActivePiece(playerSquad.pieces);
         if (players == 0)
         {
             SetEnemyWin();
+            if (finished) return true;
             FinishGame();
             return true;
         }
@@ -354,6 +371,7 @@ public class MatchController : MonoBehaviour
         if (enemies == 0)
         {
             SetPlayerWin();
+            if (finished) return true;
             FinishGame();
             return true;
         }
@@ -379,5 +397,15 @@ public class MatchController : MonoBehaviour
         }
 
         return amount;
+    }
+}
+
+public static class MatchEvents
+{
+    public static bool isRanked;
+
+    public static void SetRankedMatch(bool ranked)
+    {
+        isRanked = ranked;
     }
 }

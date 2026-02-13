@@ -171,6 +171,7 @@ namespace com.onlineobject.objectnet.integration
             }
 
             Debug.Log($"[UISteamLobbyList] Criando lobby manual com limite de {maxPlayersPerLobby} jogadores");
+            MatchEvents.SetRankedMatch(false);
             StartCoroutine(EnforceLobbyMemberLimit(maxPlayersPerLobby));
             StartCoroutine(NotifyPlayerWaitController());
         }
@@ -221,6 +222,7 @@ namespace com.onlineobject.objectnet.integration
                 });
             }
 
+            MatchEvents.SetRankedMatch(true);
             StartCoroutine(CheckForAvailableLobbies());
         }
 
@@ -342,6 +344,7 @@ namespace com.onlineobject.objectnet.integration
                 NetworkSteamManager.Instance().CreateLobby(lobbyName, (MY_LOBBY_FILTER_KEY, this.LobbyKey),("ranked", "yes"));
             }
 
+            MatchEvents.SetRankedMatch(true);
             Debug.Log($"[UISteamLobbyList] Criando lobby Quick Play '{lobbyName}' com limite de {maxPlayersPerLobby} jogadores");
             StartCoroutine(EnforceLobbyMemberLimit(maxPlayersPerLobby));
             OnMatchFound();
@@ -459,6 +462,7 @@ namespace com.onlineobject.objectnet.integration
                     }
                 });
             }
+            MatchEvents.SetRankedMatch(false);
         }
 
         private void LateUpdate()
