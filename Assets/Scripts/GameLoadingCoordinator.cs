@@ -54,8 +54,36 @@ public class GameLoadingCoordinator : MonoBehaviour
 
         if (!isOnline)
         {
-            Debug.Log("[GameLoadingCoordinator] Jogo offline detectado, ocultando loading screen imediatamente");
+            Debug.Log("[GameLoadingCoordinator] Jogo offline detectado, aguardando peças carregarem...");
+            SceneLoadingHandler.SetLoadingStatus("Preparando tabuleiro...");
+            
             yield return new WaitForSeconds(0.5f);
+            
+            bool piecesLoaded = false;
+            float offlineWaitTime = 0f;
+            float maxOfflineWait = 3f;
+            
+            while (!piecesLoaded && offlineWaitTime < maxOfflineWait)
+            {
+                piecesLoaded = CheckPiecesLoaded();
+                
+                if (piecesLoaded)
+                {
+                    Debug.Log("[GameLoadingCoordinator] Peças carregadas no modo offline");
+                    SceneLoadingHandler.UpdateLoadingProgress(0.9f);
+                    yield return new WaitForSeconds(0.3f);
+                    break;
+                }
+                
+                offlineWaitTime += Time.deltaTime;
+                float progress = 0.5f + (offlineWaitTime / maxOfflineWait) * 0.4f;
+                SceneLoadingHandler.UpdateLoadingProgress(progress);
+                
+                yield return null;
+            }
+            
+            SceneLoadingHandler.UpdateLoadingProgress(1f);
+            yield return new WaitForSeconds(0.2f);
             SceneLoadingHandler.HideLoadingScreen();
             yield break;
         }
@@ -129,5 +157,22 @@ public class GameLoadingCoordinator : MonoBehaviour
             return true;
 
         return SyncronizeTable.OpponentSteamId != 0;
+    }
+
+    private bool CheckPiecesLoaded()
+    {
+        if (MatchController.instance == null)
+            return false;
+
+        PlayerSquad playerSquad = MatchController.instance.playerSquad;
+        EnemySquad enemySquad = MatchController.instance.enemySquad;
+
+        if (playerSquad == null || enemySquad == null)
+            return false;
+
+        bool playerPiecesLoaded = playerSquad.pieces != null && playerSquad.pieces.Count > 0;
+        bool enemyPiecesLoaded = enemySquad.pieces != null && enemySquad.pieces.Count > 0;
+
+        return playerPiecesLoaded && enemyPiecesLoaded;
     }
 }
