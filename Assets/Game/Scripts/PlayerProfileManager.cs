@@ -32,9 +32,9 @@ public class PlayerProfileManager : MonoBehaviour
        
         while (!SteamInitializer.Initialized) yield return null;
 
-        
-
         yield return StartCoroutine(GetPlayerData());
+        
+        NotifyHUDUpdate();
     }
 
     
@@ -92,6 +92,7 @@ public class PlayerProfileManager : MonoBehaviour
         pontuation += delta;
         if (pontuation < 0) pontuation = 0;
         StartCoroutine(UpdatePlayerData());
+        NotifyHUDUpdate();
     }
 
     
@@ -99,6 +100,15 @@ public class PlayerProfileManager : MonoBehaviour
     {
         rankingPosition = newRank;
         StartCoroutine(UpdatePlayerData());
+    }
+    
+    private void NotifyHUDUpdate()
+    {
+        PlayerHUDManager hudManager = FindObjectOfType<PlayerHUDManager>();
+        if (hudManager != null)
+        {
+            hudManager.RefreshHUD();
+        }
     }
     
     public int GetOpponentPoints(ulong opponentSteamId)

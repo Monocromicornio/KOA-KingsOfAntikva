@@ -51,6 +51,10 @@ public class MatchController : MonoBehaviour
     [SerializeField]
     private Button exit;
 
+    [Header("Turn Timer")]
+    [SerializeField]
+    private TurnTimer turnTimer;
+
     private void Awake()
     {
         instance = this;
@@ -212,6 +216,11 @@ public class MatchController : MonoBehaviour
     public void MadeActionOnTurn()
     {
         currentTurn = TurnState.wait;
+        
+        if (turnTimer != null)
+        {
+            turnTimer.OnPlayerMadeMove();
+        }
     }
 
     public void ChangeTurn()
@@ -246,6 +255,11 @@ public class MatchController : MonoBehaviour
         {
             machinePlayer.gameObject.SetActive(true);
             machinePlayer.StartTurn();
+        }
+        
+        if (turnTimer != null)
+        {
+            turnTimer.OnTurnChanged();
         }
     }
 
@@ -304,6 +318,10 @@ public class MatchController : MonoBehaviour
         currentTurn = TurnState.undefined;
         turn = currentTurn;
 
+        if (turnTimer != null)
+        {
+            turnTimer.StopTimer();
+        }
 
         if(exit != null) exit.gameObject.SetActive(true);
 

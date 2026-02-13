@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Steamworks;
@@ -23,8 +23,14 @@ public class PlayerHUDManager : MonoBehaviour
         while (PlayerProfileManager.Instance == null || !SteamInitializer.Initialized)
             yield return null;
         
+        Debug.Log("[PlayerHUDManager] Aguardando dados do perfil...");
+        
+        yield return new WaitUntil(() => PlayerProfileManager.Instance.pontuation >= 0);
+        
         nicknameText.text = PlayerProfileManager.Instance.nickname;
         pontuationText.text = PlayerProfileManager.Instance.pontuation.ToString();
+        
+        Debug.Log($"[PlayerHUDManager] Perfil carregado - Nick: {PlayerProfileManager.Instance.nickname}, Pontos: {PlayerProfileManager.Instance.pontuation}");
                 
         yield return StartCoroutine(LoadSteamAvatar());
     }
