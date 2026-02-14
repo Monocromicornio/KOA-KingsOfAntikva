@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d3a9a3287be674da0d6f479b510a90, type: 3}
+  m_Name: Tutorial_Step10_Timer
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialStep
+  dialogue: {fileID: 11400000, guid: 2a46a6317d9457140a1d6381682260be, type: 2}
+  stepType: 0
+  highlightTarget:
+    targetType: 3
+    uiTarget: {fileID: 0}
+    worldTarget: {fileID: 0}
+    gameObjectName: Timer
+  piecesToSpawn: []
+  clearBoardBeforeSpawn: 1
+  waitForDialogueEnd: 1
+  onStepStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  delayBeforeNextStep: 2
