@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System;
 
 public class TurnTimer : MonoBehaviour
 {
@@ -32,12 +33,11 @@ public class TurnTimer : MonoBehaviour
     private bool isRunning = false;
     private bool hasStarted = false;
     private int consecutiveSkips = 0;
-    private TurnState lastTurnState = TurnState.undefined;
 
     private void Start()
     {
         matchController = MatchController.instance;
-        
+
         if (matchController == null)
         {
             Debug.LogError("[TurnTimer] MatchController não encontrado!");
@@ -54,17 +54,16 @@ public class TurnTimer : MonoBehaviour
 
         ResetTimer();
         UpdateTimerDisplay();
-        
+
         timerText.gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        return;
         if (!isRunning || matchController.finished)
             return;
 
-        currentTime -= Time.deltaTime;
+        currentTime -= Time.unscaledDeltaTime;
 
         if (currentTime <= 0)
         {
@@ -77,6 +76,11 @@ public class TurnTimer : MonoBehaviour
 
     public void StartTimer()
     {
+        bool isMyTurn = matchController.IsMyTurn();
+        Debug.Log($"[TurnTimer] ========== START TIMER ==========");
+        Debug.Log($"[TurnTimer] IsMyTurn: {isMyTurn}");
+        Debug.Log($"[TurnTimer] consecutiveSkips: {consecutiveSkips}");
+        
         if (!hasStarted)
         {
             hasStarted = true;
@@ -86,12 +90,6 @@ public class TurnTimer : MonoBehaviour
 
         ResetTimer();
         isRunning = true;
-
-        if (matchController.turn != lastTurnState)
-        {
-            consecutiveSkips = 0;
-            lastTurnState = matchController.turn;
-        }
 
         Debug.Log($"[TurnTimer] Timer resetado para {turnDuration} segundos");
     }
@@ -109,48 +107,54 @@ public class TurnTimer : MonoBehaviour
 
     private void OnTimeExpired()
     {
-        Debug.Log("[TurnTimer] Tempo esgotado! Passando turno automaticamente...");
+        bool isMyTurn = matchController.IsMyTurn();
+        Debug.Log($"[TurnTimer] ========== TEMPO ESGOTADO ==========");
+        Debug.Log($"[TurnTimer] IsMyTurn: {isMyTurn}");
+        Debug.Log($"[TurnTimer] consecutiveSkips ANTES: {consecutiveSkips}");
         
         StopTimer();
-        
-        consecutiveSkips++;
-        
-        if (consecutiveSkips >= 2 && matchController.IsMyTurn())
+
+        if (isMyTurn)
         {
-            Debug.Log("[TurnTimer] Jogador passou 2 vezes seguidas - Desistência!");
-            HandleForfeit();
+            TurnTimerEvents.OnPlayerTimerEnded?.Invoke();
+
+            consecutiveSkips++;
+            Debug.Log($"[TurnTimer] >>> INCREMENTANDO consecutiveSkips (era {consecutiveSkips - 1}, agora é {consecutiveSkips})");
+
+            if (consecutiveSkips >= 2)
+            {
+                Debug.Log("[TurnTimer] !!! DESISTÊNCIA POR 2 TIMEOUTS CONSECUTIVOS !!!");
+                HandleForfeit();
+                return;
+            }
+            else
+            {
+                matchController.ChangeTurn();
+            }
         }
         else
         {
-            matchController.ChangeTurn();
+            Debug.Log($"[TurnTimer] Tempo esgotado do OPONENTE - consecutiveSkips mantém em {consecutiveSkips}");
         }
     }
 
     private void HandleForfeit()
     {
         Debug.Log("[TurnTimer] Aplicando desistência por timeout");
-        
+
         if (matchController.IsMyTurn())
         {
             matchController.Surrender();
-            matchController.SetFinishGame(matchController.playerSquad.pieces.ToArray(), false);
-            matchController.SetFinishGame(matchController.enemySquad.pieces.ToArray(), true);
         }
-        else
-        {
-            matchController.SetFinishGame(matchController.playerSquad.pieces.ToArray(), true);
-            matchController.SetFinishGame(matchController.enemySquad.pieces.ToArray(), false);
-        }
-       
     }
 
     private void UpdateTimerDisplay()
     {
         int minutes = Mathf.FloorToInt(currentTime / 60f);
         int seconds = Mathf.FloorToInt(currentTime % 60f);
-        
+
         timerText.text = $"{minutes:00}:{seconds:00}";
-        
+
         if (currentTime <= dangerThreshold)
         {
             timerText.color = dangerColor;
@@ -167,20 +171,30 @@ public class TurnTimer : MonoBehaviour
 
     public void OnPlayerMadeMove()
     {
-        if (!hasStarted)
+        bool isMyTurn = matchController.IsMyTurn();
+        Debug.Log($"[TurnTimer] ========== JOGADOR FEZ MOVIMENTO ==========");
+        Debug.Log($"[TurnTimer] IsMyTurn: {isMyTurn}");
+        Debug.Log($"[TurnTimer] consecutiveSkips ANTES: {consecutiveSkips}");
+
+        StopTimer();
+
+        if (isMyTurn)
         {
-            StartTimer();
+            consecutiveSkips = 0;
+            Debug.Log("[TurnTimer] <<< RESETANDO consecutiveSkips para 0 (jogador local fez movimento)");
         }
-        
-        consecutiveSkips = 0;
+        else
+        {
+            Debug.Log($"[TurnTimer] Movimento do OPONENTE - consecutiveSkips mantém em {consecutiveSkips}");
+        }
     }
 
     public void OnTurnChanged()
     {
-        if (hasStarted)
-        {
-            StartTimer();
-        }
+        Debug.Log($"[TurnTimer] ========== TURNO MUDOU ==========");
+        Debug.Log($"[TurnTimer] consecutiveSkips: {consecutiveSkips}");
+        
+        StartTimer();
     }
 
     public float GetRemainingTime()
@@ -205,4 +219,10 @@ public class TurnTimer : MonoBehaviour
             isRunning = true;
         }
     }
+}
+
+public static class TurnTimerEvents
+{
+    public static Action OnPlayerTimerEnded;
+
 }

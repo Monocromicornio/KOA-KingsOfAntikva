@@ -272,7 +272,7 @@ public class MatchController : MonoBehaviour
 
     public bool IsMyTurn()
     {
-        if (!hasConnection) return true;
+       // if (!hasConnection) return true;
         return myTurn == turn;
     }
 

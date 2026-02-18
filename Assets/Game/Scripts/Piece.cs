@@ -229,7 +229,7 @@ public class Piece : NetworkBehaviour
         
         if (!isTutorialMode)
         {
-            if (!IsActive() || !matchController.IsMyTurn()) return;
+            if (!IsActive() ) return; //|| !matchController.IsMyTurn()
         }
         else
         {
