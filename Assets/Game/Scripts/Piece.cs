@@ -70,7 +70,7 @@ public class Piece : NetworkBehaviour
 
     public void ActivePiece()
     {
-        hasActedThisTurn = false;
+        // TO DO: Se ha travamentos ou fps baixo no loading, algumas pecas de um jogador sao settadas para o outro. talvez por conta do IsActive()
         
         if (hasConnection)
         {

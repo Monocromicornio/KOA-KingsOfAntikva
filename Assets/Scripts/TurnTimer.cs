@@ -60,6 +60,7 @@ public class TurnTimer : MonoBehaviour
 
     private void Update()
     {
+        return;
         if (!isRunning || matchController.finished)
             return;
 
@@ -131,6 +132,7 @@ public class TurnTimer : MonoBehaviour
         
         if (matchController.IsMyTurn())
         {
+            matchController.Surrender();
             matchController.SetFinishGame(matchController.playerSquad.pieces.ToArray(), false);
             matchController.SetFinishGame(matchController.enemySquad.pieces.ToArray(), true);
         }
@@ -139,8 +141,7 @@ public class TurnTimer : MonoBehaviour
             matchController.SetFinishGame(matchController.playerSquad.pieces.ToArray(), true);
             matchController.SetFinishGame(matchController.enemySquad.pieces.ToArray(), false);
         }
-        
-        matchController.FinishGame();
+       
     }
 
     private void UpdateTimerDisplay()

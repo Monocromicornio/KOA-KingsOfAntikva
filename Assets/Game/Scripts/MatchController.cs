@@ -12,7 +12,9 @@ public class MatchController : MonoBehaviour
 {
     public static MatchController instance;
     public NetworkManager networkManager => NetworkManager.Instance();
-    public bool hasConnection => networkManager.HasConnection();
+    public bool hasConnection => networkManager.HasConnection() &&
+                                 (networkManager.IsServerStarted() || networkManager.IsConnected());
+
     public NetworkSteamManager steamManager => NetworkSteamManager.Instance();
     private List<Piece> allPieces;
 
