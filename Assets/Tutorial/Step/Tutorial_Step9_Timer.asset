@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50d3a9a3287be674da0d6f479b510a90, type: 3}
-  m_Name: Tutorial_Step10_Timer
+  m_Name: Tutorial_Step9_Timer
   m_EditorClassIdentifier: Assembly-CSharp::TutorialStep
   dialogue: {fileID: 11400000, guid: 2a46a6317d9457140a1d6381682260be, type: 2}
   stepType: 0
@@ -19,6 +19,8 @@ MonoBehaviour:
     uiTarget: {fileID: 0}
     worldTarget: {fileID: 0}
     gameObjectName: Timer
+    childObjectName: 
+    autoToggleGameObject: 1
   piecesToSpawn: []
   clearBoardBeforeSpawn: 1
   waitForDialogueEnd: 1
