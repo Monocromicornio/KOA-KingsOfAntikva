@@ -47,6 +47,14 @@ public class Piece : NetworkBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        if (MinimapController.instance != null && fieldIndex >= 0)
+        {
+            MinimapController.instance.RegisterPiece(this);
+        }
+    }
+
     private void PassiveUpdate()
     {
         if (onValueChangeSetted) return;
@@ -134,6 +142,11 @@ public class Piece : NetworkBehaviour
 
         transform.position = this.field.transform.position;
         this.field.SetPiece(this);
+
+        if (MinimapController.instance != null)
+        {
+            MinimapController.instance.RegisterPiece(this);
+        }
     }
 
     public void SelectedAField(GameField field)
@@ -184,12 +197,18 @@ public class Piece : NetworkBehaviour
         if (Vector3.Distance(transform.position, targetField.transform.position) <= distanceThreshold)
         {
             GameField oldField = field;
+            int oldIndex = fieldIndex;
             
             targetField.SetPiece(null);
             field?.SetPiece(null);
 
             fieldIndex = targetField.index;
             field.SetPiece(this);
+
+            if (MinimapController.instance != null)
+            {
+                MinimapController.instance.UpdatePiecePosition(this, oldIndex, fieldIndex);
+            }
 
             TutorialEvents.TriggerPieceMoved(this, oldField, field);
 
@@ -206,6 +225,11 @@ public class Piece : NetworkBehaviour
         matchController?.OnDestroyPiece(this);
         if (activePiece == this) activePiece = null;
         field?.SetPiece(null);
+
+        if (MinimapController.instance != null)
+        {
+            MinimapController.instance.UnregisterPiece(this);
+        }
     }
 
     private void Destroy()

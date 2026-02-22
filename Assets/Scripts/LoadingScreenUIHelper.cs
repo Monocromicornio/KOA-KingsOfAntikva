@@ -7,7 +7,7 @@ using TMPro;
 
 public class LoadingScreenUIHelper : MonoBehaviour
 {
-    [MenuItem("GameObject/UI/Loading Screen System", false, 10)]
+    [MenuItem("GameObject/UI Loading/Loading Screen System", false, 10)]
     static void CreateLoadingScreenSystem(MenuCommand menuCommand)
     {
         Canvas existingCanvas = FindObjectOfType<Canvas>();
