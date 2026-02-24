@@ -19,6 +19,11 @@ public class EditableField : Field
 
     private void OnMouseDown()
     {
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject() == true)
+        {
+            return;
+        }
+
         onSelect.Invoke();
     }
 

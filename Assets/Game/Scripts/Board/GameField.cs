@@ -28,6 +28,7 @@ public class GameField : Field
 
     private void Update()
     {
+
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
         
         if (!isTutorialMode)
@@ -64,6 +65,12 @@ public class GameField : Field
     private void OnMouseDown()
     {
         if (!canSelect) return;
+
+     
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject() == true)
+        {
+            return;
+        }
 
         if (select)
         {

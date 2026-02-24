@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50d3a9a3287be674da0d6f479b510a90, type: 3}
-  m_Name: Tutorial_Step9_go_to_game
-  m_EditorClassIdentifier: 
-  dialogue: {fileID: 11400000, guid: 89862024122365140aa4cad7eb8b1a25, type: 2}
+  m_Name: Tutorial_Step9_Timer
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialStep
+  dialogue: {fileID: 11400000, guid: 2a46a6317d9457140a1d6381682260be, type: 2}
   stepType: 0
   highlightTarget:
-    targetType: 0
+    targetType: 3
     uiTarget: {fileID: 0}
     worldTarget: {fileID: 0}
-    gameObjectName: 
+    gameObjectName: Timer
+    childObjectName: 
+    autoToggleGameObject: 1
   piecesToSpawn: []
   clearBoardBeforeSpawn: 1
   waitForDialogueEnd: 1
@@ -28,4 +30,4 @@ MonoBehaviour:
   onStepComplete:
     m_PersistentCalls:
       m_Calls: []
-  delayBeforeNextStep: 1
+  delayBeforeNextStep: 2

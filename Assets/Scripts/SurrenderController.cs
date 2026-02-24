@@ -96,14 +96,11 @@ public class SurrenderController : MonoBehaviour
             SurrenderLocal();
         }
 
-        matchController.FinishGame();
+        matchController.Surrender();
     }
     
     private void SurrenderLocal()
     {
-        matchController.SetFinishGame(matchController.playerSquad.pieces.ToArray(), false);
-        matchController.SetFinishGame(matchController.enemySquad.pieces.ToArray(), true);
-        
         if (surrenderButton != null)
         {
             surrenderButton.gameObject.SetActive(false);
@@ -112,9 +109,6 @@ public class SurrenderController : MonoBehaviour
     
     private void SurrenderNetwork()
     {
-        matchController.SetFinishGame(matchController.playerSquad.pieces.ToArray(), false);
-        matchController.SetFinishGame(matchController.enemySquad.pieces.ToArray(), true);
-
         Debug.Log("[SurrenderController] Rendição executada. Saindo da partida em 3 segundos...");
         Invoke(nameof(GoToMenu), 3f);
 

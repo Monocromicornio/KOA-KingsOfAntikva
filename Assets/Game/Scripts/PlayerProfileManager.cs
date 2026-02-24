@@ -53,7 +53,7 @@ public class PlayerProfileManager : MonoBehaviour
             if (www.result != UnityWebRequest.Result.Success)
                 Debug.LogError("Erro ao enviar dados: " + www.error);
             else
-                Debug.Log("Servidor: " + www.downloadHandler.text);
+                Debug.Log("Update Player Data Points/Ranking Servidor: " + www.downloadHandler.text);
         }
     }
 
@@ -89,6 +89,7 @@ public class PlayerProfileManager : MonoBehaviour
     
     public void AddPoints(int delta)
     {
+        Debug.Log("ADDING POINTS " + delta);
         pontuation += delta;
         if (pontuation < 0) pontuation = 0;
         StartCoroutine(UpdatePlayerData());

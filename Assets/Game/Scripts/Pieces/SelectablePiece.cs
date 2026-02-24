@@ -32,6 +32,21 @@ public class SelectablePiece : MonoBehaviour
         piece = GetComponent<Piece>();
     }
 
+    private void OnEnable()
+    {
+        TurnTimerEvents.OnPlayerTimerEnded += OnPlayerTimerEnded;
+    }
+
+    private void OnDisable()
+    {
+        TurnTimerEvents.OnPlayerTimerEnded -= OnPlayerTimerEnded;
+    }
+
+    private void OnPlayerTimerEnded()
+    {
+        EndTurn();
+    }
+
     public void GetPiece()
     {
         getted = !getted;

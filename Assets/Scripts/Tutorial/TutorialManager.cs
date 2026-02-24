@@ -346,4 +346,32 @@ public class TutorialManager : MonoBehaviour
         ClearSpawnedPieces();
         StopAllCoroutines();
     }
+
+    public void ActivateGameObjectByName(string objectName)
+    {
+        GameObject obj = GameObject.Find(objectName);
+        if (obj != null)
+        {
+            obj.SetActive(true);
+            Debug.Log($"[Tutorial] Activated GameObject: {objectName}");
+        }
+        else
+        {
+            Debug.LogWarning($"[Tutorial] GameObject '{objectName}' not found!");
+        }
+    }
+
+    public void DeactivateGameObjectByName(string objectName)
+    {
+        GameObject obj = GameObject.Find(objectName);
+        if (obj != null)
+        {
+            obj.SetActive(false);
+            Debug.Log($"[Tutorial] Deactivated GameObject: {objectName}");
+        }
+        else
+        {
+            Debug.LogWarning($"[Tutorial] GameObject '{objectName}' not found!");
+        }
+    }
 }
