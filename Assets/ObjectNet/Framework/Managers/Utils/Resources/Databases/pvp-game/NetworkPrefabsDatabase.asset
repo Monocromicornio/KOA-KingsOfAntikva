@@ -11509,3 +11509,945 @@ MonoBehaviour:
     updateFieldsToDefault: v.1
     childsFilter: 
     scriptsFilter: 
+  - Id: 18
+    Prefab: {fileID: 2346700686789623250, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+      type: 3}
+    AutoSync: 1
+    syncPosition: 010101
+    syncRotation: 010101
+    syncScale: 010101
+    AnimationAutoSync: 0
+    ParticlesAutoSync: 0
+    ShowScripts: 1
+    PrefabScripts:
+      Scripts:
+      - Script: {fileID: 3122924463322124245, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: <pieceColor>k__BackingField
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: <timeToDestroy>k__BackingField
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: onValueChangeSetted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: hasActedThisTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 1901544206882330260, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables: []
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 179320394662554255, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 8043388635111385288, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: liftHeight
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: liftDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: flyDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: landDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: tiltAngle
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 8699268925820490549, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 4632954269160887221, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+    ShowChilds: 0
+    ChildObjets:
+      Objects: []
+    ShowInputScripts: 0
+    InputScripts:
+      Scripts: []
+    ShowVariables: 1
+    ShowEvents: 0
+    ShowTranform: 0
+    ShowChildTree: 0
+    prefabEvents:
+      onSpawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onDespawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptReleaseOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onTakeObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onReleaseObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+    AnimationSyncMode: 1
+    AnimationCount: 1
+    AnimationDefaultStatus: 
+    ownershipAccessLevel: 0
+    movementType: 0
+    disableObjectGravity: 1
+    enableObjectKinematic: 1
+    enableObjectInterpolate: 0
+    usePrefabRotation: 0
+    customSendRate: 0
+    sendRateAmount: 1
+    updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 
+  - Id: 19
+    Prefab: {fileID: 889284063656032159, guid: a3c2e4049bcc73b4cb43ceff5b41202d, type: 3}
+    AutoSync: 1
+    syncPosition: 010101
+    syncRotation: 010101
+    syncScale: 010101
+    AnimationAutoSync: 0
+    ParticlesAutoSync: 0
+    ShowScripts: 1
+    PrefabScripts:
+      Scripts:
+      - Script: {fileID: 6888409484926468429, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: <pieceColor>k__BackingField
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: <timeToDestroy>k__BackingField
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: onValueChangeSetted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: hasActedThisTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 3848785732441106412, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables: []
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 4999646697785852646, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 6303655575336491356, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: liftHeight
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: liftDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: flyDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: landDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: tiltAngle
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 3306562524466941552, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 6135751736364465971, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+    ShowChilds: 0
+    ChildObjets:
+      Objects: []
+    ShowInputScripts: 0
+    InputScripts:
+      Scripts: []
+    ShowVariables: 1
+    ShowEvents: 0
+    ShowTranform: 0
+    ShowChildTree: 0
+    prefabEvents:
+      onSpawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onDespawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptReleaseOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onTakeObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onReleaseObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+    AnimationSyncMode: 1
+    AnimationCount: 1
+    AnimationDefaultStatus: 
+    ownershipAccessLevel: 0
+    movementType: 0
+    disableObjectGravity: 1
+    enableObjectKinematic: 1
+    enableObjectInterpolate: 0
+    usePrefabRotation: 0
+    customSendRate: 0
+    sendRateAmount: 1
+    updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 
+  - Id: 20
+    Prefab: {fileID: 166717452743191706, guid: e7da47d40e52b48449ce07193adc8d91, type: 3}
+    AutoSync: 1
+    syncPosition: 010101
+    syncRotation: 010101
+    syncScale: 010101
+    AnimationAutoSync: 0
+    ParticlesAutoSync: 0
+    ShowScripts: 1
+    PrefabScripts:
+      Scripts:
+      - Script: {fileID: 4297450285353344726, guid: e7da47d40e52b48449ce07193adc8d91,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: <pieceColor>k__BackingField
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: <timeToDestroy>k__BackingField
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: onValueChangeSetted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: hasActedThisTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 172783506612124624, guid: e7da47d40e52b48449ce07193adc8d91,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables: []
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 3012776197290506684, guid: e7da47d40e52b48449ce07193adc8d91,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 2253126764676393241, guid: e7da47d40e52b48449ce07193adc8d91,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: liftHeight
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: liftDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: flyDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: landDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: tiltAngle
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 1140446195385657562, guid: e7da47d40e52b48449ce07193adc8d91,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 225438690476111063, guid: e7da47d40e52b48449ce07193adc8d91,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+    ShowChilds: 0
+    ChildObjets:
+      Objects: []
+    ShowInputScripts: 0
+    InputScripts:
+      Scripts: []
+    ShowVariables: 1
+    ShowEvents: 0
+    ShowTranform: 0
+    ShowChildTree: 0
+    prefabEvents:
+      onSpawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onDespawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptReleaseOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onTakeObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onReleaseObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+    AnimationSyncMode: 1
+    AnimationCount: 1
+    AnimationDefaultStatus: 
+    ownershipAccessLevel: 0
+    movementType: 0
+    disableObjectGravity: 1
+    enableObjectKinematic: 1
+    enableObjectInterpolate: 0
+    usePrefabRotation: 0
+    customSendRate: 0
+    sendRateAmount: 1
+    updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 
+  - Id: 21
+    Prefab: {fileID: 2077175158252841430, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+      type: 3}
+    AutoSync: 1
+    syncPosition: 010101
+    syncRotation: 010101
+    syncScale: 010101
+    AnimationAutoSync: 0
+    ParticlesAutoSync: 0
+    ShowScripts: 1
+    PrefabScripts:
+      Scripts:
+      - Script: {fileID: 7808000276761321766, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: <pieceColor>k__BackingField
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: type
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: <timeToDestroy>k__BackingField
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: onValueChangeSetted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: hasActedThisTurn
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: fieldIndex
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+      - Script: {fileID: 2608514038150262967, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables: []
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 5461904970175780463, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: getted
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: distance
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 8512942424317579059, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: moveSpeed
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: liftHeight
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: liftDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: flyDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: landDuration
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: tiltAngle
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 2667171487996755831, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: force
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+      - Script: {fileID: 2272837942174993925, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+          type: 3}
+        Enabled: 0
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: m_InstanceID
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: m_UnityRuntimeErrorString
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables: []
+    ShowChilds: 0
+    ChildObjets:
+      Objects: []
+    ShowInputScripts: 0
+    InputScripts:
+      Scripts: []
+    ShowVariables: 1
+    ShowEvents: 0
+    ShowTranform: 0
+    ShowChildTree: 0
+    prefabEvents:
+      onSpawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onDespawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptReleaseOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onTakeObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onReleaseObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+    AnimationSyncMode: 1
+    AnimationCount: 1
+    AnimationDefaultStatus: 
+    ownershipAccessLevel: 0
+    movementType: 0
+    disableObjectGravity: 1
+    enableObjectKinematic: 1
+    enableObjectInterpolate: 0
+    usePrefabRotation: 0
+    customSendRate: 0
+    sendRateAmount: 1
+    updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 
