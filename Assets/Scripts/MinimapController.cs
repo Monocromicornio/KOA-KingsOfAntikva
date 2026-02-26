@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using com.onlineobject.objectnet;
 
 public class MinimapController : MonoBehaviour
 {
@@ -16,7 +17,9 @@ public class MinimapController : MonoBehaviour
 
     private MinimapCell[] cells;
     private Dictionary<int, Piece> piecePositions = new Dictionary<int, Piece>();
+    private Dictionary<Piece, string> pieceMarkings = new Dictionary<Piece, string>();
     private string activeMarking;
+    private bool isClientPerspective = false;
 
     private void Awake()
     {
@@ -31,8 +34,44 @@ public class MinimapController : MonoBehaviour
         if (boardController == null)
             boardController = BoardController.instance;
 
+        if (MatchController.instance != null && MatchController.instance.hasConnection)
+            StartCoroutine(WaitForConnectionAndInitialize());
+        else
+            InitializeMinimapImmediate();
+    }
+
+    /// <summary>
+    /// Waits until both host and client are fully connected and the first turn has been
+    /// assigned before initializing the minimap. This guarantees the network perspective
+    /// (host vs client) is stable when InitializePerspective runs.
+    /// </summary>
+    private System.Collections.IEnumerator WaitForConnectionAndInitialize()
+    {
+        yield return new WaitUntil(() =>
+            MatchController.instance != null &&
+            MatchController.instance.hasConnection &&
+            MatchController.instance.turn != TurnState.undefined);
+
+        InitializeMinimapImmediate();
+    }
+
+    private void InitializeMinimapImmediate()
+    {
+        InitializePerspective();
         InitializeGrid();
         StartCoroutine(WaitAndSyncWithBoard());
+    }
+
+    private void InitializePerspective()
+    {
+        if (MatchController.instance != null)
+        {
+            NetworkManager networkManager = MatchController.instance.networkManager;
+            if (networkManager != null && networkManager.IsClientConnection())
+            {
+                isClientPerspective = true;
+            }
+        }
     }
 
     private System.Collections.IEnumerator WaitAndSyncWithBoard()
@@ -94,68 +133,93 @@ public class MinimapController : MonoBehaviour
         if (boardController == null || boardController.gameFields == null)
             return;
 
-        for (int i = 0; i < boardController.gameFields.Length && i < cells.Length; i++)
+        for (int boardIndex = 0; boardIndex < boardController.gameFields.Length && boardIndex < cells.Length; boardIndex++)
         {
-            GameField field = boardController.gameFields[i];
+            GameField field = boardController.gameFields[boardIndex];
             if (field != null && field.piece != null)
             {
-                UpdateCellAtIndex(i, field.piece);
+                int minimapIndex = ConvertBoardIndexToMinimapIndex(boardIndex);
+                UpdateCellAtIndex(minimapIndex, field.piece);
             }
         }
     }
 
+    private int ConvertBoardIndexToMinimapIndex(int boardIndex)
+    {
+        if (!isClientPerspective)
+            return boardIndex;
+
+        int row = boardIndex / gridSize;
+        int col = boardIndex % gridSize;
+        
+        int flippedRow = (gridSize - 1) - row;
+        int flippedCol = (gridSize - 1) - col;
+        
+        return flippedRow * gridSize + flippedCol;
+    }
+
     public void RegisterPiece(Piece piece)
     {
-        if (piece == null)
+        if (piece == null || cells == null)
             return;
 
-        int index = piece.indexCurrentField;
-        if (index >= 0 && index < cells.Length)
+        int boardIndex = piece.indexCurrentField;
+        int minimapIndex = ConvertBoardIndexToMinimapIndex(boardIndex);
+        
+        if (minimapIndex >= 0 && minimapIndex < cells.Length)
         {
-            piecePositions[index] = piece;
-            UpdateCellAtIndex(index, piece);
+            piecePositions[boardIndex] = piece;
+            UpdateCellAtIndex(minimapIndex, piece);
         }
     }
 
     public void UnregisterPiece(Piece piece)
     {
-        if (piece == null)
+        if (piece == null || cells == null)
             return;
 
-        int index = piece.indexCurrentField;
-        if (piecePositions.ContainsKey(index) && piecePositions[index] == piece)
+        int boardIndex = piece.indexCurrentField;
+        if (piecePositions.ContainsKey(boardIndex) && piecePositions[boardIndex] == piece)
         {
-            piecePositions.Remove(index);
-            if (index >= 0 && index < cells.Length)
-                cells[index].Clear();
+            piecePositions.Remove(boardIndex);
+            pieceMarkings.Remove(piece);
+            int minimapIndex = ConvertBoardIndexToMinimapIndex(boardIndex);
+            if (minimapIndex >= 0 && minimapIndex < cells.Length)
+                cells[minimapIndex].Clear();
         }
     }
 
-    public void UpdatePiecePosition(Piece piece, int oldIndex, int newIndex)
+    public void UpdatePiecePosition(Piece piece, int oldBoardIndex, int newBoardIndex)
     {
-        if (piece == null)
+        if (piece == null || cells == null)
             return;
 
-        if (oldIndex >= 0 && oldIndex < cells.Length)
+        int oldMinimapIndex = ConvertBoardIndexToMinimapIndex(oldBoardIndex);
+        int newMinimapIndex = ConvertBoardIndexToMinimapIndex(newBoardIndex);
+
+        if (oldMinimapIndex >= 0 && oldMinimapIndex < cells.Length)
         {
-            if (piecePositions.ContainsKey(oldIndex))
-                piecePositions.Remove(oldIndex);
-            cells[oldIndex].Clear();
+            if (piecePositions.ContainsKey(oldBoardIndex))
+                piecePositions.Remove(oldBoardIndex);
+            cells[oldMinimapIndex].Clear();
         }
 
-        if (newIndex >= 0 && newIndex < cells.Length)
+        if (newMinimapIndex >= 0 && newMinimapIndex < cells.Length)
         {
-            piecePositions[newIndex] = piece;
-            UpdateCellAtIndex(newIndex, piece);
+            piecePositions[newBoardIndex] = piece;
+            UpdateCellAtIndex(newMinimapIndex, piece);
         }
     }
 
     private void UpdateCellAtIndex(int index, Piece piece)
     {
-        if (index >= 0 && index < cells.Length)
-        {
-            cells[index].UpdateCell(piece);
-        }
+        if (index < 0 || index >= cells.Length)
+            return;
+
+        cells[index].UpdateCell(piece);
+
+        if (piece != null && pieceMarkings.TryGetValue(piece, out string marking))
+            cells[index].RestoreMarking(marking);
     }
 
     private void OnCellClicked(int cellIndex)
@@ -163,10 +227,30 @@ public class MinimapController : MonoBehaviour
         if (string.IsNullOrEmpty(activeMarking))
             return;
 
-        if (cellIndex >= 0 && cellIndex < cells.Length)
+        if (cellIndex < 0 || cellIndex >= cells.Length)
+            return;
+
+        string resultMarking = cells[cellIndex].SetMarking(activeMarking);
+
+        Piece piece = GetPieceAtMinimapIndex(cellIndex);
+        if (piece != null)
         {
-            cells[cellIndex].SetMarking(activeMarking);
+            if (string.IsNullOrEmpty(resultMarking))
+                pieceMarkings.Remove(piece);
+            else
+                pieceMarkings[piece] = resultMarking;
         }
+    }
+
+    /// <summary>Finds the piece currently occupying the given minimap cell index.</summary>
+    private Piece GetPieceAtMinimapIndex(int minimapIndex)
+    {
+        foreach (var kvp in piecePositions)
+        {
+            if (ConvertBoardIndexToMinimapIndex(kvp.Key) == minimapIndex)
+                return kvp.Value;
+        }
+        return null;
     }
 
     public void SetActiveMarking(string marking)
@@ -177,6 +261,7 @@ public class MinimapController : MonoBehaviour
     public void ClearAllMarkings()
     {
         activeMarking = null;
+        pieceMarkings.Clear();
         foreach (MinimapCell cell in cells)
         {
             cell.ClearMarking();

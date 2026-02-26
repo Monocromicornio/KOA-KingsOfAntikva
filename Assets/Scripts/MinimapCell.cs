@@ -48,7 +48,6 @@ public class MinimapCell : MonoBehaviour
     public void UpdateCell(Piece piece)
     {
         currentPiece = piece;
-        currentMarking = null;
 
         if (piece == null)
         {
@@ -75,13 +74,17 @@ public class MinimapCell : MonoBehaviour
         }
     }
 
-    public void SetMarking(string marking)
+    /// <summary>
+    /// Applies a marking to this cell, returning the resulting marking string.
+    /// Toggling the same marking twice removes it. Returns null when cleared.
+    /// </summary>
+    public string SetMarking(string marking)
     {
         if (currentPiece == null || currentPiece.pieceColor != PieceColor.red)
-            return;
+            return currentMarking;
 
         if (cellImage == null || cellText == null)
-            return;
+            return currentMarking;
 
         if (currentMarking == marking)
         {
@@ -95,6 +98,24 @@ public class MinimapCell : MonoBehaviour
         }
         
         cellText.text = currentMarking ?? "?";
+        return currentMarking;
+    }
+
+    /// <summary>
+    /// Restores a previously stored marking onto this cell without the toggle behaviour.
+    /// Called when a piece moves so its marking follows it to the new cell.
+    /// </summary>
+    public void RestoreMarking(string marking)
+    {
+        if (currentPiece == null || currentPiece.pieceColor != PieceColor.red)
+            return;
+
+        if (cellImage == null || cellText == null)
+            return;
+
+        currentMarking = marking;
+        cellImage.color = string.IsNullOrEmpty(marking) ? redPieceColor : GetMarkingColor(marking);
+        cellText.text = string.IsNullOrEmpty(marking) ? "?" : marking;
     }
 
     public void Clear()
