@@ -1803,6 +1803,7 @@ GameObject:
   - component: {fileID: 109180673}
   - component: {fileID: 109180672}
   - component: {fileID: 109180671}
+  - component: {fileID: 109180674}
   m_Layer: 5
   m_Name: MarkingButton (4)
   m_TagString: Untagged
@@ -1874,10 +1875,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1982788164}
+      - m_Target: {fileID: 109180674}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnMarkingButtonClicked
-        m_Mode: 0
+        m_MethodName: HandleClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
@@ -1924,6 +1925,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109180669}
   m_CullTransparentMesh: 1
+--- !u!114 &109180674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109180669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b0211167dc4964fb16043072542b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarkingButtonHandler
 --- !u!114 &110162011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2307,6 +2320,7 @@ GameObject:
   - component: {fileID: 123731650}
   - component: {fileID: 123731649}
   - component: {fileID: 123731648}
+  - component: {fileID: 123731651}
   m_Layer: 5
   m_Name: MarkingButton (5)
   m_TagString: Untagged
@@ -2378,10 +2392,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1982788164}
+      - m_Target: {fileID: 123731651}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnMarkingButtonClicked
-        m_Mode: 0
+        m_MethodName: HandleClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
@@ -2428,6 +2442,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123731646}
   m_CullTransparentMesh: 1
+--- !u!114 &123731651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123731646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b0211167dc4964fb16043072542b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarkingButtonHandler
 --- !u!1 &124469667
 GameObject:
   m_ObjectHideFlags: 0
@@ -4114,6 +4140,7 @@ GameObject:
   - component: {fileID: 233303238}
   - component: {fileID: 233303237}
   - component: {fileID: 233303236}
+  - component: {fileID: 233303239}
   m_Layer: 5
   m_Name: MarkingButton (3)
   m_TagString: Untagged
@@ -4185,10 +4212,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1982788164}
+      - m_Target: {fileID: 233303239}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnMarkingButtonClicked
-        m_Mode: 0
+        m_MethodName: HandleClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
@@ -4235,6 +4262,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233303234}
   m_CullTransparentMesh: 1
+--- !u!114 &233303239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233303234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b0211167dc4964fb16043072542b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarkingButtonHandler
 --- !u!1 &243851121
 GameObject:
   m_ObjectHideFlags: 0
@@ -4572,6 +4611,7 @@ GameObject:
   - component: {fileID: 263578734}
   - component: {fileID: 263578733}
   - component: {fileID: 263578732}
+  - component: {fileID: 263578735}
   m_Layer: 5
   m_Name: MarkingButton (1)
   m_TagString: Untagged
@@ -4643,10 +4683,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1982788164}
+      - m_Target: {fileID: 263578735}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnMarkingButtonClicked
-        m_Mode: 0
+        m_MethodName: HandleClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
@@ -4693,6 +4733,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263578730}
   m_CullTransparentMesh: 1
+--- !u!114 &263578735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263578730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b0211167dc4964fb16043072542b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarkingButtonHandler
 --- !u!1 &277923253
 GameObject:
   m_ObjectHideFlags: 0
@@ -20345,6 +20397,7 @@ GameObject:
   - component: {fileID: 1548678074}
   - component: {fileID: 1548678073}
   - component: {fileID: 1548678072}
+  - component: {fileID: 1548678075}
   m_Layer: 5
   m_Name: MarkingButton (6)
   m_TagString: Untagged
@@ -20416,10 +20469,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1982788164}
+      - m_Target: {fileID: 1548678075}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnMarkingButtonClicked
-        m_Mode: 0
+        m_MethodName: HandleClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
@@ -20466,6 +20519,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1548678070}
   m_CullTransparentMesh: 1
+--- !u!114 &1548678075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548678070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b0211167dc4964fb16043072542b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarkingButtonHandler
 --- !u!1001 &1550045114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21936,6 +22001,7 @@ GameObject:
   - component: {fileID: 1650124689}
   - component: {fileID: 1650124688}
   - component: {fileID: 1650124687}
+  - component: {fileID: 1650124690}
   m_Layer: 5
   m_Name: MarkingButton (2)
   m_TagString: Untagged
@@ -22007,10 +22073,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1982788164}
+      - m_Target: {fileID: 1650124690}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnMarkingButtonClicked
-        m_Mode: 0
+        m_MethodName: HandleClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
@@ -22057,6 +22123,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1650124685}
   m_CullTransparentMesh: 1
+--- !u!114 &1650124690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650124685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b0211167dc4964fb16043072542b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarkingButtonHandler
 --- !u!1001 &1653638153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22906,6 +22984,7 @@ GameObject:
   - component: {fileID: 1701395503}
   - component: {fileID: 1701395502}
   - component: {fileID: 1701395501}
+  - component: {fileID: 1701395504}
   m_Layer: 5
   m_Name: MarkingButton (7)
   m_TagString: Untagged
@@ -22977,10 +23056,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1982788164}
+      - m_Target: {fileID: 1701395504}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnMarkingButtonClicked
-        m_Mode: 0
+        m_MethodName: HandleClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
@@ -23027,6 +23106,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1701395499}
   m_CullTransparentMesh: 1
+--- !u!114 &1701395504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701395499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b0211167dc4964fb16043072542b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarkingButtonHandler
 --- !u!1001 &1705655564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28630,6 +28721,7 @@ GameObject:
   - component: {fileID: 2136384162}
   - component: {fileID: 2136384161}
   - component: {fileID: 2136384160}
+  - component: {fileID: 2136384163}
   m_Layer: 5
   m_Name: MarkingButton
   m_TagString: Untagged
@@ -28701,10 +28793,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1982788164}
+      - m_Target: {fileID: 2136384163}
         m_TargetAssemblyTypeName: 
-        m_MethodName: OnMarkingButtonClicked
-        m_Mode: 0
+        m_MethodName: HandleClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: 
@@ -28751,6 +28843,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136384158}
   m_CullTransparentMesh: 1
+--- !u!114 &2136384163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136384158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b0211167dc4964fb16043072542b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarkingButtonHandler
 --- !u!1001 &3453460376850358457
 PrefabInstance:
   m_ObjectHideFlags: 0
