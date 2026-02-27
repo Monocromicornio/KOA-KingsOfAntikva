@@ -25,6 +25,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608514038150262967, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 6287631038388493307}
+    - target: {fileID: 2608514038150262967, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -95,6 +100,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7808000276761321766, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 8623568306599038910}
+    - target: {fileID: 7808000276761321766, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -104,7 +114,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8091772233203591823, guid: 115b6b1e57a1e7f44917a46a08e1fd10, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2077175158252841430, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
@@ -131,3 +142,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FakePiece
   fake: {fileID: 0}
+--- !u!95 &6287631038388493307 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5208861786293125612, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+    type: 3}
+  m_PrefabInstance: {fileID: 2237091852023372311}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8623568306599038910 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7540906493992834473, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+    type: 3}
+  m_PrefabInstance: {fileID: 2237091852023372311}
+  m_PrefabAsset: {fileID: 0}

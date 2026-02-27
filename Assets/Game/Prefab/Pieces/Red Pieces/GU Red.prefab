@@ -37,7 +37,7 @@ PrefabInstance:
         type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6659562422675036410}
     - target: {fileID: 4059355268180363157, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -102,7 +102,7 @@ PrefabInstance:
         type: 3}
       propertyPath: body
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3960259393809936045}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3157641161037989940, guid: a3c2e4049bcc73b4cb43ceff5b41202d, type: 3}
@@ -132,3 +132,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FakePiece
   fake: {fileID: 0}
+--- !u!1 &3960259393809936045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3274585518398805949, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1982710570259675408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6659562422675036410 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5183507377452261866, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1982710570259675408}
+  m_PrefabAsset: {fileID: 0}
