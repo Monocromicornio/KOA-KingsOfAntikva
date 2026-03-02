@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 336360690006423719}
   - component: {fileID: 3116158735078487375}
   - component: {fileID: 6277678579294992620}
+  - component: {fileID: -4541760573679258897}
   m_Layer: 0
   m_Name: CO Blue
   m_TagString: Player
@@ -482,6 +483,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltip: {fileID: 0}
+--- !u!114 &-4541760573679258897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176818257169961629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cd63f4fca86944ab19f47b5a6a7500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::com.onlineobject.objectnet.NetworkInstantiateDetection
+  staticSpawn: 0
+  staticId: 58928
+  instancePrefabSignature: a2cf8013-59ca-4029-8c1d-d009ad3b0b1e
+  childToDisable: []
+  childToSync: []
 --- !u!1 &6586177475584591574
 GameObject:
   m_ObjectHideFlags: 0

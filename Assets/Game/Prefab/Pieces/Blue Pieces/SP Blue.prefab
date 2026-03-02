@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::com.onlineobject.objectnet.NetworkInstantiateDetection
   staticSpawn: 0
-  staticId: 53877
-  instancePrefabSignature: 2cd18135-9229-464d-9a3c-192b98c305eb
+  staticId: 33508
+  instancePrefabSignature: e00c455c-5297-49db-b115-55af9b991903
   childToDisable: []
   childToSync: []
 --- !u!1 &2467039547967108428
@@ -826,6 +826,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8038328799258409665}
     m_Modifications:
+    - target: {fileID: 213232172062129443, guid: b983e498eb097c748b010be9c8f04607,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8796cf53ad415a942823420eea0acdfe, type: 2}
     - target: {fileID: 1086542656785707890, guid: b983e498eb097c748b010be9c8f04607,
         type: 3}
       propertyPath: m_LocalRotation.w

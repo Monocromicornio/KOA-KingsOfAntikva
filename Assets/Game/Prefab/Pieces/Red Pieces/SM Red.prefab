@@ -11,8 +11,13 @@ PrefabInstance:
     - target: {fileID: 4221081348691935474, guid: ce42c23964b412644838bc793e8cb3b7,
         type: 3}
       propertyPath: m_Name
-      value: SM Variant
+      value: SM Red
       objectReference: {fileID: 0}
+    - target: {fileID: 4676684796826280016, guid: ce42c23964b412644838bc793e8cb3b7,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d2eb074c3d7fad949b13273e6ea03a24, type: 2}
     - target: {fileID: 5249892533754993861, guid: ce42c23964b412644838bc793e8cb3b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -63,6 +68,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7223981974056913023, guid: ce42c23964b412644838bc793e8cb3b7,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 85482ada2d8aa564b80238bf7348f6a4, type: 2}
+    - target: {fileID: 8027777968454945247, guid: ce42c23964b412644838bc793e8cb3b7,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 54721c3327779154c88e8459859cdba3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
