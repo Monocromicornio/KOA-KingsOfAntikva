@@ -24,6 +24,7 @@ public class MatchController : MonoBehaviour
     public GameMode gameMode;
     public GameMode.GameType gameType => gameMode.type;
 
+    public bool hasStarted { get; private set; }
     public bool finished { get; private set; }
     private bool homeTeamTurn = false; //False to start with home, true for away
 
@@ -61,6 +62,7 @@ public class MatchController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        hasStarted = false;
         game.SetActive(false);
         currentTurn = TurnState.wait;
         turn = TurnState.undefined;
@@ -78,10 +80,12 @@ public class MatchController : MonoBehaviour
     {
         if (networkManager.IsConnected())
         {
+            Debug.Log("[MatchController] Network Manager is Connected");
             _ = NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
         }
         else if (!networkManager.IsServerConnection())
         {
+            Debug.Log("[MatchController] Network Manager is NOT Sever Connection");
             myTurn = TurnState.homeTeam;
             playerSquad.LoadPieces();
             enemySquad.LoadPieces();
@@ -105,6 +109,7 @@ public class MatchController : MonoBehaviour
 
     public void StartGame(TableData clientTable)
     {
+        Debug.Log("[MatchController] Starting game with client table as Parameter");
         playerSquad.LoadPieces();
         playerSquad.LoadPieces(clientTable);
         StartCoroutine(StartGame());
@@ -113,6 +118,8 @@ public class MatchController : MonoBehaviour
     private IEnumerator StartGame()
     {
         yield return new WaitForSeconds(2);
+        hasStarted = true;
+        Debug.Log("[MatchController] Game has started");
         ChangeTurn();
     }
 

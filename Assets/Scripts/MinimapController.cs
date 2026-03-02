@@ -76,7 +76,7 @@ public class MinimapController : MonoBehaviour
 
     private System.Collections.IEnumerator WaitAndSyncWithBoard()
     {
-        while (boardController == null || !boardController.isFinished())
+        while (boardController == null || !boardController.isFinished() || MatchController.instance.hasStarted == false)
         {
             yield return new WaitForSeconds(0.1f);
             if (boardController == null)
