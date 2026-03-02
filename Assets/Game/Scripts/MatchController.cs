@@ -115,6 +115,16 @@ public class MatchController : MonoBehaviour
         StartCoroutine(StartGame());
     }
 
+    /// <summary>
+    /// Sets hasStarted to true on the client side, called via network sync from the server.
+    /// </summary>
+    public void SetHasStarted()
+    {
+        if (hasStarted) return;
+        hasStarted = true;
+        Debug.Log("[MatchController] hasStarted definido como true (via sync do servidor)");
+    }
+
     private IEnumerator StartGame()
     {
         yield return new WaitForSeconds(2);

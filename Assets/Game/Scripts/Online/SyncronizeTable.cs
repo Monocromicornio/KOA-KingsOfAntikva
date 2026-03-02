@@ -165,6 +165,7 @@ public class SyncronizeTable : NetworkBehaviour
         if (matchController != null)
         {
             matchController.StartGame(tableData);
+            NetworkExecute(NotifyClientGameStarted);
         }
         else
         {
@@ -172,6 +173,20 @@ public class SyncronizeTable : NetworkBehaviour
             pendingTableData = tableData;
             NetworkAutoLoadController.ScheduleStartGame();
         }
+    }
+
+    private void NotifyClientGameStarted()
+    {
+        if (networkManager.IsServerConnection()) return;
+
+        if (matchController == null)
+        {
+            Debug.LogError("[SyncronizeTable] NotifyClientGameStarted: MatchController é null no cliente");
+            return;
+        }
+
+        Debug.Log("[SyncronizeTable] Notificação de início de jogo recebida pelo cliente");
+        matchController.SetHasStarted();
     }
 
     /// <summary>
