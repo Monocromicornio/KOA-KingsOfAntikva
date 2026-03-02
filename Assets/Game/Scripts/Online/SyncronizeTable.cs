@@ -18,6 +18,10 @@ public class SyncronizeTable : NetworkBehaviour
 
     private static TableData pendingTableData;
 
+    public static TableData PendingTableData => pendingTableData;
+
+    public static void ClearPendingTable() { pendingTableData = null; }
+
     public static ulong LocalSteamId { get; private set; }
     public static ulong OpponentSteamId { get; private set; }
     
@@ -58,12 +62,7 @@ public class SyncronizeTable : NetworkBehaviour
     {
         StartCoroutine(SendSteamIdDelayed());
 
-        if (networkManager.IsServerConnection())
-        {
-            if (pendingTableData != null)
-                StartCoroutine(WaitForMatchControllerAndStart());
-            return;
-        }
+        if (networkManager.IsServerConnection()) return;
 
         StartCoroutine(SendPartsToServer());
     }
@@ -169,37 +168,10 @@ public class SyncronizeTable : NetworkBehaviour
         }
         else
         {
-            Debug.Log("[SyncronizeTable] MatchController não pronto, armazenando tabela pendente...");
+            Debug.Log("[SyncronizeTable] MatchController não pronto, delegando ao NetworkAutoLoadController...");
             pendingTableData = tableData;
+            NetworkAutoLoadController.ScheduleStartGame();
         }
-    }
-
-    /// <summary>
-    /// Aguarda o MatchController estar disponível e então inicia o jogo com a tabela pendente.
-    /// </summary>
-    private IEnumerator WaitForMatchControllerAndStart()
-    {
-        const float timeout = 10f;
-        float elapsed = 0f;
-
-        while (MatchController.instance == null && elapsed < timeout)
-        {
-            yield return new WaitForSeconds(0.1f);
-            elapsed += 0.1f;
-        }
-
-        if (MatchController.instance == null)
-        {
-            Debug.LogError("[SyncronizeTable] Timeout aguardando MatchController");
-            pendingTableData = null;
-            yield break;
-        }
-
-        TableData data = pendingTableData;
-        pendingTableData = null;
-
-        Debug.Log("[SyncronizeTable] MatchController pronto, iniciando jogo com tabela pendente");
-        matchController.StartGame(data);
     }
 
     /// <summary>
