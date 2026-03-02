@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6882154806359441366}
   - component: {fileID: 7837648028798507341}
   - component: {fileID: -8104086174035437449}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BO Blue
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 31164719131597111}
   - component: {fileID: 7358746454137124839}
   - component: {fileID: 1357840451934696319}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TxtForce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1084622465298454727}
   - component: {fileID: 5101893453745750110}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AuAttackYell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2740644221982132353}
   - component: {fileID: 9127905055488715452}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: HoverCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,7 +495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9066435547054742119}
   - component: {fileID: 8205623995168136039}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AuDie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -624,7 +624,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6448906911062654001}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackEffectPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,10 +654,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1607262223644257737}
     m_Modifications:
+    - target: {fileID: 1889072993138759519, guid: 8f8ad2361d343f744bb5ceb256f0db90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2471206768579475779, guid: 8f8ad2361d343f744bb5ceb256f0db90,
         type: 3}
       propertyPath: m_Name
       value: P_Bomba
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471206768579475779, guid: 8f8ad2361d343f744bb5ceb256f0db90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2851933966424417594, guid: 8f8ad2361d343f744bb5ceb256f0db90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3132368881959576695, guid: 8f8ad2361d343f744bb5ceb256f0db90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438384713108470461, guid: 8f8ad2361d343f744bb5ceb256f0db90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6434659049414574033, guid: 8f8ad2361d343f744bb5ceb256f0db90,
         type: 3}
@@ -708,6 +733,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279846222753823215, guid: 8f8ad2361d343f744bb5ceb256f0db90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -870,10 +900,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6322566837573113183, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8688707221777869417, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_Name
       value: Tooltip
+      objectReference: {fileID: 0}
+    - target: {fileID: 8688707221777869417, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
