@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6796757158943168908}
   - component: {fileID: 3867868340095633969}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: HoverCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 8962782736081396437}
   - component: {fileID: 187883295464787185}
   - component: {fileID: 8105385651177926046}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShinyStars Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 2674949694518330633}
   - component: {fileID: 98855319477092902}
   - component: {fileID: 8535271596652811713}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9639,7 +9639,7 @@ GameObject:
   - component: {fileID: 3246016591386960138}
   - component: {fileID: 7099810796496407780}
   - component: {fileID: 6659729501434283143}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TE Blue
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -9820,7 +9820,7 @@ GameObject:
   - component: {fileID: 7268020374178431806}
   - component: {fileID: 7081774987786456431}
   - component: {fileID: 1369738295395320853}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CFX2_ShinyItem (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14594,7 +14594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6429797707212531433}
   - component: {fileID: 4809238119795859094}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AuDie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14726,7 +14726,7 @@ GameObject:
   - component: {fileID: 1879870651327290629}
   - component: {fileID: 1842288280599491499}
   - component: {fileID: 424973467174476049}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TxtForce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14845,7 +14845,7 @@ GameObject:
   - component: {fileID: 2267537829103690070}
   - component: {fileID: 4734616327267075492}
   - component: {fileID: 5628983974656836957}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShinyStars Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19603,7 +19603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5455576956240394776}
   - component: {fileID: 3017564811543605370}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AuAttackYell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19732,7 +19732,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1051706102898972659}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackEffectPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19762,6 +19762,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3323634189771677534}
     m_Modifications:
+    - target: {fileID: 3280960408518658332, guid: 4af7048b85b151943929bb2e10fb33fa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418144622927211267, guid: 4af7048b85b151943929bb2e10fb33fa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7245250570559130358, guid: 4af7048b85b151943929bb2e10fb33fa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19816,6 +19826,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P_Tesouro
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468135264644652134, guid: 4af7048b85b151943929bb2e10fb33fa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432656399088155808, guid: 4af7048b85b151943929bb2e10fb33fa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441482077421992707, guid: 4af7048b85b151943929bb2e10fb33fa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729069425204427788, guid: 4af7048b85b151943929bb2e10fb33fa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19988,10 +20018,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6322566837573113183, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8688707221777869417, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_Name
       value: Tooltip
+      objectReference: {fileID: 0}
+    - target: {fileID: 8688707221777869417, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
