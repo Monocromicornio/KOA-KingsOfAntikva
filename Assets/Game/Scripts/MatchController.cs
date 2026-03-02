@@ -70,6 +70,8 @@ public class MatchController : MonoBehaviour
         allPieces = new List<Piece>();
         exit.gameObject.SetActive(false);
 
+        Debug.Log($"[MatchController] Awake — IsConnected: {networkManager.IsConnected()} | IsServerConnection: {networkManager.IsServerConnection()} | IsClientConnection: {networkManager.IsClientConnection()} | myTurn: {myTurn}");
+
         if (cameraPos && networkManager.IsClientConnection())
         {
             cameraPos.transform.eulerAngles = new Vector3(0, 180, 0);
@@ -78,14 +80,16 @@ public class MatchController : MonoBehaviour
 
     void Start()
     {
+        Debug.Log($"[MatchController] Start — IsConnected: {networkManager.IsConnected()} | IsServerConnection: {networkManager.IsServerConnection()} | hasStarted: {hasStarted}");
+
         if (networkManager.IsConnected())
         {
-            Debug.Log("[MatchController] Network Manager is Connected");
+            Debug.Log("[MatchController] Modo online: instanciando SyncronizeTable via rede");
             _ = NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
         }
         else if (!networkManager.IsServerConnection())
         {
-            Debug.Log("[MatchController] Network Manager is NOT Sever Connection");
+            Debug.Log("[MatchController] Modo offline: iniciando jogo local");
             myTurn = TurnState.homeTeam;
             playerSquad.LoadPieces();
             enemySquad.LoadPieces();
@@ -261,7 +265,18 @@ public class MatchController : MonoBehaviour
 
     public void ChangeTurnImmediate()
     {
+        Debug.Log($"[MatchController] ChangeTurnImmediate — hasStarted: {hasStarted} | finished: {finished} | IsServer: {networkManager.IsServerConnection()}");
+
         if (finished) return;
+
+        // Garante hasStarted = true no cliente: ChangeTurnImmediate chega via
+        // NetworkExecute(ChangeTurn) e é o caminho confiável de sincronização.
+        if (!hasStarted)
+        {
+            hasStarted = true;
+            Debug.Log("[MatchController] hasStarted forçado para true via ChangeTurnImmediate (sync de rede)");
+        }
+
         if (!game.activeSelf)
         {
             game.SetActive(true);
@@ -273,6 +288,8 @@ public class MatchController : MonoBehaviour
         currentTurn = homeTeamTurn ? TurnState.homeTeam : TurnState.awayTeam;
         turn = currentTurn;
 
+        Debug.Log($"[MatchController] Turno definido — currentTurn: {currentTurn} | myTurn: {myTurn} | IsMyTurn: {IsMyTurn()}");
+
         ResetPiecesForNewTurn();
 
         if (!hasConnection && currentTurn == TurnState.awayTeam)
@@ -280,7 +297,7 @@ public class MatchController : MonoBehaviour
             machinePlayer.gameObject.SetActive(true);
             machinePlayer.StartTurn();
         }
-        
+
         if (turnTimer != null)
         {
             turnTimer.OnTurnChanged();

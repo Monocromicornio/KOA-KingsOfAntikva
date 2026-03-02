@@ -60,6 +60,8 @@ public class SyncronizeTable : NetworkBehaviour
 
     void Start()
     {
+        Debug.Log($"[SyncronizeTable] Start — IsServerConnection: {networkManager.IsServerConnection()} | IsConnected: {networkManager.IsConnected()}");
+
         StartCoroutine(SendSteamIdDelayed());
 
         if (networkManager.IsServerConnection()) return;
@@ -152,6 +154,8 @@ public class SyncronizeTable : NetworkBehaviour
 
     private void DecodeTable(string xmlString)
     {
+        Debug.Log("[SyncronizeTable] DecodeTable chamado — decodificando tabela do cliente...");
+
         TableData tableData = DecodeTableDataXml(xmlString);
 
         if (tableData == null)
@@ -161,11 +165,15 @@ public class SyncronizeTable : NetworkBehaviour
         }
 
         tableData.LoadTable();
+        Debug.Log("[SyncronizeTable] TableData carregado com sucesso, chamando StartGame...");
 
         if (matchController != null)
         {
             matchController.StartGame(tableData);
-            NetworkExecute(NotifyClientGameStarted);
+            // NetworkExecute(NotifyClientGameStarted) não propaga para clientes
+            // quando chamado de dentro de um callback NetworkExecuteOnServer.
+            // O hasStarted do cliente é garantido diretamente via ChangeTurnImmediate,
+            // que chega pelo NetworkExecute(ChangeTurn) originado da coroutine StartGame.
         }
         else
         {
@@ -177,6 +185,8 @@ public class SyncronizeTable : NetworkBehaviour
 
     private void NotifyClientGameStarted()
     {
+        Debug.Log($"[SyncronizeTable] NotifyClientGameStarted executado — IsServer: {networkManager.IsServerConnection()}");
+
         if (networkManager.IsServerConnection()) return;
 
         if (matchController == null)
@@ -185,7 +195,6 @@ public class SyncronizeTable : NetworkBehaviour
             return;
         }
 
-        Debug.Log("[SyncronizeTable] Notificação de início de jogo recebida pelo cliente");
         matchController.SetHasStarted();
     }
 
