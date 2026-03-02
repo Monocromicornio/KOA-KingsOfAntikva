@@ -89,8 +89,8 @@ namespace com.onlineobject.objectnet {
                             NetworkManager.Instance().UnRegisterInSceneObject(this.gameObject, true);
                             NetworkManager.Container.UnRegister(networkObject.GetNetworkElement());
                         }
-                    } else {
-                        Debug.LogWarning(String.Format("[ NetworkManager ] Requested before being initialized : Origin [ {0} ]", this.gameObject.name));
+                    } else if (NetworkDebuggerManager.Instance()){
+                        NetworkDebugger.LogWarning(String.Format("[ NetworkManager ] Requested before being initialized : Origin [ {0} ]", this.gameObject.name));
                     }
                 }
             }

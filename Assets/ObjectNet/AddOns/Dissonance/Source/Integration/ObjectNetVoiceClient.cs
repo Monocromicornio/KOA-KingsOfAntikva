@@ -2,7 +2,6 @@
 using Dissonance.Datastructures;
 using Dissonance.Networking;
 using System;
-using static UnityEngine.Rendering.HableCurve;
 #else
 using UnityEngine;
 #endif

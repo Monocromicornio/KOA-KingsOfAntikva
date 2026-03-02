@@ -23,9 +23,6 @@ namespace com.onlineobject.objectnet {
         // Flag to determine if buffer allocation should be automatic.
         private bool autoAllocate = true;
 
-        // Flag to determine if buffer was already allocated
-        private bool allocated = false;
-
         // Client associated with the data stream.
         private IClient client;
         

@@ -234,7 +234,7 @@ namespace com.onlineobject.objectnet.steamworks {
         /// <summary>
         /// Processes network events such as sending and receiving messages, and handles connection state changes.
         /// </summary>
-        public override byte[][] Process() {
+        public override List<byte[]> Process() {
             if (this.IsConnected()) {
                 this.dequeuedBuffers.Clear();
 
@@ -250,7 +250,7 @@ namespace com.onlineobject.objectnet.steamworks {
                     this.dequeuedBuffers.Add(dataBytes);
                 }
             }
-            return this.dequeuedBuffers.ToArray();
+            return this.dequeuedBuffers;
         }
 
         /// <summary>

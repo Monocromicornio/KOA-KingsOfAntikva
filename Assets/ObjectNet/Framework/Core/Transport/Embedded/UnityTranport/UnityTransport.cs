@@ -495,7 +495,7 @@ namespace com.onlineobject.objectnet {
         /// <summary>
         /// Processes network events.
         /// </summary>
-        public abstract byte[][] Process();
+        public abstract List<byte[]> Process();
 
         /// <summary>
         /// Initiates a connection to the network.

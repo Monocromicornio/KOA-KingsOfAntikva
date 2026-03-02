@@ -1,3 +1,5 @@
+#pragma warning disable
+#pragma warning CS0618
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,9 +65,9 @@ namespace com.onlineobject.objectnet {
         private bool steamTransportInstalled = false;
 
         /// <summary>
-        ///  Store if healten package is installed
+        ///  Store if heathen package is installed
         /// </summary>
-        private bool healtenPackageInstalled = false;
+        private bool heathenPackageInstalled = false;
 
         /// <summary>
         /// The stored database on editor
@@ -106,31 +108,6 @@ namespace com.onlineobject.objectnet {
         /// The default Steam Transport full namespace ( Class + Assembly )
         /// </summary>
         const string STEAMWORKS_TRANSPORT_FULL_NAMESPACE = STEAMWORKS_TRANSPORT_NAMESPACE + ", " + STEAMWORKS_TRANSPORT_ASSEMBLY;
-
-        /// <summary>
-        /// The default Healten Steam Transport assembly
-        /// </summary>
-        const string HEALTEN_PACKAGE_ASSEMBLY = "Heathen.Steamworks";
-
-        /// <summary>
-        /// The default Healten Steam Transport namespace
-        /// </summary>
-        const string HEALTEN_PACKAGE_NAMESPACE = "HeathenEngineering.SteamworksIntegration.SteamSettings";
-
-        /// <summary>
-        /// The default Healten Steam Transport namespace ( 2025 support )
-        /// </summary>
-        const string HEALTEN_2025_PACKAGE_NAMESPACE = "Heathen.SteamworksIntegration.SteamSettings";
-
-        /// <summary>
-        /// The default Healten Steam Transport full namespace ( Class + Assembly )
-        /// </summary>
-        const string HEALTEN_PACKAGE_FULL_NAMESPACE = HEALTEN_PACKAGE_NAMESPACE + ", " + HEALTEN_PACKAGE_ASSEMBLY;
-
-        /// <summary>
-        /// The default Healten 2025 Steam Transport full namespace ( Class + Assembly )
-        /// </summary>
-        const string HEALTEN_2025_PACKAGE_FULL_NAMESPACE = HEALTEN_2025_PACKAGE_NAMESPACE + ", " + HEALTEN_PACKAGE_ASSEMBLY;
 
         /// <summary>
         /// Opens the network transports database window.
@@ -332,12 +309,7 @@ namespace com.onlineobject.objectnet {
 #endif
 
             // Check if unity transport is installed and activated
-            this.healtenPackageInstalled    = (Type.GetType(HEALTEN_PACKAGE_FULL_NAMESPACE) != null);
-
-            // Check new Healten version
-            if (this.healtenPackageInstalled == false) {
-                this.healtenPackageInstalled = (Type.GetType(HEALTEN_2025_PACKAGE_FULL_NAMESPACE) != null);
-            }
+            this.heathenPackageInstalled        = SteamUtils.IsHeathenInstalled();
 
             EditorWindowExtensions.CenterOnMainWin(this);
         }
@@ -509,10 +481,10 @@ namespace com.onlineobject.objectnet {
                         if (EditorUtils.PrintBoolean(ref isActive, null, null, 18, 10, true)) {
                             EditorUtility.DisplayDialog("Steam Transport", "Steam transport system is not installed/activated, you need to install it to use Steam Transport on ObjectNet.\n\nSee ObjectNet manual for more informations.", "Understood");
                         }
-                    } else if (eventEntry.GetName().ToUpper().Equals("STEAMTRANSPORT") && (!this.healtenPackageInstalled)) {
+                    } else if (eventEntry.GetName().ToUpper().Equals("STEAMTRANSPORT") && (!this.heathenPackageInstalled)) {
                         if (EditorUtils.PrintBoolean(ref isActive, null, null, 18, 10, true)) {
                             EditorUtility.DisplayDialog("Steam Transport", "Heathen Steam package is not installed, you need to install Heathen package to use SteamWorks library.\n\nHeathen free package is enough to make it work.", "Understood");
-                        }
+                        }                        
                     } else {
                         if (EditorUtils.PrintBoolean(ref isActive, null, null, 18, 10, true)) {
                             foreach (NetworkTransportEntry transportEntry in this.transportDatabase.GetTransports()) {
@@ -527,6 +499,7 @@ namespace com.onlineobject.objectnet {
                             }
                         }
                     }
+                    
                     EditorGUILayout.EndVertical();
                     if (eventEntry.GetName().ToUpper().Equals("UNITYTRANSPORT") && (!this.unityTransportInstalled || !this.unityTransportActivated)) {
                         EditorGUILayout.Space(2);
@@ -552,15 +525,19 @@ namespace com.onlineobject.objectnet {
                             if (unityTransportDriverType != null) {
                                 var buildTarget = EditorUserBuildSettings.activeBuildTarget;
                                 var buildGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
+#pragma warning disable
                                 string defineValues = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildGroup);
                                 PlayerSettings.SetScriptingDefineSymbolsForGroup(buildGroup, defineValues + ";UNITY_TRANSPORT_ENABLED");
+#pragma warning restore
                             } else {
                                 EditorUtility.DisplayDialog("Unity Transport", "Unity transport system is not installed, you need to install it to use Unity Transport on ObjectNet.\n\nSee ObjectNet manual for more informations.", "Understood");
                             }
                         });
                         EditorGUILayout.EndVertical();
                         EditorGUILayout.EndHorizontal();
-                    } else if (eventEntry.GetName().ToUpper().Equals("STEAMTRANSPORT") && (!this.steamTransportInstalled || !this.steamTransportActivated || !this.healtenPackageInstalled)) {
+                    } else if (eventEntry.GetName().ToUpper().Equals("STEAMTRANSPORT") && (!this.steamTransportInstalled || 
+                                                                                           !this.steamTransportActivated || 
+                                                                                           !this.heathenPackageInstalled)) {
                         EditorGUILayout.Space(2);
                         EditorGUILayout.BeginHorizontal();
                         EditorGUILayout.BeginVertical();
@@ -570,12 +547,12 @@ namespace com.onlineobject.objectnet {
                         } else if (!this.steamTransportInstalled) {
                             EditorGUILayout.Space(-5);
                             EditorUtils.PrintExplanationLabel("SteamWorks is not installed, you need to install SteamWorks to use Steam transport system", "oo_error");
-                        } else if (!this.healtenPackageInstalled) {
+                        } else if (!this.heathenPackageInstalled) {
                             EditorGUILayout.Space(-5);
                             EditorUtils.PrintExplanationLabel("Heathen Steam package is not installed, this package is required to use SteamWorks library ( Heathen free version is enough to make it work )", "oo_error");
                         }
                         EditorGUILayout.EndVertical();
-                        EditorGUILayout.EndHorizontal();                        
+                        EditorGUILayout.EndHorizontal();
                     } else {
                         EditorGUI.BeginDisabledGroup(true);
                         GUILayout.FlexibleSpace();
@@ -595,9 +572,11 @@ namespace com.onlineobject.objectnet {
                             EditorUtils.PrintImageButton("Disable", "oo_delete", Color.red.WithAlpha(0.10f), EditorUtils.IMAGE_BUTTON_FONT_COLOR, () => {
                                 var buildTarget = EditorUserBuildSettings.activeBuildTarget;
                                 var buildGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
+#pragma warning disable CS0618
                                 string defineValues = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildGroup).Replace("UNITY_TRANSPORT_ENABLED", "").Replace(";;", ";");
                                 this.unityTransportActivated = false;
                                 PlayerSettings.SetScriptingDefineSymbolsForGroup(buildGroup, defineValues);
+#pragma warning restore CS0618
                             });
                             EditorGUILayout.EndVertical();
                             EditorGUILayout.EndHorizontal();
@@ -663,6 +642,39 @@ namespace com.onlineobject.objectnet {
         void OnInspectorUpdate() {
             Repaint();
         }
+
+        /// <summary>
+        /// Check the current installed heathen version
+        /// </summary>
+        private void FlagHeathenVersionOnPrefs() {
+            var buildTarget = EditorUserBuildSettings.activeBuildTarget;
+            var buildGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
+#pragma warning disable
+            string defineValues = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildGroup);
+            string heathenVersion = "HEATHEN_LITE";
+            if (SteamUtils.IsHeathen2025()) {
+                heathenVersion = "HEATHEN_2025";
+            } else if (SteamUtils.IsHeathen2026()) {
+                heathenVersion = "HEATHEN_2026";
+            }
+            bool recompile = true;
+#if HEATHEN_LITE
+            recompile = !SteamUtils.IsHeathenLite();
+#endif
+#if HEATHEN_2025
+            recompile = !SteamUtils.IsHeathen2025();
+#endif
+#if HEATHEN_2026
+            recompile = !SteamUtils.IsHeathen2026();
+#endif
+            if (recompile) {
+                // EditorUtility.DisplayDialog("Steam Transport", "Heathen Steam package detected, ObjectNet must detect the version to use the correct API.\n\nPress \"Detect\" to check the currect Heathen version.", "Detect");
+
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildGroup, defineValues + ";" + heathenVersion);
+            }
+#pragma warning restore
+        }
     }
 #endif
         }
+#pragma warning restore

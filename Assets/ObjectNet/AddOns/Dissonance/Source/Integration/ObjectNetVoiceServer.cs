@@ -1,7 +1,6 @@
 #if DISSONANCE_ENABLED
 using Dissonance.Networking;
 using System;
-using static UnityEngine.Rendering.HableCurve;
 #else
 using UnityEngine;
 #endif

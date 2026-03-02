@@ -383,7 +383,11 @@ namespace com.onlineobject.objectnet {
             if (this.events.ContainsKey(eventCode)) {
                 this.events[eventCode].ExecuteEvent(reader);
             } else {
-                throw new Exception(String.Format("Event \"{0}\" is not registered", eventCode.ToString()));
+                if (this.gameObject != null) {
+                    throw new Exception(String.Format("Event \"{0}\" is not registered for [ {1} : {2} ]", eventCode.ToString(), this.networkId, this.gameObject.name));
+                } else {
+                    throw new Exception(String.Format("Event \"{0}\" is not registered", eventCode.ToString()));
+                }
             }
         }
 
@@ -769,9 +773,9 @@ namespace com.onlineobject.objectnet {
         public void UnregisterBehavior<T>() where T : IEntity {
             T unregisterComponent = default(T);
             bool found = false;
-            foreach (T behavior in this.behaviors) {
+            foreach (var behavior in this.behaviors) {
                 if (behavior.GetType().Equals(typeof(T))) {
-                    unregisterComponent = behavior;
+                    unregisterComponent = (T)behavior;
                     found = true;
                     break;
                 }

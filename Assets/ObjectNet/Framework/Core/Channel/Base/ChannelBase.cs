@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace com.onlineobject.objectnet {
     /// <summary>
     /// Base class for network communication channels.
@@ -19,7 +21,7 @@ namespace com.onlineobject.objectnet {
         /// Processes incoming data on the channel.
         /// </summary>
         /// <returns>Data bytes used during process</returns>
-        public abstract byte[][] Process();
+        public abstract List<byte[]> Process();
 
         /// <summary>
         /// Checks if the channel is connected.
@@ -93,7 +95,7 @@ namespace com.onlineobject.objectnet {
         /// </summary>
         /// <typeparam name="T">Type pf client that menhtod will return</typeparam>
         /// <returns>Connected clients</returns>
-        public abstract IClient[] GetConnectedClients();
+        public abstract List<IClient> GetConnectedClients();
 
         /// <summary>
         /// Gets the connected client with the specified connection ID.

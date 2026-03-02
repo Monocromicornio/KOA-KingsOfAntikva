@@ -1,6 +1,4 @@
-#pragma warning disable 0168
-#pragma warning disable 0219
-#pragma warning disable 0414
+#pragma warning disable
 
 using System.Collections.Generic;
 using System.Linq;
@@ -831,3 +829,4 @@ namespace com.onlineobject.objectnet {
         }
     }
 }
+#pragma warning enabled

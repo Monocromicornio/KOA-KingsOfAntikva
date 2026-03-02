@@ -257,7 +257,7 @@ namespace com.onlineobject.objectnet.steamworks {
         /// <summary>
         /// Processes any pending operations such as sending messages and updating client states.
         /// </summary>
-        public override byte[][] Process() {
+        public override List<byte[]> Process() {
             if (this.IsConnected()) {
                 try {
                     this.dequeuedBuffers.Clear();
@@ -280,7 +280,7 @@ namespace com.onlineobject.objectnet.steamworks {
                     }
                 }
             }
-            return this.dequeuedBuffers.ToArray();
+            return this.dequeuedBuffers;
         }
 
         /// <summary>

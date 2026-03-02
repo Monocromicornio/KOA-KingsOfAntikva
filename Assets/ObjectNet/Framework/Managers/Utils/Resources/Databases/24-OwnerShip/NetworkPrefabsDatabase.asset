@@ -19,9 +19,13 @@ MonoBehaviour:
     syncPosition: 010101
     syncRotation: 010101
     syncScale: 010101
+    enablePooling: 0
+    poolingSize: 10
     AnimationAutoSync: 0
     ParticlesAutoSync: 0
-    ShowScripts: 1
+    ShowScripts: 0
+    CheckAllScripts: 0
+    CheckAllChilds: 0
     PrefabScripts:
       Scripts:
       - Script: {fileID: 1066660572090282231, guid: abe3f4e8934a12445ab77663d3a9af00, type: 3}
@@ -29,8 +33,8 @@ MonoBehaviour:
         Delay: 0
         Variables:
           Variables: []
-        AllowExecutor: 1
-        Update1_34: 1
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 7774817699315356672, guid: abe3f4e8934a12445ab77663d3a9af00, type: 3}
         Enabled: 0
         Delay: 0
@@ -38,120 +42,196 @@ MonoBehaviour:
           Variables:
           - Variable: <CanMove>k__BackingField
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canSprint
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canJump
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canCrouch
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canUseHeadbob
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: handleMouse
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: walkSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: sprintSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: lookSpeedX
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: lookSpeedY
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: upperLookLimit
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: lowerLookLimit
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: jumpForce
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: gravity
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchHeight
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: standingHeight
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: timeToCrouch
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchingCenter
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: standingCenter
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isCrouching
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: duringCrouchAnimation
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: walkBobSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: walkBobAmount
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: sprintBobSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: sprintBobAmount
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchBobSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchBobAmount
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: defaultYPos
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: timer
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: moveDirection
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: rotationX
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: TimeBetweenSteps
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: usedTime
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isMoving
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isSpriting
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isAgachado
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: airTime
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
-        AllowExecutor: 0
-        Update1_34: 1
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 7651257382246776049, guid: abe3f4e8934a12445ab77663d3a9af00, type: 3}
         Enabled: 0
         Delay: 0
@@ -159,42 +239,66 @@ MonoBehaviour:
           Variables:
           - Variable: m_RenderShadows
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RendererIndex
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RenderPostProcessing
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_StopNaN
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Dithering
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_ClearDepth
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AllowXRRendering
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AllowHDROutput
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_UseScreenCoordOverride
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RequiresDepthTexture
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RequiresColorTexture
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Version
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
-        AllowExecutor: 0
-        Update1_34: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects:
@@ -255,8 +359,8 @@ MonoBehaviour:
         Delay: 0
         Variables:
           Variables: []
-        AllowExecutor: 0
-        Update1_34: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 7774817699315356672, guid: abe3f4e8934a12445ab77663d3a9af00, type: 3}
         Enabled: 0
         Delay: 0
@@ -264,120 +368,196 @@ MonoBehaviour:
           Variables:
           - Variable: <CanMove>k__BackingField
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canSprint
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canJump
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canCrouch
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canUseHeadbob
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: handleMouse
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: walkSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: sprintSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: lookSpeedX
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: lookSpeedY
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: upperLookLimit
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: lowerLookLimit
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: jumpForce
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: gravity
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchHeight
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: standingHeight
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: timeToCrouch
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchingCenter
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: standingCenter
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isCrouching
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: duringCrouchAnimation
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: walkBobSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: walkBobAmount
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: sprintBobSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: sprintBobAmount
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchBobSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchBobAmount
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: defaultYPos
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: timer
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: moveDirection
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: rotationX
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: TimeBetweenSteps
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: usedTime
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isMoving
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isSpriting
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isAgachado
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: airTime
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
-        AllowExecutor: 0
-        Update1_34: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 7651257382246776049, guid: abe3f4e8934a12445ab77663d3a9af00, type: 3}
         Enabled: 0
         Delay: 0
@@ -385,46 +565,71 @@ MonoBehaviour:
           Variables:
           - Variable: m_RenderShadows
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RendererIndex
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RenderPostProcessing
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_StopNaN
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Dithering
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_ClearDepth
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AllowXRRendering
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AllowHDROutput
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_UseScreenCoordOverride
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RequiresDepthTexture
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RequiresColorTexture
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Version
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
-        AllowExecutor: 0
-        Update1_34: 0
+        NetworkVariables:
+          Variables: []
     ShowVariables: 0
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
+    ShowPooling: 0
     prefabEvents:
       onSpawnPrefab:
         EventTarget: {fileID: 0}
@@ -474,15 +679,21 @@ MonoBehaviour:
     customSendRate: 0
     sendRateAmount: 1
     updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 
   - Id: 2
     Prefab: {fileID: 1914218494935195419, guid: 404da2082765fab4f9674cf63857e75b, type: 3}
     AutoSync: 1
     syncPosition: 010101
     syncRotation: 010101
     syncScale: 010101
+    enablePooling: 0
+    poolingSize: 1
     AnimationAutoSync: 0
     ParticlesAutoSync: 0
     ShowScripts: 0
+    CheckAllScripts: 0
+    CheckAllChilds: 0
     PrefabScripts:
       Scripts:
       - Script: {fileID: 8402577490660486709, guid: 404da2082765fab4f9674cf63857e75b, type: 3}
@@ -492,18 +703,26 @@ MonoBehaviour:
           Variables:
           - Variable: activeColor
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: passiveColor
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: offset
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: coordinates
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
-        AllowExecutor: 0
-        Update1_34: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -517,22 +736,31 @@ MonoBehaviour:
           Variables:
           - Variable: activeColor
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: passiveColor
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: offset
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: coordinates
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
-        AllowExecutor: 0
-        Update1_34: 0
+        NetworkVariables:
+          Variables: []
     ShowVariables: 0
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
+    ShowPooling: 0
     prefabEvents:
       onSpawnPrefab:
         EventTarget: {fileID: 0}
@@ -582,15 +810,21 @@ MonoBehaviour:
     customSendRate: 0
     sendRateAmount: 1
     updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 
   - Id: 3
     Prefab: {fileID: 1914218494935195419, guid: 027c0809fd808b74cb799aae0b8d9c5d, type: 3}
     AutoSync: 1
     syncPosition: 010101
     syncRotation: 010101
     syncScale: 010101
+    enablePooling: 0
+    poolingSize: 1
     AnimationAutoSync: 0
     ParticlesAutoSync: 0
     ShowScripts: 0
+    CheckAllScripts: 0
+    CheckAllChilds: 0
     PrefabScripts:
       Scripts:
       - Script: {fileID: 8402577490660486709, guid: 027c0809fd808b74cb799aae0b8d9c5d, type: 3}
@@ -600,18 +834,26 @@ MonoBehaviour:
           Variables:
           - Variable: activeColor
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: passiveColor
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: offset
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: coordinates
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
-        AllowExecutor: 0
-        Update1_34: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -625,22 +867,31 @@ MonoBehaviour:
           Variables:
           - Variable: activeColor
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: passiveColor
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: offset
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: coordinates
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
-        AllowExecutor: 0
-        Update1_34: 0
+        NetworkVariables:
+          Variables: []
     ShowVariables: 0
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
+    ShowPooling: 1
     prefabEvents:
       onSpawnPrefab:
         EventTarget: {fileID: 0}
@@ -690,15 +941,21 @@ MonoBehaviour:
     customSendRate: 0
     sendRateAmount: 0
     updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 
   - Id: 4
     Prefab: {fileID: 1914218494935195419, guid: 9b304867f1c3bb041b81ee7cfc0b0035, type: 3}
     AutoSync: 1
     syncPosition: 010101
     syncRotation: 010101
     syncScale: 010101
+    enablePooling: 0
+    poolingSize: 0
     AnimationAutoSync: 0
     ParticlesAutoSync: 0
     ShowScripts: 0
+    CheckAllScripts: 0
+    CheckAllChilds: 0
     PrefabScripts:
       Scripts:
       - Script: {fileID: 8402577490660486709, guid: 9b304867f1c3bb041b81ee7cfc0b0035, type: 3}
@@ -708,18 +965,26 @@ MonoBehaviour:
           Variables:
           - Variable: activeColor
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: passiveColor
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: offset
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: coordinates
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
-        AllowExecutor: 0
-        Update1_34: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects: []
@@ -730,6 +995,7 @@ MonoBehaviour:
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
+    ShowPooling: 0
     prefabEvents:
       onSpawnPrefab:
         EventTarget: {fileID: 0}
@@ -779,3 +1045,5 @@ MonoBehaviour:
     customSendRate: 0
     sendRateAmount: 0
     updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 

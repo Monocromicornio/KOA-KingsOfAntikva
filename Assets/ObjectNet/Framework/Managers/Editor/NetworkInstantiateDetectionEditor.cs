@@ -148,7 +148,7 @@ namespace com.onlineobject.objectnet.editor {
                 EditorUtils.PrintSimpleExplanation("Network Id");
                 GUILayout.Space(5.0f);
                 EditorGUI.BeginDisabledGroup(true);
-                this.staticId.intValue = Convert.ToInt32(EditorGUILayout.TextField(this.staticId.intValue.ToString(), GUILayout.Width(120)));
+                EditorGUILayout.TextField(this.staticId.intValue.ToString(), GUILayout.Width(120));
                 EditorGUI.EndDisabledGroup();
                 GUILayout.Space(5.0f);
                 if (inPrefabScene == true) {

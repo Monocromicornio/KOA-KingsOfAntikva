@@ -41,7 +41,7 @@ namespace com.onlineobject.objectnet {
 
         private Action<int, Action<IDataStream>, bool> registerEventCallback;
 
-        private Func<int, KeyValuePair<IClient, int>[]> getClientsToUpdateCallback;
+        private Func<int, List<KeyValuePair<IClient, int>>> getClientsToUpdateCallback;
 
         private Func<bool> getIsRunningLogicCallback;
 
@@ -95,12 +95,12 @@ namespace com.onlineobject.objectnet {
         /// <param name="hasEvent">Callback to check if has event already registered</param>
         /// <param name="registerEvent">Callback to register a new event</param>
         /// <param name="invalidateExecutionEvent">Invalidate variables callback</param>
-        public void InitializeEventsCallback(Func<int, bool>                            hasEvent, 
-                                             Action<int, Action<IDataStream>, bool>     registerEvent, 
-                                             Func<int, KeyValuePair<IClient, int>[]>    getClientsToUpdateCallback, 
-                                             Func<bool>                                 getIsRunningLogicCallback,
-                                             Func<int>                                  getManualUpdateCallback,
-                                             Func<int>                                  getReliableUpdateCallback) {
+        public void InitializeEventsCallback(Func<int, bool>                                hasEvent, 
+                                             Action<int, Action<IDataStream>, bool>         registerEvent, 
+                                             Func<int, List<KeyValuePair<IClient, int>>>    getClientsToUpdateCallback, 
+                                             Func<bool>                                     getIsRunningLogicCallback,
+                                             Func<int>                                      getManualUpdateCallback,
+                                             Func<int>                                      getReliableUpdateCallback) {
             this.hasEventCallback           = hasEvent;
             this.registerEventCallback      = registerEvent;
             this.getClientsToUpdateCallback = getClientsToUpdateCallback;
@@ -178,7 +178,7 @@ namespace com.onlineobject.objectnet {
         /// Return if variables was invalidated by an external process
         /// </summary>
         /// <returns>True if was invalidated</returns>
-        private KeyValuePair<IClient, int>[] GetClientsToUpdate(int frameTick) {
+        private List<KeyValuePair<IClient, int>> GetClientsToUpdate(int frameTick) {
             return (this.getClientsToUpdateCallback != null) ? this.getClientsToUpdateCallback.Invoke(frameTick) : null;
         }
 
@@ -311,7 +311,7 @@ namespace com.onlineobject.objectnet {
         /// </summary>
         private void SendReliableVariables() {
             bool hasAnyChange = false;
-            KeyValuePair<IClient, int>[] pendingExecutionClients = this.GetClientsToUpdate(this.frameTickOfReliableExecution);
+            List<KeyValuePair<IClient, int>> pendingExecutionClients = this.GetClientsToUpdate(this.frameTickOfReliableExecution);
             this.reliableVariablesToSend.Clear();
             foreach (var variable in this.variables) {
                 IVariable variableTarget = variable.Value;
@@ -319,7 +319,7 @@ namespace com.onlineobject.objectnet {
                     // Check changes to send event to this
                     if (variableTarget != null) {
                         if ( this.firstActiveExecutionTick ) variableTarget.Invalidate();
-                        if ((pendingExecutionClients != null) && (pendingExecutionClients.Length > 0) || (variableTarget.WasModified())) {
+                        if ((pendingExecutionClients != null) && (pendingExecutionClients.Count > 0) || (variableTarget.WasModified())) {
                             hasAnyChange |= variableTarget.WasModified();
                             this.reliableVariablesToSend.Add(variable.Key, variable.Value);
                             variableTarget.Validate();

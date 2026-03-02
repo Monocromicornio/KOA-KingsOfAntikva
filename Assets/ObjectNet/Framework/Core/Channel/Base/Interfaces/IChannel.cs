@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace com.onlineobject.objectnet {
     /// <summary>
     /// Interface for defining a communication channel.
@@ -49,7 +51,7 @@ namespace com.onlineobject.objectnet {
         /// Return a list of connected client's if this player is the master on embedded mode
         /// </summary>
         /// <returns>Connected clients</returns>
-        IClient[] GetConnectedClients();
+        List<IClient> GetConnectedClients();
         
         /// <summary>
         /// Sends data through the communication channel with the specified delivery mode and transport.

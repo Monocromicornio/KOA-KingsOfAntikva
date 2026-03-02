@@ -1,6 +1,4 @@
-#pragma warning disable 0168
-#pragma warning disable 0219
-#pragma warning disable 0414
+#pragma warning disable
 
 using System;
 using System.Collections;
@@ -94,7 +92,7 @@ namespace com.onlineobject.objectnet {
         /// <summary>
         /// BUffer used during receive process
         /// </summary>
-        byte[][] usedBuffers = null;
+        List<byte[]> usedBuffers = null;
 
         // Event managers for different network events.
         private INetworkEventsCore coreEventsManager        = null;
@@ -141,6 +139,8 @@ namespace com.onlineobject.objectnet {
                      NetworkPlayerSpawnTime,
                      GameObject,
                      GameObject> spawnClientPlayer;
+
+        private static Func<GameObject, Vector3, Quaternion, GameObject> instantiateFunction;
 
         /// <summary>
         /// Delegate for the Awake event.
@@ -398,6 +398,14 @@ namespace com.onlineobject.objectnet {
                     this.socket.EnqueueBuffer(data);
                 }
             }
+        }
+
+        /// <summary>
+        /// Configure methjod used to insttantiate elements
+        /// </summary>
+        /// <param name="callback">Callback metthod</param>
+        public static void ConfigureInstantiateMethod(Func<GameObject, Vector3, Quaternion, GameObject> callback) {
+            NetworkTransport.instantiateFunction = callback;
         }
 
         /// <summary>
@@ -1235,7 +1243,12 @@ namespace com.onlineobject.objectnet {
                 GameObject prefabToInstantiate = prefabEntry.GetPrefab();
                 // Then instantiate prefab on local
                 if (prefabToInstantiate != null) {
-                    GameObject instance = GameObject.Instantiate(prefabToInstantiate, prefabPosition, Quaternion.Euler(prefabRotation));
+                    GameObject instance = null;
+                    if (NetworkTransport.instantiateFunction != null) {
+                        instance = NetworkTransport.instantiateFunction(prefabToInstantiate, prefabPosition, Quaternion.Euler(prefabRotation));
+                    } else {
+                        instance = GameObject.Instantiate(prefabToInstantiate, prefabPosition, Quaternion.Euler(prefabRotation));
+                    }
                     instance.transform.localScale = prefabScale;
                     // Attach script detection to identify player how instantiate this object
                     NetworkObjectReference objectReferenceScript = null;
@@ -2178,12 +2191,12 @@ namespace com.onlineobject.objectnet {
         /// </summary>
         /// <param name="reader">The data stream containing player spawn information.</param>
         private void OnRequestPlayerSpawn(IDataStream reader) {
-            int     connectionId    = reader.Read<int>();
-            string  prefabSignature = reader.Read<string>();
-            bool    includePosition = reader.Read<bool>();
-            Vector3 position        = reader.Read<Vector3>();
-            bool    includeRotation = reader.Read<bool>();
-            Vector3 rotation        = reader.Read<Vector3>();
+            int         connectionId    = reader.Read<int>();
+            string      prefabSignature = reader.Read<string>();
+            bool        includePosition = reader.Read<bool>();
+            Vector3     position        = reader.Read<Vector3>();
+            bool        includeRotation = reader.Read<bool>();
+            Quaternion  rotation        = reader.Read<Quaternion>();
 
             List<object>    loginParameters         = null;
             Type[]          loginParametersTypes    = null;
@@ -2200,12 +2213,12 @@ namespace com.onlineobject.objectnet {
             if (string.IsNullOrEmpty(prefabSignature) == false) {
                 NetworkPrefabEntry prefabEntry = NetworkManager.Instance().GetNetworkPrefabEntry(prefabSignature);
                 if (prefabEntry != null) {
-                    playerObject = this.spawnClientPlayer((reader as INetworkStream).GetClient(), connectionId, includePosition, position, includeRotation, Quaternion.Euler(rotation), 0, NetworkPlayerSpawnTime.Manually, prefabEntry.GetPrefab());
+                    playerObject = this.spawnClientPlayer((reader as INetworkStream).GetClient(), connectionId, includePosition, position, includeRotation, rotation, 0, NetworkPlayerSpawnTime.Manually, prefabEntry.GetPrefab());
                 } else {
                     throw new Exception(String.Format("The prefab signature [{0}] doesn't exists in prefabs database", prefabSignature));
                 }
             } else {
-                playerObject = this.spawnClientPlayer((reader as INetworkStream).GetClient(), connectionId, includePosition, position, includeRotation, Quaternion.Euler(rotation), 0, NetworkPlayerSpawnTime.Manually, null);
+                playerObject = this.spawnClientPlayer((reader as INetworkStream).GetClient(), connectionId, includePosition, position, includeRotation, rotation, 0, NetworkPlayerSpawnTime.Manually, null);
             }
             // If login is enabled, set the player's tag with login parameters
             if (NetworkManager.Instance().IsLoginEnabled()) {
@@ -2818,16 +2831,18 @@ namespace com.onlineobject.objectnet {
         /// <param name="targetClient">The target client to send the lobby refresh to. If null, sends to all connected clients.</param>
 
         private void SendLobbyRefresh(IClient targetClient = null) {
-            IClient[] targetClients = (targetClient == null) ? this.GetSocket().GetConnectedClients() : new IClient[] { targetClient };
-            foreach (NetworkClient client in targetClients) {
-                // Send lobby creation failed
-                using (DataStream writer = new DataStream()) {
-                    writer.Write(NetworkManager.Lobbies.GetLobbiesCount()); // Lobby count
-                    foreach ( ILobby lobby in NetworkManager.Lobbies.GetLobbies() ) {
-                        writer.Write(lobby.GetLobbyId());
-                        writer.Write(lobby.GetLobbyName());
+            List<IClient> targetClients = (targetClient == null) ? this.GetSocket().GetConnectedClients() : null;
+            if (targetClients != null) {
+                foreach (NetworkClient client in targetClients) {
+                    // Send lobby creation failed
+                    using (DataStream writer = new DataStream()) {
+                        writer.Write(NetworkManager.Lobbies.GetLobbiesCount()); // Lobby count
+                        foreach (ILobby lobby in NetworkManager.Lobbies.GetLobbies()) {
+                            writer.Write(lobby.GetLobbyId());
+                            writer.Write(lobby.GetLobbyName());
+                        }
+                        client.Send(LobbyServerEvents.LobbyListRefresh, writer);
                     }
-                    client.Send(LobbyServerEvents.LobbyListRefresh, writer);
                 }
             }
         }
@@ -2859,3 +2874,5 @@ namespace com.onlineobject.objectnet {
         }
     }
 }
+
+#pragma warning restore

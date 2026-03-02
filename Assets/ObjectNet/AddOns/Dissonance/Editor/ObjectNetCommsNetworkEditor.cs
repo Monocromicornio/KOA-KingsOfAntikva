@@ -88,9 +88,11 @@ namespace com.onlineobject.objectnet.voice {
             EditorGUILayout.Space(10);
             EditorUtils.PrintImageButton("Remove Dissonance", "oo_dissonance", Color.red.WithAlpha(0.25f), EditorUtils.IMAGE_BUTTON_FONT_COLOR, () => {
                 var buildTarget = EditorUserBuildSettings.activeBuildTarget;
+#pragma warning disable CS0618
                 var buildGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
                 string defineValues = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildGroup).Replace("DISSONANCE_ENABLED", "").Replace(";;", ";");
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(buildGroup, defineValues);
+#pragma warning restore CS0618
             });
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndHorizontal();            

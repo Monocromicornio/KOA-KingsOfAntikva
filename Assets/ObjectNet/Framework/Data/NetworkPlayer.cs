@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace com.onlineobject.objectnet {
     /// <summary>
     /// Represents a network player in a game or application.
@@ -139,7 +141,7 @@ namespace com.onlineobject.objectnet {
         /// Gets the network client associated with the player.
         /// </summary>
         /// <returns>The associated network client.</returns>
-        public IClient[] GetClients() {
+        public List<IClient> GetClients() {
             return this.networkChannel.GetConnectedClients();
         }
 

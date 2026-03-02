@@ -709,6 +709,33 @@ namespace com.onlineobject.objectnet {
         }
 
         /// <summary>
+        /// Draws the horizontal int bar.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="label">The label.</param>
+        /// <param name="min">The minimum.</param>
+        /// <param name="max">The maximum.</param>
+        /// <param name="width">The width.</param>
+        /// <param name="fontSize">Size of the font.</param>
+        /// <param name="valueText">The value text.</param>
+        public static void DrawHorizontalIntBar(ref int value, String label, int min, int max, int fontSize = 0, float width = 250f, string valueText = null) {
+            int current = value;
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Space(10);
+            EditorGUILayout.BeginVertical();
+            EditorUtils.PrintSizedLabel(String.Format(label + " [{0}]", (valueText == null) ? current : valueText), (fontSize > 0) ? fontSize : EditorUtils.DEFAULT_SLIDER_FONT_SIZE, EditorUtils.INTERNAL_ITENS_COLOR);
+            GUILayout.Space(5);
+            Color previousColor = GUI.backgroundColor;
+            GUI.backgroundColor = EditorUtils.INTERNAL_ITENS_COLOR;
+            value = Mathf.FloorToInt(GUILayout.HorizontalSlider(value, min, max, GUILayout.Width(width)));
+            GUI.backgroundColor = previousColor;
+            GUILayout.Space(15);
+            EditorGUILayout.EndVertical();
+            GUILayout.Space(10);
+            EditorGUILayout.EndHorizontal();
+        }
+
+        /// <summary>
         /// Draws the horizontal float bar.
         /// </summary>
         /// <param name="value">The value.</param>

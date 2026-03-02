@@ -1,3 +1,37 @@
+1.46)
+- Fixed ActiveStart not being executed for the Master Player
+- Added Pooling System support for network elements
+
+1.45)
+- Fixed the Steam example scene using the wrong database
+- Added "check all" button on network prefabs database
+
+1.44)
+- Removed unnecessary memory allocation
+- Execute network method in child components
+
+1.43)
+- Removed Unity6 warnings
+- Added method to kick client(s) on the server side
+- Fixed adding network Position, Scale, and Rotation when disabled on Prefab
+- Removed wrong namespace import on the ObjectNet voice system
+- Removed memory leak variable control
+- Fixed Static Id not working when the user selects multiple elements
+
+1.42)
+- Fixed the audio listener disabled on the client's
+- Fixed Steam leave lobby not disconnecting
+
+1.41)
+- Added support for enum types
+- Fixed an error that does not allow selecting Dynamic Spawned on the editor.
+
+1.40)
+- Removed method signature collision
+- Added the possibility to update automatic network variables
+- Force to send reliable variables when execution starts
+- Fixed Steam not updating reliable Network Variables when a new player joins
+
 1.39)
 - Fixed SteamWorks 2025 detection
 - Fixed NetworkVariables not working correctly on multiple scripts

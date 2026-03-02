@@ -3,10 +3,8 @@
 #pragma warning disable 0414
 
 using System;
-
 using System.Buffers;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -36,6 +34,7 @@ namespace com.onlineobject.objectnet {
         private IClient localClient;
         private volatile int clientConnectionId = 0;
         private Dictionary<ITransportClient, NetworkClient> connectedClients = new Dictionary<ITransportClient, NetworkClient>();
+        private List<IClient> connectedResultClients = new List<IClient>();
 
         // Callbacks for various network events
         private Action<IDataStream> onMessageReceived;
@@ -49,7 +48,7 @@ namespace com.onlineobject.objectnet {
         private Func<byte[], byte[]> onDecrypt;
 
         // To enable pooling buffer
-        private Dictionary<int, List<byte[]>> poolingBuffer = new Dictionary<int, List<byte[]>>();
+        private ArrayPool<byte> poolingBuffer = ArrayPool<byte>.Shared;
 
         // Constants for default values and timeouts
         const ushort    DEFAULT_TCP_PORT = 4550;
@@ -282,7 +281,7 @@ namespace com.onlineobject.objectnet {
         /// <summary>
         /// Processes the network server by calling the Process method of the transport layer if it is not null.
         /// </summary>
-        public override byte[][] Process() {
+        public override List<byte[]> Process() {
             if (this.transportLayer != null) {
                 return this.transportLayer.Process();
             } else {
@@ -303,9 +302,14 @@ namespace com.onlineobject.objectnet {
         /// </summary>
         /// <typeparam name="T">Type pf client that menhtod will return</typeparam>
         /// <returns>Connected clients</returns>
-        public override IClient[] GetConnectedClients() {
-            return this.connectedClients.Values.ToArray<IClient>();
+        public override List<IClient> GetConnectedClients() {
+            this.connectedResultClients.Clear();
+            foreach (IClient client in this.connectedClients.Values) {
+                this.connectedResultClients.Add(client);
+            }
+            return this.connectedResultClients;
         }
+
 
         /// <summary>
         /// Gets the connected client with the specified connection ID.
@@ -595,14 +599,7 @@ namespace com.onlineobject.objectnet {
         private byte[] DequeueBuffer(int bufferSize) {
             byte[] result = null;
             lock (this.poolingBuffer) {
-                if (this.poolingBuffer.TryGetValue(bufferSize, out var tempData) == false) {
-                    this.poolingBuffer.Add(bufferSize, new List<byte[]>());
-                    this.poolingBuffer[bufferSize].Add(new byte[bufferSize]);
-                } else if (this.poolingBuffer[bufferSize].Count == 0) {
-                    this.poolingBuffer[bufferSize].Add(new byte[bufferSize]);
-                }
-                result = this.poolingBuffer[bufferSize][0];
-                this.poolingBuffer[bufferSize].RemoveAt(0);
+                result = this.poolingBuffer.Rent(minimumLength: bufferSize);                
             }
             return result;
         }
@@ -614,13 +611,7 @@ namespace com.onlineobject.objectnet {
         public void EnqueueBuffer(byte[] buffer) {
             if (buffer != null) {
                 lock (this.poolingBuffer) {
-                    if (this.poolingBuffer.TryGetValue(buffer.Length, out var tempData) == false) {
-                        this.poolingBuffer.Add(buffer.Length, new List<byte[]>());
-                        this.poolingBuffer[buffer.Length].Add(new byte[buffer.Length]);
-                    } else if (this.poolingBuffer[buffer.Length].Count == 0) {
-                        this.poolingBuffer[buffer.Length].Add(new byte[buffer.Length]);
-                    }
-                    this.poolingBuffer[buffer.Length].Add(buffer);
+                    this.poolingBuffer.Return(buffer, clearArray: false);                    
                 }
             }
         }
@@ -697,10 +688,10 @@ namespace com.onlineobject.objectnet {
             byte[]  packetData          = data;
             int     bufferSize          = (packetData.Length - (sizeof(int) / sizeof(byte)));
             // First i need to get connection id
-            byte[]  bufferData          = this.DequeueBuffer(bufferSize); // new byte[packetData.Length - sizeof(int)];
+            byte[]  bufferData          = this.DequeueBuffer(bufferSize);
 
             // Copy data buffer
-            System.Buffer.BlockCopy(packetData, (sizeof(int) / sizeof(byte)), bufferData, 0, bufferData.Length);
+            System.Buffer.BlockCopy(packetData, (sizeof(int) / sizeof(byte)), bufferData, 0, bufferSize);
 
             // Encript data if encription is enabled
             if (this.encryptionEnabled) {
@@ -712,7 +703,7 @@ namespace com.onlineobject.objectnet {
             }
 
             // Find connection id on clients
-            int receivedConnectionId        = MemoryMarshal.Read<int>(packetData.AsSpan(0)); // BitConverter.ToInt32(bufferConnectionId, 0);
+            int receivedConnectionId        = MemoryMarshal.Read<int>(packetData.AsSpan(0));
             NetworkClient receivedClient    = this.connectedClients.ContainsKey(client) ? this.connectedClients[client] : null;            
             bool isValidMessage             = (receivedClient != null);
             result                          = isValidMessage;
@@ -852,7 +843,7 @@ namespace com.onlineobject.objectnet {
                     IClient clientOrigin = null;
                     if ((NetworkManager.Instance().IsConnectedOnRelayServer()) && (NetworkManager.Instance().IsMasterPlayer())) { 
                         foreach (NetworkClient  clientNetwork in this.connectedClients.Values) {
-                            if (clientNetwork.GetConnectionId().Equals(originConnectionId)) {
+                            if (clientNetwork.GetConnectionId() == originConnectionId) {
                                 clientOrigin = clientNetwork;
                                 break;
                             }

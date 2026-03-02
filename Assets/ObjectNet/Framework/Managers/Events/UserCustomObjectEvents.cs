@@ -76,7 +76,7 @@ namespace com.onlineobject.objectnet {
         public static bool IsRemoteMethod(int eventCode) {
             const uint REMOTE_METHOD_START_BOUNDS    = 0x01FFFFFF;
             const uint REMOTE_METHOD_END_BOUNDS      = 0xFFFFFFFF;
-            return (eventCode >= REMOTE_METHOD_START_BOUNDS) && (eventCode < REMOTE_METHOD_END_BOUNDS);
+            return (eventCode >= REMOTE_METHOD_START_BOUNDS) && ((uint)eventCode < REMOTE_METHOD_END_BOUNDS);
         }
 
         /// <summary>

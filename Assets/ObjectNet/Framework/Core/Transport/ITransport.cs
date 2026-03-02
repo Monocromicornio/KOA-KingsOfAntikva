@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace com.onlineobject.objectnet {
     /// <summary>
@@ -46,7 +47,7 @@ namespace com.onlineobject.objectnet {
         /// Processes any pending transport layer actions.
         /// </summary>
         /// <returns>Data buffers used udring the process</returns>
-        byte[][] Process();
+        List<byte[]> Process();
 
         /// <summary>
         /// Attempts to establish a connection using the transport layer.

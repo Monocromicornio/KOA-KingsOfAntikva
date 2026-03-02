@@ -19,9 +19,13 @@ MonoBehaviour:
     syncPosition: 010101
     syncRotation: 010101
     syncScale: 010101
+    enablePooling: 0
+    poolingSize: 0
     AnimationAutoSync: 1
     ParticlesAutoSync: 0
     ShowScripts: 0
+    CheckAllScripts: 0
+    CheckAllChilds: 0
     PrefabScripts:
       Scripts:
       - Script: {fileID: 4359647774132702944, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
@@ -31,103 +35,171 @@ MonoBehaviour:
           Variables:
           - Variable: MoveSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: SprintSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: RotationSmoothTime
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: SpeedChangeRate
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: FootstepAudioVolume
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: JumpHeight
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: Gravity
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: JumpTimeout
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: FallTimeout
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: Grounded
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: GroundedOffset
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: GroundedRadius
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: TopClamp
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: BottomClamp
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: CameraAngleOverride
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: LockCameraPosition
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: UseNetworkInput
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _cinemachineTargetYaw
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _cinemachineTargetPitch
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _speed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animationBlend
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _targetRotation
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _rotationVelocity
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _verticalVelocity
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _terminalVelocity
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _jumpTimeoutDelta
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _fallTimeoutDelta
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animIDSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animIDGrounded
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animIDJump
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animIDFreeFall
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animIDMotionSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _hasAnimator
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6196888656308837321, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -135,10 +207,16 @@ MonoBehaviour:
           Variables:
           - Variable: canPush
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: strength
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 5148542660807208389, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -146,19 +224,31 @@ MonoBehaviour:
           Variables:
           - Variable: jump
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: sprint
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: analogMovement
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: cursorLocked
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: cursorInputForLook
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 3685245617683462947, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -166,34 +256,56 @@ MonoBehaviour:
           Variables:
           - Variable: m_NeverAutoSwitchControlSchemes
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_DefaultControlScheme
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_DefaultActionMap
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_SplitScreenIndex
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_PlayerIndex
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_InputActive
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Enabled
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_ActionsInitialized
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_OnUnpairedDeviceUsedHooked
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_OnDeviceChangeHooked
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6842299265851613245, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -201,19 +313,31 @@ MonoBehaviour:
           Variables:
           - Variable: m_ShowDebugText
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_ShowCameraFrustum
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_IgnoreTimeScale
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_LastFrameUpdated
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: mNextFrameId
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 2977574039150479887, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -221,49 +345,79 @@ MonoBehaviour:
           Variables:
           - Variable: m_RenderShadows
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RendererIndex
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RenderPostProcessing
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_StopNaN
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Dithering
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_ClearDepth
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AllowXRRendering
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AllowHDROutput
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_UseScreenCoordOverride
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RequiresDepthTexture
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RequiresColorTexture
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Version
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6194427374282554662, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
           Variables: []
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 1551763199020242427, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
+          Variables: []
+        NetworkVariables:
           Variables: []
       - Script: {fileID: 1598719383353780654, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
@@ -272,22 +426,36 @@ MonoBehaviour:
           Variables:
           - Variable: m_PivotOffset
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AmplitudeGain
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_FrequencyGain
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: mInitialized
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: mNoiseTime
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: mNoiseOffsets
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6794977410936656395, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -295,73 +463,66 @@ MonoBehaviour:
           Variables:
           - Variable: Damping
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: ShoulderOffset
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: VerticalArmLength
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: CameraSide
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: CameraDistance
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: IgnoreTag
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: CameraRadius
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: DampingIntoCollision
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: DampingFromCollision
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_PreviousFollowTargetPosition
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_DampingCorrection
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_CamPosCollisionCorrection
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
-      - Script: {fileID: 4081473374981087456, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
-        Enabled: 1
-        Delay: 0
-        Variables:
-          Variables:
-          - Variable: integerStandard
-            Enabled: 1
-            Delay: 0
-          - Variable: stringStandard
-            Enabled: 1
-            Delay: 0
-      - Script: {fileID: 4193387265657985102, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
-        Enabled: 1
-        Delay: 0
-        Variables:
-          Variables:
-          - Variable: integerStandard
-            Enabled: 1
-            Delay: 0
-          - Variable: stringStandard
-            Enabled: 1
-            Delay: 0
-      - Script: {fileID: 4099099645807608183, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
-        Enabled: 1
-        Delay: 0
-        Variables:
-          Variables:
-          - Variable: integerStandard
-            Enabled: 1
-            Delay: 0
-          - Variable: stringStandard
-            Enabled: 1
-            Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects:
@@ -1271,103 +1432,171 @@ MonoBehaviour:
           Variables:
           - Variable: MoveSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: SprintSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: RotationSmoothTime
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: SpeedChangeRate
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: FootstepAudioVolume
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: JumpHeight
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: Gravity
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: JumpTimeout
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: FallTimeout
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: Grounded
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: GroundedOffset
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: GroundedRadius
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: TopClamp
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: BottomClamp
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: CameraAngleOverride
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: LockCameraPosition
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: UseNetworkInput
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _cinemachineTargetYaw
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _cinemachineTargetPitch
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _speed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animationBlend
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _targetRotation
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _rotationVelocity
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _verticalVelocity
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _terminalVelocity
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _jumpTimeoutDelta
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _fallTimeoutDelta
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animIDSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animIDGrounded
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animIDJump
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animIDFreeFall
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _animIDMotionSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: _hasAnimator
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6196888656308837321, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -1375,10 +1604,16 @@ MonoBehaviour:
           Variables:
           - Variable: canPush
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: strength
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 5148542660807208389, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -1386,19 +1621,31 @@ MonoBehaviour:
           Variables:
           - Variable: jump
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: sprint
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: analogMovement
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: cursorLocked
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: cursorInputForLook
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 3685245617683462947, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -1406,34 +1653,56 @@ MonoBehaviour:
           Variables:
           - Variable: m_NeverAutoSwitchControlSchemes
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_DefaultControlScheme
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_DefaultActionMap
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_SplitScreenIndex
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_PlayerIndex
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_InputActive
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Enabled
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_ActionsInitialized
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_OnUnpairedDeviceUsedHooked
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_OnDeviceChangeHooked
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6842299265851613245, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -1441,19 +1710,31 @@ MonoBehaviour:
           Variables:
           - Variable: m_ShowDebugText
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_ShowCameraFrustum
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_IgnoreTimeScale
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_LastFrameUpdated
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: mNextFrameId
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 2977574039150479887, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -1461,49 +1742,79 @@ MonoBehaviour:
           Variables:
           - Variable: m_RenderShadows
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RendererIndex
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RenderPostProcessing
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_StopNaN
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Dithering
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_ClearDepth
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AllowXRRendering
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AllowHDROutput
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_UseScreenCoordOverride
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RequiresDepthTexture
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RequiresColorTexture
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Version
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6194427374282554662, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
           Variables: []
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 1551763199020242427, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
+          Variables: []
+        NetworkVariables:
           Variables: []
       - Script: {fileID: 1598719383353780654, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
@@ -1512,22 +1823,36 @@ MonoBehaviour:
           Variables:
           - Variable: m_PivotOffset
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AmplitudeGain
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_FrequencyGain
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: mInitialized
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: mNoiseTime
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: mNoiseOffsets
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6794977410936656395, guid: c41765c7c612d5947a7c2ea10a6fc6c3, type: 3}
         Enabled: 0
         Delay: 0
@@ -1535,44 +1860,71 @@ MonoBehaviour:
           Variables:
           - Variable: Damping
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: ShoulderOffset
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: VerticalArmLength
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: CameraSide
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: CameraDistance
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: IgnoreTag
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: CameraRadius
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: DampingIntoCollision
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: DampingFromCollision
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_PreviousFollowTargetPosition
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_DampingCorrection
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_CamPosCollisionCorrection
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowVariables: 0
     ShowEvents: 0
     ShowTranform: 0
-    ShowChildTree: 0
+    ShowChildTree: 1
+    ShowPooling: 0
     prefabEvents:
       onSpawnPrefab:
         EventTarget: {fileID: 0}
@@ -1618,4 +1970,9 @@ MonoBehaviour:
     disableObjectGravity: 1
     enableObjectKinematic: 1
     enableObjectInterpolate: 0
+    usePrefabRotation: 0
+    customSendRate: 0
+    sendRateAmount: 0
     updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 

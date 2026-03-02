@@ -19,19 +19,27 @@ MonoBehaviour:
     syncPosition: 010101
     syncRotation: 010101
     syncScale: 010101
+    enablePooling: 0
+    poolingSize: 0
     AnimationAutoSync: 0
     ParticlesAutoSync: 0
     ShowScripts: 1
+    CheckAllScripts: 0
+    CheckAllChilds: 0
     PrefabScripts:
       Scripts:
       - Script: {fileID: 8649281373835628, guid: f683a5331d9df83418828dea28a14453, type: 3}
-        Enabled: 1
+        Enabled: 0
         Delay: 0
         Variables:
           Variables:
           - Variable: playerColor
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6894610442966991823, guid: f683a5331d9df83418828dea28a14453, type: 3}
         Enabled: 0
         Delay: 0
@@ -39,121 +47,201 @@ MonoBehaviour:
           Variables:
           - Variable: <CanMove>k__BackingField
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canSprint
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canJump
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canCrouch
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: canUseHeadbob
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: walkSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: sprintSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: lookSpeedX
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: lookSpeedY
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: upperLookLimit
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: lowerLookLimit
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: jumpForce
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: gravity
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchHeight
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: standingHeight
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: timeToCrouch
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchingCenter
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: standingCenter
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isCrouching
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: duringCrouchAnimation
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: walkBobSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: walkBobAmount
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: sprintBobSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: sprintBobAmount
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchBobSpeed
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: crouchBobAmount
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: defaultYPos
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: timer
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: moveDirection
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: rotationX
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: TimeBetweenSteps
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: usedTime
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isMoving
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isSpriting
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: isAgachado
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: airTime
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_InstanceID
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_UnityRuntimeErrorString
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 7651257382246776049, guid: f683a5331d9df83418828dea28a14453, type: 3}
         Enabled: 0
         Delay: 0
@@ -161,46 +249,76 @@ MonoBehaviour:
           Variables:
           - Variable: m_RenderShadows
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RendererIndex
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RenderPostProcessing
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_StopNaN
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Dithering
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_ClearDepth
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AllowXRRendering
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_AllowHDROutput
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_UseScreenCoordOverride
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RequiresDepthTexture
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_RequiresColorTexture
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_Version
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_InstanceID
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
           - Variable: m_UnityRuntimeErrorString
             Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
             Delay: 0
+        NetworkVariables:
+          Variables: []
     ShowChilds: 0
     ChildObjets:
       Objects:
@@ -253,6 +371,7 @@ MonoBehaviour:
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
+    ShowPooling: 0
     prefabEvents:
       onSpawnPrefab:
         EventTarget: {fileID: 0}

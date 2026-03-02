@@ -19,9 +19,13 @@ MonoBehaviour:
     syncPosition: 010101
     syncRotation: 010101
     syncScale: 010101
+    enablePooling: 0
+    poolingSize: 0
     AnimationAutoSync: 0
     ParticlesAutoSync: 0
     ShowScripts: 0
+    CheckAllScripts: 0
+    CheckAllChilds: 0
     PrefabScripts:
       Scripts: []
     ShowChilds: 0
@@ -34,7 +38,14 @@ MonoBehaviour:
     ShowEvents: 0
     ShowTranform: 0
     ShowChildTree: 0
+    ShowPooling: 0
     prefabEvents:
+      OnInstantiate:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
       onSpawnPrefab:
         EventTarget: {fileID: 0}
         EventComponent: {fileID: 0}
@@ -79,16 +90,25 @@ MonoBehaviour:
     disableObjectGravity: 1
     enableObjectKinematic: 1
     enableObjectInterpolate: 0
+    usePrefabRotation: 0
+    customSendRate: 0
+    sendRateAmount: 0
     updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 
   - Id: 2
     Prefab: {fileID: 4558411392142725532, guid: 1ea47c75fa71b7741aeee9371a9867de, type: 3}
     AutoSync: 1
     syncPosition: 010101
     syncRotation: 010101
     syncScale: 010101
+    enablePooling: 0
+    poolingSize: 0
     AnimationAutoSync: 0
     ParticlesAutoSync: 0
     ShowScripts: 0
+    CheckAllScripts: 0
+    CheckAllChilds: 0
     PrefabScripts:
       Scripts: []
     ShowChilds: 0
@@ -98,10 +118,17 @@ MonoBehaviour:
     InputScripts:
       Scripts: []
     ShowVariables: 0
-    ShowEvents: 0
+    ShowEvents: 1
     ShowTranform: 0
     ShowChildTree: 0
+    ShowPooling: 0
     prefabEvents:
+      OnInstantiate:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 1
+        ExecutionError: 
       onSpawnPrefab:
         EventTarget: {fileID: 0}
         EventComponent: {fileID: 0}
@@ -146,4 +173,9 @@ MonoBehaviour:
     disableObjectGravity: 1
     enableObjectKinematic: 1
     enableObjectInterpolate: 0
+    usePrefabRotation: 0
+    customSendRate: 0
+    sendRateAmount: 0
     updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 

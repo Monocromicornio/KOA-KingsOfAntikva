@@ -9,12 +9,17 @@ namespace com.onlineobject.objectnet {
     [Serializable]
     public class NetworkPrefabsEventsEntry : System.Object {
 
+        // Event triggered when the object is spawned is detected on the server side.
+        [EventInformations(EventName = "OnInstantiate", ExecutionSide = EventReferenceSide.BothSides, ParametersType = new Type[] { typeof(NetworkObject) }, EventDescriptiom = "Trigger when this network object is instantiated")]
+        [SerializeField]
+        public EventReferencePrefab OnInstantiate;
+
         // Event triggered when the object is spawned on the client side.
-        [EventInformations(EventName = "OnPrefabSpawn", ExecutionSide = EventReferenceSide.BothSides, ParametersType = new Type[] { typeof(NetworkObject) }, EventDescriptiom = "Trigger when this object was spawned")]
+        [EventInformations(EventName = "OnPrefabSpawn", ExecutionSide = EventReferenceSide.ClientSide, ParametersType = new Type[] { typeof(NetworkObject) }, EventDescriptiom = "Trigger when this object was spawned on the client side")]
         [SerializeField]
         public EventReferencePrefab onSpawnPrefab;
 
-        [EventInformations(EventName = "OnPrefabDespawn", ExecutionSide = EventReferenceSide.BothSides, ParametersType = new Type[] { typeof(NetworkObject) }, EventDescriptiom = "Trigger when this object was despawned")]
+        [EventInformations(EventName = "OnPrefabDespawn", ExecutionSide = EventReferenceSide.ClientSide, ParametersType = new Type[] { typeof(NetworkObject) }, EventDescriptiom = "Trigger when this object was despawned on the client side")]
         [SerializeField]
         public EventReferencePrefab onDespawnPrefab;
 

@@ -171,10 +171,12 @@ namespace com.onlineobject.objectnet.editor {
             if (this.TriggerTarget.objectReferenceValue != null) {
                 if (previousObject != this.TriggerTarget.objectReferenceValue) {
                     bool inScene = false;
+#pragma warning disable CS0618
                     foreach (GameObject obj in GameObject.FindObjectsOfType(typeof(GameObject))) {
                         inScene |= (obj == (this.TriggerTarget.objectReferenceValue as GameObject));
                         if (inScene) break;
                     }
+#pragma warning restore CS0618
                     if ( !inScene ) {
                         this.TriggerTarget.objectReferenceValue = null;
                         this.SetExecutionError("Only objects in scene can be used to trigger an event");

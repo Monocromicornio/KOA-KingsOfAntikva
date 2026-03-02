@@ -63,7 +63,7 @@ namespace com.onlineobject.objectnet {
         }
 
         // Update is called once per frame
-        public override byte[][] Process() {
+        public override List<byte[]> Process() {
             this.GetDriver().ScheduleUpdate().Complete();
             try {
                 this.dequeuedBuffers.Clear();
@@ -87,7 +87,7 @@ namespace com.onlineobject.objectnet {
                     this.dequeuedBuffers.AddRange(connection.Process());
                 }
             }
-            return this.dequeuedBuffers.ToArray();
+            return this.dequeuedBuffers;
         }
 
         public override void Send(byte[] data, DeliveryMode mode = DeliveryMode.Unreliable) {
@@ -131,5 +131,5 @@ namespace com.onlineobject.objectnet {
             }
         }
 #endif
-        }
+    }
 }

@@ -21,6 +21,11 @@ namespace com.onlineobject.objectnet.editor {
         NetworkDebuggerManager networkManagerDebugger;
 
         /// <summary>
+        /// Flag if this object will not be destroyed when scene changes
+        /// </summary>
+        SerializedProperty dontDestroyOnLoad;
+
+        /// <summary>
         /// The enable console log
         /// </summary>
         SerializedProperty EnableConsoleLog;
@@ -76,6 +81,7 @@ namespace com.onlineobject.objectnet.editor {
         public void OnEnable() {
             this.networkManagerDebugger = (this.target as NetworkDebuggerManager);
             // Get all serializable objects
+            this.dontDestroyOnLoad      = serializedObject.FindProperty("dontDestroyOnLoad");
             this.EnableConsoleLog       = serializedObject.FindProperty("EnableConsoleLog");
             this.EnableOnBuild          = serializedObject.FindProperty("EnableOnBuild");
             this.CaptureWarnings        = serializedObject.FindProperty("CaptureWarnings");
@@ -109,6 +115,24 @@ namespace com.onlineobject.objectnet.editor {
                 Help.BrowseURL("https://www.youtube.com/@TheObjectNet");
             });
             EditorGUILayout.EndHorizontal();
+
+            EditorUtils.PrintHeader("Network Debugger", Color.blue, Color.white, 16, "oo_network", true, () => {
+                if (this.dontDestroyOnLoad != null) {
+                    GUILayout.FlexibleSpace();
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.BeginVertical();
+                    GUILayout.Space(3.0f);
+                    EditorGUILayout.BeginHorizontal();
+                    EditorUtils.PrintSimpleExplanation("Don't destroy");
+                    EditorGUILayout.BeginVertical();
+                    GUILayout.Space(3.0f);
+                    EditorUtils.PrintBooleanSquaredByRef(ref this.dontDestroyOnLoad, "", null, 14, 12, false);
+                    EditorGUILayout.EndVertical();
+                    EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.EndVertical();
+                    EditorGUILayout.EndHorizontal();
+                }
+            });
 
             // Check if peer to peer is enabled
             EditorGUILayout.BeginHorizontal(BackgroundStyle.Get(Color.red.WithAlpha(DETAIL_BACKGROUND_OPACITY)));

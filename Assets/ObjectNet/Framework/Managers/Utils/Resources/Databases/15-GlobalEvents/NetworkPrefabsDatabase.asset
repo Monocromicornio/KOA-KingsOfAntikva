@@ -19,9 +19,13 @@ MonoBehaviour:
     syncPosition: 010101
     syncRotation: 010101
     syncScale: 010101
+    enablePooling: 0
+    poolingSize: 0
     AnimationAutoSync: 1
     ParticlesAutoSync: 0
     ShowScripts: 0
+    CheckAllScripts: 0
+    CheckAllChilds: 0
     PrefabScripts:
       Scripts:
       - Script: {fileID: 4359647774132702944, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
@@ -29,35 +33,49 @@ MonoBehaviour:
         Delay: 20
         Variables:
           Variables: []
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6196888656308837321, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
+          Variables: []
+        NetworkVariables:
           Variables: []
       - Script: {fileID: 5148542660807208389, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
           Variables: []
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 3685245617683462947, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
+          Variables: []
+        NetworkVariables:
           Variables: []
       - Script: {fileID: 6842299265851613245, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
           Variables: []
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 2977574039150479887, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
           Variables: []
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6194427374282554662, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
+          Variables: []
+        NetworkVariables:
           Variables: []
     ShowChilds: 1
     ChildObjets:
@@ -966,41 +984,62 @@ MonoBehaviour:
         Delay: 0
         Variables:
           Variables: []
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 6196888656308837321, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
+          Variables: []
+        NetworkVariables:
           Variables: []
       - Script: {fileID: 5148542660807208389, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
           Variables: []
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 3685245617683462947, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
+          Variables: []
+        NetworkVariables:
           Variables: []
       - Script: {fileID: 6842299265851613245, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
           Variables: []
+        NetworkVariables:
+          Variables: []
       - Script: {fileID: 2977574039150479887, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
+          Variables: []
+        NetworkVariables:
           Variables: []
       - Script: {fileID: 6194427374282554662, guid: 06ec9f8c64c93284993ed5153ae31c3b, type: 3}
         Enabled: 0
         Delay: 0
         Variables:
           Variables: []
+        NetworkVariables:
+          Variables: []
     ShowVariables: 0
-    ShowEvents: 0
+    ShowEvents: 1
     ShowTranform: 0
     ShowChildTree: 0
+    ShowPooling: 0
     prefabEvents:
+      OnInstantiate:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
       onSpawnPrefab:
         EventTarget: {fileID: 0}
         EventComponent: {fileID: 0}
@@ -1045,4 +1084,9 @@ MonoBehaviour:
     disableObjectGravity: 1
     enableObjectKinematic: 1
     enableObjectInterpolate: 0
+    usePrefabRotation: 0
+    customSendRate: 0
+    sendRateAmount: 0
     updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 

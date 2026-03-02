@@ -1,3 +1,4 @@
+#pragma warning disable
 #if STEAMWORKS_NET
 using Steamworks;
 using System.Linq;
@@ -256,6 +257,7 @@ namespace com.onlineobject.objectnet {
             }
 #endif
         }
+
 #if STEAMWORKS_NET
         private void LateUpdate() {
             if (this.autoRefresh) {
@@ -950,3 +952,4 @@ namespace com.onlineobject.objectnet {
         }
     }
 }
+#pragma warning restore

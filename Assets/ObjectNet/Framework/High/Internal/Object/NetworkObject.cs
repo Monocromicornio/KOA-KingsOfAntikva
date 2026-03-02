@@ -1,3 +1,4 @@
+#pragma warning disable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,10 @@ namespace com.onlineobject.objectnet {
         /// Network Events Associated With This Object ( Came From NetworkPrefabEntry )
         ///
         //////////////////////////////////////////////////////////////////////////////////////////////
+        [HideInInspector]
+        [SerializeField]
+        private EventReference onInstantiate;
+
         [HideInInspector]
         [SerializeField]
         private EventReference onSpawnPrefab;
@@ -297,11 +302,28 @@ namespace com.onlineobject.objectnet {
         /// </summary>
         /// <returns>Network start order</returns>
         public NetworkStartOrder GetStartOrder() {
-            NetworkStartOrder result = (this.GetComponent<NetworkMasterPlayer>() != null) ? NetworkStartOrder.OnConnectionStablished : NetworkStartOrder.OnModeAssigned;
+            NetworkStartOrder result = (this.DetectMasterPlayerOnHierarchy()) ? NetworkStartOrder.OnConnectionStablished : NetworkStartOrder.OnModeAssigned;
             if (this.GetComponent<NetworkMasterPlayer>() == null) {
                 BehaviourConfig config = this.GetType().GetAttribute<BehaviourConfig>();
                 if (config != null) {
                     result = config.LoadOrder;
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Return if this gameobject is a Master Player of the game
+        /// </summary>
+        /// <returns>True is is MasterPlayer, otherwise false</returns>
+        private bool DetectMasterPlayerOnHierarchy() {
+            bool result = false;
+            Transform currentElementToCheck = this.transform;
+            while ((currentElementToCheck != null) && (result == false)) {
+                result = (currentElementToCheck.GetComponent<NetworkMasterPlayer>() != null) ||
+                         (currentElementToCheck.root.GetComponent<NetworkMasterPlayer>() != null);
+                if (result == false) {
+                    currentElementToCheck = currentElementToCheck.parent;
                 }
             }
             return result;
@@ -344,7 +366,7 @@ namespace com.onlineobject.objectnet {
                 NetworkObject[] networkObjects = GetComponentsInChildren<NetworkObject>(true).OrderBy(c => c.transform.parent == null ? 0 : 1) // Root objects first
                                                                                              .ThenBy(c => c.transform.parent != null ? c.transform.GetSiblingIndex() : 0) // Sort by sibling index for non-root
                                                                                              .ThenBy(c => c.gameObject.name) // Name fallback
-                                                                                             .ToArray(); ;
+                                                                                             .ToArray();
 
                 foreach (NetworkObject childObject in networkObjects) {
                     childObject.childObjectIndex = currentObjectIndex;
@@ -399,6 +421,17 @@ namespace com.onlineobject.objectnet {
             this.movementType               = source.movementType;
             this.disableObjectGravity       = source.disableObjectGravity;
             this.enableObjectKinematic      = source.enableObjectKinematic;
+        }
+
+        /// <summary>
+        /// Synchronize all network behaviour belonging to the same GameObject
+        /// </summary>
+        private void SynchronizeSiblingsObjects() {
+            foreach (NetworkObject obj in this.GetComponents<NetworkObject>()) {
+                if (obj != this) {
+                    obj.UpdateFromSource(this);
+                }
+            }
         }
 
         /// <summary>
@@ -488,11 +521,13 @@ namespace com.onlineobject.objectnet {
                 this.audioController.Intialize();
             }
             // Initialize network input controller
-            if (this.input == null) { 
+            if (this.input == null) {
                 this.input = new NetworkInput(this.networkElement,
                                               this.networkElement.IsActive(),
                                               NetworkManager.Instance().IsRemoteInputEnabled());
             }
+            // Update all network behaviours belonging to the same GameObject
+            this.SynchronizeSiblingsObjects();
             // Initialize synchronized fields and collect network variables
             // Note: System can accept mode than one NetworkBehaviour peer object, this means that i need to iteract over all NetworkObject into this
             foreach (NetworkObject obj in this.GetComponents<NetworkObject>()) {
@@ -1262,7 +1297,7 @@ namespace com.onlineobject.objectnet {
         /// </summary>
         /// <param name="executionTick">Execution tick to check variables.</param>
         /// <returns>List of pending clients to update</returns>
-        public KeyValuePair<IClient, int>[] GetClientsToUpdateVariables(int executionTick) {
+        public List<KeyValuePair<IClient, int>> GetClientsToUpdateVariables(int executionTick) {
             return NetworkManager.Instance().GetClientsToUpdateVariables(executionTick);
         }
 
@@ -1557,11 +1592,35 @@ namespace com.onlineobject.objectnet {
         }
 
         /// <summary>
+        /// Configure OnInstantiate event
+        /// </summary>
+        /// <param name="eventCallback">Callback event method</param>
+        public void OnInstantiate(EventReference eventCallback) {
+            this.onInstantiate = eventCallback;
+        }
+
+        /// <summary>
         /// Configure OnSpawnPrefab event
         /// </summary>
         /// <param name="eventCallback">Callback event method</param>
         public void OnSpawnPrefab(EventReference eventCallback) {
             this.onSpawnPrefab = eventCallback;
+        }
+
+        /// <summary>
+        /// Execute callback when object was instantiated
+        /// </summary>
+        public void ExecuteOnInstantiate() {
+            if (this.onInstantiate != null) {
+                if ((this.onInstantiate.GetEventTarget() != null) &&
+                    (this.onInstantiate.GetEventComponent() != null) &&
+                    (this.onInstantiate.GetEventMethod() != null)) {
+                    MethodInfo executionMethod = this.onInstantiate.GetEventComponent().GetType().GetMethod(this.onInstantiate.GetEventMethod());
+                    if (executionMethod != null) {
+                        executionMethod.Invoke(this.onInstantiate.GetEventComponent(), new object[] { this });
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -2237,10 +2296,22 @@ namespace com.onlineobject.objectnet {
             this.hashingMethodsCodesExecuting = true;
             MethodInfo finalMethodToExecute = null;
             //get all methods in the NetworkObject type
-            MethodInfo[] methodsToExecute = this.GetType().GetMethods(BindingFlags.DeclaredOnly |
-                                                                      BindingFlags.NonPublic    |
-                                                                      BindingFlags.Instance     |
-                                                                      BindingFlags.Public);
+            var methodsToExecute = this.GetType().GetMethods(BindingFlags.DeclaredOnly |
+                                                             BindingFlags.NonPublic    |
+                                                             BindingFlags.Instance     |
+                                                             BindingFlags.Public).ToList();
+
+
+            // Get from base class
+            Type baseClass = this.GetType().BaseType;
+            while ((baseClass != null) && (baseClass.Equals(typeof(NetworkBehaviour))) == false) {
+                methodsToExecute.AddRange(baseClass.GetMethods(BindingFlags.Public |
+                                                               BindingFlags.NonPublic |
+                                                               BindingFlags.Instance |
+                                                               BindingFlags.DeclaredOnly).ToList());
+                baseClass = baseClass.BaseType;
+            }
+
             // add all the methods with there script refrence
             foreach (MethodInfo _method in methodsToExecute){
                 //ignore Common MonoBehavior methods like Start, Awake ,OnEnable so less methods are computed resulting in less collision posibilities
@@ -2743,5 +2814,5 @@ namespace com.onlineobject.objectnet {
         }
 
     }
-
 }
+#pragma warning restore

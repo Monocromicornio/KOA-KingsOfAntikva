@@ -1,7 +1,6 @@
-﻿namespace com.onlineobject.objectnet.embedded.Transports
-{
+﻿namespace com.onlineobject.objectnet.embedded.Transports {
     /// <summary>Contains event data for when a server's transport successfully establishes a connection to a client.</summary>
-    public class ConnectedEventArgs
+    public struct ConnectedEventArgs
     {
         /// <summary>The newly established connection.</summary>
         public readonly EmbeddedConnection Connection;
@@ -15,7 +14,7 @@
     }
 
     /// <summary>Contains event data for when a server's or client's transport receives data.</summary>
-    public class DataReceivedEventArgs
+    public struct DataReceivedEventArgs
     {
         /// <summary>An array containing the received data.</summary>
         public readonly byte[] DataBuffer;
@@ -37,7 +36,7 @@
     }
 
     /// <summary>Contains event data for when a server's or client's transport initiates or detects a disconnection.</summary>
-    public class DisconnectedEventArgs
+    public struct DisconnectedEventArgs
     {
         /// <summary>The closed connection.</summary>
         public readonly EmbeddedConnection Connection;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace com.onlineobject.objectnet {
     /// <summary>
@@ -126,7 +127,7 @@ namespace com.onlineobject.objectnet {
         /// <summary>
         /// Processes any pending operations for the transport client.
         /// </summary>
-        public byte[][] Process() {
+        public List<byte[]> Process() {
             return this.sourceTransport.Process();
         }
 

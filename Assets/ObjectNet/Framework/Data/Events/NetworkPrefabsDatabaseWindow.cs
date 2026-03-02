@@ -129,7 +129,7 @@ namespace com.onlineobject.objectnet {
         /// Called when [enable].
         /// </summary>
         void OnEnable() {
-            this.maxSize            = new Vector2(990f, 895f);
+            this.maxSize            = new Vector2(1050f, 895f);
             this.minSize            = this.maxSize;
             this.titleContent       = new GUIContent ("Prefabs Database", Resources.Load("oo_info") as Texture);
             this.prefabsDatabase    = Resources.Load<NetworkPrefabsDatabase>(GlobalResources.GetPrefabsDatabase(this.targetDatabase));
@@ -267,11 +267,14 @@ namespace com.onlineobject.objectnet {
                 bool isAnimationSync        = prefabEntry.GetAnimationAutoSync();
                 bool isParticlesSync        = prefabEntry.GetParticlesAutoSync();
                 bool isToShowScripts        = prefabEntry.GetShowScripts();
+                bool isToCheckAllScripts    = prefabEntry.GetCheckAllScripts();
+                bool isToCheckAllChilds     = prefabEntry.GetCheckAllChilds();
                 bool isToShowChilds         = prefabEntry.GetShowChilds();
                 bool isShowInputScripts     = prefabEntry.GetShowInputScripts();
                 bool isToShowVariables      = prefabEntry.GetShowVariables();
                 bool isToShowEvents         = prefabEntry.GetShowEvents();
                 bool isToShowTransform      = prefabEntry.GetShowTransform();
+                bool isToShowPooling        = prefabEntry.GetShowPooling();
                 bool isToShowChildTree      = prefabEntry.GetShowChildTree();
                 bool isToDisableGravity     = prefabEntry.IsToDisableGravity();
                 bool isToEnableKinematic    = prefabEntry.IsToEnableKinematic();
@@ -359,7 +362,7 @@ namespace com.onlineobject.objectnet {
                     prefabEntry.SetShowEvents(isToShowEvents);                    
                 }
                 EditorGUILayout.EndVertical();
-                EditorGUILayout.Space(5);
+                EditorGUILayout.Space(3);
 
                 // Show variables attributes
                 EditorGUILayout.BeginVertical();
@@ -369,7 +372,16 @@ namespace com.onlineobject.objectnet {
                     prefabEntry.SetShowTransform(isToShowTransform);
                 }
                 EditorGUILayout.EndVertical();
-                EditorGUILayout.Space(5);
+                EditorGUILayout.Space(3);
+
+                EditorGUILayout.BeginVertical();
+                EditorGUILayout.Space(3);
+                if (GUILayout.Button(Resources.Load((isToShowPooling) ? "oo_pooling_active" : "oo_pooling") as Texture, GUIStyle.none, GUILayout.Width(16), GUILayout.Height(16))) {
+                    isToShowPooling = !isToShowPooling;
+                    prefabEntry.SetShowPooling(isToShowPooling);
+                }
+                EditorGUILayout.EndVertical();
+                EditorGUILayout.Space(3);
 
                 EditorGUILayout.BeginVertical();
                 GUILayout.Space(3.0f);
@@ -510,6 +522,56 @@ namespace com.onlineobject.objectnet {
                     }
                 }
 
+                // Draw pooling system
+                if (isToShowPooling) {
+                    EditorGUILayout.BeginHorizontal(BackgroundStyle.Get(EditorUtils.DETAIL_INFO_COLOR.WithAlpha(TRANSPORT_BACKGROUND_ALPHA)));
+                    EditorUtils.PrintHeader("Enable objects poolling for this network prefab", EditorUtils.DETAIL_INFO_COLOR.WithAlpha(1.0f), Color.white, 14, "oo_pooling");
+                    EditorGUILayout.EndHorizontal();
+
+                    bool    previous = prefabEntry.GetEnablePooling();
+                    int     poolSize = Mathf.Clamp(prefabEntry.GetPoolingSize(), 1, 1000);
+                    EditorGUILayout.BeginVertical();
+                    GUILayout.Space(5.0f);
+                    EditorGUILayout.BeginHorizontal();
+                    GUILayout.Space(5.0f);
+                    EditorGUILayout.BeginVertical(BackgroundStyle.Get(EditorUtils.ERROR_FONT_COLOR.WithAlpha(0.05f)));
+                    GUILayout.Space(10.0f);
+                    if (EditorUtils.PrintBooleanSquared(ref previous, "Enable Object Pooling", null, 14, 12, true, 2.5f)) {
+                        prefabEntry.SetEnablePooling(previous);
+
+#if UNITY_EDITOR
+                        UnityEditor.EditorUtility.SetDirty(prefabsDatabase);
+#endif
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
+                    }
+                    GUILayout.Space(12.0f);
+                    EditorGUILayout.EndVertical();
+                    GUILayout.Space(10.0f);
+
+                    int previousPoolSize = poolSize;
+                    EditorUtils.DrawHorizontalIntBar(ref poolSize, "Pooling Size", 1, 1000, 12, 800);
+
+                    prefabEntry.SetPoolingSize(poolSize);
+                    if (previousPoolSize != poolSize) {
+#if UNITY_EDITOR
+                        UnityEditor.EditorUtility.SetDirty(prefabsDatabase);
+#endif
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
+                    }
+
+                    GUILayout.Space(15.0f);
+
+                    EditorGUILayout.EndHorizontal();
+                    GUILayout.Space(15.0f);
+                    EditorGUILayout.BeginHorizontal();
+                    EditorUtils.PrintExplanationLabel("When enabled, pooling pre-allocates objects to reduce runtime instantiation costs and improve performance, but it may slightly increase loading time.", "oo_info");
+                    EditorGUILayout.EndHorizontal();
+                    GUILayout.Space(15.0f);
+                    EditorGUILayout.EndVertical();
+                }
+
                 // Draw synchonize tranform options
                 if (isToShowTransform) {
                     EditorGUILayout.BeginHorizontal(BackgroundStyle.Get(EditorUtils.DETAIL_INFO_COLOR.WithAlpha(TRANSPORT_BACKGROUND_ALPHA)));
@@ -624,7 +686,7 @@ namespace com.onlineobject.objectnet {
                     EditorGUILayout.EndVertical();
                     EditorGUILayout.EndHorizontal();
                     GUILayout.Space(5f);
-                }                    
+                }
 
                 // Draw script enable/disable
                 if ( isToShowScripts ) {
@@ -701,6 +763,17 @@ namespace com.onlineobject.objectnet {
                     EditorUtils.PrintSimpleExplanation("By default all logic scripts are disabled on passive objects, nonetheless, you can enable some listed script below by clicking in check in front of script");
                     EditorUtils.HorizontalLine(EditorUtils.LINE_DIVISOR_COLOR, 1.0f, new Vector2(5f, 5f));
                     EditorGUILayout.BeginHorizontal();
+                    bool executeSelect = false;
+                    bool previous = isToCheckAllScripts;
+                    if (EditorUtils.PrintBooleanSquared(ref isToCheckAllScripts, "", null, 14, 12, true, 2.5f)) {
+                        executeSelect = (previous != isToCheckAllScripts);
+                        if (executeSelect) {
+                            prefabEntry.SetCheckAllScripts(isToCheckAllScripts);
+                            foreach (ScriptStatus script in scriptList.GetScripts()) {
+                                script.Enabled = isToCheckAllScripts;
+                            }
+                        }
+                    }
                     GUILayout.Label("Don't Disable");
                     GUILayout.FlexibleSpace();
                     GUILayout.Label("Delay to disable");
@@ -749,6 +822,13 @@ namespace com.onlineobject.objectnet {
                         EditorGUILayout.EndHorizontal();
                         // Update new child
                         currentChild = script.Script.gameObject;
+                    }
+                    if (executeSelect) {
+#if UNITY_EDITOR
+                        UnityEditor.EditorUtility.SetDirty(prefabsDatabase);
+#endif
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
                     }
                     EditorGUILayout.EndVertical();
                     GUILayout.Space(15.0f);
@@ -844,6 +924,14 @@ namespace com.onlineobject.objectnet {
                         tolltipText = "Show/Hide all childs os this network prefabs";
                     }
                     EditorGUILayout.Space(5);
+                    bool executeCheck = false;
+                    bool previous = isToCheckAllChilds;
+                    if (EditorUtils.PrintBooleanSquared(ref isToCheckAllChilds, "", null, 14, 12, true, 2.5f)) {
+                        executeCheck = (previous != isToCheckAllChilds);
+                        if (executeCheck) {
+                            prefabEntry.SetCheckAllChilds(isToCheckAllChilds);
+                        }
+                    }
                     GUILayout.Label("Don't Disable");
                     GUILayout.FlexibleSpace();
                     GUILayout.Label("Auto Sync");
@@ -871,7 +959,9 @@ namespace com.onlineobject.objectnet {
                         GUILayout.Space(this.GetInheritanceLevel(networkPrefab, child.Target.transform) * 10.0f);
                         GUILayout.BeginVertical();
                         EditorGUILayout.BeginHorizontal();
-
+                        if (executeCheck) {
+                            child.Enabled = isToCheckAllChilds;
+                        }
                         if ( EditorUtils.PrintBooleanSquared(ref child.Enabled, child.Target.name, null, 14, 12, true, 2.5f) ) {                                                        
 #if UNITY_EDITOR
                             UnityEditor.EditorUtility.SetDirty(prefabsDatabase);
@@ -883,7 +973,7 @@ namespace com.onlineobject.objectnet {
                         EditorGUILayout.EndHorizontal();
                         EditorGUILayout.EndVertical();
                         GUILayout.FlexibleSpace();
-
+                        
                         EditorGUILayout.Space(3);
                         if (GUILayout.Button(Resources.Load((child.SyncPosition) ? "oo_position_active" : "oo_position") as Texture, GUIStyle.none, GUILayout.Width(16), GUILayout.Height(16))) {
                             child.SyncPosition = !child.SyncPosition;
@@ -1058,6 +1148,14 @@ namespace com.onlineobject.objectnet {
                     GUILayout.Space(15.0f);
                     EditorGUILayout.EndHorizontal();
                     GUILayout.Space(10.0f);
+
+                    if (executeCheck) {
+#if UNITY_EDITOR
+                        UnityEditor.EditorUtility.SetDirty(prefabsDatabase);
+#endif
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
+                    }
                 } else {
                     GameObjectList childList = prefabEntry.GetChildObjects();
                     if ((prefabEntry != null) && (prefabEntry.GetPrefab() != null) && (childList != null)) {
@@ -1476,27 +1574,23 @@ namespace com.onlineobject.objectnet {
                     prefabEvents = prefabEntry.GetEvents();
                 }
                 if (prefabEvents.onSpawnPrefab == null) {
-                    Debug.Log("EventReference created");
                     prefabEvents.onSpawnPrefab = new EventReferencePrefab();
 #if UNITY_EDITOR
                     UnityEditor.EditorUtility.SetDirty(prefabsDatabase);
-                    //UnityEditor.EditorUtility.SetDirty(prefabEvents.onSpawnPrefab);
 #endif
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();
                 }
                 
                 if (isToShowEvents) {
-                    // var serializedEvents = new SerializedObject(prefabEntry.GetEvents());
-                    // serializedEvents.Update();
                     bool updated = false;
+                    updated |= this.DrawEvent(prefabEntry.GetOnInstantiate(),                  "OnInstantiate");
                     updated |= this.DrawEvent(prefabEntry.GetOnSpawnPrefab(),                  "onSpawnPrefab");
                     updated |= this.DrawEvent(prefabEntry.GetOnDespawnPrefab(),                "onDespawnPrefab");
                     updated |= this.DrawEvent(prefabEntry.GetOnTakeObjectOwnership(),          "onTakeObjectOwnerShip");
                     updated |= this.DrawEvent(prefabEntry.GetOnReleaseObjectOwnership(),       "onReleaseObjectOwnerShip");
                     updated |= this.DrawEvent(prefabEntry.GetOnAcceptObjectOwnerShip(),        "onAcceptOwnerShip");
                     updated |= this.DrawEvent(prefabEntry.GetOnAcceptReleaseObjectOwnerShip(), "onAcceptReleaseOwnerShip");
-                    // serializedEvents.ApplyModifiedProperties();
                     if (updated) {
 #if UNITY_EDITOR
                         UnityEditor.EditorUtility.SetDirty(prefabsDatabase);

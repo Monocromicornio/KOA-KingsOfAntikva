@@ -9,6 +9,10 @@ namespace com.onlineobject.objectnet {
     /// </summary>
     public class NetworkDebuggerManager : MonoBehaviour {
 
+        // Flag is this object shall keep persistent between scenes
+        [SerializeField]
+        private bool dontDestroyOnLoad = true;
+
         // Indicates whether console logging is enabled or not.
         [SerializeField]
         private bool EnableConsoleLog = false; // Default is false, can be set in the Unity Inspector
@@ -44,6 +48,8 @@ namespace com.onlineobject.objectnet {
         // Reference to the NetworkDebugger instance
         private NetworkDebugger Debugger;
 
+        private static NetworkDebuggerManager instance;
+
         // Store message in wueue when "EnableOnBuild" is active
         private Queue InternalLogQueue = new Queue();
 
@@ -56,6 +62,48 @@ namespace com.onlineobject.objectnet {
         const uint MEGABYTE = 1024 * 1000;  // number of bytes in 1Mb
 
         const uint GIGABYTE = 1024 * 1000 * 1000;  // number of bytes in 1Gb
+
+        /// <summary>
+        /// Provides access to the singleton instance of the NetworkDebuggerManager.
+        /// </summary>
+        /// <returns>The singleton instance of the NetworkDebuggerManager.</returns>
+        public static NetworkDebuggerManager Instance() {
+            // Return the singleton instance
+            return NetworkDebuggerManager.instance;
+        }
+
+        /// <summary>
+        /// Detect ig another NetworkDebuggerManager is already instantiated
+        /// </summary>
+        /// <returns>True if NetworkDebuggerManager already exists, otherwise false</returns>
+        public bool DetectDuplicated() {
+            return (NetworkDebuggerManager.instance != null);
+        }
+
+        /// <summary>
+        /// Flag current instance of NetworkDebuggerManager as the in use instance
+        /// </summary>
+        private void SetInstance() {
+            NetworkDebuggerManager.instance = this;
+        }
+
+
+        /// <summary>
+        /// Awake is called when the script instance is being loaded.
+        /// Initializes the network manager, sets up prefabs, servers, and NAT traversal if necessary.
+        /// </summary>
+        void Awake() {
+            if ((this.dontDestroyOnLoad) &&
+                (this.DetectDuplicated())) {
+                DestroyImmediate(this.gameObject);
+            } else {
+                // Flag on base class
+                if (this.dontDestroyOnLoad) {
+                    DontDestroyOnLoad(this);
+                }
+                this.SetInstance(); // Flag instance to be the current object                
+            }
+        }
 
         /// <summary>
         /// Called when the script instance is being loaded.

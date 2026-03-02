@@ -1,7 +1,5 @@
-#pragma warning disable 0168
-#pragma warning disable 0219
-#pragma warning disable 0414
-
+#pragma warning disable
+#pragma warning disable
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +10,7 @@ using System.Reflection;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 namespace com.onlineobject.objectnet {
     /// <summary>
@@ -608,6 +607,8 @@ namespace com.onlineobject.objectnet {
 
         private Dictionary<IClient, int> clientsToUpdateVariables = new Dictionary<IClient, int>(); // List of new clients connected to a game
 
+        private List<IClient> recicledClients = new List<IClient>();
+
         /// <summary>
         /// FPS Measure and Contol
         /// </summary>
@@ -645,6 +646,8 @@ namespace com.onlineobject.objectnet {
 
         private List<DelayedRemove> objectsToDespawn = new List<DelayedRemove>();
 
+        private List<KeyValuePair<IClient, int>> variablesToUpdateResultMap = new List<KeyValuePair<IClient, int>>();
+
         /// <summary>
         /// List all clients waiting for scne to be loaded and the tiem when this was requested
         /// </summary>
@@ -657,6 +660,11 @@ namespace com.onlineobject.objectnet {
         private Action delayedServerLoadUnloadScene;
 
         private AsyncOperation asyncLoadingScene;
+
+        /// <summary>
+        /// Pool control system
+        /// </summary>
+        private Dictionary<GameObject, List<GameObject>> pooledNetworkObjects = new Dictionary<GameObject, List<GameObject>>();
 
         private static NetworkManager instance;
 
@@ -692,7 +700,9 @@ namespace com.onlineobject.objectnet {
             if (!InstanceExists()) {
                 // Warn the user if the application is running and no instance is found
                 if (Application.isPlaying) {
-                    NetworkDebugger.LogWarning("[ NetworkManager ] Could not find the instance of object. Please ensure you have added the NetworkManager Prefab to your scene.");
+                    if (NetworkDebuggerManager.Instance()) {
+                        NetworkDebugger.LogWarning("[ NetworkManager ] Could not find the instance of object. Please ensure you have added the NetworkManager Prefab to your scene.");
+                    }
                 }
             }
 #endif
@@ -854,6 +864,34 @@ namespace com.onlineobject.objectnet {
         }
 
 
+        private GameObject InternalInstantiate(GameObject prefab, Vector3 position, Quaternion rotation) {
+            GameObject instantiatedObject = null;
+            if (this.pooledNetworkObjects.ContainsKey(prefab)) {
+                if (this.pooledNetworkObjects[prefab].Count > 0) {
+                    instantiatedObject = this.pooledNetworkObjects[prefab][0];
+                    this.pooledNetworkObjects[prefab].RemoveAt(0);
+                    // Pooled objects isn't detected to execute any network behaviour
+                    NetworkPooledObject pooledComponent = instantiatedObject.GetComponent<NetworkPooledObject>();
+                    if (pooledComponent != null) {
+                        DestroyImmediate(pooledComponent);
+                        // Register to be detected
+                        NetworkManager.Instance().RegisterDetectedObject(instantiatedObject);
+                    }
+                    // Remove from pool root
+                    instantiatedObject.transform.parent = null;
+                    // Object on pooling are deactivated by default, so i need to enable it and force his informations
+                    instantiatedObject.transform.transform.position = position;
+                    instantiatedObject.transform.transform.rotation = rotation;
+                    instantiatedObject.SetActive(true);
+                } else {
+                    instantiatedObject = GameObject.Instantiate(prefab, position, rotation);
+                }
+            } else {
+                instantiatedObject = GameObject.Instantiate(prefab, position, rotation);
+            }
+            return instantiatedObject;
+        }
+
         /// <summary>
         /// Awake is called when the script instance is being loaded.
         /// Initializes the network manager, sets up prefabs, servers, and NAT traversal if necessary.
@@ -870,6 +908,10 @@ namespace com.onlineobject.objectnet {
                 this.SetInstance(); // Flag instance to be the current object
                 this.Initialize(); // Initialize the network manager
 
+                // Configure mehtod used to instantiate objects
+                NetworkGameObject.ConfigureInstantiateMethod(this.InternalInstantiate);
+                NetworkTransport.ConfigureInstantiateMethod(this.InternalInstantiate);
+
                 // TODO: Find a way to add and remove components from prefab during play and stop game
                 if (this.prefabsDatabase != null) {
                     // Iterate through each network prefab and inject network functionality
@@ -881,6 +923,8 @@ namespace com.onlineobject.objectnet {
                             NetworkDebugger.LogError(String.Format("Some network prefab haven't associated gameobject [Network prefab id : {0}]. Check network prefabs into NetworkManager", networkPrefab.GetId()));
                         }
                     }
+                    // AllocatePooling pooled objects
+                    this.AllocatePooling();
                 }
 
                 // If the transport database is null, create and fill it (Editor only)
@@ -1012,6 +1056,29 @@ namespace com.onlineobject.objectnet {
             if (this.IsMultiplayerAvaiable()) {
                 if (this.IsRunningLogic()) {
                     this.RemoveUpdatedClientsToUpdateVariables();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Allocated all pooled objects instance
+        /// </summary>
+        private void AllocatePooling() {
+            foreach (NetworkPrefabEntry prefabEntry in this.prefabsDatabase.GetPrefabs()) {
+                if (prefabEntry.GetEnablePooling()) {
+                    GameObject poolRoot = new GameObject();
+                    poolRoot.name = String.Format("{0} [Pool]", prefabEntry.GetPrefab().name);
+                    poolRoot.transform.parent = this.transform;
+                    int pooledInstances = prefabEntry.GetPoolingSize();
+                    this.pooledNetworkObjects.Add(prefabEntry.GetPrefab(), new List<GameObject>());
+                    while (pooledInstances-- > 0) {
+                        GameObject poolInstance = GameObject.Instantiate(prefabEntry.GetPrefab());
+                        poolInstance.SetActive(false);
+                        poolInstance.AddComponent<NetworkPooledObject>();
+                        poolInstance.transform.parent = poolRoot.transform;
+                        this.pooledNetworkObjects[prefabEntry.GetPrefab()].Add(poolInstance);
+                    }
+                    NetworkDebugger.LogDebug("[{0}] Pooled objects {1}", prefabEntry.GetPrefab().name, this.pooledNetworkObjects[prefabEntry.GetPrefab()].Count);
                 }
             }
         }
@@ -2114,7 +2181,7 @@ namespace com.onlineobject.objectnet {
                                         writer.Write(connectedPlayer.GetPlayerId()); // Write player ID
                                     }
                                 } else {
-                                    IClient[] clients = this.GetConnection(ConnectionType.Server).GetSocket().GetConnectedClients();
+                                    List<IClient> clients = this.GetConnection(ConnectionType.Server).GetSocket().GetConnectedClients();
                                     writer.Write(clients.Count()); // Send object to need be destroyed on client's
                                     foreach (NetworkClient connectedClient in this.GetConnection(ConnectionType.Server).GetSocket().GetConnectedClients() ) {
                                         NetworkPlayer connectedPlayer = this.GetPlayer<NetworkPlayer>(connectedClient);
@@ -3035,6 +3102,8 @@ namespace com.onlineobject.objectnet {
                 bool inSceneObject      = false; // DO not spawn objct on lcients in case of this object is already in scene
                 GameObject newObject    = this.detectedNetworkObjects[0]; // Get first object to check
                 this.detectedNetworkObjects.RemoveAt(0); // Then remove to not try to execute twice on same object
+                // Pooled objects isn't detected to execute any network behaviour
+                if (newObject.GetComponent<NetworkPooledObject>() != null) continue;
                 if (NetworkManager.Container.IsRegistered(newObject) == false) {
                     if (this.prefabsDatabase != null) {
                         foreach (NetworkPrefabEntry networkPrefab in this.prefabsDatabase.GetPrefabs()) {
@@ -3109,6 +3178,7 @@ namespace com.onlineobject.objectnet {
                                     networkObject.SetSendRate((networkPrefab.IsToUseCustomRate()) ? networkPrefab.GetSendRateAmount() : this.sendRateAmount);
                                     networkObject.SetIsPlayer(isNetworkPlayer);
                                     // Configure ownership behaviors
+                                    networkObject.OnInstantiate((networkPrefab.GetOnInstantiate() != null) ? networkPrefab.GetOnInstantiate().ToEventReference() : null);
                                     networkObject.OnSpawnPrefab((networkPrefab.GetOnSpawnPrefab() != null) ? networkPrefab.GetOnSpawnPrefab().ToEventReference() : null);
                                     networkObject.OnDespawnPrefab((networkPrefab.GetOnDespawnPrefab() != null) ? networkPrefab.GetOnDespawnPrefab().ToEventReference() : null);
                                     networkObject.OnAcceptOwnerShip((networkPrefab.GetOnAcceptObjectOwnerShip() != null) ? networkPrefab.GetOnAcceptObjectOwnerShip().ToEventReference() : null);
@@ -3118,7 +3188,7 @@ namespace com.onlineobject.objectnet {
                                     // Tranform update values
                                     networkObject.SetSyncPosition(networkPrefab.GetSyncPosition());
                                     networkObject.SetSyncRotation(networkPrefab.GetSyncRotation());
-                                    networkObject.SetSyncScale(networkPrefab.GetSyncScale());
+                                    networkObject.SetSyncScale(networkPrefab.GetSyncScale());                                    
                                     // Start network services
                                     networkObject.StartNetwork(networkId, (INetworkElement element) => {
                                         // Configure player ID
@@ -3272,6 +3342,9 @@ namespace com.onlineobject.objectnet {
                                         networkObject.InitializeExecutor();
                                     }
                                 }
+                                if (networkObject != null) {
+                                    networkObject.ExecuteOnInstantiate();
+                                }
                                 break;
                             }
                         }
@@ -3354,6 +3427,12 @@ namespace com.onlineobject.objectnet {
                                     playerReference.GetClient().Send(RelayServerEvents.UpdateNetworkObjectId, writer, DeliveryMode.Reliable);
                                 }
                             }
+                        }
+                    }
+                    if (networkPrefab != null) {
+                        NetworkObject networkObject = newObject.GetComponent<NetworkObject>();
+                        if (networkObject != null) {
+                            networkObject.ExecuteOnInstantiate();
                         }
                     }
                 }
@@ -3539,9 +3618,32 @@ namespace com.onlineobject.objectnet {
                     } else if (NetworkManager.Container.HasElement(networkId)) {
                         return; // If element is already registered i'm going to only ignore
                     }
-                    // If can't find i'm oging to spawn anyway
+                    // If can't find i'm going to spawn anyway
                     if (instantiatedObject == null) {
-                        instantiatedObject = GameObject.Instantiate(prefabEntry.GetPrefab(), position, Quaternion.Euler(rotation));
+                        if (prefabEntry.GetEnablePooling()) {
+                            if (this.pooledNetworkObjects.ContainsKey(prefabEntry.GetPrefab())) {
+                                if (this.pooledNetworkObjects[prefabEntry.GetPrefab()].Count > 0) {
+                                    instantiatedObject = this.pooledNetworkObjects[prefabEntry.GetPrefab()][0];
+                                    this.pooledNetworkObjects[prefabEntry.GetPrefab()].RemoveAt(0);
+                                    // Pooled objects isn't detected to execute any network behaviour
+                                    NetworkPooledObject pooledComponent = instantiatedObject.GetComponent<NetworkPooledObject>();
+                                    if (pooledComponent != null) {
+                                        DestroyImmediate(pooledComponent);
+                                        // Register to be detected
+                                        NetworkManager.Instance().RegisterDetectedObject(instantiatedObject);
+                                    }
+                                    // Remove from pool root
+                                    instantiatedObject.transform.parent = null;
+                                    // Object on pooling are deactivated by default, so i need to enable it and force his informations
+                                    instantiatedObject.transform.transform.position = position;
+                                    instantiatedObject.transform.transform.rotation = Quaternion.Euler(rotation);
+                                    instantiatedObject.SetActive(true);
+                                }
+                            }
+                        }
+                        if (instantiatedObject == null) {
+                            instantiatedObject = GameObject.Instantiate(prefabEntry.GetPrefab(), position, Quaternion.Euler(rotation));
+                        }
                     }
                     instantiatedObject.transform.localScale = scale;
                     if (autoSync) {
@@ -3716,7 +3818,9 @@ namespace com.onlineobject.objectnet {
                                     }
                                 }
                             }
-                            // Execute network prefab callback
+                            // Execute network prefab callback  ( When instantiated )
+                            networkObject.ExecuteOnInstantiate();
+                            // Execute network prefab callback  ( When Spawned )
                             networkObject.ExecuteOnSpawnPrefab();
                         }
                         // Initialize internal InternalExecutor
@@ -4593,7 +4697,7 @@ namespace com.onlineobject.objectnet {
         /// </summary>
         /// <returns>True if the system is in embedded mode, otherwise false.</returns>
         public bool InRelayMode() {
-            return NetworkServerMode.Relay.Equals(this.serverWorkingMode);
+            return (NetworkServerMode.Relay == this.serverWorkingMode);
         }
 
         /// <summary>
@@ -4730,21 +4834,33 @@ namespace com.onlineobject.objectnet {
         /// Return clients that is out of date and  need to receive update of relianle variables
         /// </summary>
         /// <returns>Array containing pending clients to update</returns>
-        public KeyValuePair<IClient, int>[] GetClientsToUpdateVariables(int frameTick) {
-            return (this.clientsToUpdateVariables.Count > 0) ? this.clientsToUpdateVariables.Where(elm => elm.Value > frameTick).ToArray() : null;
+        public List<KeyValuePair<IClient, int>> GetClientsToUpdateVariables(int frameTick) {
+            this.variablesToUpdateResultMap.Clear(); // Clear to ensure that no duplicated elements will be returned
+            // Now check to populate list
+            foreach (var element in this.clientsToUpdateVariables) {
+                if (element.Value > frameTick) {
+                    this.variablesToUpdateResultMap.Add(element);
+                }
+            }
+            return this.variablesToUpdateResultMap;
         }
-
+        
         /// <summary>
         /// Remove already updated clients that require variables update
         /// </summary>
         public void RemoveUpdatedClientsToUpdateVariables() {
-            foreach (IClient client in this.clientsToUpdateVariables.Keys.ToArray()) {
+            foreach (IClient client in this.clientsToUpdateVariables.Keys) {
                 if ((client == null) ||
                     (client.GetTransport() == null) ||
                     ((client.GetTransport() != null) && (client.GetTransport().IsConnected() == false)) ||
                     (this.clientsToUpdateVariables[client] < (Time.frameCount - DELAY_TO_REMOVE_RELIABLE_UPDATE))) {
-                    this.clientsToUpdateVariables.Remove(client);
+                    this.recicledClients.Add(client);
                 }
+            }
+            // Removed recicled clients
+            while (this.recicledClients.Count > 0) {
+                this.clientsToUpdateVariables.Remove(this.recicledClients[0]);
+                this.recicledClients.RemoveAt(0);
             }
         }
 
@@ -5190,7 +5306,7 @@ namespace com.onlineobject.objectnet {
         /// <typeparam name="T">Generic argument</typeparam>
         /// <param name="client">Client for check</param>
         /// <returns></returns>
-        public T GetClient<T>(IClient client) where T : IClient {
+        public T GetClientElement<T>(IClient client) where T : INetworkElement {
             return (T)this.clients[client];
         }
 
@@ -5257,6 +5373,17 @@ namespace com.onlineobject.objectnet {
         public bool IsToAutoLoadSceneElements() {
             return this.spawnSceneElements;
         }
+
+        /// <summary>
+        /// Disconnect a client
+        /// 
+        /// Note: Use this method to kick any player from game
+        /// </summary>
+        /// <param name="client">Client to disconnect</param>
+        public void DisconnectClient(IClient client) {
+            client.GetTransport().Disconnect();
+        }
+
 
         /// <summary>
         /// Request server to send all network elements in scene to this player
@@ -5329,7 +5456,7 @@ namespace com.onlineobject.objectnet {
                         // Send message
                         this.Send(CoreGameEvents.RequestRemoteSceneLoad, writer, DeliveryMode.Reliable);
                     }
-                    NetworkDebugger.LogDebug("Remote scne load requested [{0}]", sceneName);
+                    NetworkDebugger.LogDebug("Remote scene load requested [{0}]", sceneName);
                 } else {
                     NetworkDebugger.LogError("You can't request to load a scene from a client connection, to enable this option, you must check \"Enable client scene load\" on the network manager", sceneName);
                 }
@@ -5689,3 +5816,4 @@ namespace com.onlineobject.objectnet {
         }
     }
 }
+#pragma warning restore

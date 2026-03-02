@@ -123,7 +123,7 @@ namespace com.onlineobject.objectnet.embedded {
         /// <summary>
         /// Processes any pending operations such as sending messages and updating client states.
         /// </summary>
-        public override byte[][] Process() {
+        public override List<byte[]> Process() {
             if (this.server != null) {
                 this.server.Update();
             }
@@ -147,7 +147,7 @@ namespace com.onlineobject.objectnet.embedded {
                     }
                 }
             }
-            return this.dequeuedBuffers.ToArray();
+            return this.dequeuedBuffers;
         }
 
         /// <summary>

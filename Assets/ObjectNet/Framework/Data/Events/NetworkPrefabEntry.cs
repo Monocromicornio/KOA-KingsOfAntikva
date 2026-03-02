@@ -46,6 +46,18 @@ namespace com.onlineobject.objectnet {
         private bool[] syncScale = new bool[3] { true, true, true };
 
         /// <summary>
+        /// Synchronize position
+        /// </summary>
+        [SerializeField]
+        protected bool enablePooling = false;
+
+        /// <summary>
+        /// Synchronize position
+        /// </summary>
+        [SerializeField]
+        protected int poolingSize = 10;
+
+        /// <summary>
         /// The animation automatic synchronize
         /// </summary>
         [SerializeField]
@@ -62,6 +74,18 @@ namespace com.onlineobject.objectnet {
         /// </summary>
         [SerializeField]
         private bool ShowScripts = false;
+
+        /// <summary>
+        /// Shall to select all scripts
+        /// </summary>
+        [SerializeField]
+        private bool CheckAllScripts = false;
+
+        /// <summary>
+        /// Shall to select all child objects
+        /// </summary>
+        [SerializeField]
+        private bool CheckAllChilds = false;
 
         /// <summary>
         /// The prefab scripts
@@ -115,7 +139,13 @@ namespace com.onlineobject.objectnet {
         /// The show child tree
         /// </summary>
         [SerializeField]
-        private bool ShowChildTree = false; 
+        private bool ShowChildTree = false;
+
+        /// <summary>
+        /// The show pooling support
+        /// </summary>
+        [SerializeField]
+        private bool ShowPooling = false;
 
         /// <summary>
         /// Events associated with this prefab entry
@@ -337,6 +367,38 @@ namespace com.onlineobject.objectnet {
         }
 
         /// <summary>
+        /// Sets if this objects has pooling enabled.
+        /// </summary>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        public void SetEnablePooling(bool value) {
+            this.enablePooling = value;
+        }
+
+        /// <summary>
+        /// Return if this objects has pooling enabled.
+        /// </summary>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool GetEnablePooling() {
+            return this.enablePooling;
+        }
+
+        /// <summary>
+        /// Sets object pooling size.
+        /// </summary>
+        /// <param name="value">Pooling sizeparam>
+        public void SetPoolingSize(int value) {
+            this.poolingSize = value;
+        }
+
+        /// <summary>
+        /// Return curren tpooling size.
+        /// </summary>
+        /// <returns>Return pooling size.</returns>
+        public int GetPoolingSize() {
+            return this.poolingSize;
+        }
+
+        /// <summary>
         /// Sets the animation automatic synchronize.
         /// </summary>
         /// <param name="value">if set to <c>true</c> [value].</param>
@@ -382,6 +444,38 @@ namespace com.onlineobject.objectnet {
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool GetShowScripts() {
             return this.ShowScripts;
+        }
+
+        /// <summary>
+        /// Sets the check all scripts.
+        /// </summary>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        public void SetCheckAllScripts(bool value) {
+            this.CheckAllScripts = value;
+        }
+
+        /// <summary>
+        /// Gets the check all scripts.
+        /// </summary>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool GetCheckAllScripts() {
+            return this.CheckAllScripts;
+        }
+        
+        /// <summary>
+        /// Sets the check all child objects.
+        /// </summary>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        public void SetCheckAllChilds(bool value) {
+            this.CheckAllChilds = value;
+        }
+
+        /// <summary>
+        /// Gets the check all child objects.
+        /// </summary>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool GetCheckAllChilds() {
+            return this.CheckAllChilds;
         }
 
         /// <summary>
@@ -513,6 +607,22 @@ namespace com.onlineobject.objectnet {
         }
 
         /// <summary>
+        /// Sets the show pooling informations.
+        /// </summary>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        public void SetShowPooling(bool value) {
+            this.ShowPooling = value;
+        }
+
+        /// <summary>
+        /// Gets the show pooling informations.
+        /// </summary>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool GetShowPooling() {
+            return this.ShowPooling;
+        }
+
+        /// <summary>
         /// Sets the show child tree.
         /// </summary>
         /// <param name="value">if set to <c>true</c> [value].</param>
@@ -551,6 +661,14 @@ namespace com.onlineobject.objectnet {
 
         public void SetOnSpawnPrefab(EventReferencePrefab eventReference) {
             this.prefabEvents.onSpawnPrefab = eventReference;
+        }
+
+        public EventReferencePrefab GetOnInstantiate() {
+            return this.prefabEvents.OnInstantiate;
+        }
+
+        public void SetOnInstantiate(EventReferencePrefab eventReference) {
+            this.prefabEvents.OnInstantiate = eventReference;
         }
 
         public EventReferencePrefab GetOnDespawnPrefab() {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -12,11 +13,17 @@ namespace com.onlineobject.objectnet {
 
         static volatile object transactionLock = new object();
 
+        static volatile Func<GameObject, Vector3, Quaternion, GameObject> instantiateFunction;
+
         static volatile Dictionary<uint, GameObject> waitingOperations = new Dictionary<uint, GameObject>();
 
         static float instantiateTimeout = NetworkGameObject.WAIT_ANSWER_TIME;
 
         const float WAIT_ANSWER_TIME = 1.0f;
+
+        public static void ConfigureInstantiateMethod(Func<GameObject, Vector3, Quaternion, GameObject> callback) {
+            NetworkGameObject.instantiateFunction = callback;
+        }
 
         public static void ConfigureAsyncTimeout(float timeout) {
             NetworkGameObject.instantiateTimeout = timeout;
@@ -78,7 +85,11 @@ namespace com.onlineobject.objectnet {
             if ((NetworkManager.Instance() == null) ||
                 (NetworkManager.Instance().IsRunningLogic() == true)) {
                 // Instantiate the GameObject locally
-                newInstance = GameObject.Instantiate(prefab, position, rotation);
+                if (NetworkGameObject.instantiateFunction != null) {
+                    newInstance = NetworkGameObject.instantiateFunction(prefab, position, rotation);
+                } else {
+                    newInstance = GameObject.Instantiate(prefab, position, rotation);
+                }
                 newInstance.transform.localScale = scale;
                 result = true;
             } else {

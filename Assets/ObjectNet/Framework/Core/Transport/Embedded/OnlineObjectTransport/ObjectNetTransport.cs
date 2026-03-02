@@ -230,7 +230,7 @@ namespace com.onlineobject.objectnet.embedded {
         /// <summary>
         /// Processes any pending transport tasks.
         /// </summary>
-        public abstract byte[][] Process();
+        public abstract List<byte[]> Process();
 
         /// <summary>
         /// Attempts to establish a connection using the transport mechanism.
