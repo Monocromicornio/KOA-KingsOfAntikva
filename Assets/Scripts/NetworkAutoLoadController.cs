@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using com.onlineobject.objectnet;
 
@@ -75,5 +76,52 @@ public class NetworkAutoLoadController : MonoBehaviour
     public static bool IsAutoLoadDisabledForMatchmaking()
     {
         return instance != null && instance.autoLoadDisabledForMatchmaking;
+    }
+
+    /// <summary>
+    /// Agenda a inicialização do jogo assim que o MatchController estiver disponível,
+    /// usando a tabela armazenada em SyncronizeTable.PendingTableData.
+    /// </summary>
+    public static void ScheduleStartGame()
+    {
+        if (instance == null)
+        {
+            Debug.LogError("[AutoLoadController] Instância não encontrada ao tentar agendar StartGame");
+            return;
+        }
+
+        Debug.Log("[AutoLoadController] Agendando StartGame para quando MatchController estiver pronto");
+        instance.StartCoroutine(instance.WaitAndStartGame());
+    }
+
+    private IEnumerator WaitAndStartGame()
+    {
+        const float timeout = 10f;
+        float elapsed = 0f;
+
+        while (MatchController.instance == null && elapsed < timeout)
+        {
+            yield return new WaitForSeconds(0.1f);
+            elapsed += 0.1f;
+        }
+
+        if (MatchController.instance == null)
+        {
+            Debug.LogError("[AutoLoadController] Timeout aguardando MatchController para iniciar jogo");
+            SyncronizeTable.ClearPendingTable();
+            yield break;
+        }
+
+        TableData data = SyncronizeTable.PendingTableData;
+        SyncronizeTable.ClearPendingTable();
+
+        if (data == null)
+        {
+            Debug.LogError("[AutoLoadController] PendingTableData é null ao tentar iniciar jogo");
+            yield break;
+        }
+
+        Debug.Log("[AutoLoadController] MatchController pronto, iniciando jogo com tabela pendente");
+        MatchController.instance.StartGame(data);
     }
 }

@@ -15,13 +15,9 @@ public class SyncronizeTable : NetworkBehaviour
     private static TableData cachedTableReference;
 
     private static byte[][] tableParts;
-    private static bool tableReady = false;
 
-    private bool tableAcknowledged = false;
+    private static TableData pendingTableData;
 
-    private const float AcknowledgmentTimeout = 8f;
-    private const int MaxRetries = 3;
-    
     public static ulong LocalSteamId { get; private set; }
     public static ulong OpponentSteamId { get; private set; }
     
@@ -61,8 +57,14 @@ public class SyncronizeTable : NetworkBehaviour
     void Start()
     {
         StartCoroutine(SendSteamIdDelayed());
-        
-        if (networkManager.IsServerConnection()) return;
+
+        if (networkManager.IsServerConnection())
+        {
+            if (pendingTableData != null)
+                StartCoroutine(WaitForMatchControllerAndStart());
+            return;
+        }
+
         StartCoroutine(SendPartsToServer());
     }
     
@@ -94,19 +96,16 @@ public class SyncronizeTable : NetworkBehaviour
         OnOpponentSteamIdReceived?.Invoke(OpponentSteamId);
     }
 
-    IEnumerator SendPartsToServer(int retryCount = 0)
+    IEnumerator SendPartsToServer()
     {
         if (table == null)
         {
             Debug.LogError("[SyncronizeTable] ERRO: Não é possível enviar tabela - table é null!");
             yield break;
         }
-
-        if (retryCount == 0)
-            Debug.Log($"[SyncronizeTable] Iniciando envio da tabela para servidor: {table.name}");
-        else
-            Debug.LogWarning($"[SyncronizeTable] Reenviando tabela (tentativa {retryCount + 1}/{MaxRetries + 1})...");
-
+        
+        Debug.Log($"[SyncronizeTable] Iniciando envio da tabela para servidor: {table.name}");
+        
         string encondeTable = EncodeTableDataXml();
         byte[] bytesToEncode = Encoding.UTF8.GetBytes(encondeTable);
 
@@ -119,38 +118,8 @@ public class SyncronizeTable : NetworkBehaviour
             NetworkExecuteOnServer<byte[], int, int>(GetTable, parts[i], i, parts.Length);
             yield return new WaitForSeconds(0.2f);
         }
-
-        Debug.Log("[SyncronizeTable] Todas as partes enviadas, aguardando confirmação do servidor...");
-
-        float elapsed = 0f;
-        while (!tableAcknowledged && elapsed < AcknowledgmentTimeout)
-        {
-            yield return null;
-            elapsed += Time.deltaTime;
-        }
-
-        if (tableAcknowledged)
-        {
-            Debug.Log("[SyncronizeTable] Servidor confirmou recepção da tabela");
-            yield break;
-        }
-
-        if (retryCount < MaxRetries)
-        {
-            Debug.LogWarning($"[SyncronizeTable] Sem confirmação após {AcknowledgmentTimeout}s, reenviando...");
-            yield return new WaitForSeconds(1f);
-            StartCoroutine(SendPartsToServer(retryCount + 1));
-        }
-        else
-        {
-            Debug.LogError($"[SyncronizeTable] Falha ao confirmar entrega da tabela após {MaxRetries + 1} tentativas");
-        }
-    }
-
-    private void AcknowledgeTableReceived()
-    {
-        tableAcknowledged = true;
-        Debug.Log("[SyncronizeTable] Confirmação de recepção da tabela recebida do servidor");
+        
+        Debug.Log("[SyncronizeTable] Todas as partes da tabela foram enviadas");
     }
 
     public void SetChangeTurn()
@@ -168,32 +137,13 @@ public class SyncronizeTable : NetworkBehaviour
         if (tableParts == null || tableParts.Length != size)
         {
             tableParts = new byte[size][];
-            tableReady = false;
             Debug.Log($"[SyncronizeTable] Servidor: Iniciando recepção de tabela ({size} partes)");
         }
 
-        if (tableParts[part] != null)
-        {
-            Debug.Log($"[SyncronizeTable] Servidor: Parte {part + 1}/{size} já recebida (duplicata ignorada)");
-        }
-        else
-        {
-            tableParts[part] = encondeTable;
-            Debug.Log($"[SyncronizeTable] Servidor: Parte {part + 1}/{size} recebida ({encondeTable.Length} bytes)");
-        }
+        tableParts[part] = encondeTable;
+        Debug.Log($"[SyncronizeTable] Servidor: Parte {part + 1}/{size} recebida ({encondeTable.Length} bytes)");
 
         foreach (var p in tableParts) if (p == null) return;
-
-        // Always acknowledge so a retrying client can stop retrying.
-        NetworkExecute(AcknowledgeTableReceived);
-
-        if (tableReady)
-        {
-            Debug.Log("[SyncronizeTable] Servidor: Tabela já processada, apenas reenviando confirmação");
-            return;
-        }
-
-        tableReady = true;
 
         Debug.Log("[SyncronizeTable] Servidor: Todas as partes recebidas, combinando...");
         byte[] fullTableBytes = CombineBytes(tableParts);
@@ -204,44 +154,52 @@ public class SyncronizeTable : NetworkBehaviour
     private void DecodeTable(string xmlString)
     {
         TableData tableData = DecodeTableDataXml(xmlString);
-        
+
         if (tableData == null)
         {
             Debug.LogError("[SyncronizeTable] Falha ao decodificar tabela - tableData é null");
             return;
         }
-        
+
         tableData.LoadTable();
-        StartCoroutine(WaitForMatchControllerAndStartGame(tableData));
+
+        if (matchController != null)
+        {
+            matchController.StartGame(tableData);
+        }
+        else
+        {
+            Debug.Log("[SyncronizeTable] MatchController não pronto, armazenando tabela pendente...");
+            pendingTableData = tableData;
+        }
     }
 
-    private const float MatchControllerWaitTimeout = 10f;
-
-    private IEnumerator WaitForMatchControllerAndStartGame(TableData tableData)
+    /// <summary>
+    /// Aguarda o MatchController estar disponível e então inicia o jogo com a tabela pendente.
+    /// </summary>
+    private IEnumerator WaitForMatchControllerAndStart()
     {
+        const float timeout = 10f;
         float elapsed = 0f;
 
-        while (matchController == null && elapsed < MatchControllerWaitTimeout)
+        while (MatchController.instance == null && elapsed < timeout)
         {
-            MatchController fallback = FindFirstObjectByType<MatchController>();
-            if (fallback != null)
-            {
-                Debug.LogWarning("[SyncronizeTable] MatchController.instance era null, encontrado via FindFirstObjectByType");
-                fallback.StartGame(tableData);
-                yield break;
-            }
-
-            yield return null;
-            elapsed += Time.deltaTime;
+            yield return new WaitForSeconds(0.1f);
+            elapsed += 0.1f;
         }
 
-        if (matchController == null)
+        if (MatchController.instance == null)
         {
-            Debug.LogError($"[SyncronizeTable] ERRO: MatchController não encontrado após {MatchControllerWaitTimeout}s. O jogo não pode iniciar.");
+            Debug.LogError("[SyncronizeTable] Timeout aguardando MatchController");
+            pendingTableData = null;
             yield break;
         }
 
-        matchController.StartGame(tableData);
+        TableData data = pendingTableData;
+        pendingTableData = null;
+
+        Debug.Log("[SyncronizeTable] MatchController pronto, iniciando jogo com tabela pendente");
+        matchController.StartGame(data);
     }
 
     /// <summary>
@@ -363,7 +321,7 @@ public class SyncronizeTable : NetworkBehaviour
         OpponentSteamId = 0;
         instance = null;
         tableParts = null;
-        tableReady = false;
+        pendingTableData = null;
         
         if (OnOpponentSteamIdReceived != null)
         {
