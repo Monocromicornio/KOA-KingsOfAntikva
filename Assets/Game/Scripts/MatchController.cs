@@ -80,17 +80,31 @@ public class MatchController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log($"[MatchController] Start — IsServerConnection: {networkManager.IsServerConnection()} | IsClientConnection: {networkManager.IsClientConnection()} | IsConnected: {networkManager.IsConnected()} | hasStarted: {hasStarted}");
+        Debug.Log($"[MatchController] Start — IsServerConnection: {networkManager.IsServerConnection()} | IsClientConnection: {networkManager.IsClientConnection()} | IsConnected: {networkManager.IsConnected()} | HasConnection: {networkManager.HasConnection()} | hasStarted: {hasStarted}");
 
-        if (networkManager.IsClientConnection())
+        if (networkManager.IsServerConnection())
         {
-            // CLIENT: instancia o SyncronizeTable. O cliente já está conectado ao servidor
-            // neste ponto, então a replicação chega ao host corretamente.
-            // IsClientConnection() é mais confiável que IsConnected() no momento do Start().
-            Debug.Log("[MatchController] Client online: instanciando SyncronizeTable via rede");
-            _ = NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
+            if (networkManager.HasConnection())
+            {
+                // Cliente já conectado desde o lobby — onClientConnected não dispara novamente.
+                // Instancia diretamente com o guard para evitar duplicata.
+                Debug.Log("[MatchController] Host: cliente já conectado, instanciando SyncronizeTable");
+                InstantiateSyncronizeTable();
+            }
+            else
+            {
+                // Nenhum cliente ainda — aguarda o evento OnClientConnected disparar.
+                Debug.Log("[MatchController] Host: aguardando cliente conectar via OnClientConnected");
+            }
         }
-        else if (!networkManager.IsServerConnection())
+        else if (networkManager.IsClientConnection())
+        {
+            // CLIENT: SyncronizeTable replicado do host, não instanciar aqui.
+            // SyncronizeTable.Start() será chamado automaticamente na réplica
+            // e dispara SendPartsToServer().
+            Debug.Log("[MatchController] Client online: aguardando SyncronizeTable replicado do host");
+        }
+        else
         {
             // OFFLINE: jogo local sem rede.
             Debug.Log("[MatchController] Modo offline: iniciando jogo local");
@@ -99,13 +113,16 @@ public class MatchController : MonoBehaviour
             enemySquad.LoadPieces();
             StartCoroutine(StartGame());
         }
-        else
-        {
-            // HOST: aguarda o SyncronizeTable replicado do cliente.
-            // O host não instancia aqui para evitar race condition (cliente pode
-            // ainda estar carregando a cena quando Host.Start() executa).
-            Debug.Log("[MatchController] Host online: aguardando SyncronizeTable do cliente via rede");
-        }
+    }
+
+    private bool syncronizeTableInstantiated = false;
+
+    private async void InstantiateSyncronizeTable()
+    {
+        if (syncronizeTableInstantiated) return;
+        syncronizeTableInstantiated = true;
+        Debug.Log("[MatchController] Instanciando SyncronizeTable via rede (host → replica para client)");
+        await NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
     }
 
     private void OnEnable()
@@ -165,8 +182,8 @@ public class MatchController : MonoBehaviour
 
     public async void OnClientConnected(IClient client)
     {
-        Debug.Log("[MatchController] Client connected");
-        await NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
+        Debug.Log("[MatchController] OnClientConnected — instanciando SyncronizeTable via evento");
+        InstantiateSyncronizeTable();
     }
 
     public void OnClientDisconnected(ClientDisconnectedEventArgs client)
