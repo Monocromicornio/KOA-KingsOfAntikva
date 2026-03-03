@@ -84,15 +84,18 @@ public class MatchController : MonoBehaviour
 
         if (networkManager.IsServerConnection())
         {
-            // HOST: NÃO instancia em Start() — o cliente ainda pode estar carregando a cena.
-            // OnClientConnected dispara após o cliente reconectar na nova cena, que é o
-            // momento correto para replicar o SyncronizeTable.
-            Debug.Log("[MatchController] Host online: aguardando OnClientConnected para instanciar SyncronizeTable");
+            // HOST: aguarda a réplica do SyncronizeTable vir do cliente (via CLIENT abaixo).
+            // Se o cliente falhar em entregar, instancia como fallback após timeout.
+            Debug.Log("[MatchController] Host online: aguardando SyncronizeTable do cliente...");
+            StartCoroutine(WaitForSyncronizeTableOrFallback());
         }
         else if (networkManager.IsClientConnection())
         {
-            // CLIENT: aguarda SyncronizeTable replicado do host via OnClientConnected.
-            Debug.Log("[MatchController] Client online: aguardando SyncronizeTable replicado do host");
+            // CLIENT: onConnected não dispara na game scene pois a conexão vem do lobby.
+            // Aguarda IsConnected() ficar true (Steam P2P finaliza handshake após Start()),
+            // então instancia — mesmo comportamento do fluxo original que funcionava.
+            Debug.Log("[MatchController] Client online: aguardando IsConnected() para instanciar SyncronizeTable...");
+            StartCoroutine(WaitForConnectionAndInstantiate());
         }
         else
         {
@@ -107,11 +110,63 @@ public class MatchController : MonoBehaviour
 
     private bool syncronizeTableInstantiated = false;
 
+    /// <summary>
+    /// CLIENT: polls IsConnected() every frame. Fires as soon as the Steam P2P handshake
+    /// completes, then instantiates SyncronizeTable (which replicates to the host).
+    /// </summary>
+    private IEnumerator WaitForConnectionAndInstantiate()
+    {
+        const float timeout = 15f;
+        float elapsed = 0f;
+
+        while (!networkManager.IsConnected() && elapsed < timeout)
+        {
+            yield return null;
+            elapsed += Time.unscaledDeltaTime;
+        }
+
+        if (networkManager.IsConnected())
+        {
+            Debug.Log($"[MatchController] Client: IsConnected = True após {elapsed:F2}s, instanciando SyncronizeTable");
+            InstantiateSyncronizeTable();
+        }
+        else
+        {
+            Debug.LogError($"[MatchController] Client: timeout ({timeout}s) aguardando IsConnected(). Conexão pode estar com problema.");
+        }
+    }
+
+    /// <summary>
+    /// HOST: polls for the SyncronizeTable replica (expected from the client).
+    /// If the client fails to deliver within the timeout, the host instantiates as fallback.
+    /// </summary>
+    private IEnumerator WaitForSyncronizeTableOrFallback()
+    {
+        const float fallbackTimeout = 10f;
+        float elapsed = 0f;
+
+        while (SyncronizeTable.instance == null && elapsed < fallbackTimeout)
+        {
+            yield return null;
+            elapsed += Time.unscaledDeltaTime;
+        }
+
+        if (SyncronizeTable.instance != null)
+        {
+            Debug.Log($"[MatchController] Host: SyncronizeTable recebido do cliente após {elapsed:F2}s");
+        }
+        else
+        {
+            Debug.LogWarning($"[MatchController] Host: SyncronizeTable não recebido em {fallbackTimeout}s, instanciando como fallback");
+            InstantiateSyncronizeTable();
+        }
+    }
+
     private async void InstantiateSyncronizeTable()
     {
         if (syncronizeTableInstantiated) return;
         syncronizeTableInstantiated = true;
-        Debug.Log("[MatchController] InstantiateSyncronizeTable — criando via rede");
+        Debug.Log("[MatchController] Instanciando SyncronizeTable via rede");
         await NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
     }
 

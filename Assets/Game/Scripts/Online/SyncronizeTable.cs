@@ -29,6 +29,13 @@ public class SyncronizeTable : NetworkBehaviour
 
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Debug.LogWarning("[SyncronizeTable] Instância duplicada detectada, destruindo...");
+            Destroy(gameObject);
+            return;
+        }
+
         instance = this;
         LocalSteamId = SteamUser.GetSteamID().m_SteamID;
         OpponentSteamId = 0;
