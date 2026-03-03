@@ -80,15 +80,24 @@ public class MatchController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log($"[MatchController] Start — IsConnected: {networkManager.IsConnected()} | IsServerConnection: {networkManager.IsServerConnection()} | hasStarted: {hasStarted}");
+        Debug.Log($"[MatchController] Start — IsServerConnection: {networkManager.IsServerConnection()} | IsClientConnection: {networkManager.IsClientConnection()} | IsConnected: {networkManager.IsConnected()} | hasStarted: {hasStarted}");
 
-        if (networkManager.IsConnected())
+        if (networkManager.IsServerConnection())
         {
-            Debug.Log("[MatchController] Modo online: instanciando SyncronizeTable via rede");
+            // HOST: instancia o SyncronizeTable via rede. O cliente recebe por replicação
+            // e dispara SendPartsToServer() automaticamente via SyncronizeTable.Start().
+            Debug.Log("[MatchController] Host online: instanciando SyncronizeTable via rede");
             _ = NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
         }
-        else if (!networkManager.IsServerConnection())
+        else if (networkManager.IsClientConnection())
         {
+            // CLIENT: aguarda o SyncronizeTable replicado do host.
+            // Não instancia nada aqui para evitar duplicata.
+            Debug.Log("[MatchController] Client online: aguardando SyncronizeTable replicado do host");
+        }
+        else
+        {
+            // OFFLINE: jogo local sem rede.
             Debug.Log("[MatchController] Modo offline: iniciando jogo local");
             myTurn = TurnState.homeTeam;
             playerSquad.LoadPieces();
