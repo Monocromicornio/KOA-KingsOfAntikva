@@ -82,20 +82,15 @@ public class MatchController : MonoBehaviour
     {
         Debug.Log($"[MatchController] Start — IsServerConnection: {networkManager.IsServerConnection()} | IsClientConnection: {networkManager.IsClientConnection()} | IsConnected: {networkManager.IsConnected()} | hasStarted: {hasStarted}");
 
-        if (networkManager.IsServerConnection())
+        if (networkManager.IsClientConnection())
         {
-            // HOST: instancia o SyncronizeTable via rede. O cliente recebe por replicação
-            // e dispara SendPartsToServer() automaticamente via SyncronizeTable.Start().
-            Debug.Log("[MatchController] Host online: instanciando SyncronizeTable via rede");
+            // CLIENT: instancia o SyncronizeTable. O cliente já está conectado ao servidor
+            // neste ponto, então a replicação chega ao host corretamente.
+            // IsClientConnection() é mais confiável que IsConnected() no momento do Start().
+            Debug.Log("[MatchController] Client online: instanciando SyncronizeTable via rede");
             _ = NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
         }
-        else if (networkManager.IsClientConnection())
-        {
-            // CLIENT: aguarda o SyncronizeTable replicado do host.
-            // Não instancia nada aqui para evitar duplicata.
-            Debug.Log("[MatchController] Client online: aguardando SyncronizeTable replicado do host");
-        }
-        else
+        else if (!networkManager.IsServerConnection())
         {
             // OFFLINE: jogo local sem rede.
             Debug.Log("[MatchController] Modo offline: iniciando jogo local");
@@ -103,6 +98,13 @@ public class MatchController : MonoBehaviour
             playerSquad.LoadPieces();
             enemySquad.LoadPieces();
             StartCoroutine(StartGame());
+        }
+        else
+        {
+            // HOST: aguarda o SyncronizeTable replicado do cliente.
+            // O host não instancia aqui para evitar race condition (cliente pode
+            // ainda estar carregando a cena quando Host.Start() executa).
+            Debug.Log("[MatchController] Host online: aguardando SyncronizeTable do cliente via rede");
         }
     }
 
