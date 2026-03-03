@@ -12,7 +12,7 @@ public class TrunckPiece : InteractivePiece
     private GameObject particle;
 
     private Animator animator => anim.anim;
-    public bool opened => animator.GetBool("Open");
+    public bool opened = false;
 
     protected override void Awake()
     {
@@ -39,6 +39,8 @@ public class TrunckPiece : InteractivePiece
             piece.SendMessage("Reveal");
             trunck.SetActive(true);
         }
+        opened = true;
+
         anim.SetAnimation("Open", true);
 
         particle.SetActive(true);
