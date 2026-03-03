@@ -24,6 +24,8 @@ public class MatchController : MonoBehaviour
     public GameMode gameMode;
     public GameMode.GameType gameType => gameMode.type;
 
+
+    public bool hasStarted { get; private set; }
     public bool finished { get; private set; }
     private bool homeTeamTurn = false; //False to start with home, true for away
 
@@ -61,6 +63,7 @@ public class MatchController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        hasStarted = false;
         game.SetActive(false);
         currentTurn = TurnState.wait;
         turn = TurnState.undefined;
@@ -267,6 +270,11 @@ public class MatchController : MonoBehaviour
         if (turnTimer != null)
         {
             turnTimer.OnTurnChanged();
+        }
+
+        if(hasStarted == false)
+        {
+            hasStarted = true;
         }
     }
 
