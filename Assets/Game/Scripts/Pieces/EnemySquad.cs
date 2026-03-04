@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class EnemySquad : Squad
@@ -16,7 +17,7 @@ public class EnemySquad : Squad
     [SerializeField]
     Piece[] defaultPieces;
 
-    public override void LoadPieces()
+    public override Task LoadPieces()
     {
         int pieceCount = defaultPieces.Length;
         int lastIndex = gameFields.Length - 1;
@@ -59,5 +60,7 @@ public class EnemySquad : Squad
             //Set as fake
             piece.TurnRedPiece();
         }
+
+        return Task.CompletedTask;
     }
 }

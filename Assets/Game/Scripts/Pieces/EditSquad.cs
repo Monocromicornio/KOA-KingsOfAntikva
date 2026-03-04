@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class EditSquad : Squad
@@ -19,7 +20,7 @@ public class EditSquad : Squad
         LoadPieces();
     }
 
-    public override void LoadPieces()
+    public override Task LoadPieces()
     {
         if (table.Count() > 1)
         {
@@ -46,6 +47,8 @@ public class EditSquad : Squad
                 }
             }
         }
+
+        return Task.CompletedTask;
     }
 
     void ChangePiece(EditableField editable){
