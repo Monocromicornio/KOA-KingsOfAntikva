@@ -82,6 +82,7 @@ public class Piece : NetworkBehaviour
 
     private void SetControl()
     {
+        isMyPiece = true;
         TakeControl();
     }
 
