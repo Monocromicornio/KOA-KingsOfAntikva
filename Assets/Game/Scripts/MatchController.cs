@@ -238,13 +238,13 @@ public class MatchController : MonoBehaviour
 
     public void ChangeTurn()
     {
-        if (SyncronizeTable.instance == null)
+        if (SyncronizeTable.Instance == null)
         {
             ChangeTurnImmediate();
         }
         else
         {
-            SyncronizeTable.instance.SetChangeTurn();
+            SyncronizeTable.Instance.SetChangeTurn();
         }
     }
 

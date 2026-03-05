@@ -52,7 +52,7 @@ public class NetworkDiagnostics : MonoBehaviour
             Debug.LogError("SteamManager é NULL!");
         }
         
-        Debug.Log($"SyncronizeTable.instance: {(SyncronizeTable.instance != null ? "OK" : "NULL")}");
+        Debug.Log($"SyncronizeTable.instance: {(SyncronizeTable.Instance != null ? "OK" : "NULL")}");
         Debug.Log($"LocalSteamId: {SyncronizeTable.LocalSteamId}");
         Debug.Log($"OpponentSteamId: {SyncronizeTable.OpponentSteamId}");
         
