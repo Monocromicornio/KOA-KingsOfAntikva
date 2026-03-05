@@ -1,10 +1,14 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using com.onlineobject.objectnet;
 using UnityEngine;
 
 public class PlayerSquad : Squad
 {
-    private void LoadPieces(TableData table, bool isMy)
+    private async Task LoadPiecesInternal(TableData table, bool isMy)
     {
+        var tasks = new List<Task>();
+
         for (int i = 1; i < table.Count(); i++)
         {
             string pieceName = table.GetRecord("Piece", i);
@@ -13,21 +17,30 @@ public class PlayerSquad : Squad
             if (piece == null)
             {
                 Debug.LogWarning($"No default piece found with the name {pieceName}");
+                continue;
             }
 
             int house = int.Parse(table.GetRecord("House", i));
-            InstantiatePiece(piece, house, isMy);
+            tasks.Add(InstantiatePiece(piece, house, isMy));
         }
+
+        await Task.WhenAll(tasks);
     }
 
-    public void LoadPieces(TableData table)
+    /// <summary>
+    /// Loads the client's pieces from the given table. Returns a Task that completes when all pieces are instantiated.
+    /// </summary>
+    public Task LoadPieces(TableData table)
     {
-        LoadPieces(table, false);
+        return LoadPiecesInternal(table, false);
     }
 
-    public override void LoadPieces()
+    /// <summary>
+    /// Loads the host's (local player's) pieces. Returns a Task that completes when all pieces are instantiated.
+    /// </summary>
+    public override Task LoadPieces()
     {
-        LoadPieces(table, true);
+        return LoadPiecesInternal(table, true);
     }
 
     private GameField GetGameField(int index, bool reverse = false)
@@ -40,25 +53,26 @@ public class PlayerSquad : Squad
         return gameFields[index];
     }
 
-    private async void InstantiatePiece(Piece piece, int field, bool isMy = true)
+    private async Task InstantiatePiece(Piece piece, int field, bool isMy = true)
     {
         GameField gameField = GetGameField(field, !isMy);
         bool isOnline = MatchController.instance != null && MatchController.instance.hasConnection;
 
         GameObject obj = piece.gameObject;
         Vector3 pos = gameField.transform.position;
-        Quaternion rot = isMy? Quaternion.identity : Quaternion.Euler(0, 180, 0);
+        Quaternion rot = isMy ? Quaternion.identity : Quaternion.Euler(0, 180, 0);
 
-        Piece toLink;
         if (isOnline)
         {
             GameObject netObj = await NetworkGameObject.Instantiate(obj, pos, rot);
-            toLink = netObj.GetComponent<Piece>();
+            Piece toLink = netObj.GetComponent<Piece>();
+            toLink.SetAsMyPiece(isMy);
             if (!isMy) toLink.SetControlToClient();
         }
         else
         {
-            Instantiate(piece, pos, rot);
+            Piece spawned = Instantiate(piece, pos, rot);
+            spawned.SetAsMyPiece(isMy);
         }
     }
 }

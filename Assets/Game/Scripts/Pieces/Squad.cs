@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Squad : MonoBehaviour
@@ -21,9 +22,12 @@ public class Squad : MonoBehaviour
         }
     }
 
-    public virtual void LoadPieces()
+    /// <summary>
+    /// Loads and instantiates all pieces for this squad. Returns a Task that completes when all pieces are ready.
+    /// </summary>
+    public virtual Task LoadPieces()
     {
-        // Implementação padrão (vazia)
+        return Task.CompletedTask;
     }
 
     protected Piece GetPieceByName(string pieaceName, Piece[] defaultPieces)

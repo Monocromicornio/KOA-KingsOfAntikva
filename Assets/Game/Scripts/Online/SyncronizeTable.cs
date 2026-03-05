@@ -7,7 +7,7 @@ using Steamworks;
 
 public class SyncronizeTable : NetworkBehaviour
 {
-    public static SyncronizeTable instance;
+    public static SyncronizeTable Instance;
     NetworkManager networkManager => NetworkManager.Instance();
     MatchController matchController => MatchController.instance;
     public TableData table;
@@ -23,7 +23,11 @@ public class SyncronizeTable : NetworkBehaviour
 
     void Awake()
     {
-        instance = this;
+           if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
+          else { Destroy(gameObject); }
+
+        //Instance = this;
+
         LocalSteamId = SteamUser.GetSteamID().m_SteamID;
         OpponentSteamId = 0;
         
@@ -45,10 +49,10 @@ public class SyncronizeTable : NetworkBehaviour
     
     void OnDestroy()
     {
-        if (instance == this)
+        if (Instance == this)
         {
             Debug.Log("[SyncronizeTable] Instância destruída");
-            instance = null;
+            Instance = null;
         }
     }
 
@@ -274,7 +278,6 @@ public class SyncronizeTable : NetworkBehaviour
     public static void ResetAll()
     {
         OpponentSteamId = 0;
-        instance = null;
         
         if (OnOpponentSteamIdReceived != null)
         {
@@ -285,5 +288,8 @@ public class SyncronizeTable : NetworkBehaviour
         }
         
         Debug.Log("[SyncronizeTable] Estado completo resetado");
+
+        if(Instance != null)
+            Destroy(Instance.gameObject);
     }
 }

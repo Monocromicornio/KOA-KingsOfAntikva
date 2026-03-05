@@ -19,16 +19,16 @@ public class OpponentProfileLoader : MonoBehaviour
     private void Start()
     {
         Debug.Log("[OpponentProfileLoader] Iniciando sistema de perfil do oponente");
-        
+
+        SyncronizeTable.OnOpponentSteamIdReceived += OnOpponentSteamIdReceived;
+
         if (!IsOnlineGame())
         {
             Debug.Log("[OpponentProfileLoader] Jogo em modo offline - sistema de perfil do oponente desativado");
             enemyProfileDisplay?.gameObject.SetActive(false);
             return;
         }
-        
-        SyncronizeTable.OnOpponentSteamIdReceived += OnOpponentSteamIdReceived;
-        
+
         StartCoroutine(WaitForOpponentSteamId());
     }
     

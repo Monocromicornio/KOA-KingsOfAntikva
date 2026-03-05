@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using com.onlineobject.objectnet;
 using com.onlineobject.objectnet.embedded;
 using Steamworks;
@@ -106,10 +107,12 @@ public class MatchController : MonoBehaviour
         steamConnectionStatusChanged.Dispose();
     }
 
-    public void StartGame(TableData clientTable)
+    public async void StartGame(TableData clientTable)
     {
-        playerSquad.LoadPieces();
-        playerSquad.LoadPieces(clientTable);
+        await Task.WhenAll(
+            playerSquad.LoadPieces(),
+            playerSquad.LoadPieces(clientTable)
+        );
         StartCoroutine(StartGame());
     }
 
@@ -235,13 +238,13 @@ public class MatchController : MonoBehaviour
 
     public void ChangeTurn()
     {
-        if (SyncronizeTable.instance == null)
+        if (SyncronizeTable.Instance == null)
         {
             ChangeTurnImmediate();
         }
         else
         {
-            SyncronizeTable.instance.SetChangeTurn();
+            SyncronizeTable.Instance.SetChangeTurn();
         }
     }
 

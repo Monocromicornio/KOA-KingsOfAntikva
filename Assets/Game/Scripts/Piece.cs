@@ -31,6 +31,7 @@ public class Piece : NetworkBehaviour
     public PieceType type;
 
     public float timeToDestroy { get; private set; }
+    public bool isMyPiece { get; private set; }
     private bool onValueChangeSetted = false;
     private bool hasActedThisTurn = false;
 
@@ -71,18 +72,27 @@ public class Piece : NetworkBehaviour
         NetworkExecuteOnClient(SetControl);
     }
 
+    /// <summary>
+    /// Explicitly marks whether this piece belongs to the local player. Must be called right after instantiation.
+    /// </summary>
+    public void SetAsMyPiece(bool isMy)
+    {
+        isMyPiece = isMy;
+    }
+
     private void SetControl()
     {
+        isMyPiece = true;
         TakeControl();
     }
 
     public void ActivePiece()
     {
-        // TO DO: Se ha travamentos ou fps baixo no loading, algumas pecas de um jogador sao settadas para o outro. talvez por conta do IsActive()
-        
+        // isMyPiece is set synchronously at spawn time (SetAsMyPiece), avoiding the race condition
+        // that occurred when relying on IsActive() which depends on async network ownership state.
         if (hasConnection)
         {
-            if (IsActive())
+            if (isMyPiece)
             {
                 TurnBluePiece();
             }
