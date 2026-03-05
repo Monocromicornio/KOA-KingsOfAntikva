@@ -81,10 +81,7 @@ public class AnimPiece : NetworkBehaviour
 
     private void Destroy()
     {
-        StartCoroutine(WaitForEndOfFrame(() => {
-            SetAnimation("Die", true);
-            StartCoroutine(DieEffect());
-        }));
+        StartCoroutine(WaitForEndOfFrame(() => { StartCoroutine(DieEffect()); }));
     }
 
     private IEnumerator DieEffect()
@@ -102,6 +99,7 @@ public class AnimPiece : NetworkBehaviour
         }
 
         yield return new WaitForSeconds(2);
+        SetAnimation("Die", true);
         Instantiate(gDie, transform.position, gDie.transform.rotation);
         if (dieSoldier)
         {

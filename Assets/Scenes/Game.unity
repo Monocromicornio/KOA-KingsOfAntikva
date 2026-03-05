@@ -6335,6 +6335,7 @@ GameObject:
   - component: {fileID: 440258583}
   - component: {fileID: 440258582}
   - component: {fileID: 440258581}
+  - component: {fileID: 440258585}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6431,6 +6432,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &440258585
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440258580}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &451523654 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3646620543845491559, guid: e2cfb5c1718a9d142ab72dbd5bbf8e35,
@@ -28524,7 +28537,7 @@ PrefabInstance:
     - target: {fileID: 5405625908719733079, guid: 771b6190ed70bc7429e84c6f72a49c43,
         type: 3}
       propertyPath: turnDuration
-      value: 60
+      value: 3000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
