@@ -288,5 +288,8 @@ public class SyncronizeTable : NetworkBehaviour
         }
         
         Debug.Log("[SyncronizeTable] Estado completo resetado");
+
+        if(Instance != null)
+            Destroy(Instance.gameObject);
     }
 }
