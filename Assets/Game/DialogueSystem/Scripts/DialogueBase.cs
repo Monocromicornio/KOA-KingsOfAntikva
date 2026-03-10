@@ -15,6 +15,7 @@ public class DialogueBase : ScriptableObject
         public Sprite portraitRight;
         public UnityEvent myEvent;        
         public bool isRightPortrait;
+        public bool isDoublePortrait;
     }
 
     public Info[] dialogueInfo;

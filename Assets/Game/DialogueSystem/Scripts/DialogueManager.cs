@@ -107,19 +107,27 @@ public class DialogueManager : MonoBehaviour
         dialogueName.text = info.speaker;
         dialogueText.text = info.text;
 
-        if (!info.isRightPortrait)
+        if (!info.isDoublePortrait)        
         {
+            if (!info.isRightPortrait)
+            {
             portraitLeft.sprite = info.portraitLeft;
             portraitLeft.gameObject.SetActive(info.portraitLeft != null);
             portraitRight.gameObject.SetActive(false);
-        }
-        else
-        {
+            }
+            else
+            {
             portraitRight.sprite = info.portraitRight;
             portraitRight.gameObject.SetActive(info.portraitRight != null);
             portraitLeft.gameObject.SetActive(false);
-        }        
-        
+            }
+        }else
+        {
+            portraitLeft.sprite = info.portraitLeft;
+            portraitRight.sprite = info.portraitRight;
+            portraitLeft.gameObject.SetActive(info.portraitLeft != null);
+            portraitRight.gameObject.SetActive(info.portraitRight != null);
+        }
         dialogueText.text = "";
         StartCoroutine(TypeText(info));
                
