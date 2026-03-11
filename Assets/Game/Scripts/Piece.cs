@@ -15,6 +15,8 @@ public class Piece : NetworkBehaviour
 
     private GameField firstField;
     private NetworkVariable<int> fieldIndex = -1;
+    private NetworkVariable<int> previousFieldIndex = -1;
+
     public int indexCurrentField => (int)fieldIndex;
     public GameField field
     {
@@ -54,6 +56,16 @@ public class Piece : NetworkBehaviour
         {
             MinimapController.instance.RegisterPiece(this);
         }
+
+        fieldIndex.OnValueChange((int oldValue, int newValue) =>
+        {
+            Debug.Log("Delegate field index value changed has fired");
+            if (MinimapController.instance != null)
+            {
+                MinimapController.instance.UpdatePiecePosition(this, oldValue, newValue);
+            }
+
+        });
     }
 
     private void PassiveUpdate()
@@ -64,6 +76,7 @@ public class Piece : NetworkBehaviour
         {
             board.GetGameField(oldValue)?.SetPiece(null);
             field?.SetPiece(this);
+
         });
     }
 
@@ -151,7 +164,7 @@ public class Piece : NetworkBehaviour
     {
         firstField = field;
         if (!IsActive()) return;
-        fieldIndex = field.index;
+        fieldIndex.SetValue(field.index);
         targetField = null;
 
         transform.position = this.field.transform.position;
@@ -216,13 +229,8 @@ public class Piece : NetworkBehaviour
             targetField.SetPiece(null);
             field?.SetPiece(null);
 
-            fieldIndex = targetField.index;
+            fieldIndex.SetValue(targetField.index);
             field.SetPiece(this);
-
-            if (MinimapController.instance != null)
-            {
-                MinimapController.instance.UpdatePiecePosition(this, oldIndex, fieldIndex);
-            }
 
             TutorialEvents.TriggerPieceMoved(this, oldField, field);
 

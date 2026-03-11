@@ -52,11 +52,16 @@ public class MinimapController : MonoBehaviour
             MatchController.instance.hasConnection &&
             MatchController.instance.turn != TurnState.undefined);
 
+        Debug.Log("Initialized game for minimap");
+
+        yield return new WaitForSeconds(1f);
         InitializeMinimapImmediate();
     }
 
     private void InitializeMinimapImmediate()
     {
+        Debug.Log("Initialize game for minimap");
+
         InitializePerspective();
         InitializeGrid();
         StartCoroutine(WaitAndSyncWithBoard());
@@ -83,6 +88,7 @@ public class MinimapController : MonoBehaviour
                 boardController = BoardController.instance;
         }
 
+        Debug.Log("Initialize board for minimap");
         SyncWithBoard();
     }
 
