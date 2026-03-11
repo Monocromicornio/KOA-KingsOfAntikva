@@ -292,7 +292,7 @@ public class Piece : NetworkBehaviour
 
     public void SetLose()
     {
-        if (hasConnection) NetworkExecute(OnLose);
+        if (hasConnection) { NetworkExecute(OnLose); NetworkExecuteOnClient(OnLose); }
         else OnLose();
     }
 

@@ -15,6 +15,8 @@ public class EditSquad : Squad
     [SerializeField]
     AudioSource confirmSource;
 
+    SavePieceOrder savePieceOrder;
+
     private void Start()
     {
         LoadPieces();
@@ -52,6 +54,7 @@ public class EditSquad : Squad
     }
 
     void ChangePiece(EditableField editable){
+       
         if(toChange.Count == 0 && editable.piece == null){
             return;
         }
@@ -83,6 +86,7 @@ public class EditSquad : Squad
             }
 
             ResetChange(new []{to, from});
+            savePieceOrder.SavePieces();
         }
         else{
             if(selectSource) selectSource.Play();
