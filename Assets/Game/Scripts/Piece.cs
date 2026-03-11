@@ -154,7 +154,7 @@ public class Piece : NetworkBehaviour
     public void SetFirstField(GameField field)
     {
         firstField = field;
-        if (!IsActive()) return;
+        //if (!IsActive()) return;
         fieldIndex.SetValue(field.index);
         previousFieldIndex.SetValue(field.index);
 

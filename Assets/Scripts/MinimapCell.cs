@@ -23,6 +23,11 @@ public class MinimapCell : MonoBehaviour
     private Piece currentPiece;
     private string currentMarking;
 
+    public string GetCurrentMarking()
+    {
+        return currentMarking;
+    }
+
     private void Awake()
     {
         if (cellImage == null)
