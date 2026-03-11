@@ -286,7 +286,7 @@ public class Piece : NetworkBehaviour
 
     private void OnWin()
     {
-        if (!IsActive()) return;
+        //if (!IsActive()) return;
         SendMessage("Win");
     }
 
@@ -298,7 +298,7 @@ public class Piece : NetworkBehaviour
 
     private void OnLose()
     {
-        if (!IsActive()) return;
+        //if (!IsActive()) return;
         SendMessage("Destroy");
     }
 
