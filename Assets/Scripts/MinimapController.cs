@@ -189,16 +189,20 @@ public class MinimapController : MonoBehaviour
         {
             piecePositions.Remove(boardIndex);
             pieceMarkings.Remove(piece);
-            int minimapIndex = ConvertBoardIndexToMinimapIndex(boardIndex);
-            if (minimapIndex >= 0 && minimapIndex < cells.Length)
-                cells[minimapIndex].Clear();
         }
+
+        Debug.Log("Unregistering piece from minimap at board index " + boardIndex);
+
+        int minimapIndex = ConvertBoardIndexToMinimapIndex(boardIndex);
+        if (minimapIndex >= 0 && minimapIndex < cells.Length)
+            cells[minimapIndex].Clear();
     }
 
     public void UpdatePiecePosition(Piece piece, int oldBoardIndex, int newBoardIndex)
     {
-        if (piece == null || cells == null)
+        if (cells == null)
             return;
+        
 
         int oldMinimapIndex = ConvertBoardIndexToMinimapIndex(oldBoardIndex);
         int newMinimapIndex = ConvertBoardIndexToMinimapIndex(newBoardIndex);
@@ -208,7 +212,11 @@ public class MinimapController : MonoBehaviour
             if (piecePositions.ContainsKey(oldBoardIndex))
                 piecePositions.Remove(oldBoardIndex);
 
-            piecePositions[newBoardIndex] = piece;
+            if (piece != null)
+            {
+                piecePositions[newBoardIndex] = piece;
+            }
+
             UpdateCellAtIndex(newMinimapIndex, oldMinimapIndex, piece);
         }
     }
@@ -218,7 +226,7 @@ public class MinimapController : MonoBehaviour
         if (index < 0 || index >= cells.Length)
             return;
 
-        string marking = cells[index].GetCurrentMarking();
+        string marking = cells[oldIndex].GetCurrentMarking();
 
         cells[index].UpdateCell(piece);
 
