@@ -15,7 +15,7 @@ public class EditSquad : Squad
     [SerializeField]
     AudioSource confirmSource;
 
-    SavePieceOrder savePieceOrder;
+    public SavePieceOrder savePieceOrder;
 
     private void Start()
     {

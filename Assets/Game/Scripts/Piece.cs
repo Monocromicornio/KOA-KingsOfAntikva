@@ -280,7 +280,7 @@ public class Piece : NetworkBehaviour
 
     public void SetWin()
     {
-        if (hasConnection) NetworkExecute(OnWin);
+        if (hasConnection) { NetworkExecute(OnWin); NetworkExecuteOnClient(OnWin); }        
         else OnWin();
     }
 
