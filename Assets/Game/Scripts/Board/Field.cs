@@ -87,7 +87,7 @@ public class Field : MonoBehaviour
         this.piece = newPiece;
         this.offlinePiece = null;
 
-        if (MinimapController.instance != null)
+        if (MinimapController.instance != null && newPiece != null)
         {
             Debug.Log("Settings minimap piece position from Field: Old index: " + newPiece.indexPreviousField + " New index: " + index);
             MinimapController.instance.UpdatePiecePosition(newPiece, newPiece.indexPreviousField, index);
