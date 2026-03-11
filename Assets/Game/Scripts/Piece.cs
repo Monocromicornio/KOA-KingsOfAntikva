@@ -218,7 +218,7 @@ public class Piece : NetworkBehaviour
         {
             GameField oldField = field;
             int oldIndex = fieldIndex;
-            
+            previousFieldIndex.SetValue(oldIndex);
             targetField.SetPiece(null);
             field?.SetPiece(null);
 
@@ -265,8 +265,6 @@ public class Piece : NetworkBehaviour
     private void ChangeTurn()
     {
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
-
-        previousFieldIndex.SetValue(fieldIndex);
 
         if (!isTutorialMode)
         {
