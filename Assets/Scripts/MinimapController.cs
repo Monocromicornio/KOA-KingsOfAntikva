@@ -54,7 +54,7 @@ public class MinimapController : MonoBehaviour
 
         Debug.Log("Initialized game for minimap");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         InitializeMinimapImmediate();
     }
 
