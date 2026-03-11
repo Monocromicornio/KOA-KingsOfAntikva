@@ -31,18 +31,7 @@ public class Piece : NetworkBehaviour
     public PieceType type;
 
     public float timeToDestroy { get; private set; }
-
-    private NetworkVariable<bool> _ownedByServer = false;
-    private NetworkManager netManager => matchController.networkManager;
-
-    /// <summary>
-    /// Returns true if this piece belongs to the local player, regardless of whether they are host or client.
-    /// </summary>
-    public bool isMyPiece => hasConnection
-        ? (netManager.IsServerConnection() ? (bool)_ownedByServer : !(bool)_ownedByServer)
-        : _localIsMyPiece;
-
-    private bool _localIsMyPiece = false;
+    public bool isMyPiece { get; private set; }
     private bool onValueChangeSetted = false;
     private bool hasActedThisTurn = false;
 
@@ -78,22 +67,27 @@ public class Piece : NetworkBehaviour
         });
     }
 
-    /// <summary>
-    /// Sets network ownership. Pass true if the host (server) owns this piece, false if the client does.
-    /// Must be called on the host right after NetworkGameObject.Instantiate — syncs automatically to the client.
-    /// </summary>
-    public void SetOwnership(bool serverOwned)
+    public void SetControlToClient()
     {
-        _ownedByServer = serverOwned;
-        if (serverOwned) TakeControl();
+        NetworkExecuteOnClient(SetControl);
     }
 
     /// <summary>
-    /// Offline-only fallback. Explicitly marks whether this piece belongs to the local player.
+    /// Explicitly marks whether this piece belongs to the local player. Must be called right after instantiation.
     /// </summary>
     public void SetAsMyPiece(bool isMy)
     {
-        _localIsMyPiece = isMy;
+        isMyPiece = isMy;
+    }
+
+    private void SetControl()
+    {
+        // NetworkExecuteOnClient also executes locally on the host. Guard against this so the
+        // correct isMyPiece value set by SetAsMyPiece() at spawn time is never overwritten on the host.
+        if (!matchController.networkManager.IsServerConnection())
+            isMyPiece = true;
+
+        TakeControl();
     }
 
     public void ActivePiece()
