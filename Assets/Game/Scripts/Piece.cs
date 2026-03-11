@@ -31,7 +31,18 @@ public class Piece : NetworkBehaviour
     public PieceType type;
 
     public float timeToDestroy { get; private set; }
-    public bool isMyPiece { get; private set; }
+
+    private NetworkVariable<bool> _ownedByServer = false;
+    private NetworkManager netManager => matchController.networkManager;
+
+    /// <summary>
+    /// Returns true if this piece belongs to the local player, regardless of whether they are host or client.
+    /// </summary>
+    public bool isMyPiece => hasConnection
+        ? (netManager.IsServerConnection() ? (bool)_ownedByServer : !(bool)_ownedByServer)
+        : _localIsMyPiece;
+
+    private bool _localIsMyPiece = false;
     private bool onValueChangeSetted = false;
     private bool hasActedThisTurn = false;
 
@@ -67,23 +78,22 @@ public class Piece : NetworkBehaviour
         });
     }
 
-    public void SetControlToClient()
+    /// <summary>
+    /// Sets network ownership. Pass true if the host (server) owns this piece, false if the client does.
+    /// Must be called on the host right after NetworkGameObject.Instantiate — syncs automatically to the client.
+    /// </summary>
+    public void SetOwnership(bool serverOwned)
     {
-        NetworkExecuteOnClient(SetControl);
+        _ownedByServer = serverOwned;
+        if (serverOwned) TakeControl();
     }
 
     /// <summary>
-    /// Explicitly marks whether this piece belongs to the local player. Must be called right after instantiation.
+    /// Offline-only fallback. Explicitly marks whether this piece belongs to the local player.
     /// </summary>
     public void SetAsMyPiece(bool isMy)
     {
-        isMyPiece = isMy;
-    }
-
-    private void SetControl()
-    {
-        isMyPiece = true;
-        TakeControl();
+        _localIsMyPiece = isMy;
     }
 
     public void ActivePiece()

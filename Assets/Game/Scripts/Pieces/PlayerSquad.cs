@@ -66,8 +66,9 @@ public class PlayerSquad : Squad
         {
             GameObject netObj = await NetworkGameObject.Instantiate(obj, pos, rot);
             Piece toLink = netObj.GetComponent<Piece>();
-            toLink.SetAsMyPiece(isMy);
-            if (!isMy) toLink.SetControlToClient();
+            // isMy=true means the server (host) owns this piece; isMy=false means the client does.
+            // SetOwnership syncs _ownedByServer via NetworkVariable and grants ObjectNet control to the host.
+            toLink.SetOwnership(isMy);
         }
         else
         {
