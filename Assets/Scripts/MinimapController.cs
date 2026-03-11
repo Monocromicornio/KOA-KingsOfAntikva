@@ -50,11 +50,11 @@ public class MinimapController : MonoBehaviour
         yield return new WaitUntil(() =>
             MatchController.instance != null &&
             MatchController.instance.hasConnection &&
+            MatchController.instance.hasStarted == true &&
+            boardController.isFinished() &&
             MatchController.instance.turn != TurnState.undefined);
 
-        Debug.Log("Initialized game for minimap");
-
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.5f);
         InitializeMinimapImmediate();
     }
 
