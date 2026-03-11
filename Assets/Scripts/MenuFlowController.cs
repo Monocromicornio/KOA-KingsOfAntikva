@@ -54,6 +54,13 @@ public class MenuFlowController : MonoBehaviour
     public GameObject steamViewer;
     public Button closeLobbyButton;
 
+    // ─── Ranking & Config Panels ─────────────────────────────────────────────
+    [Header("Ranking & Config Panels")]
+    public GameObject rankingHUD;
+    public Button closeRankingButton;
+    public GameObject configsHUD;
+    public Button closeConfigButton;
+
     // ─── Dependencies ────────────────────────────────────────────────────────
     [Header("Dependencies")]
     [Tooltip("Referência ao SavePieceOrder para chamar SavePieces() antes de abrir o painel de modos")]
@@ -125,6 +132,26 @@ public class MenuFlowController : MonoBehaviour
             closeLobbyButton.onClick.AddListener(OnCloseLobbyClicked);
         }
 
+        // Ranking
+        var rankingBtn = rankingButton?.GetComponent<Button>();
+        if (rankingBtn != null)
+        {
+            rankingBtn.onClick.RemoveAllListeners();
+            rankingBtn.onClick.AddListener(OnRankingClicked);
+        }
+        if (closeRankingButton != null)
+            closeRankingButton.onClick.AddListener(OnCloseRankingClicked);
+
+        // Config
+        var configBtn = configButton?.GetComponent<Button>();
+        if (configBtn != null)
+        {
+            configBtn.onClick.RemoveAllListeners();
+            configBtn.onClick.AddListener(OnConfigClicked);
+        }
+        if (closeConfigButton != null)
+            closeConfigButton.onClick.AddListener(OnCloseConfigClicked);
+
         if (cardRanked  != null) cardRanked.GetComponent<Button>()?.onClick.AddListener(OnRankedClicked);
         if (cardLobby   != null) cardLobby.GetComponent<Button>()?.onClick.AddListener(OnLobbyClicked);
         if (cardOffline != null) cardOffline.GetComponent<Button>()?.onClick.AddListener(OnOfflineClicked);
@@ -132,25 +159,20 @@ public class MenuFlowController : MonoBehaviour
 
     // ─── Public Handlers ─────────────────────────────────────────────────────
 
-    /// <summary>Clicou em Jogar: esconde menu inicial e exibe PlayModesPanel.</summary>
+    /// <summary>Clicou em Jogar: exibe PlayModesPanel imediatamente e esconde o menu em paralelo.</summary>
     public void OnPlayButtonClicked()
     {
         savePieceOrder?.SavePieces();
-        HideMainMenu(() =>
-        {
-            playModesPanel.SetActive(true);
-            AnimateCardsIn();
-        });
+        playModesPanel.SetActive(true);
+        AnimateCardsIn();
+        HideMainMenu();
     }
 
-    /// <summary>Clicou em Voltar: fecha PlayModesPanel e restaura menu inicial.</summary>
+    /// <summary>Clicou em Voltar: desativa PlayModesPanel instantaneamente e restaura o menu.</summary>
     public void OnBackClicked()
     {
-        AnimateCardsOut(() =>
-        {
-            playModesPanel.SetActive(false);
-            ShowMainMenu();
-        });
+        playModesPanel.SetActive(false);
+        ShowMainMenu();
     }
 
     /// <summary>Modo Offline: fecha o painel; a lógica de jogo já segue via SavePieceOrder.Offline.</summary>
@@ -190,6 +212,18 @@ public class MenuFlowController : MonoBehaviour
     {
         StopRankedSearch();
     }
+
+    /// <summary>Abre o painel de Ranking com animação de escala.</summary>
+    public void OnRankingClicked()   => OpenPanel(rankingHUD);
+
+    /// <summary>Fecha o painel de Ranking com animação de escala.</summary>
+    public void OnCloseRankingClicked() => ClosePanel(rankingHUD);
+
+    /// <summary>Abre o painel de Configurações com animação de escala.</summary>
+    public void OnConfigClicked()    => OpenPanel(configsHUD);
+
+    /// <summary>Fecha o painel de Configurações com animação de escala.</summary>
+    public void OnCloseConfigClicked() => ClosePanel(configsHUD);
 
     // ─── Main Menu Animations ────────────────────────────────────────────────
 
@@ -312,6 +346,26 @@ public class MenuFlowController : MonoBehaviour
         StartCoroutine(MoveAnchored(cardOffline, _cardOfflineRest, new Vector2(_cardOfflineRest.x - w, _cardOfflineRest.y), ANIM_STAGGER * 2f, onComplete));
     }
 
+    // ─── Generic Panel Open / Close ──────────────────────────────────────────
+
+    private void OpenPanel(GameObject panel)
+    {
+        panel.SetActive(true);
+        var rt = panel.GetComponent<RectTransform>();
+        rt.localScale = Vector3.zero;
+        StartCoroutine(ScaleUniform(rt, 0f, 1f, 0f, EaseOutBack, null));
+    }
+
+    private void ClosePanel(GameObject panel)
+    {
+        var rt = panel.GetComponent<RectTransform>();
+        StartCoroutine(ScaleUniform(rt, 1f, 0f, 0f, EaseInQuart, () =>
+        {
+            panel.SetActive(false);
+            rt.localScale = Vector3.one;
+        }));
+    }
+
     // ─── Steam Viewer ────────────────────────────────────────────────────────
 
     private void OpenSteamViewer()
@@ -319,13 +373,13 @@ public class MenuFlowController : MonoBehaviour
         steamViewer.SetActive(true);
         var rt = steamViewer.GetComponent<RectTransform>();
         rt.localScale = Vector3.zero;
-        StartCoroutine(ScaleUniform(rt, 0f, 1f, 0f, null));
+        StartCoroutine(ScaleUniform(rt, 0f, 1f, 0f, EaseOutBack, null));
     }
 
     private void CloseSteamViewer(System.Action onComplete = null)
     {
         var rt = steamViewer.GetComponent<RectTransform>();
-        StartCoroutine(ScaleUniform(rt, 1f, 0f, 0f, () =>
+        StartCoroutine(ScaleUniform(rt, 1f, 0f, 0f, EaseInQuart, () =>
         {
             steamViewer.SetActive(false);
             rt.localScale = Vector3.one;
@@ -396,9 +450,10 @@ public class MenuFlowController : MonoBehaviour
         onComplete?.Invoke();
     }
 
-    /// <summary>Interpola localScale uniformemente com easing EaseOutBack.</summary>
+    /// <summary>Interpola localScale uniformemente com a função de easing fornecida.</summary>
     private IEnumerator ScaleUniform(RectTransform rt, float from, float to,
-                                     float delay, System.Action onComplete)
+                                     float delay, System.Func<float, float> easing,
+                                     System.Action onComplete)
     {
         if (delay > 0f) yield return new WaitForSeconds(delay);
 
@@ -406,7 +461,7 @@ public class MenuFlowController : MonoBehaviour
         while (t < 1f)
         {
             t = Mathf.Min(t + Time.deltaTime / ANIM_DURATION, 1f);
-            float s = Mathf.LerpUnclamped(from, to, EaseOutBack(t));
+            float s = Mathf.LerpUnclamped(from, to, easing(t));
             rt.localScale = new Vector3(s, s, 1f);
             yield return null;
         }
@@ -423,4 +478,6 @@ public class MenuFlowController : MonoBehaviour
         const float c3 = c1 + 1f;
         return 1f + c3 * Mathf.Pow(t - 1f, 3f) + c1 * Mathf.Pow(t - 1f, 2f);
     }
+
+    private static float EaseInQuart(float t) => t * t * t * t;
 }
