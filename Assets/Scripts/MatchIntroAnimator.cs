@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using com.onlineobject.objectnet;
 
 /// <summary>
 /// Reproduz a animação de intro da partida:
@@ -18,8 +19,13 @@ public class MatchIntroAnimator : MonoBehaviour
     [Header("Camera")]
     public Transform cameraTransform;
 
-    public Vector3 cameraStartPosition = new Vector3(0f, 2.9f, -10.6f);
-    public Vector3 cameraEndPosition   = new Vector3(0f, -0.46f, -0.08f);
+    [Tooltip("Posição inicial da câmera quando o jogador é o host (servidor)")]
+    public Vector3 cameraStartPositionHost   = new Vector3(0f, 2.9f, -10.6f);
+
+    [Tooltip("Posição inicial da câmera quando o jogador é o client")]
+    public Vector3 cameraStartPositionClient = new Vector3(0f, 2.9f, -10.6f);
+
+    public Vector3 cameraEndPosition = new Vector3(0f, -0.46f, -0.08f);
 
     [Tooltip("Duração do movimento de câmera em segundos")]
     public float cameraDuration = 2f;
@@ -48,6 +54,8 @@ public class MatchIntroAnimator : MonoBehaviour
     public float hudFadeDuration = 0.5f;
 
     // ─── Internal state ──────────────────────────────────────────────────────
+    private Vector3 _cameraStartPosition;
+
     private Vector2 _playerProfileRest;
     private Vector2 _enemyProfileRest;
 
@@ -65,6 +73,12 @@ public class MatchIntroAnimator : MonoBehaviour
         // Desativar em Awake impede que Start() do TurnTimer rode prematuramente.
         if (turnTimer != null)
             turnTimer.enabled = false;
+
+        // Resolve a posição inicial da câmera com base no papel de rede
+        bool isHost = NetworkManager.Instance() != null
+            ? NetworkManager.Instance().IsServerConnection()
+            : true;
+        _cameraStartPosition = isHost ? cameraStartPositionHost : cameraStartPositionClient;
 
         // Preparações que podem acontecer durante o loading screen:
         // 1. Captura as posições de descanso dos perfis
@@ -91,7 +105,7 @@ public class MatchIntroAnimator : MonoBehaviour
 
         // 5. Posiciona a câmera no início da animação
         if (cameraTransform != null)
-            cameraTransform.localPosition = cameraStartPosition;
+            cameraTransform.localPosition = _cameraStartPosition;
     }
 
     private void Start()
@@ -132,7 +146,7 @@ public class MatchIntroAnimator : MonoBehaviour
         {
             t = Mathf.Min(t + Time.deltaTime / cameraDuration, 1f);
             cameraTransform.localPosition = Vector3.LerpUnclamped(
-                cameraStartPosition, cameraEndPosition, EaseInOutQuart(t));
+                _cameraStartPosition, cameraEndPosition, EaseInOutQuart(t));
             yield return null;
         }
 

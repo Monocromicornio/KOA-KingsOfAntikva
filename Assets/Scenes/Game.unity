@@ -6459,7 +6459,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MatchIntroAnimator
   cameraTransform: {fileID: 1093712202}
-  cameraStartPosition: {x: 0, y: 2.9, z: -10.6}
+  cameraStartPositionHost: {x: 0, y: 2.9, z: 10.6}
+  cameraStartPositionClient: {x: 0, y: 2.9, z: -10.6}
   cameraEndPosition: {x: 0, y: -0.46, z: -0.08}
   cameraDuration: 2
   playerProfile: {fileID: 389465698}
