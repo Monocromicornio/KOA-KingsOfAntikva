@@ -144,7 +144,27 @@ public class SyncronizeTable : NetworkBehaviour
         Debug.Log("[SyncronizeTable] Servidor: Todas as partes recebidas, combinando...");
         byte[] fullTableBytes = CombineBytes(tableParts);
         Debug.Log($"[SyncronizeTable] Servidor: Tabela completa recebida ({fullTableBytes.Length} bytes total)");
-        DecodeTable(Encoding.UTF8.GetString(fullTableBytes));
+        StartCoroutine(WaitForMatchControllerAndDecode(Encoding.UTF8.GetString(fullTableBytes)));
+    }
+
+    private IEnumerator WaitForMatchControllerAndDecode(string xmlString)
+    {
+        const float TimeoutSeconds = 5f;
+        float elapsed = 0f;
+
+        while (MatchController.instance == null && elapsed < TimeoutSeconds)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        if (MatchController.instance == null)
+        {
+            Debug.LogError("[SyncronizeTable] Timeout: MatchController.instance ainda é null após 5s. Verifique se o MatchController está ativo na cena Game.");
+            yield break;
+        }
+
+        DecodeTable(xmlString);
     }
 
     private void DecodeTable(string xmlString)

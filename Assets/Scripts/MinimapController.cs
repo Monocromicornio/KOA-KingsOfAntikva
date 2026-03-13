@@ -50,13 +50,18 @@ public class MinimapController : MonoBehaviour
         yield return new WaitUntil(() =>
             MatchController.instance != null &&
             MatchController.instance.hasConnection &&
+            MatchController.instance.hasStarted == true &&
+            boardController.isFinished() &&
             MatchController.instance.turn != TurnState.undefined);
 
+        yield return new WaitForSeconds(0.5f);
         InitializeMinimapImmediate();
     }
 
     private void InitializeMinimapImmediate()
     {
+        Debug.Log("Initialize game for minimap");
+
         InitializePerspective();
         InitializeGrid();
         StartCoroutine(WaitAndSyncWithBoard());
@@ -83,6 +88,7 @@ public class MinimapController : MonoBehaviour
                 boardController = BoardController.instance;
         }
 
+        Debug.Log("Initialize board for minimap");
         SyncWithBoard();
     }
 
@@ -139,7 +145,7 @@ public class MinimapController : MonoBehaviour
             if (field != null && field.piece != null)
             {
                 int minimapIndex = ConvertBoardIndexToMinimapIndex(boardIndex);
-                UpdateCellAtIndex(minimapIndex, field.piece);
+                UpdateCellAtIndex(minimapIndex, minimapIndex, field.piece);
             }
         }
     }
@@ -169,7 +175,7 @@ public class MinimapController : MonoBehaviour
         if (minimapIndex >= 0 && minimapIndex < cells.Length)
         {
             piecePositions[boardIndex] = piece;
-            UpdateCellAtIndex(minimapIndex, piece);
+            UpdateCellAtIndex(minimapIndex, minimapIndex, piece);
         }
     }
 
@@ -183,43 +189,51 @@ public class MinimapController : MonoBehaviour
         {
             piecePositions.Remove(boardIndex);
             pieceMarkings.Remove(piece);
-            int minimapIndex = ConvertBoardIndexToMinimapIndex(boardIndex);
-            if (minimapIndex >= 0 && minimapIndex < cells.Length)
-                cells[minimapIndex].Clear();
         }
+
+        Debug.Log("Unregistering piece from minimap at board index " + boardIndex);
+
+        int minimapIndex = ConvertBoardIndexToMinimapIndex(boardIndex);
+        if (minimapIndex >= 0 && minimapIndex < cells.Length)
+            cells[minimapIndex].Clear();
     }
 
     public void UpdatePiecePosition(Piece piece, int oldBoardIndex, int newBoardIndex)
     {
-        if (piece == null || cells == null)
+        if (cells == null)
             return;
+        
 
         int oldMinimapIndex = ConvertBoardIndexToMinimapIndex(oldBoardIndex);
         int newMinimapIndex = ConvertBoardIndexToMinimapIndex(newBoardIndex);
 
-        if (oldMinimapIndex >= 0 && oldMinimapIndex < cells.Length)
+        if (newMinimapIndex >= 0 && newMinimapIndex < cells.Length && oldMinimapIndex >= 0 && oldMinimapIndex < cells.Length)
         {
             if (piecePositions.ContainsKey(oldBoardIndex))
                 piecePositions.Remove(oldBoardIndex);
-            cells[oldMinimapIndex].Clear();
-        }
 
-        if (newMinimapIndex >= 0 && newMinimapIndex < cells.Length)
-        {
-            piecePositions[newBoardIndex] = piece;
-            UpdateCellAtIndex(newMinimapIndex, piece);
+            if (piece != null)
+            {
+                piecePositions[newBoardIndex] = piece;
+            }
+
+            UpdateCellAtIndex(newMinimapIndex, oldMinimapIndex, piece);
         }
     }
 
-    private void UpdateCellAtIndex(int index, Piece piece)
+    private void UpdateCellAtIndex(int index, int oldIndex, Piece piece)
     {
         if (index < 0 || index >= cells.Length)
             return;
 
+        string marking = cells[oldIndex].GetCurrentMarking();
+
         cells[index].UpdateCell(piece);
 
-        if (piece != null && pieceMarkings.TryGetValue(piece, out string marking))
-            cells[index].RestoreMarking(marking);
+        cells[index].RestoreMarking(marking);
+
+        if(oldIndex != index)
+            cells[oldIndex].Clear();
     }
 
     private void OnCellClicked(int cellIndex)

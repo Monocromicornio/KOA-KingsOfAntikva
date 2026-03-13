@@ -15,7 +15,10 @@ public class Piece : NetworkBehaviour
 
     private GameField firstField;
     private NetworkVariable<int> fieldIndex = -1;
+    private NetworkVariable<int> previousFieldIndex = -1;
+
     public int indexCurrentField => (int)fieldIndex;
+    public int indexPreviousField => (int)previousFieldIndex;
     public GameField field
     {
         get
@@ -64,6 +67,7 @@ public class Piece : NetworkBehaviour
         {
             board.GetGameField(oldValue)?.SetPiece(null);
             field?.SetPiece(this);
+
         });
     }
 
@@ -82,7 +86,11 @@ public class Piece : NetworkBehaviour
 
     private void SetControl()
     {
-        isMyPiece = true;
+        // NetworkExecuteOnClient also executes locally on the host. Guard against this so the
+        // correct isMyPiece value set by SetAsMyPiece() at spawn time is never overwritten on the host.
+        if (!matchController.networkManager.IsServerConnection())
+            isMyPiece = true;
+
         TakeControl();
     }
 
@@ -146,8 +154,10 @@ public class Piece : NetworkBehaviour
     public void SetFirstField(GameField field)
     {
         firstField = field;
-        if (!IsActive()) return;
-        fieldIndex = field.index;
+        //if (!IsActive()) return;
+        fieldIndex.SetValue(field.index);
+        previousFieldIndex.SetValue(field.index);
+
         targetField = null;
 
         transform.position = this.field.transform.position;
@@ -208,17 +218,12 @@ public class Piece : NetworkBehaviour
         {
             GameField oldField = field;
             int oldIndex = fieldIndex;
-            
+            previousFieldIndex.SetValue(oldIndex);
             targetField.SetPiece(null);
             field?.SetPiece(null);
 
-            fieldIndex = targetField.index;
+            fieldIndex.SetValue(targetField.index);
             field.SetPiece(this);
-
-            if (MinimapController.instance != null)
-            {
-                MinimapController.instance.UpdatePiecePosition(this, oldIndex, fieldIndex);
-            }
 
             TutorialEvents.TriggerPieceMoved(this, oldField, field);
 
@@ -260,7 +265,7 @@ public class Piece : NetworkBehaviour
     private void ChangeTurn()
     {
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
-        
+
         if (!isTutorialMode)
         {
             if (!IsActive() ) return; //|| !matchController.IsMyTurn()
@@ -280,25 +285,25 @@ public class Piece : NetworkBehaviour
 
     public void SetWin()
     {
-        if (hasConnection) NetworkExecute(OnWin);
+        if (hasConnection) { NetworkExecute(OnWin); NetworkExecuteOnClient(OnWin); }        
         else OnWin();
     }
 
     private void OnWin()
     {
-        if (!IsActive()) return;
+        //if (!IsActive()) return;
         SendMessage("Win");
     }
 
     public void SetLose()
     {
-        if (hasConnection) NetworkExecute(OnLose);
+        if (hasConnection) { NetworkExecute(OnLose); NetworkExecuteOnClient(OnLose); }
         else OnLose();
     }
 
     private void OnLose()
     {
-        if (!IsActive()) return;
+        //if (!IsActive()) return;
         SendMessage("Destroy");
     }
 

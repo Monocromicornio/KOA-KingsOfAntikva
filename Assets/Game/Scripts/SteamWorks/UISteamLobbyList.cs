@@ -58,27 +58,28 @@ namespace com.onlineobject.objectnet.integration
 
         void Awake()
         {
-            this.CreateLobbyButton.onClick.AddListener(CreateSteamLobby);
-            this.RefreshLobbyButton.onClick.AddListener(RefreshLobby);
+            SetMaxPlayers(maxPlayersPerLobby);
+        }
 
-            if (this.QuickPlayButton != null)
+        void Start()
+        {
+            CreateLobbyButton.onClick.AddListener(CreateSteamLobby);
+            RefreshLobbyButton.onClick.AddListener(RefreshLobby);
+
+            if (QuickPlayButton != null)
             {
-                this.QuickPlayButton.onClick.AddListener(StartQuickPlay);
+               QuickPlayButton.onClick.AddListener(StartQuickPlay);
             }
 
-            if (this.cancelSearchButton != null)
-            {
-                this.cancelSearchButton.onClick.AddListener(CancelMatchmaking);
-            }
+            cancelSearchButton.onClick.AddListener(CancelMatchmaking);
 
-            if (this.searchingPanel != null)
+            if (searchingPanel != null)
             {
                 this.searchingPanel.SetActive(false);
             }
 
-            SetMaxPlayers(maxPlayersPerLobby);
+            RefreshLobby();
         }
-
         private void SetMaxPlayers(int maxPlayers)
         {
             var networkSteamManager = NetworkSteamManager.Instance();
@@ -131,11 +132,6 @@ namespace com.onlineobject.objectnet.integration
                     }
                 }
             }
-        }
-
-        void OnEnable()
-        {
-            RefreshLobby();
         }
 
         private void Update()
@@ -433,6 +429,7 @@ namespace com.onlineobject.objectnet.integration
 
         public void CancelMatchmaking()
         {
+            Debug.Log("Cancelling matchmaking");
             isSearching = false;
             currentRetry = 0;
 
