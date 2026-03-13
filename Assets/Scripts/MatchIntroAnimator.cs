@@ -74,10 +74,11 @@ public class MatchIntroAnimator : MonoBehaviour
         if (turnTimer != null)
             turnTimer.enabled = false;
 
-        // Resolve a posição inicial da câmera com base no papel de rede
-        bool isHost = NetworkManager.Instance() != null
-            ? NetworkManager.Instance().IsServerConnection()
-            : true;
+        // Resolve a posição inicial da câmera com base no papel de rede.
+        // Em modo offline (não conectado) trata como host.
+        // Em modo online usa IsServerConnection() para distinguir host de client.
+        var nm = NetworkManager.Instance();
+        bool isHost = nm == null || !nm.IsConnected() || nm.IsServerConnection();
         _cameraStartPosition = isHost ? cameraStartPositionHost : cameraStartPositionClient;
 
         // Preparações que podem acontecer durante o loading screen:
