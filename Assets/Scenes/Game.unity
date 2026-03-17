@@ -6442,7 +6442,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440258580}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -28822,6 +28822,11 @@ PrefabInstance:
       propertyPath: turnDuration
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 5405625908719733079, guid: 771b6190ed70bc7429e84c6f72a49c43,
+        type: 3}
+      propertyPath: matchController
+      value: 
+      objectReference: {fileID: 1690787744}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

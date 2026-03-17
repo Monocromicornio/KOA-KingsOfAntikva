@@ -62,11 +62,11 @@ public class InteractivePiece : MonoBehaviour
         target.CounterAttack(this);
     }
 
-    protected IEnumerator FeedbackAttack(UnityAction action)
+    protected IEnumerator FeedbackAttack(UnityAction action, string animName = "Attack")
     {
         soundController.PreAttack();
-        yield return new WaitForSeconds(1);
-        anim.SetAnimation("Attack");
+        yield return new WaitForSeconds(0.5f);
+        anim.SetAnimation(animName);
         action.Invoke();
     }
 
@@ -84,7 +84,7 @@ public class InteractivePiece : MonoBehaviour
     {
         if (target == null) return;
         UnityAction action = () => target.Notify(false, this);
-        StartCoroutine(FeedbackAttack(action));
+        StartCoroutine(FeedbackAttack(action, "Attack"));
     }
 
     protected virtual void InstaKillAttack(InteractivePiece target)

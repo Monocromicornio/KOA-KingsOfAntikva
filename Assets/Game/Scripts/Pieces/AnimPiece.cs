@@ -68,7 +68,7 @@ public class AnimPiece : NetworkBehaviour
 
     public void ChangeAnim(GameObject newAnim)
     {
-        Animator anim = newAnim.GetComponent<Animator>();
+        Animator anim = newAnim.GetComponentInChildren<Animator>();
         if (anim == null) return;
         ChangeAnim(anim);
     }

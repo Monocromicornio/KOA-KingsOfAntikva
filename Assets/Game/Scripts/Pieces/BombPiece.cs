@@ -3,6 +3,8 @@ using UnityEngine.Events;
 
 public class BombPiece : InteractivePiece
 {
+
+    public GameObject effect;
     protected override void Awake()
     {
         base.Awake();
@@ -13,6 +15,7 @@ public class BombPiece : InteractivePiece
     {
         if (target == null) return;
         SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+        Instantiate(effect, transform.position, effect.transform.rotation);
         UnityAction action = () => ActionsAfterAttack(target);
         StartCoroutine(FeedbackAttack(action));
     }

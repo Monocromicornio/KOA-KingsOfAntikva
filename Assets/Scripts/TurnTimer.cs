@@ -28,7 +28,7 @@ public class TurnTimer : MonoBehaviour
     [SerializeField]
     private float dangerThreshold = 10f;
 
-    private MatchController matchController;
+    public MatchController matchController;
     private float currentTime;
     private bool isRunning = false;
     private bool hasStarted = false;
