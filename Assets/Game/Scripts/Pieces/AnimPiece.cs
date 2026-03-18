@@ -81,12 +81,15 @@ public class AnimPiece : NetworkBehaviour
 
     private void Destroy()
     {
-        StartCoroutine(WaitForEndOfFrame(() => { StartCoroutine(DieEffect()); }));
+        StartCoroutine(WaitForEndOfFrame(() => { DieEffect(); }));
     }
 
-    private IEnumerator DieEffect()
+    /// <summary>
+    /// Triggers death animation and sounds immediately.
+    /// All timing is controlled externally by InteractivePiece.deathAnimationDelay.
+    /// </summary>
+    private void DieEffect()
     {
-        yield return new WaitForSeconds(0.5f);
         bool dieSoldier = gameMode.type == GameMode.GameType.Hard && tag == "Enemy";
 
         if (dieSoldier)
@@ -98,9 +101,13 @@ public class AnimPiece : NetworkBehaviour
             if (auDie) auDie.Play();
         }
 
-        yield return new WaitForSeconds(2);
         SetAnimation("Die", true);
-        Instantiate(gDie, transform.position, gDie.transform.rotation);
+
+        if (gDie != null)
+        {
+            Instantiate(gDie, transform.position, gDie.transform.rotation);
+        }
+
         if (dieSoldier)
         {
             soundController.DownSoldier();

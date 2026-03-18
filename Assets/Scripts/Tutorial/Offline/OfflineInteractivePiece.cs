@@ -25,26 +25,72 @@ public class OfflineInteractivePiece : MonoBehaviour
     [SerializeField]
     public int force;
 
+    [Header("Attack Timing")]
+    [SerializeField]
+    [Tooltip("Delay (seconds) from when the Attack trigger fires to when the losing piece starts its death sequence. Configure per piece to sync with each attack animation.")]
+    protected float deathAnimationDelay = 1f;
+
+    [SerializeField]
+    [Tooltip("Total duration (seconds) of this piece's Attack animation clip. Used by FakePiece to hold Block pose during the attacker's animation before counter-attacking.")]
+    protected float attackAnimationDuration = 1f;
+
+    /// <summary>
+    /// Public accessor so other pieces can read the configured delay during combat resolution.
+    /// </summary>
+    public float DeathAnimationDelay => deathAnimationDelay;
+
     protected virtual void Awake()
     {
         piece = GetComponent<OfflinePiece>();
     }
 
+    /// <summary>
+    /// Resolves combat outcome with proper sequencing.
+    /// Win: reveal loser instantly, start death at deathAnimationDelay, wait for death to complete, then move.
+    /// Lose: reveal self instantly, start death at winner's deathAnimationDelay, wait for death to complete, then cancel.
+    /// In both cases, the turn only changes AFTER the death animation finishes.
+    /// </summary>
     public virtual void Notify(bool success, OfflineInteractivePiece target)
     {
-        OfflinePiece toDestroy = success ? target.piece : piece;
-
-        string message = success ? "Success" : "Failed";
-        float time = success ? toDestroy.timeToDestroy : 0;
-        StartCoroutine(WaitToSendMessage(time + 1, message));
-
-        toDestroy.SetLose();
+        if (success)
+        {
+            StartCoroutine(WinSequence(target));
+        }
+        else
+        {
+            StartCoroutine(LoseSequence(target));
+        }
     }
 
-    private IEnumerator WaitToSendMessage(float time, string message)
+    private IEnumerator WinSequence(OfflineInteractivePiece loser)
     {
-        yield return new WaitForSeconds(time);
-        SendMessage(message, SendMessageOptions.DontRequireReceiver);
+        // Reveal enemy immediately (shows real model if disguised)
+        loser.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+
+        // Wait for the configured moment in the attack animation to start death
+        yield return new WaitForSeconds(deathAnimationDelay);
+        loser.piece.SetLose();
+
+        // Wait for death animation to complete before moving and changing turn
+        yield return new WaitForSeconds(loser.piece.timeToDestroy);
+        SendMessage("Success", SendMessageOptions.DontRequireReceiver);
+    }
+
+    private IEnumerator LoseSequence(OfflineInteractivePiece winner)
+    {
+        // Reveal self if disguised (FakePiece shows real model)
+        piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+
+        // Cache delay before yielding (winner's GO may be destroyed in edge cases like BombPiece)
+        float winnerDelay = winner.DeathAnimationDelay;
+
+        // Winner's delay determines when during their attack/counter-attack this piece starts dying
+        yield return new WaitForSeconds(winnerDelay);
+        piece.SetLose();
+
+        // Wait for death animation to complete before canceling and changing turn
+        yield return new WaitForSeconds(piece.timeToDestroy);
+        SendMessage("Failed", SendMessageOptions.DontRequireReceiver);
     }
 
     protected virtual void ForceChallenge(OfflineInteractivePiece target)
@@ -58,13 +104,16 @@ public class OfflineInteractivePiece : MonoBehaviour
         target.CounterAttack(this);
     }
 
-    protected IEnumerator FeedbackAttack(UnityAction action)
+    /// <summary>
+    /// Plays pre-attack delay, triggers the animation, then invokes the combat action.
+    /// </summary>
+    protected IEnumerator FeedbackAttack(UnityAction action, string animName = "Attack")
     {
         yield return new WaitForSeconds(1);
         
         if (anim != null)
         {
-            anim.SetAnimation("Attack");
+            anim.SetAnimation(animName);
         }
         
         action.Invoke();
@@ -76,18 +125,44 @@ public class OfflineInteractivePiece : MonoBehaviour
         
         if (target == null) return;
         
-        Debug.Log($"[OfflineInteractivePiece] Triggering piece attacked event");
         TutorialEvents.TriggerPieceAttacked(piece, target.piece);
         
         UnityAction action = () => ForceChallenge(target);
         StartCoroutine(FeedbackAttack(action));
     }
 
+    /// <summary>
+    /// Counter-attack when this piece is attacked and wins the force comparison.
+    /// FakePiece: Block during enemy attack, then CounterAttack after it finishes.
+    /// All other pieces: standard Attack trigger for counter-attack.
+    /// </summary>
     protected virtual void CounterAttack(OfflineInteractivePiece target)
     {
         if (target == null) return;
+
+        OfflineFakePiece fakePiece = GetComponent<OfflineFakePiece>();
+        if (fakePiece != null)
+        {
+            StartCoroutine(FakeCounterAttackSequence(target));
+            return;
+        }
+
+        // Standard counter-attack: play Attack and resolve
         UnityAction action = () => target.Notify(false, this);
         StartCoroutine(FeedbackAttack(action));
+    }
+
+    private IEnumerator FakeCounterAttackSequence(OfflineInteractivePiece attacker)
+    {
+        // Step 1: hold Block pose while the attacker's attack animation plays
+        if (anim != null) anim.SetAnimation("Block");
+
+        // Step 2: wait for the attacker's attack animation to finish
+        yield return new WaitForSeconds(attacker.attackAnimationDuration);
+
+        // Step 3: launch counter-attack animation and resolve
+        UnityAction action = () => attacker.Notify(false, this);
+        StartCoroutine(FeedbackAttack(action, "CounterAttack"));
     }
 
     protected virtual void InstaKillAttack(OfflineInteractivePiece target)
@@ -96,7 +171,6 @@ public class OfflineInteractivePiece : MonoBehaviour
         
         if (target == null) return;
         
-        Debug.Log($"[OfflineInteractivePiece] Triggering piece attacked event for InstaKill");
         TutorialEvents.TriggerPieceAttacked(piece, target.piece);
         
         UnityAction action = () => Notify(true, target);
