@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class BombPiece : InteractivePiece
 {
@@ -15,14 +15,25 @@ public class BombPiece : InteractivePiece
     {
         if (target == null) return;
         SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
-        Instantiate(effect, transform.position, effect.transform.rotation);
-        UnityAction action = () => ActionsAfterAttack(target);
-        StartCoroutine(FeedbackAttack(action));
+        StartCoroutine(BombCounterAttackSequence(target));
     }
 
-    private void ActionsAfterAttack(InteractivePiece target)
+    private IEnumerator BombCounterAttackSequence(InteractivePiece target)
     {
-        target.Notify(false, this);
+        // Wait for the configured delay before exploding
+        yield return new WaitForSeconds(target.DeathAnimationDelay);
+
+        if (effect != null)
+        {
+            Instantiate(effect, transform.position, effect.transform.rotation);
+        }
+
+        target.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+        target.piece.SetLose();
         piece.SetLose();
+
+        // Wait for death animations to complete before changing turn
+        yield return new WaitForSeconds(piece.timeToDestroy);
+        SendMessage("Failed");
     }
 }

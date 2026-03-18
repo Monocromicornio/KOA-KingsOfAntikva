@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class OfflineBombPiece : OfflineInteractivePiece
 {
@@ -19,13 +19,20 @@ public class OfflineBombPiece : OfflineInteractivePiece
         TutorialEvents.TriggerPieceAttacked(piece, target.piece);
         
         SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
-        UnityAction action = () => ActionsAfterAttack(target);
-        StartCoroutine(FeedbackAttack(action));
+        StartCoroutine(BombCounterAttackSequence(target));
     }
 
-    private void ActionsAfterAttack(OfflineInteractivePiece target)
+    private IEnumerator BombCounterAttackSequence(OfflineInteractivePiece target)
     {
-        target.Notify(false, this);
+        // Wait for the configured delay before exploding
+        yield return new WaitForSeconds(target.DeathAnimationDelay);
+
+        target.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+        target.piece.SetLose();
         piece.SetLose();
+
+        // Wait for death animations to complete before changing turn
+        yield return new WaitForSeconds(piece.timeToDestroy);
+        SendMessage("Failed", SendMessageOptions.DontRequireReceiver);
     }
 }
