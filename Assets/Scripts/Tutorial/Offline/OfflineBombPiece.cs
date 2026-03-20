@@ -22,17 +22,32 @@ public class OfflineBombPiece : OfflineInteractivePiece
         StartCoroutine(BombCounterAttackSequence(target));
     }
 
+    /// <summary>
+    /// Bomb explosion: kill attacker, wait for death, send Failed, then kill the bomb.
+    /// The bomb kills itself LAST so the coroutine survives.
+    /// </summary>
     private IEnumerator BombCounterAttackSequence(OfflineInteractivePiece target)
     {
-        // Wait for the configured delay before exploding
-        yield return new WaitForSeconds(target.DeathAnimationDelay);
+        // Cache values before any yield
+        float cachedTargetDeathDelay = target != null ? target.DeathAnimationDelay : 1f;
+        float cachedDeathDuration = GetSafeTimeToDestroy(target);
 
-        target.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
-        target.piece.SetLose();
-        piece.SetLose();
+        yield return new WaitForSeconds(cachedTargetDeathDelay);
 
-        // Wait for death animations to complete before changing turn
-        yield return new WaitForSeconds(piece.timeToDestroy);
+        // Kill the attacker first
+        if (target != null && target.piece != null)
+        {
+            target.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+            target.piece.SetLose();
+        }
+
+        // Wait for attacker's death animation to complete
+        yield return new WaitForSeconds(cachedDeathDuration);
+
+        // Signal turn change before killing the bomb
         SendMessage("Failed", SendMessageOptions.DontRequireReceiver);
+
+        // Now the bomb can safely die
+        piece.SetLose();
     }
 }

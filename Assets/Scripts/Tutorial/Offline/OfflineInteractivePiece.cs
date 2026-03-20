@@ -5,6 +5,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(OfflinePiece))]
 public class OfflineInteractivePiece : MonoBehaviour
 {
+    private const float DEFAULT_TIME_TO_DESTROY = 3.5f;
+
     private OfflinePiece _piece;
     public OfflinePiece piece 
     { 
@@ -45,10 +47,8 @@ public class OfflineInteractivePiece : MonoBehaviour
     }
 
     /// <summary>
-    /// Resolves combat outcome with proper sequencing.
-    /// Win: reveal loser instantly, start death at deathAnimationDelay, wait for death to complete, then move.
-    /// Lose: reveal self instantly, start death at winner's deathAnimationDelay, wait for death to complete, then cancel.
-    /// In both cases, the turn only changes AFTER the death animation finishes.
+    /// Called when this piece wins a combat (attacker that won).
+    /// Runs WinSequence on this piece (the winner), so the coroutine is never killed.
     /// </summary>
     public virtual void Notify(bool success, OfflineInteractivePiece target)
     {
@@ -56,41 +56,28 @@ public class OfflineInteractivePiece : MonoBehaviour
         {
             StartCoroutine(WinSequence(target));
         }
-        else
-        {
-            StartCoroutine(LoseSequence(target));
-        }
     }
 
     private IEnumerator WinSequence(OfflineInteractivePiece loser)
     {
-        // Reveal enemy immediately (shows real model if disguised)
-        loser.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+        // Cache values before any yield
+        float cachedDeathAnimDelay = deathAnimationDelay;
+        float cachedDeathDuration = GetSafeTimeToDestroy(loser);
 
-        // Wait for the configured moment in the attack animation to start death
-        yield return new WaitForSeconds(deathAnimationDelay);
-        loser.piece.SetLose();
+        if (loser != null && loser.piece != null)
+        {
+            loser.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+        }
 
-        // Wait for death animation to complete before moving and changing turn
-        yield return new WaitForSeconds(loser.piece.timeToDestroy);
+        yield return new WaitForSeconds(cachedDeathAnimDelay);
+
+        if (loser != null && loser.piece != null)
+        {
+            loser.piece.SetLose();
+        }
+
+        yield return new WaitForSeconds(cachedDeathDuration);
         SendMessage("Success", SendMessageOptions.DontRequireReceiver);
-    }
-
-    private IEnumerator LoseSequence(OfflineInteractivePiece winner)
-    {
-        // Reveal self if disguised (FakePiece shows real model)
-        piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
-
-        // Cache delay before yielding (winner's GO may be destroyed in edge cases like BombPiece)
-        float winnerDelay = winner.DeathAnimationDelay;
-
-        // Winner's delay determines when during their attack/counter-attack this piece starts dying
-        yield return new WaitForSeconds(winnerDelay);
-        piece.SetLose();
-
-        // Wait for death animation to complete before canceling and changing turn
-        yield return new WaitForSeconds(piece.timeToDestroy);
-        SendMessage("Failed", SendMessageOptions.DontRequireReceiver);
     }
 
     protected virtual void ForceChallenge(OfflineInteractivePiece target)
@@ -133,8 +120,7 @@ public class OfflineInteractivePiece : MonoBehaviour
 
     /// <summary>
     /// Counter-attack when this piece is attacked and wins the force comparison.
-    /// FakePiece: Block during enemy attack, then CounterAttack after it finishes.
-    /// All other pieces: standard Attack trigger for counter-attack.
+    /// All death handling runs on THIS (the winner) so the coroutine is never killed.
     /// </summary>
     protected virtual void CounterAttack(OfflineInteractivePiece target)
     {
@@ -147,22 +133,68 @@ public class OfflineInteractivePiece : MonoBehaviour
             return;
         }
 
-        // Standard counter-attack: play Attack and resolve
-        UnityAction action = () => target.Notify(false, this);
+        // Standard counter-attack: play Attack, then handle loser death
+        UnityAction action = () => StartCoroutine(HandleLoserDeath(target));
         StartCoroutine(FeedbackAttack(action));
+    }
+
+    /// <summary>
+    /// Handles the loser's death entirely from the winner's coroutine.
+    /// </summary>
+    private IEnumerator HandleLoserDeath(OfflineInteractivePiece loser)
+    {
+        // Cache values before any yield
+        float cachedDeathAnimDelay = deathAnimationDelay;
+        float cachedDeathDuration = GetSafeTimeToDestroy(loser);
+
+        if (loser != null && loser.piece != null)
+        {
+            loser.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+        }
+
+        yield return new WaitForSeconds(cachedDeathAnimDelay);
+
+        if (loser != null && loser.piece != null)
+        {
+            loser.piece.SetLose();
+        }
+
+        yield return new WaitForSeconds(cachedDeathDuration);
+
+        SendMessage("Failed", SendMessageOptions.DontRequireReceiver);
     }
 
     private IEnumerator FakeCounterAttackSequence(OfflineInteractivePiece attacker)
     {
-        // Step 1: hold Block pose while the attacker's attack animation plays
+        // Cache all values before any yield
+        float cachedAttackAnimDuration = attacker != null ? attacker.attackAnimationDuration : 1f;
+        float cachedDeathAnimDelay = deathAnimationDelay;
+        float cachedDeathDuration = GetSafeTimeToDestroy(attacker);
+
         if (anim != null) anim.SetAnimation("Block");
 
-        // Step 2: wait for the attacker's attack animation to finish
-        yield return new WaitForSeconds(attacker.attackAnimationDuration);
+        yield return new WaitForSeconds(cachedAttackAnimDuration);
 
-        // Step 3: launch counter-attack animation and resolve
-        UnityAction action = () => attacker.Notify(false, this);
-        StartCoroutine(FeedbackAttack(action, "CounterAttack"));
+        // Counter-attack animation
+        yield return new WaitForSeconds(1);
+        if (anim != null) anim.SetAnimation("CounterAttack");
+
+        // Handle loser death from THIS (winner) coroutine
+        if (attacker != null && attacker.piece != null)
+        {
+            attacker.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+        }
+
+        yield return new WaitForSeconds(cachedDeathAnimDelay);
+
+        if (attacker != null && attacker.piece != null)
+        {
+            attacker.piece.SetLose();
+        }
+
+        yield return new WaitForSeconds(cachedDeathDuration);
+
+        SendMessage("Failed", SendMessageOptions.DontRequireReceiver);
     }
 
     protected virtual void InstaKillAttack(OfflineInteractivePiece target)
@@ -175,5 +207,17 @@ public class OfflineInteractivePiece : MonoBehaviour
         
         UnityAction action = () => Notify(true, target);
         StartCoroutine(FeedbackAttack(action));
+    }
+
+    /// <summary>
+    /// Safely reads timeToDestroy from a piece, returning a default if the piece was already destroyed.
+    /// </summary>
+    protected static float GetSafeTimeToDestroy(OfflineInteractivePiece interactivePiece)
+    {
+        if (interactivePiece != null && interactivePiece.piece != null)
+        {
+            return interactivePiece.piece.timeToDestroy;
+        }
+        return DEFAULT_TIME_TO_DESTROY;
     }
 }

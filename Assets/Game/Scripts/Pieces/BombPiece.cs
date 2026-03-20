@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BombPiece : InteractivePiece
 {
-
     public GameObject effect;
+
     protected override void Awake()
     {
         base.Awake();
@@ -15,25 +15,52 @@ public class BombPiece : InteractivePiece
     {
         if (target == null) return;
         SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
-        StartCoroutine(BombCounterAttackSequence(target));
+        matchController.StartCoroutine(BombCounterAttackSequence(target));
     }
 
+    /// <summary>
+    /// Bomb explosion: wait for deathAnimationDelay, explode, kill attacker,
+    /// wait for death animation, change turn, then kill the bomb.
+    /// Runs on MatchController so the coroutine survives even if both pieces are destroyed.
+    /// </summary>
     private IEnumerator BombCounterAttackSequence(InteractivePiece target)
     {
-        // Wait for the configured delay before exploding
-        yield return new WaitForSeconds(target.DeathAnimationDelay);
+        // Cache all values before any yield to avoid MissingReferenceException
+        BombPiece bomb = this;
+        float cachedTargetDeathDelay = target != null ? target.DeathAnimationDelay : 1f;
+        float cachedDeathDuration = GetSafeTimeToDestroy(target);
+        Vector3 cachedBombPosition = transform.position;
+        Quaternion cachedEffectRotation = (effect != null) ? effect.transform.rotation : Quaternion.identity;
+        GameObject cachedEffect = effect;
 
-        if (effect != null)
+        yield return new WaitForSeconds(cachedTargetDeathDelay);
+
+        if (cachedEffect != null)
         {
-            Instantiate(effect, transform.position, effect.transform.rotation);
+            Instantiate(cachedEffect, cachedBombPosition, cachedEffectRotation);
         }
 
-        target.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
-        target.piece.SetLose();
-        piece.SetLose();
+        // Kill the attacker first
+        if (target != null && target.piece != null)
+        {
+            target.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+            target.piece.SetLose();
+        }
+        else
+        {
+            Debug.LogWarning("[BombPiece] BombCounterAttack: target already destroyed before SetLose.");
+        }
 
-        // Wait for death animations to complete before changing turn
-        yield return new WaitForSeconds(piece.timeToDestroy);
-        SendMessage("Failed");
+        // Wait for attacker's death animation to complete
+        yield return new WaitForSeconds(cachedDeathDuration);
+
+        // Change turn BEFORE killing the bomb
+        matchController.ChangeTurn();
+
+        // Now the bomb can safely die
+        if (bomb != null && bomb.piece != null)
+        {
+            bomb.piece.SetLose();
+        }
     }
 }
