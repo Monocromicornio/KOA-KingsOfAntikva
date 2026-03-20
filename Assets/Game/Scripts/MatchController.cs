@@ -334,7 +334,6 @@ public class MatchController : MonoBehaviour
         //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posi��o no ranking:
 
         SetFinishGame(enemySquad.pieces.ToArray(), true);
-        SetFinishGame(playerSquad.pieces.ToArray(), false);
     }
 
     public void FinishGame()
@@ -359,13 +358,18 @@ public class MatchController : MonoBehaviour
         SetEnemyWin();
         FinishGame();
     }
+    /// <summary>
+    /// Applies end-game state to pieces using local-only calls (no network messages).
+    /// Each client handles its own end-game visuals independently via CheckEndGame.
+    /// </summary>
     public void SetFinishGame(Piece[] pieces, bool win)
     {
         if (pieces.Length == 0) return;
         foreach (Piece piece in pieces)
         {
-            if (win) piece.SetWin();
-            else piece.SetLose();
+            if (piece == null) continue;
+            if (win) piece.SetWinLocal();
+            else piece.SetLoseLocal();
         }
     }
 

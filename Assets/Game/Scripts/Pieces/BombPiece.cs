@@ -4,6 +4,7 @@ using UnityEngine;
 public class BombPiece : InteractivePiece
 {
     public GameObject effect;
+    private bool effectSpawned;
 
     protected override void Awake()
     {
@@ -14,11 +15,13 @@ public class BombPiece : InteractivePiece
     /// <summary>
     /// Called via SendMessage("Destroy") from Piece.OnLose().
     /// Since SetLose uses NetworkExecute, this runs on ALL clients, so the effect is visible everywhere.
+    /// The effectSpawned flag prevents double-spawning when OnLose is called multiple times.
     /// </summary>
     private void Destroy()
     {
-        if (effect != null)
+        if (effect != null && !effectSpawned)
         {
+            effectSpawned = true;
             Instantiate(effect, transform.position, effect.transform.rotation);
         }
     }
@@ -31,10 +34,12 @@ public class BombPiece : InteractivePiece
     }
 
     /// <summary>
-    /// Bomb explosion: wait for deathAnimationDelay, kill attacker,
-    /// wait for death animation, change turn, then kill the bomb.
-    /// Runs on MatchController so the coroutine survives even if both pieces are destroyed.
-    /// The explosion effect is handled by Destroy() via network-synced SendMessage.
+    /// Bomb explosion sequence:
+    /// 1. Wait for target's death animation delay
+    /// 2. Bomb explodes (SetLose triggers Destroy → effect) and kills attacker simultaneously
+    /// 3. Wait for death animations to complete
+    /// 4. Change turn
+    /// Runs on MatchController so the coroutine survives piece destruction.
     /// </summary>
     private IEnumerator BombCounterAttackSequence(InteractivePiece target)
     {
@@ -44,7 +49,13 @@ public class BombPiece : InteractivePiece
 
         yield return new WaitForSeconds(cachedTargetDeathDelay);
 
-        // Kill the attacker first
+        // Bomb explodes NOW — kill bomb first so the effect spawns at the right time
+        if (this != null && piece != null)
+        {
+            piece.SetLose();
+        }
+
+        // Kill the attacker
         if (target != null && target.piece != null)
         {
             target.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
@@ -55,16 +66,10 @@ public class BombPiece : InteractivePiece
             Debug.LogWarning("[BombPiece] BombCounterAttack: target already destroyed before SetLose.");
         }
 
-        // Wait for attacker's death animation to complete
+        // Wait for death animations to complete
         yield return new WaitForSeconds(cachedDeathDuration);
 
-        // Change turn BEFORE killing the bomb
+        // Change turn after everything is resolved
         matchController.ChangeTurn();
-
-        // Now the bomb can safely die — Destroy() will spawn the effect on all clients
-        if (this != null && piece != null)
-        {
-            piece.SetLose();
-        }
     }
 }

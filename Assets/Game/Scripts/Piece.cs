@@ -294,6 +294,15 @@ public class Piece : NetworkBehaviour
         else OnWin();
     }
 
+    /// <summary>
+    /// Triggers the win state locally only, without sending network messages.
+    /// Used at end-game so each client handles its own visuals independently.
+    /// </summary>
+    public void SetWinLocal()
+    {
+        OnWin();
+    }
+
     private void OnWin()
     {
         //if (!IsActive()) return;
@@ -304,6 +313,15 @@ public class Piece : NetworkBehaviour
     {
         if (hasConnection) { NetworkExecute(OnLose); NetworkExecuteOnClient(OnLose); }
         else OnLose();
+    }
+
+    /// <summary>
+    /// Triggers the lose/death state locally only, without sending network messages.
+    /// Used at end-game so pieces only die on the winner's screen.
+    /// </summary>
+    public void SetLoseLocal()
+    {
+        OnLose();
     }
 
     private void OnLose()
