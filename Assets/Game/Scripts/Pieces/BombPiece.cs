@@ -4,11 +4,26 @@ using UnityEngine;
 public class BombPiece : InteractivePiece
 {
     public GameObject effect;
+    private bool hasExploded;
 
     protected override void Awake()
     {
         base.Awake();
         force = int.MaxValue;
+    }
+
+    /// <summary>
+    /// Called via SendMessage("Explode") from Piece.TriggerExplosion().
+    /// Only runs during counter-attack (TriggerExplosion is only called from BombCounterAttackSequence).
+    /// Uses hasExploded flag to prevent double-spawning from NetworkExecute + NetworkExecuteOnClient.
+    /// </summary>
+    private void Explode()
+    {
+        if (effect != null && !hasExploded)
+        {
+            hasExploded = true;
+            Instantiate(effect, transform.position, effect.transform.rotation);
+        }
     }
 
     protected override void CounterAttack(InteractivePiece target)
@@ -21,7 +36,7 @@ public class BombPiece : InteractivePiece
     /// <summary>
     /// Bomb counter-attack explosion sequence:
     /// 1. Wait for target's death animation delay
-    /// 2. Spawn explosion effect (ONLY during counter-attack, not when killed by Desarmador)
+    /// 2. Trigger explosion effect on all clients via Piece.TriggerExplosion (network synced)
     /// 3. Both pieces die simultaneously
     /// 4. Wait for death animations to complete
     /// 5. Change turn
@@ -29,27 +44,19 @@ public class BombPiece : InteractivePiece
     /// </summary>
     private IEnumerator BombCounterAttackSequence(InteractivePiece target)
     {
-        // Cache all values before any yield to avoid MissingReferenceException
         float cachedTargetDeathDelay = target != null ? target.DeathAnimationDelay : 1f;
         float cachedDeathDuration = GetSafeTimeToDestroy(target);
-        GameObject cachedEffect = effect;
-        Vector3 cachedPosition = transform.position;
-        Quaternion cachedEffectRotation = cachedEffect != null ? cachedEffect.transform.rotation : Quaternion.identity;
 
         yield return new WaitForSeconds(cachedTargetDeathDelay);
 
-        // Spawn explosion effect at the right moment
-        if (cachedEffect != null)
-        {
-            Instantiate(cachedEffect, cachedPosition, cachedEffectRotation);
-        }
-
-        // Both pieces die simultaneously
+        // Trigger explosion on ALL clients via network before killing the bomb
         if (this != null && piece != null)
         {
+            piece.TriggerExplosion();
             piece.SetLose();
         }
 
+        // Kill the attacker
         if (target != null && target.piece != null)
         {
             target.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
@@ -60,10 +67,8 @@ public class BombPiece : InteractivePiece
             Debug.LogWarning("[BombPiece] BombCounterAttack: target already destroyed before SetLose.");
         }
 
-        // Wait for death animations to complete
         yield return new WaitForSeconds(cachedDeathDuration);
 
-        // Change turn after everything is resolved
         matchController.ChangeTurn();
     }
 }

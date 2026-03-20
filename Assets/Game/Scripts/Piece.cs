@@ -35,6 +35,7 @@ public class Piece : NetworkBehaviour
 
     public float timeToDestroy { get; private set; }
     public bool isMyPiece { get; private set; }
+    public bool isDying { get; private set; }
     private bool onValueChangeSetted = false;
     private bool hasActedThisTurn = false;
 
@@ -237,9 +238,14 @@ public class Piece : NetworkBehaviour
 
     private void OnDestroy()
     {
-        matchController?.OnDestroyPiece(this);
+        if (!isDying)
+        {
+            // Destroyed externally (e.g. NetworkDestroy from remote) — run cleanup once
+            matchController?.OnDestroyPiece(this);
+            field?.SetPiece(null);
+        }
+
         if (activePiece == this) activePiece = null;
-        field?.SetPiece(null);
 
         if (MinimapController.instance != null)
         {
@@ -249,7 +255,11 @@ public class Piece : NetworkBehaviour
 
     private void Destroy()
     {
-        OnDestroy();
+        if (isDying) return;
+        isDying = true;
+        // Clear field reference immediately so other pieces don't see this as a valid target
+        field?.SetPiece(null);
+        matchController?.OnDestroyPiece(this);
         StartCoroutine(WaitToDestroy());
     }
 
@@ -257,10 +267,9 @@ public class Piece : NetworkBehaviour
     {
         yield return new WaitForSeconds(timeToDestroy);
 
-        // During end-game, each client handles destruction independently (no network messages)
-        bool isEndGame = matchController != null && matchController.finished;
+        if (this == null || gameObject == null) yield break;
 
-        if (hasConnection && IsActive() && !isEndGame)
+        if (hasConnection && IsActive())
         {
             NetworkGameObject.NetworkDestroy(gameObject);
         }
@@ -293,7 +302,7 @@ public class Piece : NetworkBehaviour
 
     public void SetWin()
     {
-        if (hasConnection) { NetworkExecute(OnWin); NetworkExecuteOnClient(OnWin); }        
+        if (hasConnection) NetworkExecute(OnWin);
         else OnWin();
     }
 
@@ -314,7 +323,7 @@ public class Piece : NetworkBehaviour
 
     public void SetLose()
     {
-        if (hasConnection) { NetworkExecute(OnLose); NetworkExecuteOnClient(OnLose); }
+        if (hasConnection) NetworkExecute(OnLose);
         else OnLose();
     }
 
@@ -331,6 +340,21 @@ public class Piece : NetworkBehaviour
     {
         //if (!IsActive()) return;
         SendMessage("Destroy");
+    }
+
+    /// <summary>
+    /// Triggers the explosion effect on all clients via network.
+    /// Used by BombPiece to show the explosion only during counter-attack.
+    /// </summary>
+    public void TriggerExplosion()
+    {
+        if (hasConnection) NetworkExecute(OnTriggerExplosion);
+        else OnTriggerExplosion();
+    }
+
+    private void OnTriggerExplosion()
+    {
+        SendMessage("Explode", SendMessageOptions.DontRequireReceiver);
     }
 
     public void TurnRedPiece()

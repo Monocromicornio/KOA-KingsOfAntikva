@@ -188,6 +188,10 @@ public class MatchController : MonoBehaviour
         SyncronizeTable.ResetAll();
     }
 
+    /// <summary>
+    /// Removes a player piece from playerSquad when it dies.
+    /// Enemy pieces are removed via OnDestroyFakePiece when their GameObject is actually destroyed.
+    /// </summary>
     public void OnDestroyPiece(Piece piece)
     {
         if (playerSquad.pieces.Contains(piece))
@@ -360,8 +364,8 @@ public class MatchController : MonoBehaviour
         FinishGame();
     }
     /// <summary>
-    /// Applies end-game state to pieces using local-only calls (no network messages).
-    /// Each client handles its own end-game visuals independently via CheckEndGame.
+    /// Applies end-game state to the given pieces.
+    /// Uses standard SetWin/SetLose with network sync so both clients see the result.
     /// </summary>
     public void SetFinishGame(Piece[] pieces, bool win)
     {
@@ -369,8 +373,8 @@ public class MatchController : MonoBehaviour
         foreach (Piece piece in pieces)
         {
             if (piece == null) continue;
-            if (win) piece.SetWinLocal();
-            else piece.SetLoseLocal();
+            if (win) piece.SetWin();
+            else piece.SetLose();
         }
     }
 
@@ -403,6 +407,8 @@ public class MatchController : MonoBehaviour
         int amount = 0;
         foreach (Piece piece in pieces)
         {
+            if (piece == null || piece.isDying) continue;
+
             if (piece.type == PieceType.Flag)
             {
                 TrunckPiece trunckPiece = piece.GetComponent<TrunckPiece>();

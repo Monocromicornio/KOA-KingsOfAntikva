@@ -79,8 +79,12 @@ public class AnimPiece : NetworkBehaviour
         ChangeAnim(lastAnims.Last());
     }
 
+    private bool isDying = false;
+
     private void Destroy()
     {
+        if (isDying) return;
+        isDying = true;
         StartCoroutine(WaitForEndOfFrame(() => { DieEffect(); }));
     }
 
