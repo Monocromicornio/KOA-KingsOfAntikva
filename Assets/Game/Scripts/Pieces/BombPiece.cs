@@ -11,6 +11,18 @@ public class BombPiece : InteractivePiece
         force = int.MaxValue;
     }
 
+    /// <summary>
+    /// Called via SendMessage("Destroy") from Piece.OnLose().
+    /// Since SetLose uses NetworkExecute, this runs on ALL clients, so the effect is visible everywhere.
+    /// </summary>
+    private void Destroy()
+    {
+        if (effect != null)
+        {
+            Instantiate(effect, transform.position, effect.transform.rotation);
+        }
+    }
+
     protected override void CounterAttack(InteractivePiece target)
     {
         if (target == null) return;
@@ -19,26 +31,18 @@ public class BombPiece : InteractivePiece
     }
 
     /// <summary>
-    /// Bomb explosion: wait for deathAnimationDelay, explode, kill attacker,
+    /// Bomb explosion: wait for deathAnimationDelay, kill attacker,
     /// wait for death animation, change turn, then kill the bomb.
     /// Runs on MatchController so the coroutine survives even if both pieces are destroyed.
+    /// The explosion effect is handled by Destroy() via network-synced SendMessage.
     /// </summary>
     private IEnumerator BombCounterAttackSequence(InteractivePiece target)
     {
         // Cache all values before any yield to avoid MissingReferenceException
-        BombPiece bomb = this;
         float cachedTargetDeathDelay = target != null ? target.DeathAnimationDelay : 1f;
         float cachedDeathDuration = GetSafeTimeToDestroy(target);
-        Vector3 cachedBombPosition = transform.position;
-        Quaternion cachedEffectRotation = (effect != null) ? effect.transform.rotation : Quaternion.identity;
-        GameObject cachedEffect = effect;
 
         yield return new WaitForSeconds(cachedTargetDeathDelay);
-
-        if (cachedEffect != null)
-        {
-            Instantiate(cachedEffect, cachedBombPosition, cachedEffectRotation);
-        }
 
         // Kill the attacker first
         if (target != null && target.piece != null)
@@ -57,10 +61,10 @@ public class BombPiece : InteractivePiece
         // Change turn BEFORE killing the bomb
         matchController.ChangeTurn();
 
-        // Now the bomb can safely die
-        if (bomb != null && bomb.piece != null)
+        // Now the bomb can safely die — Destroy() will spawn the effect on all clients
+        if (this != null && piece != null)
         {
-            bomb.piece.SetLose();
+            piece.SetLose();
         }
     }
 }

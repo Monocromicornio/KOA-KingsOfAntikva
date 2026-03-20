@@ -255,11 +255,16 @@ public class Piece : NetworkBehaviour
 
     private IEnumerator WaitToDestroy()
     {
-        if (!IsActive()) yield break;
-
         yield return new WaitForSeconds(timeToDestroy);
-        if (hasConnection) NetworkGameObject.NetworkDestroy(gameObject);
-        else Destroy(gameObject);
+
+        if (hasConnection && IsActive())
+        {
+            NetworkGameObject.NetworkDestroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void ChangeTurn()
