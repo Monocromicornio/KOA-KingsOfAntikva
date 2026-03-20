@@ -334,6 +334,7 @@ public class MatchController : MonoBehaviour
         //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posi��o no ranking:
 
         SetFinishGame(enemySquad.pieces.ToArray(), true);
+        SetFinishGame(playerSquad.pieces.ToArray(), false);
     }
 
     public void FinishGame()

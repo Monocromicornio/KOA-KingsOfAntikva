@@ -257,7 +257,10 @@ public class Piece : NetworkBehaviour
     {
         yield return new WaitForSeconds(timeToDestroy);
 
-        if (hasConnection && IsActive())
+        // During end-game, each client handles destruction independently (no network messages)
+        bool isEndGame = matchController != null && matchController.finished;
+
+        if (hasConnection && IsActive() && !isEndGame)
         {
             NetworkGameObject.NetworkDestroy(gameObject);
         }
