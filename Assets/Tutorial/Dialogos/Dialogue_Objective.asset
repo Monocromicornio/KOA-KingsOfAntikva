@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Dialogue_Objective
   m_EditorClassIdentifier: Assembly-CSharp::DialogueBase
   dialogueInfo:
-  - text: "Os exercitos est\xE3o escondidos por uma nevoa o que impede que n\xF3s
-      vejamos quem \xE9 quem. O lado bom \xE9 que o Rei inimigo n\xE3o nos v\xEA
-      tamb\xE9m, mas n\xE3o se preocupe, voc\xEA ver\xE1 nosso exercito normalmente,
-      s\xF3 n\xE3o conseguir\xE1 ver os inimigos."
+  - text: "Os ex\xE9rcitos est\xE3o ocultos por uma n\xE9voa de guerra, o que impede
+      que saibamos quem \xE9 quem no lado inimigo. A vantagem \xE9 que eles tamb\xE9m
+      n\xE3o conseguem ver nossos soldados. Voc\xEA ver\xE1 o seu ex\xE9rcito normalmente,
+      mas os soldados inimigos permanecer\xE3o ocultos."
     speaker: Rei Azul
     portraitLeft: {fileID: 21300000, guid: 0ac773d46c729494c8a69bb01d146284, type: 3}
     portraitRight: {fileID: 0}
@@ -24,8 +24,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     isRightPortrait: 0
-  - text: "Nosso objetivo para vencer esta guerra \xE9 encontrar o tesouro do inimigo
-      que est\xE1 escondido entre seus soldados.. "
+    isDoublePortrait: 0
+  - text: "Para vencer esta guerra, precisamos encontrar o tesouro inimigo, que est\xE1
+      escondido entre o ex\xE9rcito dele."
     speaker: Rei Azul
     portraitLeft: {fileID: 21300000, guid: 0ac773d46c729494c8a69bb01d146284, type: 3}
     portraitRight: {fileID: 0}
@@ -33,3 +34,4 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     isRightPortrait: 0
+    isDoublePortrait: 0

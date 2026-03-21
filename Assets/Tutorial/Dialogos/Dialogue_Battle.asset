@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Dialogue_Battle
   m_EditorClassIdentifier: Assembly-CSharp::DialogueBase
   dialogueInfo:
-  - text: "Para atacar o inimigo, selecione o soldado com quem voc\xEA quer realizar
-      o ataque e se o inimigo estiver ao alcance do ataque dele (dentro da casa verde)
-      selecione o inimigo que deseja atacar."
+  - text: "Para atacar, selecione o soldado que far\xE1 a investida. Se um inimigo
+      estiver ao alcance, dentro de uma casa verde, basta selecionar o soldado inimigo
+      para iniciar o ataque."
     speaker: Rei Azul
     portraitLeft: {fileID: 21300000, guid: 0ac773d46c729494c8a69bb01d146284, type: 3}
     portraitRight: {fileID: 0}
@@ -23,8 +23,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     isRightPortrait: 0
-  - text: "Mas lembre-se em uma batalha, o que vale \xE9 a for\xE7a, aquele com a
-      maior for\xE7a vence"
+    isDoublePortrait: 0
+  - text: "Mas lembre-se: na batalha, a for\xE7a decide o vencedor. O soldado com
+      maior for\xE7a vence o confronto."
     speaker: Rei Azul
     portraitLeft: {fileID: 21300000, guid: 0ac773d46c729494c8a69bb01d146284, type: 3}
     portraitRight: {fileID: 0}
@@ -32,3 +33,4 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     isRightPortrait: 0
+    isDoublePortrait: 0
