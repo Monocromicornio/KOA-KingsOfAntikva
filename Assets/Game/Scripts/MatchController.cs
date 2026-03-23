@@ -122,12 +122,18 @@ public class MatchController : MonoBehaviour
 
     private IEnumerator StartGame()
     {
+        yield return new WaitForSeconds(2);
+        ChangeTurn();
+
         while (isLoadingScreenFinished == false)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(3);
-        ChangeTurn();
+
+        if (turnTimer != null)
+        {
+            turnTimer.OnTurnChanged();
+        }
     }
 
     public void OnSteamConnectionStatusChanged(SteamNetConnectionStatusChangedCallback_t callback)
@@ -282,7 +288,7 @@ public class MatchController : MonoBehaviour
             machinePlayer.StartTurn();
         }
         
-        if (turnTimer != null)
+        if (turnTimer != null && isLoadingScreenFinished == true)
         {
             turnTimer.OnTurnChanged();
         }

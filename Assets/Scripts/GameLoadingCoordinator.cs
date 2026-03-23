@@ -153,7 +153,7 @@ public class GameLoadingCoordinator : MonoBehaviour
         if (MatchController.instance == null)
             return false;
 
-        return MatchController.instance.currentTurn != TurnState.wait;
+        return MatchController.instance.hasStarted == true;
     }
 
     private bool CheckOpponentProfileReady()
