@@ -28,6 +28,9 @@ public class MatchController : MonoBehaviour
 
     public bool hasStarted { get; private set; }
     public bool finished { get; private set; }
+
+    public bool isLoadingScreenFinished;
+
     private bool homeTeamTurn = false; //False to start with home, true for away
 
     public TurnState currentTurn { get; private set; }
@@ -112,13 +115,18 @@ public class MatchController : MonoBehaviour
         await Task.WhenAll(
             playerSquad.LoadPieces(),
             playerSquad.LoadPieces(clientTable)
+
         );
         StartCoroutine(StartGame());
     }
 
     private IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(2);
+        while (isLoadingScreenFinished == false)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(3);
         ChangeTurn();
     }
 
