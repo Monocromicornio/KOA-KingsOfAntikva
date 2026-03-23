@@ -63,8 +63,6 @@ public class TurnTimer : MonoBehaviour
 
         ResetTimer();
         UpdateTimerDisplay();
-
-        timerText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -89,11 +87,12 @@ public class TurnTimer : MonoBehaviour
         Debug.Log($"[TurnTimer] ========== START TIMER ==========");
         Debug.Log($"[TurnTimer] IsMyTurn: {isMyTurn}");
         Debug.Log($"[TurnTimer] consecutiveSkips: {consecutiveSkips}");
-        
+
+        timerText.gameObject.SetActive(true);
+
         if (!hasStarted)
         {
-            hasStarted = true;
-            timerText.gameObject.SetActive(true);
+            hasStarted = true;   
             Debug.Log("[TurnTimer] Timer iniciado na primeira jogada");
         }
 
