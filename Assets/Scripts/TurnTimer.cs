@@ -34,6 +34,15 @@ public class TurnTimer : MonoBehaviour
     private bool hasStarted = false;
     private int consecutiveSkips = 0;
 
+    private bool CheckIsMyTurn()
+    {
+        if (matchController == null)
+        {
+            matchController = MatchController.instance;
+        }
+
+        return matchController.IsMyTurn();
+    }
     private void Start()
     {
         matchController = MatchController.instance;
@@ -76,7 +85,7 @@ public class TurnTimer : MonoBehaviour
 
     public void StartTimer()
     {
-        bool isMyTurn = matchController.IsMyTurn();
+        bool isMyTurn = CheckIsMyTurn();
         Debug.Log($"[TurnTimer] ========== START TIMER ==========");
         Debug.Log($"[TurnTimer] IsMyTurn: {isMyTurn}");
         Debug.Log($"[TurnTimer] consecutiveSkips: {consecutiveSkips}");
@@ -107,7 +116,7 @@ public class TurnTimer : MonoBehaviour
 
     private void OnTimeExpired()
     {
-        bool isMyTurn = matchController.IsMyTurn();
+        bool isMyTurn = CheckIsMyTurn();
         Debug.Log($"[TurnTimer] ========== TEMPO ESGOTADO ==========");
         Debug.Log($"[TurnTimer] IsMyTurn: {isMyTurn}");
         Debug.Log($"[TurnTimer] consecutiveSkips ANTES: {consecutiveSkips}");
@@ -142,7 +151,7 @@ public class TurnTimer : MonoBehaviour
     {
         Debug.Log("[TurnTimer] Aplicando desistência por timeout");
 
-        if (matchController.IsMyTurn())
+        if (CheckIsMyTurn())
         {
             matchController.Surrender();
         }
@@ -171,7 +180,7 @@ public class TurnTimer : MonoBehaviour
 
     public void OnPlayerMadeMove()
     {
-        bool isMyTurn = matchController.IsMyTurn();
+        bool isMyTurn = CheckIsMyTurn();
         Debug.Log($"[TurnTimer] ========== JOGADOR FEZ MOVIMENTO ==========");
         Debug.Log($"[TurnTimer] IsMyTurn: {isMyTurn}");
         Debug.Log($"[TurnTimer] consecutiveSkips ANTES: {consecutiveSkips}");
