@@ -41,6 +41,7 @@ Transform:
   - {fileID: 4794791003780805886}
   - {fileID: 2740644221982132353}
   - {fileID: 5276072751491269234}
+  - {fileID: 450311768087451099}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8698608975684619726
@@ -152,6 +153,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 6070362150032259933}
   force: 0
+  deathAnimationDelay: 0
+  attackAnimationDuration: 0
   effect: {fileID: 2315799150374999750, guid: 5e8d02ae90b09384bb49475e77bd1423, type: 3}
 --- !u!114 &7837648028798507341
 MonoBehaviour:
@@ -616,6 +619,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &7817651317754977843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 450311768087451099}
+  m_Layer: 10
+  m_Name: ColorSwap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &450311768087451099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7817651317754977843}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1607262223644257737}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9051051891077703398
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,6 +782,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6033026153546891418}
+    - targetCorrespondingSourceObject: {fileID: 2851933966424417594, guid: 8f8ad2361d343f744bb5ceb256f0db90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8359707122518912514}
   m_SourcePrefab: {fileID: 100100000, guid: 8f8ad2361d343f744bb5ceb256f0db90, type: 3}
 --- !u!1 &3620785317967201504 stripped
 GameObject:
@@ -777,6 +815,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &4026493716079564953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2851933966424417594, guid: 8f8ad2361d343f744bb5ceb256f0db90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1185819333194612131}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8359707122518912514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026493716079564953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e63169b08d4724298af8d06560f9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkMaterialSwap
+  targetRenderer: {fileID: 4684764170314959376}
+  hostMaterials:
+  - {fileID: 2100000, guid: df66989fb50e86944ac3cf59037dc8ab, type: 2}
+  clientMaterials:
+  - {fileID: 2100000, guid: 0c23bd4c1bc5fd14db28a83f683f033c, type: 2}
+  piece: {fileID: 0}
+--- !u!23 &4684764170314959376 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5870231384907528115, guid: 8f8ad2361d343f744bb5ceb256f0db90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1185819333194612131}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5276072751491269234 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6434659049414574033, guid: 8f8ad2361d343f744bb5ceb256f0db90,
@@ -924,7 +992,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5523406995422772715}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &4794791003780805886 stripped
 RectTransform:
@@ -932,3 +1004,29 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1614854608850790704}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5407969309481864213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1614854608850790704}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5523406995422772715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407969309481864213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.bo_blue_tooltip_text_tmp_
+  _fallback: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12

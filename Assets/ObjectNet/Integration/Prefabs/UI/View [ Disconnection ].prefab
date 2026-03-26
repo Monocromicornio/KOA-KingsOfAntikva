@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4251343837870050295}
   - component: {fileID: 1097641199699978444}
   m_Layer: 5
-  m_Name: View [ Disconnection ]
+  m_Name: 'View [ Disconnection ]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 2889697653261011700}
   - component: {fileID: 1905244097423655719}
   - component: {fileID: 9159486959553809761}
+  - component: {fileID: 8639481367511727621}
   m_Layer: 5
   m_Name: TitleLabel
   m_TagString: Untagged
@@ -215,3 +216,23 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Disconnected from server
+--- !u!114 &8639481367511727621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480196801281019582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.view_disconnection_root_titlelabel
+  _fallback: Disconnected from server
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12

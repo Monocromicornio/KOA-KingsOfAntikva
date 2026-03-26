@@ -9729,6 +9729,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 3246016591386960138}
   force: 0
+  deathAnimationDelay: 1
+  attackAnimationDuration: 0
   particle: {fileID: 4870199711936650830}
   opened: 0
 --- !u!114 &3246016591386960138
@@ -19889,7 +19891,7 @@ Animator:
   m_GameObject: {fileID: 7014127323765505916}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 615406b3739f9f44d94c2f6d8d06e051, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -19917,7 +19919,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.45
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -20042,7 +20044,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1668372250528241833}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &3987164695336522705 stripped
 RectTransform:
@@ -20050,3 +20056,29 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7185169520533753375}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4527018430103382842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7185169520533753375}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1668372250528241833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4527018430103382842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.te_blue_tooltip_text_tmp_
+  _fallback: "Tesouro\nSe o inimigo encontrar seu tesouro voc\xEA perde"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12

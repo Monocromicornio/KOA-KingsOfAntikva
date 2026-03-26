@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class OfflineBombPiece : OfflineInteractivePiece
 {
@@ -19,13 +19,35 @@ public class OfflineBombPiece : OfflineInteractivePiece
         TutorialEvents.TriggerPieceAttacked(piece, target.piece);
         
         SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
-        UnityAction action = () => ActionsAfterAttack(target);
-        StartCoroutine(FeedbackAttack(action));
+        StartCoroutine(BombCounterAttackSequence(target));
     }
 
-    private void ActionsAfterAttack(OfflineInteractivePiece target)
+    /// <summary>
+    /// Bomb explosion: kill attacker, wait for death, send Failed, then kill the bomb.
+    /// The bomb kills itself LAST so the coroutine survives.
+    /// </summary>
+    private IEnumerator BombCounterAttackSequence(OfflineInteractivePiece target)
     {
-        target.Notify(false, this);
+        // Cache values before any yield
+        float cachedTargetDeathDelay = target != null ? target.DeathAnimationDelay : 1f;
+        float cachedDeathDuration = GetSafeTimeToDestroy(target);
+
+        yield return new WaitForSeconds(cachedTargetDeathDelay);
+
+        // Kill the attacker first
+        if (target != null && target.piece != null)
+        {
+            target.piece.SendMessage("Reveal", SendMessageOptions.DontRequireReceiver);
+            target.piece.SetLose();
+        }
+
+        // Wait for attacker's death animation to complete
+        yield return new WaitForSeconds(cachedDeathDuration);
+
+        // Signal turn change before killing the bomb
+        SendMessage("Failed", SendMessageOptions.DontRequireReceiver);
+
+        // Now the bomb can safely die
         piece.SetLose();
     }
 }
