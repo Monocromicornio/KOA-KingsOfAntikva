@@ -209,6 +209,7 @@ public class InteractivePiece : MonoBehaviour
         {
             soundController.PreAttack();
             yield return new WaitForSeconds(0.5f);
+            Debug.Log("[InteractivePiece] COUNTER ATTACK! Inside coroutine on piece " + gameObject.name);
             if (anim != null) anim.SetAnimation("CounterAttack");
         }
         else

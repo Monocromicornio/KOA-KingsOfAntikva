@@ -43,13 +43,14 @@ public class AnimPiece : NetworkBehaviour
 
     public void SetAnimation(string animName, bool value)
     {
+        Debug.Log("Setting animation bool " + animName + " to value " + value + " on piece " + gameObject.name);
         if (hasConnection) NetworkExecute<string, bool>(SetBool, animName, value);
         else SetBool(animName, value);
     }
 
     private void SetTrigger(string animName)
     {
-        Debug.Log("Calling anim " + animName + " on piece " + gameObject.name);
+        Debug.Log("Calling Trigger " + animName + " on piece " + gameObject.name);
         anim.SetTrigger(animName);
     }
 
