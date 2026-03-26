@@ -148,11 +148,13 @@ public class InteractivePiece : MonoBehaviour
         FakePiece fakePiece = GetComponent<FakePiece>();
         if (fakePiece != null)
         {
+            Debug.Log("[InteractivePiece] COUNTER ATTACK! FakePiece detected, calling fake counter attack sequence");
             matchController.StartCoroutine(FakeCounterAttackSequence(target));
             return;
         }
 
         // Standard counter-attack: play Attack on this piece, then handle loser death on MatchController
+        Debug.Log("[InteractivePiece] COUNTER ATTACK! Reveled Piece detected, calling default attack sequence");
         UnityAction action = () => matchController.StartCoroutine(HandleLoserDeath(target));
         StartCoroutine(FeedbackAttack(action));
     }
