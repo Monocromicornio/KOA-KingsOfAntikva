@@ -28,6 +28,9 @@ public class MatchController : MonoBehaviour
 
     public bool hasStarted { get; private set; }
     public bool finished { get; private set; }
+
+    public bool isLoadingScreenFinished;
+
     private bool homeTeamTurn = false; //False to start with home, true for away
 
     public TurnState currentTurn { get; private set; }
@@ -112,6 +115,7 @@ public class MatchController : MonoBehaviour
         await Task.WhenAll(
             playerSquad.LoadPieces(),
             playerSquad.LoadPieces(clientTable)
+
         );
         StartCoroutine(StartGame());
     }
@@ -120,6 +124,16 @@ public class MatchController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         ChangeTurn();
+
+        while (isLoadingScreenFinished == false)
+        {
+            yield return null;
+        }
+
+        if (turnTimer != null)
+        {
+            turnTimer.OnTurnChanged();
+        }
     }
 
     public void OnSteamConnectionStatusChanged(SteamNetConnectionStatusChangedCallback_t callback)
@@ -188,6 +202,10 @@ public class MatchController : MonoBehaviour
         SyncronizeTable.ResetAll();
     }
 
+    /// <summary>
+    /// Removes a player piece from playerSquad when it dies.
+    /// Enemy pieces are removed via OnDestroyFakePiece when their GameObject is actually destroyed.
+    /// </summary>
     public void OnDestroyPiece(Piece piece)
     {
         if (playerSquad.pieces.Contains(piece))
@@ -270,7 +288,7 @@ public class MatchController : MonoBehaviour
             machinePlayer.StartTurn();
         }
         
-        if (turnTimer != null)
+        if (turnTimer != null && isLoadingScreenFinished == true)
         {
             turnTimer.OnTurnChanged();
         }
@@ -359,11 +377,16 @@ public class MatchController : MonoBehaviour
         SetEnemyWin();
         FinishGame();
     }
+    /// <summary>
+    /// Applies end-game state to the given pieces.
+    /// Uses standard SetWin/SetLose with network sync so both clients see the result.
+    /// </summary>
     public void SetFinishGame(Piece[] pieces, bool win)
     {
         if (pieces.Length == 0) return;
         foreach (Piece piece in pieces)
         {
+            if (piece == null) continue;
             if (win) piece.SetWin();
             else piece.SetLose();
         }
@@ -398,6 +421,8 @@ public class MatchController : MonoBehaviour
         int amount = 0;
         foreach (Piece piece in pieces)
         {
+            if (piece == null || piece.isDying) continue;
+
             if (piece.type == PieceType.Flag)
             {
                 TrunckPiece trunckPiece = piece.GetComponent<TrunckPiece>();

@@ -2746,6 +2746,7 @@ MonoBehaviour:
   - {fileID: 1496281830}
   selectSource: {fileID: 482355928}
   confirmSource: {fileID: 252995014}
+  savePieceOrder: {fileID: 0}
 --- !u!1 &395999367
 GameObject:
   m_ObjectHideFlags: 0
@@ -7640,7 +7641,7 @@ GameObject:
   - component: {fileID: 1110486696}
   - component: {fileID: 1110486698}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: TutorialDialogueTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8787,11 +8788,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
-    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 212665604}
     - target: {fileID: 204174837974343679, guid: 7c02cf4ea40ac23429a01df25ef0ab95,
         type: 3}
       propertyPath: m_Controller
@@ -8867,6 +8863,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 212665604}
     m_RemovedComponents:
     - {fileID: -2812836381458848527, guid: 000503531bb61764a9893992bf78f84e, type: 3}
     - {fileID: 5915757320643567642, guid: 7c02cf4ea40ac23429a01df25ef0ab95, type: 3}
@@ -13365,11 +13366,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
-    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 212665604}
     - target: {fileID: 204174837974343679, guid: 7c02cf4ea40ac23429a01df25ef0ab95,
         type: 3}
       propertyPath: m_Controller
@@ -13445,6 +13441,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 212665604}
     m_RemovedComponents:
     - {fileID: -2812836381458848527, guid: 000503531bb61764a9893992bf78f84e, type: 3}
     - {fileID: 5915757320643567642, guid: 7c02cf4ea40ac23429a01df25ef0ab95, type: 3}

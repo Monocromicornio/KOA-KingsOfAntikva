@@ -38,14 +38,19 @@ public class GameLoadingCoordinator : MonoBehaviour
         Debug.Log("[GameLoadingCoordinator] Evento de perfil do oponente recebido");
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
         waitStartTime = Time.time;
 
         SceneLoadingHandler.ShowLoadingScreen("Aguardando oponente...");
         SceneLoadingHandler.UpdateLoadingProgress(0.5f);
 
-        StartCoroutine(CheckGameReady());
+        yield return StartCoroutine(CheckGameReady());
+
+        if (CheckMatchControllerReady())
+        {
+            MatchController.instance.isLoadingScreenFinished = true;
+        }
     }
 
     private IEnumerator CheckGameReady()
@@ -148,7 +153,7 @@ public class GameLoadingCoordinator : MonoBehaviour
         if (MatchController.instance == null)
             return false;
 
-        return MatchController.instance.currentTurn != TurnState.wait;
+        return MatchController.instance.hasStarted == true;
     }
 
     private bool CheckOpponentProfileReady()

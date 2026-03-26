@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: Dialogue_Killer
   m_EditorClassIdentifier: Assembly-CSharp::DialogueBase
   dialogueInfo:
-  - text: "O Rei deles \xE9 t\xE3o forte quanto eu, por isso treinei um soldado especial
-      para que pudesse derrotar ele, infelizmente ele s\xF3 se aperfei\xE7oou nisto
-      ent\xE3o ele n\xE3o \xE9 t\xE3o bom combatendo outros soldados, por isso use-o
-      com cautela para derrotar o rei inimigo quando tiver certeza que \xE9 ele. "
+  - text: "O Rei inimigo \xE9 t\xE3o poderoso quanto eu. Por isso, treinei um soldado
+      especial capaz de derrot\xE1-lo."
     speaker: Rei Azul
     portraitLeft: {fileID: 21300000, guid: 0ac773d46c729494c8a69bb01d146284, type: 3}
     portraitRight: {fileID: 0}
@@ -24,3 +22,15 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     isRightPortrait: 0
+    isDoublePortrait: 0
+  - text: "Por\xE9m, ele foi preparado apenas para essa miss\xE3o e n\xE3o \xE9 t\xE3o
+      eficiente contra outros soldados. Use-o com cautela e ataque apenas quando
+      tiver certeza de que encontrou o Rei inimigo."
+    speaker: Rei Azul
+    portraitLeft: {fileID: 21300000, guid: 0ac773d46c729494c8a69bb01d146284, type: 3}
+    portraitRight: {fileID: 0}
+    myEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    isRightPortrait: 0
+    isDoublePortrait: 0

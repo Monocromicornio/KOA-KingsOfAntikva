@@ -9729,6 +9729,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 3246016591386960138}
   force: 0
+  deathAnimationDelay: 1
+  attackAnimationDuration: 0
   particle: {fileID: 4870199711936650830}
   opened: 0
 --- !u!114 &3246016591386960138
@@ -19889,7 +19891,7 @@ Animator:
   m_GameObject: {fileID: 7014127323765505916}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 615406b3739f9f44d94c2f6d8d06e051, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

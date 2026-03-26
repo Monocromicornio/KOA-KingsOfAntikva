@@ -82,28 +82,24 @@ public class OfflineAnimPiece : MonoBehaviour
         PlayDieAnimation();
     }
 
+    /// <summary>
+    /// Triggers death animation and sounds immediately.
+    /// All timing is controlled externally by OfflineInteractivePiece.deathAnimationDelay.
+    /// </summary>
     public void PlayDieAnimation()
     {
         StartCoroutine(WaitForEndOfFrame(() => {
             SetAnimation("Die", true);
-            StartCoroutine(DieEffect());
+            
+            if (auDie) auDie.Play();
+
+            if (gDie != null)
+            {
+                Instantiate(gDie, transform.position, gDie.transform.rotation);
+            }
+
+            if (auDown) auDown.Play();
         }));
-    }
-
-    private IEnumerator DieEffect()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        if (auDie) auDie.Play();
-
-        yield return new WaitForSeconds(2);
-        
-        if (gDie != null)
-        {
-            Instantiate(gDie, transform.position, gDie.transform.rotation);
-        }
-        
-        if (auDown) auDown.Play();
     }
 
     public void Win()
