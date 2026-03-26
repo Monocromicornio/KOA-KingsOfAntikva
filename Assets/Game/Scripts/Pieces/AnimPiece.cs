@@ -49,6 +49,7 @@ public class AnimPiece : NetworkBehaviour
 
     private void SetTrigger(string animName)
     {
+        Debug.Log("Calling anim " + animName + " on piece " + gameObject.name);
         anim.SetTrigger(animName);
     }
 
