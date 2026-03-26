@@ -426,7 +426,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 130960951}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &130960949 stripped
 RectTransform:
@@ -434,6 +438,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 130960948}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &130960950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 130960948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &130960951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130960950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_x6_tooltip_text_tmp_
+  _fallback: "Espadachin\nPe\xE7a de valor 6"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &165100594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -567,13 +597,57 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 165100597}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &165100595 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
     type: 3}
   m_PrefabInstance: {fileID: 165100594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &165100596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 165100594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &165100597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165100596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_x1_1_tooltip_text_tmp_
+  _fallback: 'Soldado
+
+    Ande quantas casa quiser na vertical ou na horizontal'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!1 &205120216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4018563519656525788, guid: 1660b1df3c1aa014c90cbafafac15913,
+    type: 3}
+  m_PrefabInstance: {fileID: 362532239}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &205120217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 983683558767347240, guid: 1660b1df3c1aa014c90cbafafac15913,
+    type: 3}
+  m_PrefabInstance: {fileID: 362532239}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &208908475
 GameObject:
@@ -586,6 +660,7 @@ GameObject:
   - component: {fileID: 208908476}
   - component: {fileID: 208908478}
   - component: {fileID: 208908479}
+  - component: {fileID: 208908480}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -640,7 +715,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tutorial
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -712,6 +787,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &208908480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208908475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.hud_imggametype_toggles_toggle1_label
+  _fallback: Tutorial
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &212665603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1088,7 +1183,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 218722475}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &218722473 stripped
 RectTransform:
@@ -1096,6 +1195,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 218722472}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &218722474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 218722472}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &218722475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218722474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_xs_tooltip_text_tmp_
+  _fallback: "Espi\xE3o\nO espi\xE3o tem valor 1 mas consegue derrotar o rei inimigo"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &252995012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1836,6 +1961,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4109429599981915465, guid: 1660b1df3c1aa014c90cbafafac15913,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6203030521626481233, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1865,6 +1995,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252036943884236247, guid: 1660b1df3c1aa014c90cbafafac15913,
+        type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7252036943884236247, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
@@ -1984,7 +2119,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4018563519656525788, guid: 1660b1df3c1aa014c90cbafafac15913,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 362532246}
+    - targetCorrespondingSourceObject: {fileID: 983683558767347240, guid: 1660b1df3c1aa014c90cbafafac15913,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 362532247}
   m_SourcePrefab: {fileID: 100100000, guid: 1660b1df3c1aa014c90cbafafac15913, type: 3}
 --- !u!224 &362532240 stripped
 RectTransform:
@@ -1998,7 +2141,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 362532239}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 205120216}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -2010,7 +2153,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 362532239}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 205120217}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -2052,6 +2195,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &362532246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205120216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.hud_dialoguebox_box_name
+  _fallback: New Text
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!114 &362532247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205120217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.hud_dialoguebox_box_text
+  _fallback: New Text
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &365964492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2183,7 +2366,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 365964495}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &365964493 stripped
 RectTransform:
@@ -2191,6 +2378,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 365964492}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &365964494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 365964492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &365964495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365964494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_xb_2_tooltip_text_tmp_
+  _fallback: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &370946781
 GameObject:
   m_ObjectHideFlags: 0
@@ -3491,7 +3704,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 483708450}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &483708448 stripped
 RectTransform:
@@ -3499,6 +3716,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 483708447}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &483708449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 483708447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &483708450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483708449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_xb_tooltip_text_tmp_
+  _fallback: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &499394484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4995,7 +5238,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 648502434}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &648502432 stripped
 RectTransform:
@@ -5003,6 +5250,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 648502431}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &648502433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 648502431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &648502434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648502433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_xf_tooltip_text_tmp_
+  _fallback: "Tesouro\nSe o inimigo encontrar seu tesouro voc\xEA perde"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &695345760
 GameObject:
   m_ObjectHideFlags: 0
@@ -5206,7 +5479,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 720025831}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &720025829 stripped
 RectTransform:
@@ -5214,6 +5491,34 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 720025828}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &720025830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 720025828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &720025831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720025830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_x2_tooltip_text_tmp_
+  _fallback: 'Especialista
+
+    Desarma as bombas inimigas'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &732809361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5548,14 +5853,12 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: 'Soldado
-
-        Ande quantas casa quiser na vertical ou na horizontal'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -5670,7 +5973,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 805009673}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &805009671 stripped
 RectTransform:
@@ -5678,6 +5985,34 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 805009670}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &805009672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 805009670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &805009673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805009672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_so_1_tooltip_text_tmp_
+  _fallback: 'Soldado
+
+    Ande quantas casa quiser na vertical ou na horizontal'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &809661825
 GameObject:
   m_ObjectHideFlags: 0
@@ -5991,6 +6326,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BO_2
       objectReference: {fileID: 0}
+    - target: {fileID: 1126554203067672091, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1607262223644257737, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6089,7 +6429,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5407969309481864213, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 939789254}
   m_SourcePrefab: {fileID: 100100000, guid: eb70597a8a1d4ec4b9723704eaad583c, type: 3}
 --- !u!4 &939789250 stripped
 Transform:
@@ -6115,6 +6459,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62d33c72c5cfc247b3f644f07316f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &939789253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5407969309481864213, guid: eb70597a8a1d4ec4b9723704eaad583c,
+    type: 3}
+  m_PrefabInstance: {fileID: 939789249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &939789254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939789253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_bo_2_tooltip_text_tmp_
+  _fallback: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &959674556 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4877329463306078049, guid: b364eb724c9dbcb449cdd515002d0396,
@@ -6139,6 +6509,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BO_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126554203067672091, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1607262223644257737, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
@@ -6238,7 +6613,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5407969309481864213, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 981214784}
   m_SourcePrefab: {fileID: 100100000, guid: eb70597a8a1d4ec4b9723704eaad583c, type: 3}
 --- !u!4 &981214780 stripped
 Transform:
@@ -6264,6 +6643,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62d33c72c5cfc247b3f644f07316f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &981214783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5407969309481864213, guid: eb70597a8a1d4ec4b9723704eaad583c,
+    type: 3}
+  m_PrefabInstance: {fileID: 981214779}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &981214784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981214783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_bo_1_tooltip_text_tmp_
+  _fallback: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &983000315
 GameObject:
   m_ObjectHideFlags: 0
@@ -6599,7 +7004,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1037097898}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1037097896 stripped
 RectTransform:
@@ -6607,6 +7016,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1037097895}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1037097897 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1037097895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1037097898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037097897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_x7_tooltip_text_tmp_
+  _fallback: "Alquimista\nPe\xE7a de valor 7"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &1042713988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6976,7 +7411,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1066217383}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1066217381 stripped
 RectTransform:
@@ -6984,6 +7423,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1066217380}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1066217382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1066217380}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1066217383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066217382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_x3_tooltip_text_tmp_
+  _fallback: "Guerreiro\nPe\xE7a com valor 3"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1096358905
 GameObject:
   m_ObjectHideFlags: 0
@@ -7054,7 +7519,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "Rei\nPe\xE7a mais forte de valor 9"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -7174,7 +7639,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1110911677}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1110911675 stripped
 RectTransform:
@@ -7182,6 +7651,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1110911674}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1110911676 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1110911674}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1110911677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110911676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_re_tooltip_text_tmp_
+  _fallback: "Rei\nPe\xE7a mais forte de valor 9"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &1151258071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7313,7 +7808,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1151258074}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1151258072 stripped
 RectTransform:
@@ -7321,6 +7820,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1151258071}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1151258073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1151258071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1151258074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151258073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_x8_tooltip_text_tmp_
+  _fallback: "Capit\xE3o\nPe\xE7a de valor 8"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &1158810613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8089,6 +8614,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 953138633070522485, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1730685880023842657, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
       propertyPath: m_Enabled
@@ -8224,8 +8754,40 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 8016408258170204312, guid: b99fa23f35fe0164996c20cbc7f93958, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5302037425490319995, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1158810615}
   m_SourcePrefab: {fileID: 100100000, guid: 115b6b1e57a1e7f44917a46a08e1fd10, type: 3}
+--- !u!1 &1158810614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5302037425490319995, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+    type: 3}
+  m_PrefabInstance: {fileID: 1158810613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1158810615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158810614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_es_1_tooltip_text_tmp_
+  _fallback: 'Especialista
+
+    Desarma as bombas inimigas'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1226220597
 GameObject:
   m_ObjectHideFlags: 0
@@ -8526,7 +9088,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1254582674}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1254582672 stripped
 RectTransform:
@@ -8534,6 +9100,34 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1254582671}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1254582673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1254582671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1254582674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254582673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_x2_1_tooltip_text_tmp_
+  _fallback: 'Especialista
+
+    Desarma as bombas inimigas'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1277884273 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2964531555182091127, guid: 7c02cf4ea40ac23429a01df25ef0ab95,
@@ -8801,6 +9395,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
+    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 212665604}
     - target: {fileID: 204174837974343679, guid: 7c02cf4ea40ac23429a01df25ef0ab95,
         type: 3}
       propertyPath: m_Controller
@@ -8886,11 +9485,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 212665604}
     m_RemovedComponents:
     - {fileID: -2812836381458848527, guid: 000503531bb61764a9893992bf78f84e, type: 3}
     - {fileID: 5915757320643567642, guid: 7c02cf4ea40ac23429a01df25ef0ab95, type: 3}
@@ -9370,7 +9964,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1439298466}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1439298464 stripped
 RectTransform:
@@ -9378,6 +9976,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1439298463}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1439298465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1439298463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1439298466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439298465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_x4_tooltip_text_tmp_
+  _fallback: "Barbaro\nPe\xE7a de valor 4"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1439579692 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7885620633965204329, guid: a96857b90c286cb4fae0764bb2cef4e7,
@@ -10023,7 +10647,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1520331223}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1520331221 stripped
 RectTransform:
@@ -10031,6 +10659,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1520331220}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1520331222 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1520331220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1520331223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520331222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_xb_1_tooltip_text_tmp_
+  _fallback: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1532221864 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8773344370244739178, guid: 621d63bb591b44549ba880d9520fc575,
@@ -10344,7 +10998,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1581898412}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1581898410 stripped
 RectTransform:
@@ -10352,6 +11010,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1581898409}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1581898411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1581898409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1581898412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581898411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_x5_tooltip_text_tmp_
+  _fallback: "Comandante\nPe\xE7a de valor 5"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1618145623
 GameObject:
   m_ObjectHideFlags: 0
@@ -10707,6 +11391,7 @@ GameObject:
   - component: {fileID: 1752944021}
   - component: {fileID: 1752944023}
   - component: {fileID: 1752944024}
+  - component: {fileID: 1752944025}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -10761,7 +11446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hard
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10833,6 +11518,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1752944025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752944020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.hud_imggametype_toggles_toggle3_label
+  _fallback: Hard
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!4 &1753564464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2339970578118039558, guid: 33833f2e5eea3604e99a0d5ceced72ad,
@@ -10856,6 +11561,7 @@ GameObject:
   - component: {fileID: 1783138674}
   - component: {fileID: 1783138676}
   - component: {fileID: 1783138677}
+  - component: {fileID: 1783138678}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -10910,7 +11616,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Normal
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10982,6 +11688,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1783138678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783138673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.hud_imggametype_toggles_toggle2_label
+  _fallback: Normal
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &1830795420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12345,6 +13071,7 @@ GameObject:
   - component: {fileID: 2059433017}
   - component: {fileID: 2059433019}
   - component: {fileID: 2059433018}
+  - component: {fileID: 2059433020}
   m_Layer: 5
   m_Name: Jogar
   m_TagString: Untagged
@@ -12391,7 +13118,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: JOGAR
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12471,6 +13198,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059433016}
   m_CullTransparentMesh: 1
+--- !u!114 &2059433020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059433016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.hud_play_jogar
+  _fallback: JOGAR
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &2076652599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13027,6 +13774,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
+    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 212665604}
     - target: {fileID: 204174837974343679, guid: 7c02cf4ea40ac23429a01df25ef0ab95,
         type: 3}
       propertyPath: m_Controller
@@ -13112,11 +13864,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 212665604}
     m_RemovedComponents:
     - {fileID: -2812836381458848527, guid: 000503531bb61764a9893992bf78f84e, type: 3}
     - {fileID: 5915757320643567642, guid: 7c02cf4ea40ac23429a01df25ef0ab95, type: 3}
@@ -13163,6 +13910,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4698142052431190754, guid: 39a64a6460024264a9cd4f07dde93564,
+        type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6176818257169961629, guid: 39a64a6460024264a9cd4f07dde93564,
         type: 3}
@@ -13243,8 +13995,38 @@ PrefabInstance:
     - {fileID: 6544754289383672517, guid: 3a02c100d7bb3884abe3aa2a11cc5722, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 404623805501124844, guid: 39a64a6460024264a9cd4f07dde93564,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1002661676946805588}
   m_SourcePrefab: {fileID: 100100000, guid: 39a64a6460024264a9cd4f07dde93564, type: 3}
+--- !u!1 &1002661676946805587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 404623805501124844, guid: 39a64a6460024264a9cd4f07dde93564,
+    type: 3}
+  m_PrefabInstance: {fileID: 1002661676946805586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1002661676946805588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002661676946805587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_co_tooltip_text_tmp_
+  _fallback: "Comandante\nPe\xE7a de valor 5"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &1257667078392076225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13338,6 +14120,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4391946322423449808, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4999646697785852646, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
         type: 3}
       propertyPath: m_Enabled
@@ -13373,8 +14160,38 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 3483025399811617060, guid: 77b6e78bf35e9d443abec8f8518857ad, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8673360664851505886, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1257667078392076227}
   m_SourcePrefab: {fileID: 100100000, guid: a3c2e4049bcc73b4cb43ceff5b41202d, type: 3}
+--- !u!1 &1257667078392076226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8673360664851505886, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1257667078392076225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1257667078392076227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257667078392076226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_gu_tooltip_text_tmp_
+  _fallback: "Guerreiro\nPe\xE7a com valor 3"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &2168400679713421067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13386,14 +14203,12 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: 'Soldado
-
-        Ande quantas casa quiser na vertical ou na horizontal'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -13508,8 +14323,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2168400679713421069}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
+--- !u!1 &2168400679713421068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2168400679713421067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2168400679713421069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168400679713421068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_so_tooltip_text_tmp_
+  _fallback: 'Soldado
+
+    Ande quantas casa quiser na vertical ou na horizontal'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &2315811074771952397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13618,12 +14465,47 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 212665604}
+    - target: {fileID: 7765584387529328180, guid: ce42c23964b412644838bc793e8cb3b7,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4351143560355445342, guid: 13406f1d1e7fdd54f91aecb45f7a8e38, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3416615424206482490, guid: ce42c23964b412644838bc793e8cb3b7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2315811074771952399}
   m_SourcePrefab: {fileID: 100100000, guid: ce42c23964b412644838bc793e8cb3b7, type: 3}
+--- !u!1 &2315811074771952398 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3416615424206482490, guid: ce42c23964b412644838bc793e8cb3b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2315811074771952397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2315811074771952399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2315811074771952398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_sm_tooltip_text_tmp_
+  _fallback: "Espadachin\nPe\xE7a de valor 6"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &2534306164728643152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13632,6 +14514,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
+    - target: {fileID: -8476957192184334617, guid: bc2321f76058681448f7bd9c0a1b3299,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 395494897363563387, guid: b78a57b2d214d7c4892015c632eac3c6,
         type: 3}
       propertyPath: animator
@@ -13912,6 +14799,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -2.241013
       objectReference: {fileID: 0}
+    - target: {fileID: 6048011073127553190, guid: b78a57b2d214d7c4892015c632eac3c6,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6391230901751222679, guid: b78a57b2d214d7c4892015c632eac3c6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14097,17 +14989,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: BA
       objectReference: {fileID: 0}
-    - target: {fileID: -8476957192184334617, guid: bc2321f76058681448f7bd9c0a1b3299,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8476957192184334617, guid: bc2321f76058681448f7bd9c0a1b3299, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1675478140519346856, guid: b78a57b2d214d7c4892015c632eac3c6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2534306164728643154}
   m_SourcePrefab: {fileID: 100100000, guid: b78a57b2d214d7c4892015c632eac3c6, type: 3}
+--- !u!1 &2534306164728643153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1675478140519346856, guid: b78a57b2d214d7c4892015c632eac3c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2534306164728643152}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2534306164728643154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2534306164728643153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_ba_tooltip_text_tmp_
+  _fallback: "Barbaro\nPe\xE7a de valor 4"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!4 &2587017638004494010 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8038328799258409665, guid: e7da47d40e52b48449ce07193adc8d91,
@@ -14126,6 +15043,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BO
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126554203067672091, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1607262223644257737, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
@@ -14225,7 +15147,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5407969309481864213, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4900162653397210084}
   m_SourcePrefab: {fileID: 100100000, guid: eb70597a8a1d4ec4b9723704eaad583c, type: 3}
 --- !u!95 &4900162653397210082 stripped
 Animator:
@@ -14233,6 +15159,32 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 4900162653397210081}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4900162653397210083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5407969309481864213, guid: eb70597a8a1d4ec4b9723704eaad583c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4900162653397210081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4900162653397210084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4900162653397210083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_bo_tooltip_text_tmp_
+  _fallback: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!4 &5580216431478494238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5129219172707231062, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
@@ -14349,12 +15301,52 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 212665604}
+    - target: {fileID: 8826377136991797556, guid: 7e7a667bca45d03498cf4628929ea9cf,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826377136991797556, guid: 7e7a667bca45d03498cf4628929ea9cf,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1202385198740109032, guid: 2a9f1178adf477042a1d20383d0a2553, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4527018430103382842, guid: 7e7a667bca45d03498cf4628929ea9cf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6056435496536570712}
   m_SourcePrefab: {fileID: 100100000, guid: 7e7a667bca45d03498cf4628929ea9cf, type: 3}
+--- !u!1 &6056435496536570711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4527018430103382842, guid: 7e7a667bca45d03498cf4628929ea9cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 6056435496536570710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6056435496536570712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6056435496536570711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_te_tooltip_text_tmp_
+  _fallback: "Tesouro\nSe o inimigo encontrar seu tesouro voc\xEA perde"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!114 &6642530466121886694 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3151734332534876124, guid: e7995d82f804a9c42a5e34e8cf014ed5,
@@ -14690,6 +15682,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 7.647852
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498035182812764631, guid: e7da47d40e52b48449ce07193adc8d91,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498035182812764631, guid: e7da47d40e52b48449ce07193adc8d91,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3654058897346598640, guid: e7da47d40e52b48449ce07193adc8d91,
         type: 3}
@@ -15120,7 +16122,11 @@ PrefabInstance:
     - {fileID: 3259212026070272148, guid: 10a9e1add2b2960498beec4e5b035e05, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8369130719434011609, guid: e7da47d40e52b48449ce07193adc8d91,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6645098377955611276}
   m_SourcePrefab: {fileID: 100100000, guid: e7da47d40e52b48449ce07193adc8d91, type: 3}
 --- !u!114 &6645098377955611274 stripped
 MonoBehaviour:
@@ -15134,6 +16140,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62d33c72c5cfc247b3f644f07316f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6645098377955611275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8369130719434011609, guid: e7da47d40e52b48449ce07193adc8d91,
+    type: 3}
+  m_PrefabInstance: {fileID: 6645098377955611273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6645098377955611276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6645098377955611275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_sp_tooltip_text_tmp_
+  _fallback: "Espi\xE3o\nO espi\xE3o tem valor 1 mas consegue derrotar o rei inimigo"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!4 &6650014233237680659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4059355268180363157, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
@@ -52963,6 +53995,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 953138633070522485, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1730685880023842657, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
       propertyPath: m_Enabled
@@ -53093,8 +54130,40 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 8016408258170204312, guid: b99fa23f35fe0164996c20cbc7f93958, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5302037425490319995, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7121314379929235838}
   m_SourcePrefab: {fileID: 100100000, guid: 115b6b1e57a1e7f44917a46a08e1fd10, type: 3}
+--- !u!1 &7121314379929235837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5302037425490319995, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+    type: 3}
+  m_PrefabInstance: {fileID: 7121314379929235836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7121314379929235838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7121314379929235837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
+  _fallback: 'Especialista
+
+    Desarma as bombas inimigas'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!4 &7399097680583110790 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5249892533754993861, guid: ce42c23964b412644838bc793e8cb3b7,
@@ -53194,6 +54263,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1436925250732549548, guid: e7995d82f804a9c42a5e34e8cf014ed5,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2407614658806333372, guid: e7995d82f804a9c42a5e34e8cf014ed5,
         type: 3}
       propertyPath: m_Enabled
@@ -53243,8 +54317,38 @@ PrefabInstance:
     - {fileID: 5813233981979559539, guid: 772c6332045b0a94cbe580dac81f2acd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6295574453187252130, guid: e7995d82f804a9c42a5e34e8cf014ed5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7914311181784925883}
   m_SourcePrefab: {fileID: 100100000, guid: e7995d82f804a9c42a5e34e8cf014ed5, type: 3}
+--- !u!1 &7914311181784925882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6295574453187252130, guid: e7995d82f804a9c42a5e34e8cf014ed5,
+    type: 3}
+  m_PrefabInstance: {fileID: 7914311181784925881}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7914311181784925883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7914311181784925882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_ca_tooltip_text_tmp_
+  _fallback: "Capit\xE3o\nPe\xE7a de valor 8"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!114 &7972478167047283906 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8773420065660899599, guid: 39a64a6460024264a9cd4f07dde93564,
@@ -53415,6 +54519,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0.00000059203575
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844848554802854988, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+        type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2977610167742352033, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
         type: 3}
@@ -53920,7 +55029,11 @@ PrefabInstance:
     - {fileID: 2504597714129881253, guid: 718debec6f2d8074e867ebbf928ad1e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7193456740644247106, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8501136342407249000}
   m_SourcePrefab: {fileID: 100100000, guid: 56eab7c35f27d8c488ba1ec2b1533ca7, type: 3}
 --- !u!114 &8501136342407248998 stripped
 MonoBehaviour:
@@ -53934,6 +55047,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62d33c72c5cfc247b3f644f07316f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8501136342407248999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7193456740644247106, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8501136342407248997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8501136342407249000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8501136342407248999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positiontutorialnew.pieces_la_tooltip_text_tmp_
+  _fallback: "Alquimista\nPe\xE7a de valor 7"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!4 &8773344370808039191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8159768512308113772, guid: 7c02cf4ea40ac23429a01df25ef0ab95,

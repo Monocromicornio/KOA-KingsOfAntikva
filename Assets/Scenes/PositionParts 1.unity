@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 6410801}
   - component: {fileID: 6410803}
   - component: {fileID: 6410802}
+  - component: {fileID: 6410804}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -178,7 +179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jogar offline
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -258,6 +259,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6410800}
   m_CullTransparentMesh: 1
+--- !u!114 &6410804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6410800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_menusarea_sidemenu_btnjogaroffline_text_tmp_
+  _fallback: Jogar offline
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &42014029
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +426,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &50683299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_quality_dropdown_template_viewport_content_item_item_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &59496557
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +457,7 @@ GameObject:
   - component: {fileID: 59496558}
   - component: {fileID: 59496560}
   - component: {fileID: 59496559}
+  - component: {fileID: 59496561}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -462,7 +504,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00:00
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -542,6 +584,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59496557}
   m_CullTransparentMesh: 1
+--- !u!114 &59496561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59496557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_menusarea_sidemenu_quickplay_searchinfo_timer
+  _fallback: 00:00
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!222 &84135870
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -550,6 +612,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93059451}
   m_CullTransparentMesh: 1
+--- !u!114 &84930956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_antialiasing_name
+  _fallback: Anti Aliasing
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &93059451
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,6 +643,7 @@ GameObject:
   - component: {fileID: 93059452}
   - component: {fileID: 84135870}
   - component: {fileID: 93059453}
+  - component: {fileID: 93059454}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -607,7 +690,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Criar Lobby
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -679,6 +762,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &93059454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93059451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_menusarea_sidemenu_btnjogar_text_tmp_
+  _fallback: Criar Lobby
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &113474797
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +1030,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "Espadachin\nPe\xE7a de valor 6"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -1047,7 +1150,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 130960951}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &130960949 stripped
 RectTransform:
@@ -1055,6 +1162,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 130960948}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &130960950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 130960948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &130960951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130960950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_x6_tooltip_text_tmp_
+  _fallback: "Espadachin\nPe\xE7a de valor 6"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &157804509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,6 +1199,7 @@ GameObject:
   - component: {fileID: 157804510}
   - component: {fileID: 157804512}
   - component: {fileID: 157804511}
+  - component: {fileID: 157804513}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1112,7 +1246,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Posicione suas pe\xE7as como desejar"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1192,6 +1326,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157804509}
   m_CullTransparentMesh: 1
+--- !u!114 &157804513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157804509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_text_tmp_
+  _fallback: "Posicione suas pe\xE7as como desejar"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!114 &164315169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_texturequality_dropdown_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &164834266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,7 +1575,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 165100597}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &165100595 stripped
 RectTransform:
@@ -1409,6 +1587,34 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 165100594}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &165100596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 165100594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &165100597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165100596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_x1_1_tooltip_text_tmp_
+  _fallback: 'Soldado
+
+    Ande quantas casa quiser na vertical ou na horizontal'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &182052540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,6 +1847,7 @@ GameObject:
   - component: {fileID: 197991706}
   - component: {fileID: 197991708}
   - component: {fileID: 197991707}
+  - component: {fileID: 197991709}
   m_Layer: 5
   m_Name: PlayerNick
   m_TagString: Untagged
@@ -1687,7 +1894,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1767,6 +1974,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197991705}
   m_CullTransparentMesh: 1
+--- !u!114 &197991709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197991705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_menusarea_sidemenu_playerinfos_playernick
+  _fallback: New Text
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &208908475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,6 +2005,7 @@ GameObject:
   - component: {fileID: 208908476}
   - component: {fileID: 208908478}
   - component: {fileID: 208908479}
+  - component: {fileID: 208908480}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -1832,7 +2060,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tutorial
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1904,6 +2132,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &208908480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208908475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_panel_imggametype_toggles_toggle1_label
+  _fallback: Tutorial
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &212665603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2035,6 +2283,26 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 212665603}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &216470485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_antialiasing_dropdown_template_viewport_content_item_item_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &218722472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2166,7 +2434,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 218722475}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &218722473 stripped
 RectTransform:
@@ -2174,6 +2446,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 218722472}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &218722474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 218722472}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &218722475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218722474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_xs_tooltip_text_tmp_
+  _fallback: "Espi\xE3o\nO espi\xE3o tem valor 1 mas consegue derrotar o rei inimigo"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!114 &225094475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2227,6 +2525,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &252795490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_setscreenmode_dropdown_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &252995012
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,6 +2675,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &254451774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_texturequality_dropdown_template_viewport_content_item_item_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &255686499 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7885620633965204329, guid: a96857b90c286cb4fae0764bb2cef4e7,
@@ -2692,6 +3030,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &334231632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_fpslimit_name
+  _fallback: FPS Limit
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &334359080
 GameObject:
   m_ObjectHideFlags: 0
@@ -3091,7 +3449,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -3211,7 +3569,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 365964495}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &365964493 stripped
 RectTransform:
@@ -3219,6 +3581,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 365964492}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &365964494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 365964492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &365964495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365964494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_xb_2_tooltip_text_tmp_
+  _fallback: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &370946781
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,6 +3748,7 @@ MonoBehaviour:
   - {fileID: 6645098377955611274}
   selectSource: {fileID: 482355928}
   confirmSource: {fileID: 252995014}
+  savePieceOrder: {fileID: 0}
 --- !u!1 &387248152
 GameObject:
   m_ObjectHideFlags: 0
@@ -3477,6 +3866,7 @@ GameObject:
   - component: {fileID: 407690175}
   - component: {fileID: 407690177}
   - component: {fileID: 407690176}
+  - component: {fileID: 407690178}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3523,7 +3913,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Alterar vis\xE3o"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3603,6 +3993,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407690174}
   m_CullTransparentMesh: 1
+--- !u!114 &407690178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407690174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_panel_btncam_text_tmp_
+  _fallback: "Alterar vis\xE3o"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &424443824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4366,6 +4776,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &459577810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_audioconfigs_ambience_name
+  _fallback: Ambience
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &467956715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4850,7 +5280,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -4970,7 +5400,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 483708450}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &483708448 stripped
 RectTransform:
@@ -4978,6 +5412,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 483708447}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &483708449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 483708447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &483708450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483708449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_xb_tooltip_text_tmp_
+  _fallback: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &499394484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6008,6 +6468,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539791405}
   m_CullTransparentMesh: 1
+--- !u!114 &553860274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_quality_dropdown_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &553920031
 GameObject:
   m_ObjectHideFlags: 0
@@ -6019,6 +6499,7 @@ GameObject:
   - component: {fileID: 553920032}
   - component: {fileID: 553920034}
   - component: {fileID: 553920033}
+  - component: {fileID: 553920035}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -6065,7 +6546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Server
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6145,6 +6626,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553920031}
   m_CullTransparentMesh: 1
+--- !u!114 &553920035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553920031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_panel_btnsever_text_tmp_
+  _fallback: Server
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &579583968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6335,6 +6836,26 @@ MonoBehaviour:
   EventMethod: 
   EditorVisible: 0
   ExecutionError: 
+--- !u!114 &642835278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_setscreenmode_dropdown_template_viewport_content_item_item_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &646892044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6592,12 +7113,12 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "Tesouro\nSe o inimigo encontrar seu tesouro voc\xEA perde"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.45
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -6712,7 +7233,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 648502434}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &648502432 stripped
 RectTransform:
@@ -6720,6 +7245,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 648502431}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &648502433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 648502431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &648502434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648502433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_xf_tooltip_text_tmp_
+  _fallback: "Tesouro\nSe o inimigo encontrar seu tesouro voc\xEA perde"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &656143404
 GameObject:
   m_ObjectHideFlags: 0
@@ -6876,6 +7427,7 @@ GameObject:
   - component: {fileID: 658420416}
   - component: {fileID: 658420418}
   - component: {fileID: 658420417}
+  - component: {fileID: 658420419}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -6922,7 +7474,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Client
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7002,6 +7554,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658420415}
   m_CullTransparentMesh: 1
+--- !u!114 &658420419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658420415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_panel_btnclient_text_tmp_
+  _fallback: Client
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &661593927
 GameObject:
   m_ObjectHideFlags: 0
@@ -7237,6 +7809,7 @@ GameObject:
   - component: {fileID: 706973764}
   - component: {fileID: 706973765}
   - component: {fileID: 706973766}
+  - component: {fileID: 706973767}
   m_Layer: 0
   m_Name: LoadingText
   m_TagString: Untagged
@@ -7291,7 +7864,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Carregando...
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7363,6 +7936,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &706973767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706973763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.loadingscreenmanager_loadingcanvas_loadingpanel_loadingtext
+  _fallback: Carregando...
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &709071818
 GameObject:
   m_ObjectHideFlags: 0
@@ -7451,9 +8044,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: 'Especialista
-
-        Desarma as bombas inimigas'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -7568,7 +8159,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 720025831}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &720025829 stripped
 RectTransform:
@@ -7576,6 +8171,34 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 720025828}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &720025830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 720025828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &720025831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720025830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_x2_tooltip_text_tmp_
+  _fallback: 'Especialista
+
+    Desarma as bombas inimigas'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &722400629
 GameObject:
   m_ObjectHideFlags: 0
@@ -7587,6 +8210,7 @@ GameObject:
   - component: {fileID: 722400630}
   - component: {fileID: 722400632}
   - component: {fileID: 722400631}
+  - component: {fileID: 722400633}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -7633,7 +8257,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tutorial
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7713,6 +8337,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722400629}
   m_CullTransparentMesh: 1
+--- !u!114 &722400633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722400629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_dialoguebox_box_tutorialbutton_text_tmp_
+  _fallback: Tutorial
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &732809361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9028,14 +9672,12 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: 'Soldado
-
-        Ande quantas casa quiser na vertical ou na horizontal'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -9150,7 +9792,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 805009673}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &805009671 stripped
 RectTransform:
@@ -9158,6 +9804,34 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 805009670}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &805009672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 805009670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &805009673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805009672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_so_1_tooltip_text_tmp_
+  _fallback: 'Soldado
+
+    Ande quantas casa quiser na vertical ou na horizontal'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &809661825
 GameObject:
   m_ObjectHideFlags: 0
@@ -9272,6 +9946,26 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1496281829}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &863265111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_shadowquality_name
+  _fallback: Shadow Quality
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &877057182
 GameObject:
   m_ObjectHideFlags: 0
@@ -9516,6 +10210,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 911004227}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &917486152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_fpslimit_dropdown_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &922036873 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3960259393809936045, guid: 77b6e78bf35e9d443abec8f8518857ad,
@@ -9603,6 +10317,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926313202}
   m_CullTransparentMesh: 0
+--- !u!114 &927928734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_setscreenmode_name
+  _fallback: Screen Mode
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &928848595 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7885620633965204329, guid: a96857b90c286cb4fae0764bb2cef4e7,
@@ -9754,6 +10488,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!114 &984599870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_vsync_name
+  _fallback: VSync
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &995445401
 GameObject:
   m_ObjectHideFlags: 0
@@ -10170,7 +10924,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1037097898}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1037097896 stripped
 RectTransform:
@@ -10178,6 +10936,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1037097895}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1037097897 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1037097895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1037097898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037097897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_x7_tooltip_text_tmp_
+  _fallback: "Alquimista\nPe\xE7a de valor 7"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &1042713988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10422,6 +11206,7 @@ GameObject:
   - component: {fileID: 1044601054}
   - component: {fileID: 1044601056}
   - component: {fileID: 1044601055}
+  - component: {fileID: 1044601057}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -10468,7 +11253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cancel
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10548,6 +11333,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044601053}
   m_CullTransparentMesh: 1
+--- !u!114 &1044601057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044601053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_menusarea_sidemenu_cancelsearch_text_tmp_
+  _fallback: Cancel
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!114 &1049109010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10713,7 +11518,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1066217383}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1066217381 stripped
 RectTransform:
@@ -10721,6 +11530,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1066217380}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1066217382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1066217380}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1066217383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066217382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_x3_tooltip_text_tmp_
+  _fallback: "Guerreiro\nPe\xE7a com valor 3"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1096358905
 GameObject:
   m_ObjectHideFlags: 0
@@ -10791,7 +11626,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "Rei\nPe\xE7a mais forte de valor 9"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -10911,7 +11746,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1110911677}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1110911675 stripped
 RectTransform:
@@ -10919,6 +11758,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1110911674}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1110911676 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1110911674}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1110911677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110911676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_re_tooltip_text_tmp_
+  _fallback: "Rei\nPe\xE7a mais forte de valor 9"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &1151258071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10930,7 +11795,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "Capit\xE3o\nPe\xE7a de valor 8"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -11050,7 +11915,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1151258074}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1151258072 stripped
 RectTransform:
@@ -11058,6 +11927,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1151258071}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1151258073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1151258071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1151258074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151258073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_x8_tooltip_text_tmp_
+  _fallback: "Capit\xE3o\nPe\xE7a de valor 8"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1168027920
 GameObject:
   m_ObjectHideFlags: 0
@@ -11270,6 +12165,7 @@ GameObject:
   - component: {fileID: 1205051661}
   - component: {fileID: 1205051663}
   - component: {fileID: 1205051662}
+  - component: {fileID: 1205051664}
   m_Layer: 5
   m_Name: Status
   m_TagString: Untagged
@@ -11316,7 +12212,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Status
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11396,6 +12292,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205051660}
   m_CullTransparentMesh: 1
+--- !u!114 &1205051664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205051660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_menusarea_sidemenu_quickplay_searchinfo_status
+  _fallback: Status
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!114 &1214636506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_texturequality_name
+  _fallback: Texture Quality
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1226220597
 GameObject:
   m_ObjectHideFlags: 0
@@ -11482,6 +12418,7 @@ GameObject:
   - component: {fileID: 1226280873}
   - component: {fileID: 1226280875}
   - component: {fileID: 1226280874}
+  - component: {fileID: 1226280876}
   m_Layer: 5
   m_Name: Pontuation
   m_TagString: Untagged
@@ -11528,7 +12465,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11608,6 +12545,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226280872}
   m_CullTransparentMesh: 1
+--- !u!114 &1226280876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226280872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_menusarea_sidemenu_playerinfos_pontuation
+  _fallback: New Text
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!114 &1234007332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_fpslimit_dropdown_template_viewport_content_item_item_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1243511139
 GameObject:
   m_ObjectHideFlags: 0
@@ -11705,6 +12682,7 @@ GameObject:
   - component: {fileID: 1254570860}
   - component: {fileID: 1254570859}
   - component: {fileID: 1254570858}
+  - component: {fileID: 1254570861}
   m_Layer: 0
   m_Name: StatusText
   m_TagString: Untagged
@@ -11732,7 +12710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: asdasdas
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11831,6 +12809,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1254570861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254570857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.loadingscreenmanager_loadingcanvas_loadingpanel_loadingbarbackground_statustext
+  _fallback: asdasdas
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &1254582671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11842,9 +12840,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: 'Especialista
-
-        Desarma as bombas inimigas'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -11964,7 +12960,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1254582674}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1254582672 stripped
 RectTransform:
@@ -11972,6 +12972,34 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1254582671}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1254582673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1254582671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1254582674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254582673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_x2_1_tooltip_text_tmp_
+  _fallback: 'Especialista
+
+    Desarma as bombas inimigas'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!114 &1256041542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12048,6 +13076,26 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 721925434020008449}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1288752482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_audioconfigs_voice_name
+  _fallback: Voice
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1296408264
 GameObject:
   m_ObjectHideFlags: 0
@@ -12141,6 +13189,7 @@ GameObject:
   - component: {fileID: 1306115863}
   - component: {fileID: 1306115865}
   - component: {fileID: 1306115864}
+  - component: {fileID: 1306115866}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -12187,7 +13236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Partida Rankeada
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12267,6 +13316,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306115862}
   m_CullTransparentMesh: 1
+--- !u!114 &1306115866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306115862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_menusarea_sidemenu_quickplay_text_tmp_
+  _fallback: Partida Rankeada
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1306742275
 GameObject:
   m_ObjectHideFlags: 0
@@ -12635,6 +13704,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1362043693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_resolution_dropdown_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &1392217694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12643,6 +13732,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
+    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 212665604}
     - target: {fileID: 204174837974343679, guid: 7c02cf4ea40ac23429a01df25ef0ab95,
         type: 3}
       propertyPath: m_Controller
@@ -12718,11 +13812,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 212665604}
     m_RemovedComponents:
     - {fileID: -2812836381458848527, guid: 000503531bb61764a9893992bf78f84e, type: 3}
     - {fileID: 5915757320643567642, guid: 7c02cf4ea40ac23429a01df25ef0ab95, type: 3}
@@ -12905,6 +13994,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1416147232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_resolution_name
+  _fallback: Resolution
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1417392630 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1361816087391196012, guid: 44bbdc285684ac641b8ef6a096c0cbc5,
@@ -13088,7 +14197,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "Barbaro\nPe\xE7a de valor 4"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -13208,7 +14317,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1439298466}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1439298464 stripped
 RectTransform:
@@ -13216,6 +14329,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1439298463}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1439298465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1439298463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1439298466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439298465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_x4_tooltip_text_tmp_
+  _fallback: "Barbaro\nPe\xE7a de valor 4"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1439579692 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7885620633965204329, guid: a96857b90c286cb4fae0764bb2cef4e7,
@@ -13235,6 +14374,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltip: {fileID: 0}
+--- !u!114 &1444309287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_antialiasing_dropdown_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!114 &1447978472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_shadowquality_dropdown_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1450312587
 GameObject:
   m_ObjectHideFlags: 0
@@ -13710,7 +14889,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -13830,7 +15009,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1520331223}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1520331221 stripped
 RectTransform:
@@ -13838,6 +15021,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1520331220}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1520331222 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1520331220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1520331223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520331222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_xb_1_tooltip_text_tmp_
+  _fallback: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1532221864 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8773344370244739178, guid: 621d63bb591b44549ba880d9520fc575,
@@ -14048,7 +15257,7 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "Comandante\nPe\xE7a de valor 5"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -14168,7 +15377,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1581898412}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &1581898410 stripped
 RectTransform:
@@ -14176,6 +15389,32 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1581898409}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1581898411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1581898409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1581898412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581898411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_x5_tooltip_text_tmp_
+  _fallback: "Comandante\nPe\xE7a de valor 5"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1610280698
 GameObject:
   m_ObjectHideFlags: 0
@@ -14500,6 +15739,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642262890}
   m_CullTransparentMesh: 0
+--- !u!114 &1644407750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_shadowquality_dropdown_template_viewport_content_item_item_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1649280065 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7220416273139772614, guid: 6960357aea7143a4cb99e7cdfc633c4e,
@@ -14780,6 +16039,7 @@ GameObject:
   - component: {fileID: 1752944021}
   - component: {fileID: 1752944023}
   - component: {fileID: 1752944024}
+  - component: {fileID: 1752944025}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -14834,7 +16094,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hard
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14906,6 +16166,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1752944025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752944020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_panel_imggametype_toggles_toggle3_label
+  _fallback: Hard
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!4 &1753564464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2339970578118039558, guid: 33833f2e5eea3604e99a0d5ceced72ad,
@@ -14972,6 +16252,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2076652599}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1781903136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_quality_name
+  _fallback: Quality
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1783138673
 GameObject:
   m_ObjectHideFlags: 0
@@ -14983,6 +16283,7 @@ GameObject:
   - component: {fileID: 1783138674}
   - component: {fileID: 1783138676}
   - component: {fileID: 1783138677}
+  - component: {fileID: 1783138678}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -15037,7 +16338,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Normal
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15109,6 +16410,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1783138678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783138673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_panel_imggametype_toggles_toggle2_label
+  _fallback: Normal
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!114 &1818929985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15924,6 +17245,26 @@ MonoBehaviour:
   EventMethod: 
   EditorVisible: 0
   ExecutionError: 
+--- !u!114 &1883563256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_videoconfigs_scroll_view_viewport_content_resolution_dropdown_template_viewport_content_item_item_label
+  _fallback: Option A
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!114 &1900463830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17677,6 +19018,7 @@ GameObject:
   - component: {fileID: 2140729456}
   - component: {fileID: 2140729458}
   - component: {fileID: 2140729457}
+  - component: {fileID: 2140729459}
   m_Layer: 5
   m_Name: PlayersCount
   m_TagString: Untagged
@@ -17723,7 +19065,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Players
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17803,6 +19145,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140729455}
   m_CullTransparentMesh: 1
+--- !u!114 &2140729459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140729455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_menusarea_sidemenu_quickplay_searchinfo_playerscount
+  _fallback: Players
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!114 &6509867975294407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17836,7 +19198,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lobbies
+  m_Text: 
 --- !u!1 &58600019830421769
 GameObject:
   m_ObjectHideFlags: 0
@@ -17925,6 +19287,7 @@ GameObject:
   - component: {fileID: 5185140128367525225}
   - component: {fileID: 8921332701471816659}
   - component: {fileID: 8348757172262033644}
+  - component: {fileID: 8921332701471816660}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -18099,6 +19462,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
+    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 212665604}
     - target: {fileID: 204174837974343679, guid: 7c02cf4ea40ac23429a01df25ef0ab95,
         type: 3}
       propertyPath: m_Controller
@@ -18174,11 +19542,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 212665604}
     m_RemovedComponents:
     - {fileID: -2812836381458848527, guid: 000503531bb61764a9893992bf78f84e, type: 3}
     - {fileID: 5915757320643567642, guid: 7c02cf4ea40ac23429a01df25ef0ab95, type: 3}
@@ -18260,6 +19623,7 @@ GameObject:
   - component: {fileID: 2826138633738088283}
   - component: {fileID: 6998854050795419850}
   - component: {fileID: 7252036942202942138}
+  - component: {fileID: 7252036942202942139}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -18416,6 +19780,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2843833135536239040, guid: 77b6e78bf35e9d443abec8f8518857ad,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3381538086059187964, guid: 77b6e78bf35e9d443abec8f8518857ad,
         type: 3}
       propertyPath: animator
@@ -18461,8 +19830,38 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 3483025399811617060, guid: 77b6e78bf35e9d443abec8f8518857ad, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7195053804783180750, guid: 77b6e78bf35e9d443abec8f8518857ad,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1257667078392076227}
   m_SourcePrefab: {fileID: 100100000, guid: 77b6e78bf35e9d443abec8f8518857ad, type: 3}
+--- !u!1 &1257667078392076226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7195053804783180750, guid: 77b6e78bf35e9d443abec8f8518857ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 1257667078392076225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1257667078392076227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257667078392076226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_gu_tooltip_text_tmp_
+  _fallback: "Guerreiro\nPe\xE7a com valor 3"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1419152996459282174
 GameObject:
   m_ObjectHideFlags: 0
@@ -19154,8 +20553,398 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 703917912331900810, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1683403705489250774}
+    - targetCorrespondingSourceObject: {fileID: 3171964324194315527, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1683403705489250773}
+    - targetCorrespondingSourceObject: {fileID: 87410293181491588, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1683403705489250772}
+    - targetCorrespondingSourceObject: {fileID: 4795690962571834884, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1683403705489250771}
+    - targetCorrespondingSourceObject: {fileID: 4126854003467818075, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1683403705489250770}
+    - targetCorrespondingSourceObject: {fileID: 219801279599385175, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1288752482}
+    - targetCorrespondingSourceObject: {fileID: 1435880467710317581, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 459577810}
+    - targetCorrespondingSourceObject: {fileID: 5486602202393690460, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1416147232}
+    - targetCorrespondingSourceObject: {fileID: 4314622324758054381, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1362043693}
+    - targetCorrespondingSourceObject: {fileID: 1219998557125946758, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1883563256}
+    - targetCorrespondingSourceObject: {fileID: 6313438950315674335, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 927928734}
+    - targetCorrespondingSourceObject: {fileID: 248314282804955639, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 252795490}
+    - targetCorrespondingSourceObject: {fileID: 7866528534095442733, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 642835278}
+    - targetCorrespondingSourceObject: {fileID: 9199619943297149881, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1781903136}
+    - targetCorrespondingSourceObject: {fileID: 6781278189969238034, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 553860274}
+    - targetCorrespondingSourceObject: {fileID: 1097261081559987704, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 50683299}
+    - targetCorrespondingSourceObject: {fileID: 5967315569437277894, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 334231632}
+    - targetCorrespondingSourceObject: {fileID: 5659604711001652844, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 917486152}
+    - targetCorrespondingSourceObject: {fileID: 5381944837562630152, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1234007332}
+    - targetCorrespondingSourceObject: {fileID: 146099106172681356, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 863265111}
+    - targetCorrespondingSourceObject: {fileID: 4710357750188565713, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1447978472}
+    - targetCorrespondingSourceObject: {fileID: 6675873697743270982, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1644407750}
+    - targetCorrespondingSourceObject: {fileID: 4376942461622105655, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 84930956}
+    - targetCorrespondingSourceObject: {fileID: 8089618452150458952, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1444309287}
+    - targetCorrespondingSourceObject: {fileID: 5489459211413734989, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 216470485}
+    - targetCorrespondingSourceObject: {fileID: 6451824722100010741, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1214636506}
+    - targetCorrespondingSourceObject: {fileID: 4601092226916833583, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 164315169}
+    - targetCorrespondingSourceObject: {fileID: 8646351101786649558, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 254451774}
+    - targetCorrespondingSourceObject: {fileID: 2142454206314277330, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 984599870}
   m_SourcePrefab: {fileID: 100100000, guid: b79e5e5f038313e4c8fa9460f27a77c4, type: 3}
+--- !u!1 &1683403705489250741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2142454206314277330, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250742 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8646351101786649558, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250743 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4601092226916833583, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6451824722100010741, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5489459211413734989, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8089618452150458952, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250747 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4376942461622105655, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6675873697743270982, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4710357750188565713, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 146099106172681356, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250751 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5381944837562630152, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250752 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5659604711001652844, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250753 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5967315569437277894, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250754 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1097261081559987704, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6781278189969238034, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9199619943297149881, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7866528534095442733, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 248314282804955639, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250759 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6313438950315674335, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1219998557125946758, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4314622324758054381, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5486602202393690460, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1435880467710317581, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250764 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 219801279599385175, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250765 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4126854003467818075, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4795690962571834884, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 87410293181491588, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3171964324194315527, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683403705489250769 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 703917912331900810, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683403705489250740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1683403705489250770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_audioconfigs_sfx_name
+  _fallback: SFX
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!114 &1683403705489250771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_audioconfigs_music_name
+  _fallback: Music
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!114 &1683403705489250772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_audioconfigs_master_name
+  _fallback: Master
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!114 &1683403705489250773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_configtabs_video_text_tmp_
+  _fallback: Video
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!114 &1683403705489250774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683403705489250769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_configshud_bg_configtabs_audio_text_tmp_
+  _fallback: Audio
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!222 &1684439063091817321
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19211,6 +21000,7 @@ GameObject:
   - component: {fileID: 4215270823953707638}
   - component: {fileID: 5704259625222065786}
   - component: {fileID: 6989332708768042523}
+  - component: {fileID: 6989332708768042524}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -19473,8 +21263,98 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6482907732119955465, guid: aa229251e8acdde428da4ec05b498074,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2136600940923147594}
+    - targetCorrespondingSourceObject: {fileID: 8852775435984148893, guid: aa229251e8acdde428da4ec05b498074,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2136600940923147593}
+    - targetCorrespondingSourceObject: {fileID: 6891152879961107722, guid: aa229251e8acdde428da4ec05b498074,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2136600940923147592}
   m_SourcePrefab: {fileID: 100100000, guid: aa229251e8acdde428da4ec05b498074, type: 3}
+--- !u!1 &2136600940923147589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6891152879961107722, guid: aa229251e8acdde428da4ec05b498074,
+    type: 3}
+  m_PrefabInstance: {fileID: 2136600940923147588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2136600940923147590 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8852775435984148893, guid: aa229251e8acdde428da4ec05b498074,
+    type: 3}
+  m_PrefabInstance: {fileID: 2136600940923147588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2136600940923147591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6482907732119955465, guid: aa229251e8acdde428da4ec05b498074,
+    type: 3}
+  m_PrefabInstance: {fileID: 2136600940923147588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2136600940923147592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136600940923147589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_rankinghud_bg_scroll_view_viewport_content_rankingcontentprefab_pontuation
+  _fallback: 1
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!114 &2136600940923147593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136600940923147590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_rankinghud_bg_scroll_view_viewport_content_rankingcontentprefab_nick
+  _fallback: ASDAS
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
+--- !u!114 &2136600940923147594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136600940923147591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_rankinghud_bg_scroll_view_viewport_content_rankingcontentprefab_position
+  _fallback: 0
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &2168400679713421067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19486,14 +21366,12 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: 'Soldado
-
-        Ande quantas casa quiser na vertical ou na horizontal'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_fontSize
-      value: 47.5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -19608,8 +21486,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2168400679713421069}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
+--- !u!1 &2168400679713421068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2168400679713421067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2168400679713421069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168400679713421068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_so_tooltip_text_tmp_
+  _fallback: 'Soldado
+
+    Ande quantas casa quiser na vertical ou na horizontal'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &2239363222893216996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21186,6 +23096,7 @@ GameObject:
   - component: {fileID: 3901814876098154435}
   - component: {fileID: 8315876440667748283}
   - component: {fileID: 6509867975294407}
+  - component: {fileID: 8315876440667748284}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -21265,6 +23176,7 @@ GameObject:
   - component: {fileID: 7280711134853904872}
   - component: {fileID: 1083273115498317824}
   - component: {fileID: 4034207616513801852}
+  - component: {fileID: 7280711134853904873}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -21478,6 +23390,7 @@ GameObject:
   - component: {fileID: 4621670494880310791}
   - component: {fileID: 8765279544350807636}
   - component: {fileID: 4109429599377246756}
+  - component: {fileID: 8765279544350807637}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -21518,7 +23431,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Create Lobby
+  m_Text: 
 --- !u!1 &4041444608958758726
 GameObject:
   m_ObjectHideFlags: 0
@@ -21557,7 +23470,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -21916,6 +23829,7 @@ GameObject:
   - component: {fileID: 220902768923303546}
   - component: {fileID: 7897240839841702785}
   - component: {fileID: 7890452914061146427}
+  - component: {fileID: 7897240839841702786}
   m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
@@ -22299,6 +24213,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1347830008565920809, guid: 10a9e1add2b2960498beec4e5b035e05,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1347830008565920809, guid: 10a9e1add2b2960498beec4e5b035e05,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1350337914081063636, guid: 10a9e1add2b2960498beec4e5b035e05,
         type: 3}
@@ -22854,7 +24778,11 @@ PrefabInstance:
     - {fileID: 3259212026070272148, guid: 10a9e1add2b2960498beec4e5b035e05, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6204500390488907303, guid: 10a9e1add2b2960498beec4e5b035e05,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6645098377955611276}
   m_SourcePrefab: {fileID: 100100000, guid: 10a9e1add2b2960498beec4e5b035e05, type: 3}
 --- !u!114 &6645098377955611274 stripped
 MonoBehaviour:
@@ -22868,6 +24796,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62d33c72c5cfc247b3f644f07316f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6645098377955611275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6204500390488907303, guid: 10a9e1add2b2960498beec4e5b035e05,
+    type: 3}
+  m_PrefabInstance: {fileID: 6645098377955611273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6645098377955611276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6645098377955611275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_sp_tooltip_text_tmp_
+  _fallback: "Espi\xE3o\nO espi\xE3o tem valor 1 mas consegue derrotar o rei inimigo"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!4 &6650014233237680659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2581049505478426245, guid: 77b6e78bf35e9d443abec8f8518857ad,
@@ -59807,7 +61761,27 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Refresh Lobbies
+  m_Text: 
+--- !u!114 &6989332708768042524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922623537670034285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_steam_viewer_bottonbuttons_horizontal_group_lobby_list_refreshlobbies_background_label
+  _fallback: Refresh Lobbies
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!224 &6990353467526365705
 RectTransform:
   m_ObjectHideFlags: 0
@@ -60711,8 +62685,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6241744844413943916, guid: b99fa23f35fe0164996c20cbc7f93958,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7121314379929235838}
   m_SourcePrefab: {fileID: 100100000, guid: b99fa23f35fe0164996c20cbc7f93958, type: 3}
+--- !u!1 &7121314379929235837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6241744844413943916, guid: b99fa23f35fe0164996c20cbc7f93958,
+    type: 3}
+  m_PrefabInstance: {fileID: 7121314379929235836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7121314379929235838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7121314379929235837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_es_tooltip_text_tmp_
+  _fallback: 'Especialista
+
+    Desarma as bombas inimigas'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!224 &7151501842447658946
 RectTransform:
   m_ObjectHideFlags: 0
@@ -60784,7 +62790,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -60856,6 +62862,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7252036942202942139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983683559770734917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_dialoguebox_box_text
+  _fallback: New Text
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!224 &7280711134853904872
 RectTransform:
   m_ObjectHideFlags: 0
@@ -60875,6 +62901,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7280711134853904873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3555982771501713833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_steam_viewer_controls_lobbycreationroot_createlobby_background_label
+  _fallback: Create Lobby
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!222 &7297802654037226391
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -61058,7 +63104,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lobby Name
+  m_Text: 
 --- !u!222 &7897240839841702785
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -61067,6 +63113,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5853526866919945163}
   m_CullTransparentMesh: 1
+--- !u!114 &7897240839841702786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853526866919945163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_steam_viewer_controls_lobbycreationroot_lobbyname_lobbyname_placeholder
+  _fallback: Lobby Name
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!224 &7946101033834763755
 RectTransform:
   m_ObjectHideFlags: 0
@@ -61098,6 +63164,7 @@ GameObject:
   - component: {fileID: 8374121929363537461}
   - component: {fileID: 8688278719643567440}
   - component: {fileID: 8600242597614440762}
+  - component: {fileID: 8688278719643567441}
   m_Layer: 5
   m_Name: TitleLabel
   m_TagString: Untagged
@@ -61692,6 +63759,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3264257777251471016}
   m_CullTransparentMesh: 1
+--- !u!114 &8315876440667748284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3264257777251471016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_steam_viewer_bottonbuttons_horizontal_group_lobby_list_lobbieslist_label
+  _fallback: Lobbies
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!114 &8348757172262033644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61725,7 +63812,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lobby Name
+  m_Text: 
 --- !u!224 &8374121929363537461
 RectTransform:
   m_ObjectHideFlags: 0
@@ -61942,6 +64029,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3793990763286740010, guid: 718debec6f2d8074e867ebbf928ad1e4,
+        type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3974071364705629425, guid: 718debec6f2d8074e867ebbf928ad1e4,
         type: 3}
@@ -62397,7 +64489,11 @@ PrefabInstance:
     - {fileID: 2504597714129881253, guid: 718debec6f2d8074e867ebbf928ad1e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8072792511193699876, guid: 718debec6f2d8074e867ebbf928ad1e4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8501136342407249000}
   m_SourcePrefab: {fileID: 100100000, guid: 718debec6f2d8074e867ebbf928ad1e4, type: 3}
 --- !u!114 &8501136342407248998 stripped
 MonoBehaviour:
@@ -62411,6 +64507,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62d33c72c5cfc247b3f644f07316f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8501136342407248999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8072792511193699876, guid: 718debec6f2d8074e867ebbf928ad1e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8501136342407248997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8501136342407249000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8501136342407248999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.pieces_la_tooltip_text_tmp_
+  _fallback: "Alquimista\nPe\xE7a de valor 7"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!224 &8555437041705448197
 RectTransform:
   m_ObjectHideFlags: 0
@@ -62471,7 +64593,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Loobies
+  m_Text: 
 --- !u!222 &8688278719643567440
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -62480,6 +64602,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8011416515186604229}
   m_CullTransparentMesh: 1
+--- !u!114 &8688278719643567441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011416515186604229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_steam_viewer_title_titlelabel
+  _fallback: Loobies
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &8764431087444933489
 GameObject:
   m_ObjectHideFlags: 0
@@ -62504,6 +64646,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4018563518780864689}
   m_CullTransparentMesh: 1
+--- !u!114 &8765279544350807637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4018563518780864689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_dialoguebox_box_name
+  _fallback: New Text
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!4 &8773344370808039191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8159768512308113772, guid: 7c02cf4ea40ac23429a01df25ef0ab95,
@@ -62543,6 +64705,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186914608348131368}
   m_CullTransparentMesh: 1
+--- !u!114 &8921332701471816660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186914608348131368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts 1.hud_steam_viewer_controls_lobbycreationroot_lobbyname_label
+  _fallback: Lobby Name
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &9039490444777015394
 GameObject:
   m_ObjectHideFlags: 0

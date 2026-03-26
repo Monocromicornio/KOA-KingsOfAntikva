@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5026719813358830469}
   - component: {fileID: 1277857289529821154}
   - component: {fileID: 7961675703769422975}
+  - component: {fileID: 2778317784914682621}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -137,6 +138,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2778317784914682621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914841206845659744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.playerprofile_name
+  _fallback: Name
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &3969521270351364901
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +440,7 @@ GameObject:
   - component: {fileID: 6166822554864791961}
   - component: {fileID: 2682330925471536463}
   - component: {fileID: 3171604594816723059}
+  - component: {fileID: 5219211044654942533}
   m_Layer: 5
   m_Name: Points
   m_TagString: Untagged
@@ -545,3 +567,23 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5219211044654942533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178514836408860723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.playerprofile_points
+  _fallback: Points
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
