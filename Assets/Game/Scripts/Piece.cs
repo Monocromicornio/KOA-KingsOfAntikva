@@ -101,14 +101,13 @@ public class Piece : NetworkBehaviour
         // that occurred when relying on IsActive() which depends on async network ownership state.
         if (hasConnection)
         {
-            if (isMyPiece)
-            {
+            bool isServer = matchController.networkManager.IsServerConnection();
+            bool shouldBeBlue = isServer ? isMyPiece : !isMyPiece;
+
+            if (shouldBeBlue)
                 TurnBluePiece();
-            }
             else
-            {
                 TurnRedPiece();
-            }
         }
         else if (pieceColor == PieceColor.undefined)
         {
