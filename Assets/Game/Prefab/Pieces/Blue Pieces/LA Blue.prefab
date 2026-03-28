@@ -1158,6 +1158,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5363373391172814099, guid: 91a2d7d448ddebc46951a7187a086651,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5413893420646057535, guid: 91a2d7d448ddebc46951a7187a086651,
         type: 3}
       propertyPath: m_Layer
@@ -1182,6 +1187,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644911207750043458, guid: 91a2d7d448ddebc46951a7187a086651,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5680277171761807493, guid: 91a2d7d448ddebc46951a7187a086651,
         type: 3}
@@ -1732,8 +1742,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NetworkMaterialSwap
   targetRenderer: {fileID: 584566895280357389}
   hostMaterials:
+  - {fileID: 2100000, guid: 3a2a1284206944c428b7e5f2c23cbf1c, type: 2}
   - {fileID: 2100000, guid: 27e23c45c17189f40b74dd54690ec7c3, type: 2}
   clientMaterials:
+  - {fileID: 2100000, guid: 3a2a1284206944c428b7e5f2c23cbf1c, type: 2}
   - {fileID: 2100000, guid: 6403cccf39e4e504abe33494d697483a, type: 2}
   piece: {fileID: 3122924463322124245}
 --- !u!1 &7220627825075199170 stripped
@@ -1757,9 +1769,11 @@ MonoBehaviour:
   targetRenderer: {fileID: 8206834887493465112}
   hostMaterials:
   - {fileID: 2100000, guid: 6267a60d0575f054694edfda86f24c2d, type: 2}
+  - {fileID: 2100000, guid: 0a62511b68a904c4faf58d4e9f986a34, type: 2}
   - {fileID: 2100000, guid: 3ae4325e535713e469f5794bdc0daad7, type: 2}
   clientMaterials:
   - {fileID: 2100000, guid: c8f9fbdcb222c3547a57abaa68ab8337, type: 2}
+  - {fileID: 2100000, guid: 0a62511b68a904c4faf58d4e9f986a34, type: 2}
   - {fileID: 2100000, guid: 50b62318ed0262c42a9ef6610294c176, type: 2}
   piece: {fileID: 3122924463322124245}
 --- !u!23 &8206834887493465112 stripped
