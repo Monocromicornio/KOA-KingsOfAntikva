@@ -3,14 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-/// <summary>
-/// Controls the main menu screen flow using anchoredPosition coroutines.
-/// Handles transitions between: MainMenu -> PlayModesPanel -> (Offline / Lobby / Ranked).
-///
-/// Real scene structure:
-///   Main Menu : /HUD/PlayerInfos, /HUD/Play, /HUD/Cancelar, /HUD/RankingButton, /HUD/ConfigButton
-///   PlayModes : /HUD/PlayModesPanel/BG/Ranked|Lobby|Offline  +  /HUD/PlayModesPanel/Back
-/// </summary>
+
 public class MenuFlowController : MonoBehaviour
 {
     // ─── Durations ───────────────────────────────────────────────────────────
