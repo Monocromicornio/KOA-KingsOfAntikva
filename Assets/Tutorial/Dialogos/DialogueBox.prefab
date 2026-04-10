@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2826138634607519798}
   - component: {fileID: 6998854048711999399}
   - component: {fileID: 7252036943884236247}
+  - component: {fileID: 6603421999213434107}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -137,6 +138,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6603421999213434107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983683558767347240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.dialoguebox_box_text
+  _fallback: New Text
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &1423435412551305580
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +207,7 @@ GameObject:
   - component: {fileID: 4621670496285499754}
   - component: {fileID: 8765279545494966585}
   - component: {fileID: 4109429599981915465}
+  - component: {fileID: 147789871147659726}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -312,6 +334,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &147789871147659726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4018563519656525788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.dialoguebox_box_name
+  _fallback: New Text
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &4041444610232940587
 GameObject:
   m_ObjectHideFlags: 0

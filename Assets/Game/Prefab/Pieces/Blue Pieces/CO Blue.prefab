@@ -1816,14 +1816,80 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8380956918746689249, guid: a607fe85152b98f429554ecfae510c8e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1140907466813084830}
+    - targetCorrespondingSourceObject: {fileID: 5179442945095409321, guid: a607fe85152b98f429554ecfae510c8e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5654453929449134070}
+    - targetCorrespondingSourceObject: {fileID: 890598889705269097, guid: a607fe85152b98f429554ecfae510c8e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4982714460473386305}
   m_SourcePrefab: {fileID: 100100000, guid: a607fe85152b98f429554ecfae510c8e, type: 3}
+--- !u!1 &874749276888758308 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 890598889705269097, guid: a607fe85152b98f429554ecfae510c8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 35942131395108685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4982714460473386305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874749276888758308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e63169b08d4724298af8d06560f9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkMaterialSwap
+  targetRenderer: {fileID: 2176115977444887453}
+  hostMaterials:
+  - {fileID: 2100000, guid: beecbe6736f1b714584f2fd654d46ef0, type: 2}
+  clientMaterials:
+  - {fileID: 2100000, guid: 202cea2e2d5ca6047b9bf4ed69714d47, type: 2}
+  piece: {fileID: 8773420065660899599}
+--- !u!23 &2176115977444887453 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2183309989519627472, guid: a607fe85152b98f429554ecfae510c8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 35942131395108685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4666835200676772680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4664705354148750341, guid: a607fe85152b98f429554ecfae510c8e,
     type: 3}
   m_PrefabInstance: {fileID: 35942131395108685}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5160741199578268132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5179442945095409321, guid: a607fe85152b98f429554ecfae510c8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 35942131395108685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5654453929449134070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5160741199578268132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e63169b08d4724298af8d06560f9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkMaterialSwap
+  targetRenderer: {fileID: 8591895887777412937}
+  hostMaterials:
+  - {fileID: 2100000, guid: 7080001842a640f4f87ef102caaf4d13, type: 2}
+  clientMaterials:
+  - {fileID: 2100000, guid: d005dd35fbad3904690da947f43ed2c3, type: 2}
+  piece: {fileID: 8773420065660899599}
 --- !u!1 &6303431076481605322 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6270690766568194439, guid: a607fe85152b98f429554ecfae510c8e,
@@ -1833,6 +1899,36 @@ GameObject:
 --- !u!95 &7269689209849100052 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7249861899440695385, guid: a607fe85152b98f429554ecfae510c8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 35942131395108685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8372353078966956460 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8380956918746689249, guid: a607fe85152b98f429554ecfae510c8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 35942131395108685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1140907466813084830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8372353078966956460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e63169b08d4724298af8d06560f9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkMaterialSwap
+  targetRenderer: {fileID: 0}
+  hostMaterials:
+  - {fileID: 2100000, guid: f50bad02da821c64792bc9a88d7eef16, type: 2}
+  clientMaterials:
+  - {fileID: 2100000, guid: 423844e047befe34e9d161ea29bfc834, type: 2}
+  piece: {fileID: 8773420065660899599}
+--- !u!23 &8591895887777412937 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8593777266295187460, guid: a607fe85152b98f429554ecfae510c8e,
     type: 3}
   m_PrefabInstance: {fileID: 35942131395108685}
   m_PrefabAsset: {fileID: 0}
@@ -1977,8 +2073,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6367513060533264509}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
+--- !u!1 &404623805501124844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6410990548019713481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6367513060533264509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404623805501124844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.co_blue_tooltip_text_tmp_
+  _fallback: "Comandante\nPe\xE7a de valor 5"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!224 &872556320165316615 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,

@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 3532991826665793241}
   - component: {fileID: 4897639890797147060}
   - component: {fileID: 2638799901550718947}
+  - component: {fileID: 3718713084238050532}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -276,6 +277,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3718713084238050532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7382649322894686499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.enemyprofile_name
+  _fallback: Rei Azul
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &7436198572992004125
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +380,7 @@ GameObject:
   - component: {fileID: 8325452751628595599}
   - component: {fileID: 3969490390412259470}
   - component: {fileID: 3455898621853032324}
+  - component: {fileID: 8201828840578860827}
   m_Layer: 5
   m_Name: Points
   m_TagString: Untagged
@@ -485,6 +507,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8201828840578860827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179430182557352829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.enemyprofile_points
+  _fallback: 1500
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &8482349648914944122
 GameObject:
   m_ObjectHideFlags: 0

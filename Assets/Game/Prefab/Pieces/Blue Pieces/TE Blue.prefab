@@ -19862,7 +19862,51 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1476680127371499259}
+    - targetCorrespondingSourceObject: {fileID: 8729069425204427788, guid: 4af7048b85b151943929bb2e10fb33fa,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4887039268932874462}
+    - targetCorrespondingSourceObject: {fileID: 3280960408518658332, guid: 4af7048b85b151943929bb2e10fb33fa,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 483506644347758083}
   m_SourcePrefab: {fileID: 100100000, guid: 4af7048b85b151943929bb2e10fb33fa, type: 3}
+--- !u!1 &571502415342443875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3280960408518658332, guid: 4af7048b85b151943929bb2e10fb33fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 3055184856001778815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &483506644347758083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571502415342443875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e63169b08d4724298af8d06560f9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkMaterialSwap
+  targetRenderer: {fileID: 1446250650512966566}
+  hostMaterials:
+  - {fileID: 2100000, guid: a83fd534d77bc2647b3bd377deccbcee, type: 2}
+  clientMaterials:
+  - {fileID: 2100000, guid: 7637ddc3739d80747af1577e458925c6, type: 2}
+  piece: {fileID: 1305063625225364300}
+--- !u!23 &1191855665554025588 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4245874210297214987, guid: 4af7048b85b151943929bb2e10fb33fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 3055184856001778815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1446250650512966566 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4500273868184967129, guid: 4af7048b85b151943929bb2e10fb33fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 3055184856001778815}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5603066192594323481 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7468135264644652134, guid: 4af7048b85b151943929bb2e10fb33fa,
@@ -19875,6 +19919,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3055184856001778815}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6000430864002705523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8729069425204427788, guid: 4af7048b85b151943929bb2e10fb33fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 3055184856001778815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4887039268932874462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6000430864002705523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e63169b08d4724298af8d06560f9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkMaterialSwap
+  targetRenderer: {fileID: 1191855665554025588}
+  hostMaterials:
+  - {fileID: 2100000, guid: 351603a7cdc719c4eb0f5341a383d51b, type: 2}
+  clientMaterials:
+  - {fileID: 2100000, guid: 5179f90eba552834cbbee19c4c54b6b3, type: 2}
+  piece: {fileID: 1305063625225364300}
 --- !u!1 &7014127323765505916 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5418144622927211267, guid: 4af7048b85b151943929bb2e10fb33fa,
@@ -20044,7 +20112,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1668372250528241833}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &3987164695336522705 stripped
 RectTransform:
@@ -20052,3 +20124,29 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7185169520533753375}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4527018430103382842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7185169520533753375}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1668372250528241833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4527018430103382842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.te_blue_tooltip_text_tmp_
+  _fallback: "Tesouro\nSe o inimigo encontrar seu tesouro voc\xEA perde"
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12

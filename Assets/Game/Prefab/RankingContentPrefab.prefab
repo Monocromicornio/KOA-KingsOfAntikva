@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 6812595504855474701}
   - component: {fileID: 4581784873233073674}
   - component: {fileID: 1819666832822865272}
+  - component: {fileID: 2884277310897609273}
   m_Layer: 5
   m_Name: Position
   m_TagString: Untagged
@@ -202,6 +203,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2884277310897609273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6482907732119955465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.rankingcontentprefab_position
+  _fallback: 0
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &6891152879961107722
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +234,7 @@ GameObject:
   - component: {fileID: 6460285749340594103}
   - component: {fileID: 8773337712501792677}
   - component: {fileID: 9019080345456432828}
+  - component: {fileID: 7164013999071181312}
   m_Layer: 5
   m_Name: Pontuation
   m_TagString: Untagged
@@ -339,6 +361,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7164013999071181312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891152879961107722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.rankingcontentprefab_pontuation
+  _fallback: 1
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &8852775435984148893
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +392,7 @@ GameObject:
   - component: {fileID: 9040614476830570604}
   - component: {fileID: 848089404648233797}
   - component: {fileID: 4421771803012250585}
+  - component: {fileID: 6023785896223693879}
   m_Layer: 5
   m_Name: Nick
   m_TagString: Untagged
@@ -476,3 +519,23 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6023785896223693879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852775435984148893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: prefab.rankingcontentprefab_nick
+  _fallback: ASDAS
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
