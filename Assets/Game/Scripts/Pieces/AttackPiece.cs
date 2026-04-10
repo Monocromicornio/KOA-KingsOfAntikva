@@ -32,7 +32,7 @@ public class AttackPiece : InteractivePiece
         Debug.Log($"[AttackPiece] NewTarget - targetField: {fieldPiece?.name}, hasPiece: {fieldPiece?.hasPiece}");
         if (fieldPiece == null || !fieldPiece.hasPiece)
         {
-            Debug.LogWarning("[AttackPiece] Abortou: targetField nulo ou sem peça.");
+            Debug.LogWarning("[AttackPiece] Abortou: targetField nulo ou sem peï¿½a.");
             return;
         }
 
@@ -65,21 +65,25 @@ public class AttackPiece : InteractivePiece
 
     private IEnumerator PositionToAttack()
     {
-        float timeout = 5f;
+        const float timeout = 10f;
         float elapsed = 0f;
         const float distanceThreshold = 0.1f;
+
+        Debug.Log($"[AttackPiece:{name}] PositionToAttack started. Moving to fieldAtk: {fieldAtk?.name ?? "NULL"}, target: {target?.name ?? "NULL"}");
 
         while (Vector3.Distance(transform.position, fieldAtk.transform.position) > distanceThreshold)
         {
             elapsed += Time.deltaTime;
             if (elapsed >= timeout)
             {
-                Debug.LogError("[AttackPiece] Timeout: peça não chegou ao fieldAtk. Posição travada.");
+                Debug.LogError($"[AttackPiece:{name}] Timeout: piece did not reach fieldAtk after {timeout}s. Forcing turn change as fallback.");
+                matchController.ChangeTurn();
                 yield break;
             }
             yield return new WaitForEndOfFrame();
         }
 
+        Debug.Log($"[AttackPiece:{name}] Reached fieldAtk after {elapsed:F2}s. Starting attack on {target?.name ?? "NULL"}.");
         transform.LookAt(target.transform);
         InteractivePiece combatTarget = GetCombatPiece();
         ReadyToAttack(combatTarget);
