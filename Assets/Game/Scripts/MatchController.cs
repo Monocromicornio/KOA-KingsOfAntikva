@@ -31,6 +31,8 @@ public class MatchController : MonoBehaviour
 
     public bool isLoadingScreenFinished;
 
+    private bool changeTurnPending = false;
+
     private bool homeTeamTurn = false; //False to start with home, true for away
 
     public TurnState currentTurn { get; private set; }
@@ -256,6 +258,15 @@ public class MatchController : MonoBehaviour
 
     public void ChangeTurn()
     {
+        if (changeTurnPending)
+        {
+            Debug.LogWarning($"[MatchController] ChangeTurn BLOCKED — already pending. Caller: {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name} on {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType?.Name}");
+            return;
+        }
+
+        changeTurnPending = true;
+        Debug.Log($"[MatchController] ChangeTurn called — pending set. turn={turn}, myTurn={myTurn}, Caller: {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name} on {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType?.Name}");
+
         if (SyncronizeTable.Instance == null)
         {
             ChangeTurnImmediate();
@@ -268,6 +279,9 @@ public class MatchController : MonoBehaviour
 
     public void ChangeTurnImmediate()
     {
+        Debug.Log($"[MatchController] ChangeTurnImmediate called — resetting pending. turn={turn}, myTurn={myTurn}");
+        changeTurnPending = false;
+
         if (finished) return;
         if (!game.activeSelf)
         {
@@ -279,6 +293,8 @@ public class MatchController : MonoBehaviour
         homeTeamTurn = !homeTeamTurn;
         currentTurn = homeTeamTurn ? TurnState.homeTeam : TurnState.awayTeam;
         turn = currentTurn;
+
+        Debug.Log($"[MatchController] Turn changed to {turn}");
 
         ResetPiecesForNewTurn();
 

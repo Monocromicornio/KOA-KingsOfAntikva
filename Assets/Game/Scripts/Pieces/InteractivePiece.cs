@@ -185,6 +185,7 @@ public class InteractivePiece : MonoBehaviour
 
         yield return new WaitForSeconds(cachedDeathDuration);
 
+        Debug.Log($"[InteractivePiece:{name}] HandleLoserDeath — calling matchController.ChangeTurn().");
         matchController.ChangeTurn();
     }
 
@@ -233,6 +234,7 @@ public class InteractivePiece : MonoBehaviour
 
         yield return new WaitForSeconds(cachedDeathDuration);
 
+        Debug.Log($"[InteractivePiece:{name}] FakeCounterAttackSequence — calling matchController.ChangeTurn().");
         matchController.ChangeTurn();
     }
 

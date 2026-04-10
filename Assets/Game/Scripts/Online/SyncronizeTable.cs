@@ -120,11 +120,13 @@ public class SyncronizeTable : NetworkBehaviour
 
     public void SetChangeTurn()
     {
+        Debug.Log("[SyncronizeTable] SetChangeTurn — broadcasting via NetworkExecute.");
         NetworkExecute(ChangeTurn);
     }
 
     private void ChangeTurn()
     {
+        Debug.Log("[SyncronizeTable] ChangeTurn (network receiver) — calling matchController.ChangeTurnImmediate().");
         matchController.ChangeTurnImmediate();
     }
 

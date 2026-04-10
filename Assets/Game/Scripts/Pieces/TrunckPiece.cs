@@ -29,6 +29,7 @@ public class TrunckPiece : InteractivePiece
     protected override void CounterAttack(InteractivePiece target)
     {
         OpenChest();
+        Debug.Log($"[TrunckPiece:{name}] CounterAttack — calling matchController.ChangeTurn().");
         matchController.ChangeTurn();
     }
 

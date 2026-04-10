@@ -69,6 +69,7 @@ public class BombPiece : InteractivePiece
 
         yield return new WaitForSeconds(cachedDeathDuration);
 
+        Debug.Log($"[BombPiece:{name}] BombCounterAttackSequence — calling matchController.ChangeTurn().");
         matchController.ChangeTurn();
     }
 }

@@ -285,13 +285,28 @@ public class Piece : NetworkBehaviour
 
         if (!isTutorialMode)
         {
-            if (!IsActive() ) return; //|| !matchController.IsMyTurn()
+            if (!IsActive())
+            {
+                Debug.LogWarning($"[Piece:{name}] ChangeTurn BLOCKED — IsActive()=false. IsMyTurn={matchController.IsMyTurn()}, turn={matchController.turn}");
+                return;
+            }
+
+            if (!matchController.IsMyTurn())
+            {
+                Debug.LogWarning($"[Piece:{name}] ChangeTurn BLOCKED — IsMyTurn()=false. turn={matchController.turn}, myTurn={matchController.myTurn}");
+                return;
+            }
         }
         else
         {
-            if (!IsActive()) return;
+            if (!IsActive())
+            {
+                Debug.LogWarning($"[Piece:{name}] ChangeTurn BLOCKED (tutorial) — IsActive()=false.");
+                return;
+            }
         }
-        
+
+        Debug.Log($"[Piece:{name}] ChangeTurn PASSING — calling matchController.ChangeTurn(). turn={matchController.turn}");
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
         
         if (!isTutorialMode)
