@@ -258,14 +258,16 @@ public class MatchController : MonoBehaviour
 
     public void ChangeTurn()
     {
-        if (changeTurnPending)
+        // Duplicate-call guard is only needed online, where multiple code paths
+        // (local piece coroutine + network packet receiver) can both fire for the same action.
+        if (hasConnection && changeTurnPending)
         {
-            Debug.LogWarning($"[MatchController] ChangeTurn BLOCKED — already pending. Caller: {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name} on {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType?.Name}");
+            Debug.LogWarning($"[MatchController] ChangeTurn BLOCKED — already pending (online). Caller: {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name} on {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType?.Name}");
             return;
         }
 
-        changeTurnPending = true;
-        Debug.Log($"[MatchController] ChangeTurn called — pending set. turn={turn}, myTurn={myTurn}, Caller: {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name} on {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType?.Name}");
+        if (hasConnection) changeTurnPending = true;
+        Debug.Log($"[MatchController] ChangeTurn called — pending={changeTurnPending}, turn={turn}, myTurn={myTurn}, Caller: {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name} on {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType?.Name}");
 
         if (SyncronizeTable.Instance == null)
         {

@@ -291,9 +291,11 @@ public class Piece : NetworkBehaviour
                 return;
             }
 
-            if (!matchController.IsMyTurn())
+            // IsMyTurn() guard is only meaningful in online matches to prevent the remote copy
+            // of a moved piece from firing a second ChangeTurn after the network has already applied it.
+            if (hasConnection && !matchController.IsMyTurn())
             {
-                Debug.LogWarning($"[Piece:{name}] ChangeTurn BLOCKED — IsMyTurn()=false. turn={matchController.turn}, myTurn={matchController.myTurn}");
+                Debug.LogWarning($"[Piece:{name}] ChangeTurn BLOCKED — IsMyTurn()=false (online). turn={matchController.turn}, myTurn={matchController.myTurn}");
                 return;
             }
         }
@@ -308,7 +310,7 @@ public class Piece : NetworkBehaviour
 
         Debug.Log($"[Piece:{name}] ChangeTurn PASSING — calling matchController.ChangeTurn(). turn={matchController.turn}");
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
-        
+
         if (!isTutorialMode)
         {
             matchController.ChangeTurn();
