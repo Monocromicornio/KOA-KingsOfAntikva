@@ -23,41 +23,48 @@ public class NetworkMaterialSwap : MonoBehaviour
         Renderer currentRenderer = targetRenderer != null ? targetRenderer : GetComponentInChildren<Renderer>();
         if (currentRenderer == null)
         {
-            Debug.LogWarning("[NetworkMaterialSwap] Renderer não encontrado.");
+            Debug.LogWarning("[NetworkMaterialSwap] Renderer nï¿½o encontrado.");
             return;
         }
 
         NetworkManager nm = NetworkManager.Instance();
         if (nm == null)
         {
-            Debug.LogWarning("[NetworkMaterialSwap] NetworkManager não encontrado.");
+            Debug.LogWarning("[NetworkMaterialSwap] NetworkManager nï¿½o encontrado.");
+            return;
+        }
+
+        // Partida offline (contra IA): nï¿½o realiza troca de material
+        MatchController matchController = MatchController.instance;
+        if (matchController != null && !matchController.hasConnection)
+        {
             return;
         }
 
         bool isHost = nm.IsServerConnection();
 
-        // Tenta pegar o Piece automaticamente se não tiver sido atribuído no Inspector
+        // Tenta pegar o Piece automaticamente se nï¿½o tiver sido atribuï¿½do no Inspector
         if (piece == null)
             piece = GetComponentInParent<Piece>();
 
-        // Se existir Piece, usa a lógica completa
+        // Se existir Piece, usa a lï¿½gica completa
         if (piece != null)
         {
             bool isMyPiece = piece.isMyPiece;
 
             // Host:
-            // minha peça = azul / inimiga = vermelho
+            // minha peï¿½a = azul / inimiga = vermelho
             // Client:
-            // minha peça = vermelho / inimiga = azul
+            // minha peï¿½a = vermelho / inimiga = azul
             bool useHostMaterials = (isHost == isMyPiece);
 
             currentRenderer.materials = useHostMaterials ? hostMaterials : clientMaterials;
 
-            Debug.Log($"[NetworkMaterialSwap] PEÇA | isHost: {isHost} | isMyPiece: {isMyPiece} | useHostMaterials: {useHostMaterials}");
+            Debug.Log($"[NetworkMaterialSwap] PEï¿½A | isHost: {isHost} | isMyPiece: {isMyPiece} | useHostMaterials: {useHostMaterials}");
         }
         else
         {
-            // Se não for peça/personagem, decide só por host/client
+            // Se nï¿½o for peï¿½a/personagem, decide sï¿½ por host/client
             currentRenderer.materials = isHost ? hostMaterials : clientMaterials;
 
             Debug.Log($"[NetworkMaterialSwap] OBJETO COMUM | isHost: {isHost}");

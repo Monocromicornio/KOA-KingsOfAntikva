@@ -1387,7 +1387,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[2]'
       value: 
-      objectReference: {fileID: 2100000, guid: 6267a60d0575f054694edfda86f24c2d, type: 2}
+      objectReference: {fileID: 2100000, guid: 3ae4325e535713e469f5794bdc0daad7, type: 2}
     - target: {fileID: 6635011790251304849, guid: 91a2d7d448ddebc46951a7187a086651,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1683,6 +1683,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 84.5884
       objectReference: {fileID: 0}
+    - target: {fileID: 9112966139792126477, guid: 91a2d7d448ddebc46951a7187a086651,
+        type: 3}
+      propertyPath: piece
+      value: 
+      objectReference: {fileID: 3122924463322124245}
     - target: {fileID: 9178894343417527852, guid: 91a2d7d448ddebc46951a7187a086651,
         type: 3}
       propertyPath: m_Layer
@@ -1715,7 +1720,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5644911207750043458, guid: 91a2d7d448ddebc46951a7187a086651,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6058978113985997197}
+      addedObject: {fileID: 1164477213340711134}
     - targetCorrespondingSourceObject: {fileID: 5363373391172814099, guid: 91a2d7d448ddebc46951a7187a086651,
         type: 3}
       insertIndex: -1
@@ -1759,7 +1764,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3054023382044023680}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6058978113985997197
+--- !u!114 &1164477213340711134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1775,7 +1780,7 @@ MonoBehaviour:
   hostMaterials:
   - {fileID: 2100000, guid: a5008503a8ca2c14da5287609618c31a, type: 2}
   - {fileID: 2100000, guid: 0a62511b68a904c4faf58d4e9f986a34, type: 2}
-  - {fileID: 2100000, guid: 6267a60d0575f054694edfda86f24c2d, type: 2}
+  - {fileID: 2100000, guid: 3ae4325e535713e469f5794bdc0daad7, type: 2}
   clientMaterials:
   - {fileID: 2100000, guid: c8f9fbdcb222c3547a57abaa68ab8337, type: 2}
   - {fileID: 2100000, guid: 0a62511b68a904c4faf58d4e9f986a34, type: 2}
