@@ -126,11 +126,6 @@ public class MatchController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        if (hasStarted == false)
-        {
-            hasStarted = true;
-        }
-
         ChangeTurn();
 
         while (isLoadingScreenFinished == false)
@@ -264,23 +259,6 @@ public class MatchController : MonoBehaviour
 
     public void ChangeTurn()
     {
-        if (hasStarted == false)
-        {
-            return;
-        }
-
-        // Duplicate-call guard is only needed online, where multiple code paths
-        // (local piece coroutine + network packet receiver) can both fire for the same action.
-        if (hasConnection && changeTurnPending)
-        {
-            Debug.LogWarning($"[MatchController] ChangeTurn BLOCKED — already pending (online). Caller: {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name} on {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType?.Name}");
-            return;
-        }
-
-        if (hasConnection) changeTurnPending = true;
-
-        Debug.Log($"[MatchController] ChangeTurn called — pending={changeTurnPending}, turn={turn}, myTurn={myTurn}, Caller: {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name} on {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType?.Name}");
-
         ChangeTurnImmediate();
     }
 
@@ -315,6 +293,9 @@ public class MatchController : MonoBehaviour
         {
             turnTimer.OnTurnChanged();
         }
+
+
+        hasStarted = true;
     }
 
     public bool IsMyTurn()

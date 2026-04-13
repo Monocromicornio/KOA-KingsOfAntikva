@@ -69,7 +69,9 @@ public class Piece : NetworkBehaviour
             Debug.Log("[Piece] Field index value changed via Passive Update");
             board.GetGameField(oldValue)?.SetPiece(null);
             field?.SetPiece(this);
-            matchController.ChangeTurn();
+
+            if(matchController.hasStarted == true)
+                matchController.ChangeTurn();
         });
     }
 
