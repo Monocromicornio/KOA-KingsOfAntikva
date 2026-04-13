@@ -123,19 +123,6 @@ public class SyncronizeTable : NetworkBehaviour
         Debug.Log("[SyncronizeTable] Todas as partes da tabela foram enviadas");
     }
 
-    private void ActiveUpdate()
-    {
-        if (turnCallbackRegistered) return;
-        turnCallbackRegistered = true;
-
-        // Host receives this when the CLIENT increments their counter.
-        clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
-        {
-            Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
-            matchController.ChangeTurnImmediate();
-        });
-    }
-
     // Called every frame on the client (non-owner of this NetworkObject).
     private void PassiveUpdate()
     {
@@ -143,11 +130,22 @@ public class SyncronizeTable : NetworkBehaviour
         turnCallbackRegistered = true;
 
         // Client receives this when the HOST increments their counter.
-        serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
+        if (networkManager.IsServerConnection() == false)
         {
-            Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
-            matchController.ChangeTurnImmediate();
-        });
+            serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
+            {
+                Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
+                matchController.ChangeTurnImmediate();
+            });
+        }
+        else
+        {
+            clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
+            {
+                Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
+                matchController.ChangeTurnImmediate();
+            });
+        }
     }
 
     public void SetChangeTurn()
@@ -156,6 +154,7 @@ public class SyncronizeTable : NetworkBehaviour
         Debug.Log($"[SyncronizeTable] SetChangeTurn — isServer={networkManager.IsServerConnection()}. Calling ChangeTurnImmediate locally and incrementing counter for remote peer.");
         matchController.ChangeTurnImmediate();
 
+        turnCallbackRegistered = false;
         // Increment the counter that belongs to this peer so the other peer's OnValueChange fires.
         if (networkManager.IsServerConnection())
         {
