@@ -12206,3 +12206,99 @@ MonoBehaviour:
     updateFieldsToDefault: v.1
     childsFilter: 
     scriptsFilter: 
+  - Id: 28
+    Prefab: {fileID: 3650926474381546244, guid: 1bbc980e6c55f224f93ede553ad69f4b,
+      type: 3}
+    AutoSync: 1
+    syncPosition: 010101
+    syncRotation: 010101
+    syncScale: 010101
+    AnimationAutoSync: 0
+    ParticlesAutoSync: 0
+    ShowScripts: 1
+    PrefabScripts:
+      Scripts:
+      - Script: {fileID: 9099147055701051958, guid: 1bbc980e6c55f224f93ede553ad69f4b,
+          type: 3}
+        Enabled: 1
+        Delay: 0
+        Variables:
+          Variables:
+          - Variable: turnCallbackRegistered
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+        NetworkVariables:
+          Variables:
+          - Variable: serverTurnCounter
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+          - Variable: clientTurnCounter
+            Enabled: 0
+            DeliveryMode: 0
+            DetectionMode: 0
+            Delay: 0
+    ShowChilds: 0
+    ChildObjets:
+      Objects: []
+    ShowInputScripts: 0
+    InputScripts:
+      Scripts: []
+    ShowVariables: 1
+    ShowEvents: 0
+    ShowTranform: 0
+    ShowChildTree: 0
+    prefabEvents:
+      onSpawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onDespawnPrefab:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onAcceptReleaseOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onTakeObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+      onReleaseObjectOwnerShip:
+        EventTarget: {fileID: 0}
+        EventComponent: {fileID: 0}
+        EventMethod: 
+        EditorVisible: 0
+        ExecutionError: 
+    AnimationSyncMode: 1
+    AnimationCount: 0
+    AnimationDefaultStatus: 
+    ownershipAccessLevel: 0
+    movementType: 0
+    disableObjectGravity: 1
+    enableObjectKinematic: 1
+    enableObjectInterpolate: 0
+    usePrefabRotation: 0
+    customSendRate: 0
+    sendRateAmount: 1
+    updateFieldsToDefault: v.1
+    childsFilter: 
+    scriptsFilter: 

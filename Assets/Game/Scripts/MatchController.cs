@@ -46,6 +46,7 @@ public class MatchController : MonoBehaviour
 
     public SyncronizeTable syncronize;
 
+    public OnlineTurnManager onlineTurnManager;
     [SerializeField]
     private GameObject game;
     public PlayerSquad playerSquad;
@@ -88,6 +89,8 @@ public class MatchController : MonoBehaviour
         if (networkManager.IsConnected())
         {
             _ = NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
+
+            _ = NetworkGameObject.Instantiate(onlineTurnManager.gameObject, Vector3.up, Quaternion.identity);
         }
         else if (!networkManager.IsServerConnection())
         {
@@ -275,7 +278,7 @@ public class MatchController : MonoBehaviour
         }
         else
         {
-            SyncronizeTable.Instance.SetChangeTurn();
+            OnlineTurnManager.Instance.SetChangeTurn();
         }
     }
 
