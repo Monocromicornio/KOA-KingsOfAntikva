@@ -26,7 +26,7 @@ public class OnlineTurnManager : NetworkBehaviour
 
     private void ActiveUpdate()
     {
-        if (networkManager.IsServerConnection())
+        if (networkManager.IsServerConnection() == false)
         {
             return;
         }
@@ -58,7 +58,7 @@ public class OnlineTurnManager : NetworkBehaviour
     // Called every frame on the client (non-owner of this NetworkObject).
     private void PassiveUpdate()
     {
-        if (networkManager.IsServerConnection() == false)
+        if (networkManager.IsServerConnection())
         {
             return;
         }
