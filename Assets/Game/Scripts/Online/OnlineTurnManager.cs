@@ -24,13 +24,44 @@ public class OnlineTurnManager : NetworkBehaviour
         Instance = this;
     }
 
+    private void ActiveUpdate()
+    {
+        if (networkManager.IsServerConnection())
+        {
+            if (turnCallbackRegistered) return;
+            turnCallbackRegistered = true;
+        }
+
+        Debug.Log("[SyncronizeTable] Passive udpate fired");
+
+        if (networkManager.IsServerConnection())
+        {
+            clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
+            {
+                Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
+                matchController.ChangeTurnImmediate();
+            });
+        }
+        else
+        {
+            // Client receives this when the HOST increments their counter.
+            serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
+            {
+                Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
+                matchController.ChangeTurnImmediate();
+            });
+        }
+    }
+
 
     // Called every frame on the client (non-owner of this NetworkObject).
     private void PassiveUpdate()
     {
-        if (turnCallbackRegistered) return;
-        turnCallbackRegistered = true;
-
+        if (networkManager.IsServerConnection() == false)
+        {
+            if (turnCallbackRegistered) return;
+            turnCallbackRegistered = true;
+        }
         Debug.Log("[SyncronizeTable] Passive udpate fired");
 
         if (networkManager.IsServerConnection())
