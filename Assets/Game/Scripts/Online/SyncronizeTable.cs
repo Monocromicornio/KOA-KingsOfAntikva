@@ -129,7 +129,11 @@ public class SyncronizeTable : NetworkBehaviour
         turnCallbackRegistered = true;
 
         Debug.Log("[SyncronizeTable] Active udpate fired");
-
+        serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
+        {
+            Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
+           // matchController.ChangeTurnImmediate();
+        });
         clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
         {
             Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
@@ -151,7 +155,11 @@ public class SyncronizeTable : NetworkBehaviour
             Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
             matchController.ChangeTurnImmediate();
         });
-
+        clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
+        {
+            Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
+            //matchController.ChangeTurnImmediate();
+        });
     }
 
     public void SetChangeTurn()
