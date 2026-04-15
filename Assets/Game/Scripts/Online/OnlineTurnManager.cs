@@ -24,11 +24,11 @@ public class OnlineTurnManager : NetworkBehaviour
         Instance = this;
     }
 
-    private void ActiveUpdate()
+    private void ActiveStart()
     {
         if (turnCallbackRegistered) return;
         turnCallbackRegistered = true;
-        Debug.Log("[OnlineTurnManager] Active udpate fired. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
+        Debug.Log("[OnlineTurnManager] Active start fired. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
 
         if (networkManager.IsServerConnection())
         {
@@ -51,11 +51,11 @@ public class OnlineTurnManager : NetworkBehaviour
 
 
     // Called every frame on the client (non-owner of this NetworkObject).
-    private void PassiveUpdate()
+    private void PassiveStart()
     {
         if (turnCallbackRegistered) return;
         turnCallbackRegistered = true;
-        Debug.Log("[OnlineTurnManager] Passive udpate fired. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
+        Debug.Log("[OnlineTurnManager] Passive start fired. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
 
         if (NetworkManager.Instance().IsServerConnection())
         {
