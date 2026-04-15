@@ -39,7 +39,6 @@ public class OnlineTurnManager : NetworkBehaviour
             {
                 Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
                 matchController.ChangeTurnImmediate();
-                TakeControl();
             });
         }
         else
@@ -49,7 +48,6 @@ public class OnlineTurnManager : NetworkBehaviour
             {
                 Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
                 matchController.ChangeTurnImmediate();
-                TakeControl();
             });
         }
     }
@@ -64,12 +62,15 @@ public class OnlineTurnManager : NetworkBehaviour
         if (networkManager.IsServerConnection())
         {
             Debug.Log("[SyncronizeTable] Increasing server Turn Counter");
+            TakeControl();
             serverTurnCounter.SetValue((int)serverTurnCounter + 1);
         }
         else
         {
             Debug.Log("[SyncronizeTable] Increasing client Turn Counter");
+            TakeControl();
             clientTurnCounter.SetValue((int)clientTurnCounter + 1);
+
         }
     }
 }
