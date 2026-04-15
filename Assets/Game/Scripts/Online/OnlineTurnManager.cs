@@ -24,24 +24,7 @@ public class OnlineTurnManager : NetworkBehaviour
         Instance = this;
     }
 
-    private void ActiveUpdate()
-    {
-        if (turnCallbackRegistered) return;
-        turnCallbackRegistered = true;
 
-        Debug.Log("[SyncronizeTable] Active udpate fired");
-        serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
-        {
-            Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
-            // matchController.ChangeTurnImmediate();
-        });
-        clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
-        {
-            Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
-            matchController.ChangeTurnImmediate();
-        });
-
-    }
     // Called every frame on the client (non-owner of this NetworkObject).
     private void PassiveUpdate()
     {
@@ -50,17 +33,25 @@ public class OnlineTurnManager : NetworkBehaviour
 
         Debug.Log("[SyncronizeTable] Passive udpate fired");
 
-        // Client receives this when the HOST increments their counter.
-        serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
+        if (networkManager.IsServerConnection())
         {
-            Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
-            matchController.ChangeTurnImmediate();
-        });
-        clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
+            clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
+            {
+                Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
+                matchController.ChangeTurnImmediate();
+            });
+            TakeControl();
+        }
+        else
         {
-            Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
-            //matchController.ChangeTurnImmediate();
-        });
+            // Client receives this when the HOST increments their counter.
+            serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
+            {
+                Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
+                matchController.ChangeTurnImmediate();
+            });
+            TakeControl();
+        }
     }
 
     public void SetChangeTurn()
