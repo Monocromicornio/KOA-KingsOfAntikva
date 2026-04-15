@@ -39,8 +39,8 @@ public class OnlineTurnManager : NetworkBehaviour
             {
                 Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
                 matchController.ChangeTurnImmediate();
+                TakeControl();
             });
-            TakeControl();
         }
         else
         {
@@ -49,8 +49,8 @@ public class OnlineTurnManager : NetworkBehaviour
             {
                 Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
                 matchController.ChangeTurnImmediate();
+                TakeControl();
             });
-            TakeControl();
         }
     }
 
