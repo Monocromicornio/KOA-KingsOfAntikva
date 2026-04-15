@@ -4,7 +4,6 @@ using System.Text;
 using com.onlineobject.objectnet;
 using UnityEngine;
 using Steamworks;
-using UnityEngine.Android;
 
 public class SyncronizeTable : NetworkBehaviour
 {
@@ -29,19 +28,10 @@ public class SyncronizeTable : NetworkBehaviour
 
     void Awake()
     {
- 
-        if (Instance != null && Instance != this)
-        {
-            Debug.LogWarning("[SyncronizeTable] Duplicate instance detected — destroying new one. Only the network-instantiated instance should exist per match.");
-            Destroy(gameObject);
-            return;
-        }
+        if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
+        else { Destroy(gameObject); }
 
-        Instance = this;
-        // Intentionally NOT using DontDestroyOnLoad — this object is match-scoped and must
-        // share the same NetworkObject ID on both peers. Persisting across scenes would cause
-        // a new instantiation to be destroyed here while the stale one loses its network ID,
-        // silently breaking all NetworkExecute calls (including ChangeTurn) from the remote peer.
+        //Instance = this;
 
         LocalSteamId = SteamUser.GetSteamID().m_SteamID;
         OpponentSteamId = 0;
@@ -58,7 +48,7 @@ public class SyncronizeTable : NetworkBehaviour
             Debug.Log($"[SyncronizeTable] TableData restaurado do cache: {table.name}");
         }
 
-        Debug.Log($"[SyncronizeTable] Awake — Instance set. Steam ID local: {LocalSteamId}");
+        Debug.Log($"[SyncronizeTable] Steam ID local salvo: {LocalSteamId}");
         Debug.Log($"[SyncronizeTable] TableData status: {(table != null ? $"OK ({table.name})" : "NULL!")}");
     }
 
@@ -138,13 +128,12 @@ public class SyncronizeTable : NetworkBehaviour
         if (turnCallbackRegistered) return;
         turnCallbackRegistered = true;
 
+        Debug.Log("[SyncronizeTable] Active udpate fired");
+
         clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
         {
-
-            Debug.Log("[SyncronizeTable]  fired");
-
-            Debug.Log($"[SyncronizeTable] Active udpate clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
-           // matchController.ChangeTurnImmediate();
+            Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
+            matchController.ChangeTurnImmediate();
         });
 
     }
@@ -154,23 +143,15 @@ public class SyncronizeTable : NetworkBehaviour
         if (turnCallbackRegistered) return;
         turnCallbackRegistered = true;
 
+        Debug.Log("[SyncronizeTable] Passive udpate fired");
+
         // Client receives this when the HOST increments their counter.
-        if (networkManager.IsServerConnection() == false)
+        serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
         {
-            serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
-            {
-                Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
-                matchController.ChangeTurnImmediate();
-            });
-        }
-        else
-        {
-            clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
-            {
-                Debug.Log($"[SyncronizeTable] Passive Update clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
-                matchController.ChangeTurnImmediate();
-            });
-        }
+            Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
+            matchController.ChangeTurnImmediate();
+        });
+
     }
 
     public void SetChangeTurn()
