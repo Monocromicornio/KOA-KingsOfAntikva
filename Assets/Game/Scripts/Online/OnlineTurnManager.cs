@@ -16,7 +16,7 @@ public class OnlineTurnManager : NetworkBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Debug.LogWarning("[SyncronizeTable] Duplicate instance detected — destroying new one. Only the network-instantiated instance should exist per match.");
+            Debug.LogWarning("[OnlineTurnManager] Duplicate instance detected — destroying new one. Only the network-instantiated instance should exist per match.");
             Destroy(gameObject);
             return;
         }
@@ -26,20 +26,15 @@ public class OnlineTurnManager : NetworkBehaviour
 
     private void ActiveUpdate()
     {
-        if (networkManager.IsServerConnection() == false)
-        {
-            return;
-        }
-
         if (turnCallbackRegistered) return;
         turnCallbackRegistered = true;
-        Debug.Log("[SyncronizeTable] Active udpate fired");
+        Debug.Log("[OnlineTurnManager] Active udpate fired. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
 
         if (networkManager.IsServerConnection())
         {
             clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
             {
-                Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
+                Debug.Log($"[OnlineTurnManager] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
                 matchController.ChangeTurnImmediate();
             });
         }
@@ -48,7 +43,7 @@ public class OnlineTurnManager : NetworkBehaviour
             // Client receives this when the HOST increments their counter.
             serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
             {
-                Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
+                Debug.Log($"[OnlineTurnManager] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
                 matchController.ChangeTurnImmediate();
             });
         }
@@ -58,20 +53,15 @@ public class OnlineTurnManager : NetworkBehaviour
     // Called every frame on the client (non-owner of this NetworkObject).
     private void PassiveUpdate()
     {
-        if (networkManager.IsServerConnection())
-        {
-            return;
-        }
-
         if (turnCallbackRegistered) return;
         turnCallbackRegistered = true;
-        Debug.Log("[SyncronizeTable] Passive udpate fired");
+        Debug.Log("[OnlineTurnManager] Passive udpate fired. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
 
-        if (networkManager.IsServerConnection())
+        if (NetworkManager.Instance().IsServerConnection())
         {
             clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
             {
-                Debug.Log($"[SyncronizeTable] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
+                Debug.Log($"[OnlineTurnManager] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
                 matchController.ChangeTurnImmediate();
             });
         }
@@ -80,7 +70,7 @@ public class OnlineTurnManager : NetworkBehaviour
             // Client receives this when the HOST increments their counter.
             serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
             {
-                Debug.Log($"[SyncronizeTable] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
+                Debug.Log($"[OnlineTurnManager] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
                 matchController.ChangeTurnImmediate();
             });
         }
@@ -89,20 +79,20 @@ public class OnlineTurnManager : NetworkBehaviour
     public void SetChangeTurn()
     {
         // Execute locally immediately — this peer's turn is ending right now.
-        Debug.Log($"[SyncronizeTable] SetChangeTurn — isServer={networkManager.IsServerConnection()}. Calling ChangeTurnImmediate locally and incrementing counter for remote peer.");
+        Debug.Log($"[OnlineTurnManager] SetChangeTurn — isServer={networkManager.IsServerConnection()}. Calling ChangeTurnImmediate locally and incrementing counter for remote peer.");
         matchController.ChangeTurnImmediate();
 
         // Increment the counter that belongs to this peer so the other peer's OnValueChange fires.
         if (networkManager.IsServerConnection())
         {
-            Debug.Log("[SyncronizeTable] Increasing server Turn Counter");
-            TakeControl();
+            Debug.Log("[OnlineTurnManager] Increasing server Turn Counter");
+           // TakeControl();
             serverTurnCounter.SetValue((int)serverTurnCounter + 1);
         }
         else
         {
-            Debug.Log("[SyncronizeTable] Increasing client Turn Counter");
-            TakeControl();
+            Debug.Log("[OnlineTurnManager] Increasing client Turn Counter");
+         //   TakeControl();
             clientTurnCounter.SetValue((int)clientTurnCounter + 1);
 
         }
