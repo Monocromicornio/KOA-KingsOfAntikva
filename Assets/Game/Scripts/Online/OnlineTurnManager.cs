@@ -28,11 +28,12 @@ public class OnlineTurnManager : NetworkBehaviour
     {
         if (networkManager.IsServerConnection())
         {
-            if (turnCallbackRegistered) return;
-            turnCallbackRegistered = true;
+            return;
         }
 
-        Debug.Log("[SyncronizeTable] Passive udpate fired");
+        if (turnCallbackRegistered) return;
+        turnCallbackRegistered = true;
+        Debug.Log("[SyncronizeTable] Active udpate fired");
 
         if (networkManager.IsServerConnection())
         {
@@ -59,9 +60,11 @@ public class OnlineTurnManager : NetworkBehaviour
     {
         if (networkManager.IsServerConnection() == false)
         {
-            if (turnCallbackRegistered) return;
-            turnCallbackRegistered = true;
+            return;
         }
+
+        if (turnCallbackRegistered) return;
+        turnCallbackRegistered = true;
         Debug.Log("[SyncronizeTable] Passive udpate fired");
 
         if (networkManager.IsServerConnection())
