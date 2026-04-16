@@ -14,12 +14,14 @@ public class OnlineTurnManager : NetworkBehaviour
     public override void OnNetworkStarted()
     {
         this.RegisterEvent(CHANGE_TURN_EVENT, this.OnReceivedChangeTurnEvent, true);
+        Debug.Log("[OnlineTurnManager] Network started, registering change turn event delegate");
     }
 
     //Event will trigger this method
     private void OnReceivedChangeTurnEvent(IDataStream reader)
     {
         this.ReceiveChangeTurnFromOther();
+        Debug.Log("[OnlineTurnManager] Received remote change turn event from opponent");
     }
 
     //regular method
