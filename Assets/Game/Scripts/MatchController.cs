@@ -140,12 +140,12 @@ public class MatchController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
+        ChangeTurn();
+
         while (isLoadingScreenFinished == false)
         {
             yield return null;
         }
-
-        ChangeTurn();
 
         if (turnTimer != null)
         {
