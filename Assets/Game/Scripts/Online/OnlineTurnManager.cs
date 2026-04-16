@@ -1,4 +1,5 @@
 ﻿using com.onlineobject.objectnet;
+using System.Collections;
 using UnityEngine;
 
 public class OnlineTurnManager : NetworkBehaviour
@@ -24,54 +25,30 @@ public class OnlineTurnManager : NetworkBehaviour
         Instance = this;
     }
 
-    private void ActiveStart()
+    private IEnumerator Start()
     {
-        if (turnCallbackRegistered) return;
-        turnCallbackRegistered = true;
-        Debug.Log("[OnlineTurnManager] Active start fired. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
-
-        if (networkManager.IsServerConnection())
-        {
-            clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
-            {
-                Debug.Log($"[OnlineTurnManager] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
-                matchController.ChangeTurnImmediate();
-            });
-        }
-        else
-        {
-            // Client receives this when the HOST increments their counter.
-            serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
-            {
-                Debug.Log($"[OnlineTurnManager] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
-                matchController.ChangeTurnImmediate();
-            });
-        }
-    }
-
-
-    // Called every frame on the client (non-owner of this NetworkObject).
-    private void PassiveStart()
-    {
-        if (turnCallbackRegistered) return;
-        turnCallbackRegistered = true;
-        Debug.Log("[OnlineTurnManager] Passive start fired. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
+        yield return new WaitForSeconds(4);
+        Debug.Log("[OnlineTurnManager] Start fired. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
 
         if (NetworkManager.Instance().IsServerConnection())
         {
+            Debug.Log("[OnlineTurnManager] Registering delegate for CLIENT TurnCounter. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
             clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
             {
                 Debug.Log($"[OnlineTurnManager] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
                 matchController.ChangeTurnImmediate();
+                TakeControl();
             });
         }
         else
         {
+            Debug.Log("[OnlineTurnManager] Registering delegate for SERVER TurnCounter. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
             // Client receives this when the HOST increments their counter.
             serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
             {
                 Debug.Log($"[OnlineTurnManager] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
                 matchController.ChangeTurnImmediate();
+                TakeControl();
             });
         }
     }
