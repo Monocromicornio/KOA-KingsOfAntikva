@@ -6606,7 +6606,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440258580}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -22725,6 +22725,8 @@ MonoBehaviour:
   gameMode: {fileID: 1690787742}
   isLoadingScreenFinished: 0
   syncronize: {fileID: 9041021084249334171, guid: 6876983ce3ae3454e81c05e4b6f12bb4,
+    type: 3}
+  onlineTurnManager: {fileID: 9099147055701051958, guid: 1bbc980e6c55f224f93ede553ad69f4b,
     type: 3}
   game: {fileID: 1576172671}
   playerSquad: {fileID: 1686763110}
