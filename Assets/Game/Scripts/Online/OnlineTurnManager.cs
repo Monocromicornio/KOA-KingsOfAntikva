@@ -8,10 +8,25 @@ public class OnlineTurnManager : NetworkBehaviour
     NetworkManager networkManager => NetworkManager.Instance();
     MatchController matchController => MatchController.instance;
 
-    private NetworkVariable<int> serverTurnCounter = 0;
-    private NetworkVariable<int> clientTurnCounter = 0;
+    const int CHANGE_TURN_EVENT = 22980;
 
-    private bool turnCallbackRegistered = false;
+    //Subscribe the reciever method to the event
+    public override void OnNetworkStarted()
+    {
+        this.RegisterEvent(CHANGE_TURN_EVENT, this.OnReceivedChangeTurnEvent, true);
+    }
+
+    //Event will trigger this method
+    private void OnReceivedChangeTurnEvent(IDataStream reader)
+    {
+        this.ReceiveChangeTurnFromOther();
+    }
+
+    //regular method
+    private void ReceiveChangeTurnFromOther()
+    {
+        matchController.ChangeTurnImmediate(); 
+    }
 
     void Awake()
     {
@@ -25,53 +40,15 @@ public class OnlineTurnManager : NetworkBehaviour
         Instance = this;
     }
 
-    private IEnumerator Start()
-    {
-        yield return new WaitForSeconds(4);
-        Debug.Log("[OnlineTurnManager] Start fired. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
-
-        if (NetworkManager.Instance().IsServerConnection())
-        {
-            Debug.Log("[OnlineTurnManager] Registering delegate for CLIENT TurnCounter. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
-            clientTurnCounter.OnValueChange((int oldValue, int newValue) =>
-            {
-                Debug.Log($"[OnlineTurnManager] clientTurnCounter changed {oldValue} → {newValue} (host received client turn end) — calling ChangeTurnImmediate.");
-                matchController.ChangeTurnImmediate();
-                TakeControl();
-            });
-        }
-        else
-        {
-            Debug.Log("[OnlineTurnManager] Registering delegate for SERVER TurnCounter. Am i Server connection? " + NetworkManager.Instance().IsServerConnection());
-            // Client receives this when the HOST increments their counter.
-            serverTurnCounter.OnValueChange((int oldValue, int newValue) =>
-            {
-                Debug.Log($"[OnlineTurnManager] serverTurnCounter changed {oldValue} → {newValue} (client received host turn end) — calling ChangeTurnImmediate.");
-                matchController.ChangeTurnImmediate();
-                TakeControl();
-            });
-        }
-    }
-
     public void SetChangeTurn()
     {
         // Execute locally immediately — this peer's turn is ending right now.
         Debug.Log($"[OnlineTurnManager] SetChangeTurn — isServer={networkManager.IsServerConnection()}. Calling ChangeTurnImmediate locally and incrementing counter for remote peer.");
         matchController.ChangeTurnImmediate();
 
-        // Increment the counter that belongs to this peer so the other peer's OnValueChange fires.
-        if (networkManager.IsServerConnection())
+        using (DataStream writer = new DataStream())
         {
-            Debug.Log("[OnlineTurnManager] Increasing server Turn Counter");
-           // TakeControl();
-            serverTurnCounter.SetValue((int)serverTurnCounter + 1);
-        }
-        else
-        {
-            Debug.Log("[OnlineTurnManager] Increasing client Turn Counter");
-         //   TakeControl();
-            clientTurnCounter.SetValue((int)clientTurnCounter + 1);
-
+            this.Send(CHANGE_TURN_EVENT, writer, DeliveryMode.Reliable);
         }
     }
 }

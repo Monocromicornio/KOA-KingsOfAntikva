@@ -90,7 +90,7 @@ public class MatchController : MonoBehaviour
         {
             _ = NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
 
-            _ = NetworkGameObject.Instantiate(onlineTurnManager.gameObject, Vector3.up, Quaternion.identity);
+            
         }
         else if (!networkManager.IsServerConnection())
         {
@@ -105,16 +105,27 @@ public class MatchController : MonoBehaviour
     {
         // clientDisconnected = Callback<ClientDisconnectedEventArgs>.Create(OnClientDisconnected);
         // serverDisconnected = Callback<ServerDisconnectedEventArgs>.Create(OnServerDisconnected);
+        LoadingEvents.OnLoadingFinished += OnLoadingFinished;
         steamConnectionStatusChanged = Callback<SteamNetConnectionStatusChangedCallback_t>.Create(OnSteamConnectionStatusChanged);
+
     }
 
     private void OnDisable()
     {
         //clientDisconnected.Dispose();
-       // serverDisconnected.Dispose();
+        // serverDisconnected.Dispose();
+        LoadingEvents.OnLoadingFinished -= OnLoadingFinished;
         steamConnectionStatusChanged.Dispose();
     }
 
+
+    private void OnLoadingFinished()
+    {
+        if (networkManager.IsConnected())
+        {
+            _ = NetworkGameObject.Instantiate(onlineTurnManager.gameObject, Vector3.up, Quaternion.identity);
+        }
+    }
     public async void StartGame(TableData clientTable)
     {
         await Task.WhenAll(
@@ -128,12 +139,13 @@ public class MatchController : MonoBehaviour
     private IEnumerator StartGame()
     {
         yield return new WaitForSeconds(2);
-        ChangeTurn();
 
         while (isLoadingScreenFinished == false)
         {
             yield return null;
         }
+
+        ChangeTurn();
 
         if (turnTimer != null)
         {
