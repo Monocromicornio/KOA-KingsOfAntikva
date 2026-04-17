@@ -56,13 +56,6 @@ public class Piece : NetworkBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnEnable()
-    {
-        if (MinimapController.instance != null && indexCurrentField >= 0)
-        {
-            MinimapController.instance.RegisterPiece(this);
-        }
-    }
     private void PassiveUpdate()
     {
         if (onValueChangeSetted) return;
@@ -157,6 +150,22 @@ public class Piece : NetworkBehaviour
 
     public void SetFirstField(GameField field)
     {
+         firstField = field;
+        //if (!IsActive()) return;
+        fieldIndex.SetValue(field.index);
+        previousFieldIndex.SetValue(field.index);
+
+        indexCurrentField = field.index;
+        indexPreviousField = field.index;
+
+        targetField = null;
+
+        transform.position = this.field.transform.position;
+        this.field.SetPiece(this);
+
+
+        MinimapController.instance.RegisterPiece(this, field.index);
+
         if (syncronizeVariablesDelegateSetup == false)
         {
             this.fieldIndex.OnSynchonize(() => { return this.indexCurrentField; },
@@ -177,24 +186,6 @@ public class Piece : NetworkBehaviour
                             });
 
             syncronizeVariablesDelegateSetup = true;
-        }
-
-        firstField = field;
-        //if (!IsActive()) return;
-        fieldIndex.SetValue(field.index);
-        previousFieldIndex.SetValue(field.index);
-
-        indexCurrentField = field.index;
-        indexPreviousField = field.index;
-
-        targetField = null;
-
-        transform.position = this.field.transform.position;
-        this.field.SetPiece(this);
-
-        if (MinimapController.instance != null)
-        {
-            MinimapController.instance.RegisterPiece(this);
         }
     }
 

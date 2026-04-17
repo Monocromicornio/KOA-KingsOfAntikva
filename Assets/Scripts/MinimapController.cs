@@ -164,12 +164,13 @@ public class MinimapController : MonoBehaviour
         return flippedRow * gridSize + flippedCol;
     }
 
-    public void RegisterPiece(Piece piece)
+    public void RegisterPiece(Piece piece, int fieldIndex)
     {
         if (piece == null || cells == null)
             return;
 
-        int boardIndex = piece.indexCurrentField;
+        Debug.Log("Registering minimap piece " + piece.gameObject.name + " with field id " + fieldIndex);
+        int boardIndex = fieldIndex;
         int minimapIndex = ConvertBoardIndexToMinimapIndex(boardIndex);
         
         if (minimapIndex >= 0 && minimapIndex < cells.Length)
