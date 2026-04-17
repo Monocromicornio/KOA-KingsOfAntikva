@@ -171,8 +171,7 @@ public class Piece : NetworkBehaviour
             this.fieldIndex.OnSynchonize(() => { return this.indexCurrentField; },
                             (int value) =>
                             {
-                                
-                                Debug.Log("[Piece] ON SYNCRONIZE Field index value changed");
+                                Debug.Log("[Piece] ON SYNCRONIZE Field index value changed to " + value);
                                 board.GetGameField(indexCurrentField)?.SetPiece(null);
                                 field?.SetPiece(this);
                                 this.indexCurrentField = value;
@@ -182,7 +181,7 @@ public class Piece : NetworkBehaviour
             this.previousFieldIndex.OnSynchonize(() => { return this.indexPreviousField; },
                             (int value) =>
                             {
-                                Debug.Log("[Piece] ON SYNCRONIZE Previous Field index value changed");
+                                Debug.Log("[Piece] ON SYNCRONIZE Previous Field index value changed to " + value);
                                 this.indexPreviousField = value;
                             });
 
