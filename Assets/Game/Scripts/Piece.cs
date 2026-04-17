@@ -173,8 +173,8 @@ public class Piece : NetworkBehaviour
                             (int value) =>
                             {
                                 Debug.Log("[Piece] ON SYNCRONIZE Field index value changed to " + value);
-                                this.indexCurrentField = value;
                                 board.GetGameField(value)?.SetPiece(this);
+                                this.indexCurrentField = value;
                             });
 
 
