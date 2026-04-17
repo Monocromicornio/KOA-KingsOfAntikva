@@ -17,8 +17,8 @@ public class Piece : NetworkBehaviour
     private NetworkVariable<int> fieldIndex = -1;
     private NetworkVariable<int> previousFieldIndex = -1;
 
-    public int indexCurrentField;
-    public int indexPreviousField;
+    public int indexCurrentField = -1;
+    public int indexPreviousField = -1;
     public GameField field
     {
         get
