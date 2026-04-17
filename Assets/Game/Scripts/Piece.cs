@@ -17,8 +17,8 @@ public class Piece : NetworkBehaviour
     private NetworkVariable<int> fieldIndex = -1;
     private NetworkVariable<int> previousFieldIndex = -1;
 
-    public int indexCurrentField => (int)fieldIndex;
-    public int indexPreviousField => (int)previousFieldIndex;
+    public int indexCurrentField;
+    public int indexPreviousField;
     public GameField field
     {
         get
@@ -38,6 +38,9 @@ public class Piece : NetworkBehaviour
     public bool isDying { get; private set; }
     private bool onValueChangeSetted = false;
     private bool hasActedThisTurn = false;
+
+
+    const int CHANGE_FIELDINDEX_EVENT = 12980;
 
     private void Awake()
     {
@@ -67,10 +70,35 @@ public class Piece : NetworkBehaviour
         fieldIndex.OnValueChange((int oldValue, int newValue) =>
         {
             Debug.Log("[Piece] Field index value changed via Passive Update");
-            board.GetGameField(oldValue)?.SetPiece(null);
-            field?.SetPiece(this);
-           // matchController.ChangeTurn();
+           // indexCurrentField = newValue;
+          //  board.GetGameField(oldValue)?.SetPiece(null);
+           // field?.SetPiece(this);
         });
+    }
+
+    public override void OnNetworkStarted()
+    {
+        this.RegisterEvent(CHANGE_FIELDINDEX_EVENT, this.OnReceivedChangeTurnEvent, true);
+        Debug.Log("[PIECE] Network started, registering field change event delegate");
+    }
+
+    //Event will trigger this method
+    private void OnReceivedChangeTurnEvent(IDataStream reader)
+    {
+        int receivedOldIndex = reader.Read<int>();
+        int receivedNewIndex = reader.Read<int>();
+
+        this.ReceiveChangeTurnFromOther(receivedOldIndex, receivedNewIndex);
+        Debug.Log("[PIECE] Received remote field change event from opponent. OLD VALUE " + receivedOldIndex + " NEW VALUE " + receivedNewIndex);
+    }
+
+    //regular method
+    private void ReceiveChangeTurnFromOther(int receivedOldIndex, int receivedNewIndex)
+    {
+        indexCurrentField = receivedNewIndex;
+        indexPreviousField = receivedOldIndex;
+        board.GetGameField(receivedOldIndex)?.SetPiece(null);
+        field?.SetPiece(this);
     }
 
     public void SetControlToClient()
@@ -210,7 +238,7 @@ public class Piece : NetworkBehaviour
 
         if (field == targetField)
         {
-            ChangeTurn();
+            ChangeTurn(field.index, field.index);
             return true;
         }
         if (targetField == null) return false;
@@ -230,7 +258,7 @@ public class Piece : NetworkBehaviour
             TutorialEvents.TriggerPieceMoved(this, oldField, field);
 
             SendMessage("ChangeField", targetField, SendMessageOptions.DontRequireReceiver);
-            ChangeTurn();
+            ChangeTurn(oldIndex, targetField.index);
             return true;
         }
 
@@ -280,7 +308,7 @@ public class Piece : NetworkBehaviour
         }
     }
 
-    private void ChangeTurn()
+    private void ChangeTurn(int oldIndex, int newIndex)
     {
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
 
@@ -311,6 +339,13 @@ public class Piece : NetworkBehaviour
 
         Debug.Log($"[Piece:{name}] ChangeTurn PASSING — calling matchController.ChangeTurn(). turn={matchController.turn}");
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
+
+        using (DataStream writer = new DataStream())
+        {
+            writer.Write(oldIndex);
+            writer.Write(newIndex);
+            this.Send(CHANGE_FIELDINDEX_EVENT, writer, DeliveryMode.Reliable);
+        }
 
         if (!isTutorialMode)
         {
