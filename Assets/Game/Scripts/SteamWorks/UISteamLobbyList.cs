@@ -18,7 +18,7 @@ namespace com.onlineobject.objectnet.integration
 
         public Button QuickPlayButton;
 
-        public InputField LobbyName;
+        public TMP_InputField LobbyName;
 
         public GameObject LobbyItemsRoot;
 
