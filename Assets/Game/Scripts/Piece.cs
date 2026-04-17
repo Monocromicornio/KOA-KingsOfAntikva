@@ -63,8 +63,8 @@ public class Piece : NetworkBehaviour
         fieldIndex.OnValueChange((int oldValue, int newValue) =>
         {
             Debug.Log("[Piece] Field index value changed via Passive Update");
-            board.GetGameField(oldValue)?.SetPiece(null);
-            field?.SetPiece(this);
+           // board.GetGameField(oldValue)?.SetPiece(null);
+          //  field?.SetPiece(this);
         });
     }
 
@@ -171,7 +171,9 @@ public class Piece : NetworkBehaviour
             this.fieldIndex.OnSynchonize(() => { return this.indexCurrentField; },
                             (int value) =>
                             {
+                                
                                 Debug.Log("[Piece] ON SYNCRONIZE Field index value changed");
+                                board.GetGameField(indexCurrentField)?.SetPiece(null);
                                 this.indexCurrentField = value;
                                 field?.SetPiece(this);
                             });
@@ -182,7 +184,6 @@ public class Piece : NetworkBehaviour
                             {
                                 Debug.Log("[Piece] ON SYNCRONIZE Previous Field index value changed");
                                 this.indexPreviousField = value;
-                                board.GetGameField(indexPreviousField)?.SetPiece(null);
                             });
 
             syncronizeVariablesDelegateSetup = true;
