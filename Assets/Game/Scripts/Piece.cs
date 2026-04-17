@@ -55,6 +55,13 @@ public class Piece : NetworkBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        if (MinimapController.instance != null && fieldIndex >= 0)
+        {
+            MinimapController.instance.RegisterPiece(this);
+        }
+    }
     private void PassiveUpdate()
     {
         if (onValueChangeSetted) return;
