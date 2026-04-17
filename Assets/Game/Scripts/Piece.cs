@@ -1,6 +1,7 @@
-using System.Collections;
 using com.onlineobject.objectnet;
+using System.Collections;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Piece : NetworkBehaviour
 {
@@ -18,8 +19,8 @@ public class Piece : NetworkBehaviour
     private NetworkVariable<int> previousFieldIndex = -1;
 
 
-    public int indexCurrentField;
-    public int indexPreviousField;
+    public int indexCurrentField = -1;
+    public int indexPreviousField = -1;
     public GameField field
     {
         get
@@ -57,7 +58,7 @@ public class Piece : NetworkBehaviour
 
     private void OnEnable()
     {
-        if (MinimapController.instance != null && fieldIndex >= 0)
+        if (MinimapController.instance != null && indexCurrentField >= 0)
         {
             MinimapController.instance.RegisterPiece(this);
         }
@@ -182,6 +183,9 @@ public class Piece : NetworkBehaviour
         //if (!IsActive()) return;
         fieldIndex.SetValue(field.index);
         previousFieldIndex.SetValue(field.index);
+
+        indexCurrentField = field.index;
+        indexPreviousField = field.index;
 
         targetField = null;
 
