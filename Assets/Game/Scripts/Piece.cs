@@ -55,18 +55,13 @@ public class Piece : NetworkBehaviour
 
     private void OnEnable()
     {
-        if (MinimapController.instance != null && fieldIndex >= 0)
-        {
-            MinimapController.instance.RegisterPiece(this);
-        }
-
         this.fieldIndex.OnSynchonize(() => { return this.indexCurrentField; },
-                      (int value) =>
-                      {
-                          Debug.Log("[Piece] ON SYNCRONIZE Field index value changed");
-                          this.indexCurrentField = value;
-                          field?.SetPiece(this);
-                      });
+              (int value) =>
+              {
+                  Debug.Log("[Piece] ON SYNCRONIZE Field index value changed");
+                  this.indexCurrentField = value;
+                  field?.SetPiece(this);
+              });
 
 
         this.previousFieldIndex.OnSynchonize(() => { return this.indexPreviousField; },
@@ -75,6 +70,11 @@ public class Piece : NetworkBehaviour
                             this.indexPreviousField = value;
                             board.GetGameField(indexPreviousField)?.SetPiece(null);
                         });
+
+        if (MinimapController.instance != null && fieldIndex >= 0)
+        {
+            MinimapController.instance.RegisterPiece(this);
+        }
     }
 
     private void PassiveUpdate()
