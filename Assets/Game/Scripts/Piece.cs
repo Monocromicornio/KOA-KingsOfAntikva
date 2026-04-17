@@ -152,8 +152,9 @@ public class Piece : NetworkBehaviour
     {
          firstField = field;
         //if (!IsActive()) return;
-        fieldIndex.SetValue(field.index);
         previousFieldIndex.SetValue(field.index);
+        fieldIndex.SetValue(field.index);
+
 
         indexCurrentField = field.index;
         indexPreviousField = field.index;
@@ -172,9 +173,8 @@ public class Piece : NetworkBehaviour
                             (int value) =>
                             {
                                 Debug.Log("[Piece] ON SYNCRONIZE Field index value changed to " + value);
-                                board.GetGameField(indexCurrentField)?.SetPiece(null);
-                                this.field.SetPiece(this);
                                 this.indexCurrentField = value;
+                                board.GetGameField(value)?.SetPiece(this);
                             });
 
 
@@ -182,6 +182,7 @@ public class Piece : NetworkBehaviour
                             (int value) =>
                             {
                                 Debug.Log("[Piece] ON SYNCRONIZE Previous Field index value changed to " + value);
+                                board.GetGameField(value)?.SetPiece(null);
                                 this.indexPreviousField = value;
                             });
 
