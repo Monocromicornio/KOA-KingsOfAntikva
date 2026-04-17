@@ -56,6 +56,10 @@ public class Piece : NetworkBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        MinimapController.instance.RegisterPiece(this, indexCurrentField);
+    }
     private void PassiveUpdate()
     {
         if (onValueChangeSetted) return;
@@ -157,7 +161,7 @@ public class Piece : NetworkBehaviour
 
 
         indexCurrentField = field.index;
-        indexPreviousField = field.index;
+        indexPreviousField = -1;
 
         targetField = null;
 
@@ -167,7 +171,7 @@ public class Piece : NetworkBehaviour
 
         MinimapController.instance.RegisterPiece(this, field.index);
 
-        if (syncronizeVariablesDelegateSetup == false)
+        if (syncronizeVariablesDelegateSetup == false && IsActive() == false)
         {
             this.fieldIndex.OnSynchonize(() => { return this.indexCurrentField; },
                             (int value) =>
@@ -240,10 +244,13 @@ public class Piece : NetworkBehaviour
             GameField oldField = field;
             int oldIndex = fieldIndex;
             previousFieldIndex.SetValue(oldIndex);
+            indexPreviousField = oldIndex;
+
             targetField.SetPiece(null);
             field?.SetPiece(null);
 
             fieldIndex.SetValue(targetField.index);
+            indexCurrentField = targetField.index;
             field.SetPiece(this);
 
             TutorialEvents.TriggerPieceMoved(this, oldField, field);
