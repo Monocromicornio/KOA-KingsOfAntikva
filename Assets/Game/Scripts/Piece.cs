@@ -70,9 +70,9 @@ public class Piece : NetworkBehaviour
         fieldIndex.OnValueChange((int oldValue, int newValue) =>
         {
             Debug.Log("[Piece] Field index value changed via Passive Update");
-           // indexCurrentField = newValue;
-          //  board.GetGameField(oldValue)?.SetPiece(null);
-           // field?.SetPiece(this);
+            // indexCurrentField = newValue;
+            //  board.GetGameField(oldValue)?.SetPiece(null);
+            // field?.SetPiece(this);
         });
     }
 
@@ -160,9 +160,9 @@ public class Piece : NetworkBehaviour
     {
         if (pieceColor == PieceColor.red) return;
         if (hasActedThisTurn) return;
-        
+
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
-        
+
         if (!isTutorialMode)
         {
             if (!matchController.IsMyTurn()) return;
@@ -188,6 +188,10 @@ public class Piece : NetworkBehaviour
         fieldIndex.SetValue(field.index);
         previousFieldIndex.SetValue(field.index);
 
+        indexCurrentField = field.index;
+        indexPreviousField = field.index;
+        SyncCurrentField(indexPreviousField, indexCurrentField);
+
         targetField = null;
 
         transform.position = this.field.transform.position;
@@ -205,18 +209,18 @@ public class Piece : NetworkBehaviour
         if (hasActedThisTurn) return;
 
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
-        
+
         if (!isTutorialMode)
         {
             matchController.MadeActionOnTurn();
         }
-        
+
         hasActedThisTurn = true;
         targetField = field;
-        
+
         bool onField = CheckPieceOnField();
         if (!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
-        
+
         SendMessage("Deselect", SendMessageOptions.DontRequireReceiver);
     }
 
@@ -225,10 +229,10 @@ public class Piece : NetworkBehaviour
         if (!IsActive() || finished) return;
 
         targetField = field;
-        
+
         bool onField = CheckPieceOnField();
         if (!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
-        
+
         SendMessage("Deselect", SendMessageOptions.DontRequireReceiver);
     }
 
@@ -258,7 +262,7 @@ public class Piece : NetworkBehaviour
             TutorialEvents.TriggerPieceMoved(this, oldField, field);
 
             SendMessage("ChangeField", targetField, SendMessageOptions.DontRequireReceiver);
-            ChangeTurn(oldIndex, targetField.index);
+            SyncCurrentField(oldIndex, targetField.index);
             return true;
         }
 
@@ -308,7 +312,21 @@ public class Piece : NetworkBehaviour
         }
     }
 
-    private void ChangeTurn(int oldIndex = -1, int newIndex = -1)
+    private void SyncCurrentField(int oldIndex, int newIndex)
+    {
+        if (!IsActive())
+        {
+            return;
+        }
+
+        using (DataStream writer = new DataStream())
+        {
+            writer.Write(oldIndex);
+            writer.Write(newIndex);
+            this.Send(CHANGE_FIELDINDEX_EVENT, writer, DeliveryMode.Reliable);
+        }
+    }
+    private void ChangeTurn()
     {
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
 
@@ -340,12 +358,7 @@ public class Piece : NetworkBehaviour
         Debug.Log($"[Piece:{name}] ChangeTurn PASSING — calling matchController.ChangeTurn(). turn={matchController.turn}");
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
 
-        using (DataStream writer = new DataStream())
-        {
-            writer.Write(oldIndex);
-            writer.Write(newIndex);
-            this.Send(CHANGE_FIELDINDEX_EVENT, writer, DeliveryMode.Reliable);
-        }
+      
 
         if (!isTutorialMode)
         {
