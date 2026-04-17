@@ -253,15 +253,19 @@ public class Piece : NetworkBehaviour
             GameField oldField = field;
             int oldIndex = fieldIndex;
             previousFieldIndex.SetValue(oldIndex);
+            indexPreviousField = oldIndex;
+
             targetField.SetPiece(null);
             field?.SetPiece(null);
 
             fieldIndex.SetValue(targetField.index);
+            indexCurrentField = targetField.index;
             field.SetPiece(this);
 
             TutorialEvents.TriggerPieceMoved(this, oldField, field);
 
             SendMessage("ChangeField", targetField, SendMessageOptions.DontRequireReceiver);
+            ChangeTurn();
             SyncCurrentField(oldIndex, targetField.index);
             return true;
         }
