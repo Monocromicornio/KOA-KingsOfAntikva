@@ -17,8 +17,9 @@ public class Piece : NetworkBehaviour
     private NetworkVariable<int> fieldIndex = -1;
     private NetworkVariable<int> previousFieldIndex = -1;
 
-    public int indexCurrentField => (int)fieldIndex;
-    public int indexPreviousField => (int)previousFieldIndex;
+
+    public int indexCurrentField;
+    public int indexPreviousField;
     public GameField field
     {
         get
@@ -43,6 +44,22 @@ public class Piece : NetworkBehaviour
     {
         pieceColor = PieceColor.undefined;
         timeToDestroy = 3.5f;
+
+        this.fieldIndex.OnSynchonize(() => { return this.indexCurrentField; },
+                        (int value) => 
+                        {
+                            Debug.Log("[Piece] ON SYNCRONIZE Field index value changed");
+                            this.indexCurrentField = value;
+                            field?.SetPiece(this);
+                        });
+
+
+        this.previousFieldIndex.OnSynchonize(() => { return this.indexPreviousField; },
+                        (int value) => {
+                            Debug.Log("[Piece] ON SYNCRONIZE Previous Field index value changed");
+                            this.indexPreviousField = value;
+                            board.GetGameField(indexPreviousField)?.SetPiece(null);
+                        });
     }
 
     private void Start()
@@ -69,7 +86,6 @@ public class Piece : NetworkBehaviour
             Debug.Log("[Piece] Field index value changed via Passive Update");
             board.GetGameField(oldValue)?.SetPiece(null);
             field?.SetPiece(this);
-           // matchController.ChangeTurn();
         });
     }
 
