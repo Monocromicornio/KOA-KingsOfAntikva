@@ -40,6 +40,8 @@ public class Piece : NetworkBehaviour
     private bool onValueChangeSetted = false;
     private bool hasActedThisTurn = false;
 
+    private bool syncronizeVariablesDelegateSetup = false;
+
     private void Awake()
     {
         pieceColor = PieceColor.undefined;
@@ -51,30 +53,6 @@ public class Piece : NetworkBehaviour
         if (matchController == null) return;
         matchController.OnInstantiatedPiece(this);
         gameObject.SetActive(false);
-    }
-
-    private void OnEnable()
-    {
-        this.fieldIndex.OnSynchonize(() => { return this.indexCurrentField; },
-              (int value) =>
-              {
-                  Debug.Log("[Piece] ON SYNCRONIZE Field index value changed");
-                  this.indexCurrentField = value;
-                  field?.SetPiece(this);
-              });
-
-
-        this.previousFieldIndex.OnSynchonize(() => { return this.indexPreviousField; },
-                        (int value) => {
-                            Debug.Log("[Piece] ON SYNCRONIZE Previous Field index value changed");
-                            this.indexPreviousField = value;
-                            board.GetGameField(indexPreviousField)?.SetPiece(null);
-                        });
-
-        if (MinimapController.instance != null && fieldIndex >= 0)
-        {
-            MinimapController.instance.RegisterPiece(this);
-        }
     }
 
     private void PassiveUpdate()
@@ -171,6 +149,28 @@ public class Piece : NetworkBehaviour
 
     public void SetFirstField(GameField field)
     {
+        if (syncronizeVariablesDelegateSetup == false)
+        {
+            this.fieldIndex.OnSynchonize(() => { return this.indexCurrentField; },
+                            (int value) =>
+                            {
+                                Debug.Log("[Piece] ON SYNCRONIZE Field index value changed");
+                                this.indexCurrentField = value;
+                                field?.SetPiece(this);
+                            });
+
+
+            this.previousFieldIndex.OnSynchonize(() => { return this.indexPreviousField; },
+                            (int value) =>
+                            {
+                                Debug.Log("[Piece] ON SYNCRONIZE Previous Field index value changed");
+                                this.indexPreviousField = value;
+                                board.GetGameField(indexPreviousField)?.SetPiece(null);
+                            });
+
+            syncronizeVariablesDelegateSetup = true;
+        }
+
         firstField = field;
         //if (!IsActive()) return;
         fieldIndex.SetValue(field.index);
