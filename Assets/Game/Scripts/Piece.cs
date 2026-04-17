@@ -238,7 +238,7 @@ public class Piece : NetworkBehaviour
 
         if (field == targetField)
         {
-            ChangeTurn(field.index, field.index);
+            ChangeTurn();
             return true;
         }
         if (targetField == null) return false;
@@ -308,7 +308,7 @@ public class Piece : NetworkBehaviour
         }
     }
 
-    private void ChangeTurn(int oldIndex, int newIndex)
+    private void ChangeTurn(int oldIndex = -1, int newIndex = -1)
     {
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
 
