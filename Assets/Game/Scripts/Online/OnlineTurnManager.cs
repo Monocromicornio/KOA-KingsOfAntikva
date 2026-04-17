@@ -17,6 +17,10 @@ public class OnlineTurnManager : NetworkBehaviour
         Debug.Log("[OnlineTurnManager] Network started, registering change turn event delegate");
     }
 
+    private void OnDestroy()
+    {
+        this.UnregisterEvent(CHANGE_TURN_EVENT);
+    }
     //Event will trigger this method
     private void OnReceivedChangeTurnEvent(IDataStream reader)
     {
