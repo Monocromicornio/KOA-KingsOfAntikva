@@ -79,7 +79,7 @@ public class MatchIntroAnimator : MonoBehaviour
         // Em modo online usa IsServerConnection() para distinguir host de client.
         var nm = NetworkManager.Instance();
         bool isHost = nm == null || !nm.IsConnected() || nm.IsServerConnection();
-        _cameraStartPosition = isHost ? cameraStartPositionHost : cameraStartPositionClient;
+       // _cameraStartPosition = isHost ? cameraStartPositionHost : cameraStartPositionClient;
 
         // Preparações que podem acontecer durante o loading screen:
         // 1. Captura as posições de descanso dos perfis
@@ -122,7 +122,7 @@ public class MatchIntroAnimator : MonoBehaviour
         yield return new WaitUntil(() =>
             LoadingScreenManager.Instance != null && !LoadingScreenManager.Instance.IsShowing());
 
-        yield return StartCoroutine(PlayCameraIntro());
+        //yield return StartCoroutine(PlayCameraIntro());
         yield return StartCoroutine(PlayProfilesIntro());
 
         // Profiles chegaram: fade-in do HUD e timer em paralelo
