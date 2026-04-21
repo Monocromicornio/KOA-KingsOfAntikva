@@ -8943,9 +8943,7 @@ PrefabInstance:
     - target: {fileID: 1126554203067672091, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
       propertyPath: m_text
-      value: '<b>Bomba</b>
-
-        Explode qualquer um, menos o especialista'
+      value: "Bomba\nMata qualquer pe\xE7a menos o especialista"
       objectReference: {fileID: 0}
     - target: {fileID: 1607262223644257737, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
@@ -18143,6 +18141,10 @@ MonoBehaviour:
   closeRankingButton: {fileID: 539791407}
   configsHUD: {fileID: 1049374571}
   closeConfigButton: {fileID: 1447767455}
+  exitPanel: {fileID: 1846682744}
+  exitButton: {fileID: 1693146010}
+  exitYesButton: {fileID: 1644369976}
+  exitCancelButton: {fileID: 2007793943}
   savePieceOrder: {fileID: 1306742280}
 --- !u!225 &1910468108
 CanvasGroup:
@@ -21788,7 +21790,7 @@ PrefabInstance:
     - target: {fileID: 4391946322423449808, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
         type: 3}
       propertyPath: m_text
-      value: "<b>Guerreiro</b>\nPe\xE7a com valor 3"
+      value: "Guerreiro\nPe\xE7a com valor 3"
       objectReference: {fileID: 0}
     - target: {fileID: 4999646697785852646, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
         type: 3}
@@ -25419,15 +25421,12 @@ PrefabInstance:
     - target: {fileID: 3498035182812764631, guid: e7da47d40e52b48449ce07193adc8d91,
         type: 3}
       propertyPath: m_text
-      value: '<b>Assassino</b>
-
-        O assassino consegue derrotar o rei inimigo,
-        mas perde para qualquer outro soldado'
+      value: "Espi\xE3o\nO espi\xE3o tem valor 1 mas consegue derrotar o rei inimigo"
       objectReference: {fileID: 0}
     - target: {fileID: 3498035182812764631, guid: e7da47d40e52b48449ce07193adc8d91,
         type: 3}
       propertyPath: m_fontSize
-      value: 39.7
+      value: 44.15
       objectReference: {fileID: 0}
     - target: {fileID: 3654058897346598640, guid: e7da47d40e52b48449ce07193adc8d91,
         type: 3}
@@ -62943,7 +62942,7 @@ PrefabInstance:
     - target: {fileID: 953138633070522485, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
       propertyPath: m_text
-      value: '<b>Engenheiro</b>
+      value: 'Especialista
 
         Desarma as bombas inimigas'
       objectReference: {fileID: 0}

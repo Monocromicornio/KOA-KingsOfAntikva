@@ -54,6 +54,13 @@ public class MenuFlowController : MonoBehaviour
     public GameObject configsHUD;
     public Button closeConfigButton;
 
+    // ─── Exit Panel ──────────────────────────────────────────────────────────
+    [Header("Exit Panel")]
+    public GameObject exitPanel;
+    public Button exitButton;
+    public Button exitYesButton;
+    public Button exitCancelButton;
+
     // ─── Dependencies ────────────────────────────────────────────────────────
     [Header("Dependencies")]
     [Tooltip("Referência ao SavePieceOrder para chamar SavePieces() antes de abrir o painel de modos")]
@@ -148,6 +155,23 @@ public class MenuFlowController : MonoBehaviour
         if (cardRanked  != null) cardRanked.GetComponent<Button>()?.onClick.AddListener(OnRankedClicked);
         if (cardLobby   != null) cardLobby.GetComponent<Button>()?.onClick.AddListener(OnLobbyClicked);
         if (cardOffline != null) cardOffline.GetComponent<Button>()?.onClick.AddListener(OnOfflineClicked);
+
+        // Exit
+        if (exitButton != null)
+        {
+            exitButton.onClick.RemoveAllListeners();
+            exitButton.onClick.AddListener(OnExitClicked);
+        }
+        if (exitYesButton != null)
+        {
+            exitYesButton.onClick.RemoveAllListeners();
+            exitYesButton.onClick.AddListener(OnExitYesClicked);
+        }
+        if (exitCancelButton != null)
+        {
+            exitCancelButton.onClick.RemoveAllListeners();
+            exitCancelButton.onClick.AddListener(OnExitCancelClicked);
+        }
     }
 
     // ─── Public Handlers ─────────────────────────────────────────────────────
@@ -206,17 +230,34 @@ public class MenuFlowController : MonoBehaviour
         StopRankedSearch();
     }
 
-    /// <summary>Abre o painel de Ranking com animação de escala.</summary>
-    public void OnRankingClicked()   => OpenPanel(rankingHUD);
+    /// <summary>Abre o painel de Ranking com animação de slide de cima para baixo.</summary>
+    public void OnRankingClicked()   => SlideInFromTop(rankingHUD);
 
-    /// <summary>Fecha o painel de Ranking com animação de escala.</summary>
-    public void OnCloseRankingClicked() => ClosePanel(rankingHUD);
+    /// <summary>Fecha o painel de Ranking com animação de slide para cima.</summary>
+    public void OnCloseRankingClicked() => SlideOutToTop(rankingHUD);
 
-    /// <summary>Abre o painel de Configurações com animação de escala.</summary>
-    public void OnConfigClicked()    => OpenPanel(configsHUD);
+    /// <summary>Abre o painel de Configurações com animação de slide de cima para baixo.</summary>
+    public void OnConfigClicked()    => SlideInFromTop(configsHUD);
 
-    /// <summary>Fecha o painel de Configurações com animação de escala.</summary>
-    public void OnCloseConfigClicked() => ClosePanel(configsHUD);
+    /// <summary>Fecha o painel de Configurações com animação de slide para cima.</summary>
+    public void OnCloseConfigClicked() => SlideOutToTop(configsHUD);
+
+    /// <summary>Abre o painel de saída com animação de escala.</summary>
+    public void OnExitClicked() => OpenPanel(exitPanel);
+
+    /// <summary>Confirma a saída e fecha o jogo.</summary>
+    public void OnExitYesClicked()
+    {
+        Debug.Log("[MenuFlowController] Exiting application...");
+        Application.Quit();
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+    }
+
+    /// <summary>Cancela a saída e fecha o painel.</summary>
+    public void OnExitCancelClicked() => ClosePanel(exitPanel);
 
     // ─── Main Menu Animations ────────────────────────────────────────────────
 
@@ -337,6 +378,40 @@ public class MenuFlowController : MonoBehaviour
         StartCoroutine(MoveAnchored(cardRanked,  _cardRankedRest,  new Vector2(_cardRankedRest.x  + w, _cardRankedRest.y),  0f,                null));
         StartCoroutine(MoveAnchored(cardLobby,   _cardLobbyRest,   new Vector2(_cardLobbyRest.x,  _cardLobbyRest.y  + h),  ANIM_STAGGER,      null));
         StartCoroutine(MoveAnchored(cardOffline, _cardOfflineRest, new Vector2(_cardOfflineRest.x - w, _cardOfflineRest.y), ANIM_STAGGER * 2f, onComplete));
+    }
+
+    // ─── Slide From Top Panel Open / Close ──────────────────────────────────
+
+    /// <summary>Desliza o painel de cima para baixo até a posição central.</summary>
+    private void SlideInFromTop(GameObject panel)
+    {
+        panel.SetActive(true);
+        var rt = panel.GetComponent<RectTransform>();
+        float canvasHeight = _canvasRect.rect.height;
+        float panelHeight = rt.rect.height;
+
+        Vector2 restPosition = Vector2.zero;
+        Vector2 startPosition = new Vector2(restPosition.x, canvasHeight + panelHeight);
+
+        rt.anchoredPosition = startPosition;
+        StartCoroutine(MoveAnchored(rt, startPosition, restPosition, 0f, null));
+    }
+
+    /// <summary>Desliza o painel para cima até sair da tela e desativa.</summary>
+    private void SlideOutToTop(GameObject panel)
+    {
+        var rt = panel.GetComponent<RectTransform>();
+        float canvasHeight = _canvasRect.rect.height;
+        float panelHeight = rt.rect.height;
+
+        Vector2 currentPosition = rt.anchoredPosition;
+        Vector2 targetPosition = new Vector2(currentPosition.x, canvasHeight + panelHeight);
+
+        StartCoroutine(MoveAnchored(rt, currentPosition, targetPosition, 0f, () =>
+        {
+            panel.SetActive(false);
+            rt.anchoredPosition = Vector2.zero;
+        }));
     }
 
     // ─── Generic Panel Open / Close ──────────────────────────────────────────
