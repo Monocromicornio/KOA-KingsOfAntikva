@@ -115,11 +115,11 @@ public class InteractivePiece : MonoBehaviour
     }
 
     /// <summary>
-    /// Plays the pre-attack sound, waits briefly, triggers the animation, then invokes the combat action.
+    /// Plays the piece's attack sound, waits briefly, triggers the animation, then invokes the combat action.
     /// </summary>
     protected IEnumerator FeedbackAttack(UnityAction action, string animName = "Attack")
     {
-        soundController.PreAttack();
+        anim.PlayAttackSound();
         yield return new WaitForSeconds(0.5f);
         anim.SetAnimation(animName);
         action.Invoke();
@@ -207,7 +207,7 @@ public class InteractivePiece : MonoBehaviour
         // Step 3: launch counter-attack animation
         if (defender != null)
         {
-            soundController.PreAttack();
+            anim.PlayAttackSound();
             yield return new WaitForSeconds(0.5f);
             Debug.Log("[InteractivePiece] COUNTER ATTACK! Inside coroutine on piece " + gameObject.name);
             if (anim != null) anim.SetAnimation("CounterAttack");
