@@ -14,8 +14,8 @@ public class MenuFlowController : MonoBehaviour
     [Header("Main Menu Elements")]
     public RectTransform playerInfos;
     public RectTransform playButton;
-    public RectTransform rankingButton;
-    public RectTransform configButton;
+    public RectTransform cancelSearchButton;
+    public RectTransform rightMenuBackground;
 
     // ─── Play Modes Panel ────────────────────────────────────────────────────
     [Header("Play Modes Panel")]
@@ -33,14 +33,6 @@ public class MenuFlowController : MonoBehaviour
     public Button backButton;
 
     // ─── Ranked search UI ────────────────────────────────────────────────────
-    [Header("Ranked Search UI")]
-    [Tooltip("Container /HUD/Cancelar com Timer e Status que aparece durante a busca")]
-    public GameObject cancelarPanel;
-
-    [Tooltip("Componente TMP Timer dentro do Cancelar")]
-    public TextMeshProUGUI timerText;
-
-    public Button cancelarButton;
 
     // ─── Lobby Panel (Steam Viewer) ──────────────────────────────────────────
     [Header("Lobby Panel")]
@@ -54,6 +46,13 @@ public class MenuFlowController : MonoBehaviour
     public GameObject configsHUD;
     public Button closeConfigButton;
 
+    // ─── Exit Panel ──────────────────────────────────────────────────────────
+    [Header("Exit Panel")]
+    public GameObject exitPanel;
+    public Button exitButton;
+    public Button exitYesButton;
+    public Button exitCancelButton;
+
     // ─── Dependencies ────────────────────────────────────────────────────────
     [Header("Dependencies")]
     [Tooltip("Referência ao SavePieceOrder para chamar SavePieces() antes de abrir o painel de modos")]
@@ -62,8 +61,7 @@ public class MenuFlowController : MonoBehaviour
     // ─── Cached resting anchoredPositions ────────────────────────────────────
     private Vector2 _playerInfosRest;
     private Vector2 _playButtonRest;
-    private Vector2 _rankingButtonRest;
-    private Vector2 _configButtonRest;
+    private Vector2 _rightMenuBackgroundRest;
 
     private Vector2 _cardRankedRest;
     private Vector2 _cardLobbyRest;
@@ -74,8 +72,6 @@ public class MenuFlowController : MonoBehaviour
 
     // ─── Ranked search state ─────────────────────────────────────────────────
     private bool _isSearching;
-    private float _searchStartTime;
-    private Coroutine _timerCoroutine;
 
     // ─────────────────────────────────────────────────────────────────────────
     private void Awake()
@@ -88,14 +84,16 @@ public class MenuFlowController : MonoBehaviour
 
     private void CacheRestPositions()
     {
-        if (playerInfos)   _playerInfosRest  = playerInfos.anchoredPosition;
-        if (playButton)    _playButtonRest    = playButton.anchoredPosition;
-        if (rankingButton) _rankingButtonRest = rankingButton.anchoredPosition;
-        if (configButton)  _configButtonRest  = configButton.anchoredPosition;
+        if (playerInfos)          _playerInfosRest          = playerInfos.anchoredPosition;
+        if (playButton)           _playButtonRest            = playButton.anchoredPosition;
+        if (rightMenuBackground)  _rightMenuBackgroundRest   = rightMenuBackground.anchoredPosition;
 
         if (cardRanked)  _cardRankedRest  = cardRanked.anchoredPosition;
         if (cardLobby)   _cardLobbyRest   = cardLobby.anchoredPosition;
         if (cardOffline) _cardOfflineRest = cardOffline.anchoredPosition;
+
+        // Cancel fica escondido atrás do Play no início
+        if (cancelSearchButton) cancelSearchButton.gameObject.SetActive(false);
     }
 
     private void WireButtons()
@@ -113,10 +111,15 @@ public class MenuFlowController : MonoBehaviour
         if (backButton != null)
             backButton.onClick.AddListener(OnBackClicked);
 
-        if (cancelarButton != null)
+        // Cancel_Search_Button cancela a busca rankeada
+        if (cancelSearchButton != null)
         {
-            cancelarButton.onClick.RemoveAllListeners();
-            cancelarButton.onClick.AddListener(OnCancelSearchClicked);
+            var btn = cancelSearchButton.GetComponent<Button>();
+            if (btn != null)
+            {
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(OnCancelSearchClicked);
+            }
         }
 
         if (closeLobbyButton != null)
@@ -125,29 +128,33 @@ public class MenuFlowController : MonoBehaviour
             closeLobbyButton.onClick.AddListener(OnCloseLobbyClicked);
         }
 
-        // Ranking
-        var rankingBtn = rankingButton?.GetComponent<Button>();
-        if (rankingBtn != null)
-        {
-            rankingBtn.onClick.RemoveAllListeners();
-            rankingBtn.onClick.AddListener(OnRankingClicked);
-        }
+        // Ranking e Config – botões dentro do Right_Menu_BackGround
         if (closeRankingButton != null)
             closeRankingButton.onClick.AddListener(OnCloseRankingClicked);
 
-        // Config
-        var configBtn = configButton?.GetComponent<Button>();
-        if (configBtn != null)
-        {
-            configBtn.onClick.RemoveAllListeners();
-            configBtn.onClick.AddListener(OnConfigClicked);
-        }
         if (closeConfigButton != null)
             closeConfigButton.onClick.AddListener(OnCloseConfigClicked);
 
         if (cardRanked  != null) cardRanked.GetComponent<Button>()?.onClick.AddListener(OnRankedClicked);
         if (cardLobby   != null) cardLobby.GetComponent<Button>()?.onClick.AddListener(OnLobbyClicked);
         if (cardOffline != null) cardOffline.GetComponent<Button>()?.onClick.AddListener(OnOfflineClicked);
+
+        // Exit
+        if (exitButton != null)
+        {
+            exitButton.onClick.RemoveAllListeners();
+            exitButton.onClick.AddListener(OnExitClicked);
+        }
+        if (exitYesButton != null)
+        {
+            exitYesButton.onClick.RemoveAllListeners();
+            exitYesButton.onClick.AddListener(OnExitYesClicked);
+        }
+        if (exitCancelButton != null)
+        {
+            exitCancelButton.onClick.RemoveAllListeners();
+            exitCancelButton.onClick.AddListener(OnExitCancelClicked);
+        }
     }
 
     // ─── Public Handlers ─────────────────────────────────────────────────────
@@ -206,17 +213,34 @@ public class MenuFlowController : MonoBehaviour
         StopRankedSearch();
     }
 
-    /// <summary>Abre o painel de Ranking com animação de escala.</summary>
-    public void OnRankingClicked()   => OpenPanel(rankingHUD);
+    /// <summary>Abre o painel de Ranking com animação de slide de cima para baixo.</summary>
+    public void OnRankingClicked()   => SlideInFromTop(rankingHUD);
 
-    /// <summary>Fecha o painel de Ranking com animação de escala.</summary>
-    public void OnCloseRankingClicked() => ClosePanel(rankingHUD);
+    /// <summary>Fecha o painel de Ranking com animação de slide para cima.</summary>
+    public void OnCloseRankingClicked() => SlideOutToTop(rankingHUD);
 
-    /// <summary>Abre o painel de Configurações com animação de escala.</summary>
-    public void OnConfigClicked()    => OpenPanel(configsHUD);
+    /// <summary>Abre o painel de Configurações com animação de slide de cima para baixo.</summary>
+    public void OnConfigClicked()    => SlideInFromTop(configsHUD);
 
-    /// <summary>Fecha o painel de Configurações com animação de escala.</summary>
-    public void OnCloseConfigClicked() => ClosePanel(configsHUD);
+    /// <summary>Fecha o painel de Configurações com animação de slide para cima.</summary>
+    public void OnCloseConfigClicked() => SlideOutToTop(configsHUD);
+
+    /// <summary>Abre o painel de saída com animação de escala.</summary>
+    public void OnExitClicked() => OpenPanel(exitPanel);
+
+    /// <summary>Confirma a saída e fecha o jogo.</summary>
+    public void OnExitYesClicked()
+    {
+        Debug.Log("[MenuFlowController] Exiting application...");
+        Application.Quit();
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+    }
+
+    /// <summary>Cancela a saída e fecha o painel.</summary>
+    public void OnExitCancelClicked() => ClosePanel(exitPanel);
 
     // ─── Main Menu Animations ────────────────────────────────────────────────
 
@@ -246,22 +270,13 @@ public class MenuFlowController : MonoBehaviour
                 ANIM_STAGGER, decrement));
         }
 
-        // RankingButton sai pelo topo
-        if (rankingButton)
+        // Right_Menu_BackGround (ranking + config + exit) sai pelo topo
+        if (rightMenuBackground)
         {
             pending++;
-            StartCoroutine(MoveAnchored(rankingButton, _rankingButtonRest,
-                new Vector2(_rankingButtonRest.x, _rankingButtonRest.y + h),
+            StartCoroutine(MoveAnchored(rightMenuBackground, _rightMenuBackgroundRest,
+                new Vector2(_rightMenuBackgroundRest.x, _rightMenuBackgroundRest.y + h),
                 0f, decrement));
-        }
-
-        // ConfigButton sai pelo topo
-        if (configButton)
-        {
-            pending++;
-            StartCoroutine(MoveAnchored(configButton, _configButtonRest,
-                new Vector2(_configButtonRest.x, _configButtonRest.y + h),
-                ANIM_STAGGER, decrement));
         }
 
         if (pending == 0) onComplete?.Invoke();
@@ -291,20 +306,12 @@ public class MenuFlowController : MonoBehaviour
                 _playButtonRest, ANIM_STAGGER, decrement));
         }
 
-        if (rankingButton)
+        if (rightMenuBackground)
         {
             pending++;
-            rankingButton.anchoredPosition = new Vector2(_rankingButtonRest.x, _rankingButtonRest.y + h);
-            StartCoroutine(MoveAnchored(rankingButton, rankingButton.anchoredPosition,
-                _rankingButtonRest, 0f, decrement));
-        }
-
-        if (configButton)
-        {
-            pending++;
-            configButton.anchoredPosition = new Vector2(_configButtonRest.x, _configButtonRest.y + h);
-            StartCoroutine(MoveAnchored(configButton, configButton.anchoredPosition,
-                _configButtonRest, ANIM_STAGGER, decrement));
+            rightMenuBackground.anchoredPosition = new Vector2(_rightMenuBackgroundRest.x, _rightMenuBackgroundRest.y + h);
+            StartCoroutine(MoveAnchored(rightMenuBackground, rightMenuBackground.anchoredPosition,
+                _rightMenuBackgroundRest, 0f, decrement));
         }
 
         if (pending == 0) onComplete?.Invoke();
@@ -337,6 +344,40 @@ public class MenuFlowController : MonoBehaviour
         StartCoroutine(MoveAnchored(cardRanked,  _cardRankedRest,  new Vector2(_cardRankedRest.x  + w, _cardRankedRest.y),  0f,                null));
         StartCoroutine(MoveAnchored(cardLobby,   _cardLobbyRest,   new Vector2(_cardLobbyRest.x,  _cardLobbyRest.y  + h),  ANIM_STAGGER,      null));
         StartCoroutine(MoveAnchored(cardOffline, _cardOfflineRest, new Vector2(_cardOfflineRest.x - w, _cardOfflineRest.y), ANIM_STAGGER * 2f, onComplete));
+    }
+
+    // ─── Slide From Top Panel Open / Close ──────────────────────────────────
+
+    /// <summary>Desliza o painel de cima para baixo até a posição central.</summary>
+    private void SlideInFromTop(GameObject panel)
+    {
+        panel.SetActive(true);
+        var rt = panel.GetComponent<RectTransform>();
+        float canvasHeight = _canvasRect.rect.height;
+        float panelHeight = rt.rect.height;
+
+        Vector2 restPosition = Vector2.zero;
+        Vector2 startPosition = new Vector2(restPosition.x, canvasHeight + panelHeight);
+
+        rt.anchoredPosition = startPosition;
+        StartCoroutine(MoveAnchoredSmooth(rt, startPosition, restPosition, 0f, null));
+    }
+
+    /// <summary>Desliza o painel para cima até sair da tela e desativa.</summary>
+    private void SlideOutToTop(GameObject panel)
+    {
+        var rt = panel.GetComponent<RectTransform>();
+        float canvasHeight = _canvasRect.rect.height;
+        float panelHeight = rt.rect.height;
+
+        Vector2 currentPosition = rt.anchoredPosition;
+        Vector2 targetPosition = new Vector2(currentPosition.x, canvasHeight + panelHeight);
+
+        StartCoroutine(MoveAnchoredSmooth(rt, currentPosition, targetPosition, 0f, () =>
+        {
+            panel.SetActive(false);
+            rt.anchoredPosition = Vector2.zero;
+        }));
     }
 
     // ─── Generic Panel Open / Close ──────────────────────────────────────────
@@ -384,48 +425,23 @@ public class MenuFlowController : MonoBehaviour
 
     private void StartRankedSearch()
     {
-        _isSearching     = true;
-        _searchStartTime = Time.time;
+        _isSearching = true;
 
-        if (playButton)    playButton.gameObject.SetActive(false);
-        if (cancelarPanel) cancelarPanel.SetActive(true);
-
-        _timerCoroutine = StartCoroutine(UpdateSearchTimer());
+        if (playButton)          playButton.gameObject.SetActive(false);
+        if (cancelSearchButton)  cancelSearchButton.gameObject.SetActive(true);
     }
 
     private void StopRankedSearch()
     {
         _isSearching = false;
 
-        if (_timerCoroutine != null)
-        {
-            StopCoroutine(_timerCoroutine);
-            _timerCoroutine = null;
-        }
-
-        if (cancelarPanel) cancelarPanel.SetActive(false);
-        if (playButton)    playButton.gameObject.SetActive(true);
-        if (timerText)     timerText.text = "00:00";
-    }
-
-    private IEnumerator UpdateSearchTimer()
-    {
-        while (_isSearching)
-        {
-            float elapsed = Time.time - _searchStartTime;
-            int minutes   = Mathf.FloorToInt(elapsed / 60f);
-            int seconds   = Mathf.FloorToInt(elapsed % 60f);
-
-            if (timerText != null)
-                timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-
-            yield return null;
-        }
+        if (cancelSearchButton)  cancelSearchButton.gameObject.SetActive(false);
+        if (playButton)          playButton.gameObject.SetActive(true);
     }
 
     // ─── Core animation coroutines ───────────────────────────────────────────
 
-    /// <summary>Interpola anchoredPosition com easing EaseOutBack.</summary>
+    /// <summary>Interpola anchoredPosition com easing EaseOutBack (usado no menu principal).</summary>
     private IEnumerator MoveAnchored(RectTransform rt, Vector2 from, Vector2 to,
                                      float delay, System.Action onComplete)
     {
@@ -436,6 +452,24 @@ public class MenuFlowController : MonoBehaviour
         {
             t = Mathf.Min(t + Time.deltaTime / ANIM_DURATION, 1f);
             rt.anchoredPosition = Vector2.LerpUnclamped(from, to, EaseOutBack(t));
+            yield return null;
+        }
+
+        rt.anchoredPosition = to;
+        onComplete?.Invoke();
+    }
+
+    /// <summary>Interpola anchoredPosition com easing EaseInOutQuad (sem bounce, usado em painéis).</summary>
+    private IEnumerator MoveAnchoredSmooth(RectTransform rt, Vector2 from, Vector2 to,
+                                           float delay, System.Action onComplete)
+    {
+        if (delay > 0f) yield return new WaitForSeconds(delay);
+
+        float t = 0f;
+        while (t < 1f)
+        {
+            t = Mathf.Min(t + Time.deltaTime / ANIM_DURATION, 1f);
+            rt.anchoredPosition = Vector2.LerpUnclamped(from, to, EaseInOutQuad(t));
             yield return null;
         }
 
@@ -473,4 +507,7 @@ public class MenuFlowController : MonoBehaviour
     }
 
     private static float EaseInQuart(float t) => t * t * t * t;
+
+    private static float EaseInOutQuad(float t)
+        => t < 0.5f ? 2f * t * t : 1f - Mathf.Pow(-2f * t + 2f, 2f) / 2f;
 }
