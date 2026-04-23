@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -85,6 +86,8 @@ public class SceneLoadingHandler : MonoBehaviour
         {
             LoadingScreenManager.Instance.Hide();
         }
+
+        LoadingEvents.OnLoadingFinished?.Invoke();
     }
 
     public static void UpdateLoadingProgress(float progress)
@@ -102,4 +105,9 @@ public class SceneLoadingHandler : MonoBehaviour
             LoadingScreenManager.Instance.SetStatusText(status);
         }
     }
+}
+
+public static class LoadingEvents
+{
+    public static Action OnLoadingFinished;
 }

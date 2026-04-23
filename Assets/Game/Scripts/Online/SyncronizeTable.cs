@@ -11,42 +11,49 @@ public class SyncronizeTable : NetworkBehaviour
     NetworkManager networkManager => NetworkManager.Instance();
     MatchController matchController => MatchController.instance;
     public TableData table;
-    
+
     private static TableData cachedTableReference;
 
     private byte[][] tableParts;
-    
+
     public static ulong LocalSteamId { get; private set; }
     public static ulong OpponentSteamId { get; private set; }
-    
+
     public static event Action<ulong> OnOpponentSteamIdReceived;
 
+    private NetworkVariable<int> serverTurnCounter = 0;
+    private NetworkVariable<int> clientTurnCounter = 0;
+
+    private bool turnCallbackRegistered = false;
+
+    private bool receivedOpponentSteamId = false;
+    private bool sentSteamIdToOpponent = false;
     void Awake()
     {
-           if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
-          else { Destroy(gameObject); }
+        if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
+        else { Destroy(gameObject); }
 
         //Instance = this;
 
         LocalSteamId = SteamUser.GetSteamID().m_SteamID;
         OpponentSteamId = 0;
-        
+
         if (table != null && cachedTableReference == null)
         {
             cachedTableReference = table;
             Debug.Log($"[SyncronizeTable] Referência de TableData cacheada: {table.name}");
         }
-        
+
         if (table == null && cachedTableReference != null)
         {
             table = cachedTableReference;
             Debug.Log($"[SyncronizeTable] TableData restaurado do cache: {table.name}");
         }
-        
+
         Debug.Log($"[SyncronizeTable] Steam ID local salvo: {LocalSteamId}");
         Debug.Log($"[SyncronizeTable] TableData status: {(table != null ? $"OK ({table.name})" : "NULL!")}");
     }
-    
+
     void OnDestroy()
     {
         if (Instance == this)
@@ -58,38 +65,40 @@ public class SyncronizeTable : NetworkBehaviour
 
     void Start()
     {
-        StartCoroutine(SendSteamIdDelayed());
-        
+        //StartCoroutine(SendSteamIdDelayed());
+
         if (networkManager.IsServerConnection()) return;
         StartCoroutine(SendPartsToServer());
     }
-    
+
     private IEnumerator SendSteamIdDelayed()
     {
         yield return new WaitForSeconds(2f);
-        
+
         Debug.Log($"[SyncronizeTable] Enviando meu Steam ID para oponente: {LocalSteamId}");
-        NetworkExecute<ulong>(ReceiveOpponentSteamId, LocalSteamId);
+        OnlineTurnManager.Instance.SendSteamIdToOpponent(LocalSteamId);
+        sentSteamIdToOpponent = true;
     }
-    
-    private void ReceiveOpponentSteamId(ulong opponentId)
+
+    public void ReceiveOpponentSteamId(ulong opponentId)
     {
         if (opponentId == LocalSteamId)
         {
             Debug.Log("[SyncronizeTable] Recebi meu próprio Steam ID (ignorando)");
             return;
         }
-        
+
         if (OpponentSteamId != 0)
         {
             Debug.Log($"[SyncronizeTable] Steam ID do oponente já foi definido: {OpponentSteamId}");
             return;
         }
-        
+
         OpponentSteamId = opponentId;
         Debug.Log($"[SyncronizeTable] ✓ Steam ID do oponente recebido: {OpponentSteamId}");
-        
+
         OnOpponentSteamIdReceived?.Invoke(OpponentSteamId);
+        receivedOpponentSteamId = true;
     }
 
     IEnumerator SendPartsToServer()
@@ -99,9 +108,9 @@ public class SyncronizeTable : NetworkBehaviour
             Debug.LogError("[SyncronizeTable] ERRO: Não é possível enviar tabela - table é null!");
             yield break;
         }
-        
+
         Debug.Log($"[SyncronizeTable] Iniciando envio da tabela para servidor: {table.name}");
-        
+
         string encondeTable = EncodeTableDataXml();
         byte[] bytesToEncode = Encoding.UTF8.GetBytes(encondeTable);
 
@@ -114,20 +123,12 @@ public class SyncronizeTable : NetworkBehaviour
             NetworkExecuteOnServer<byte[], int, int>(GetTable, parts[i], i, parts.Length);
             yield return new WaitForSeconds(0.2f);
         }
-        
+
         Debug.Log("[SyncronizeTable] Todas as partes da tabela foram enviadas");
-    }
 
-    public void SetChangeTurn()
-    {
-        NetworkExecute(ChangeTurn);
+        StartCoroutine(SendSteamIdDelayed());
     }
-
-    private void ChangeTurn()
-    {
-        matchController.ChangeTurnImmediate();
-    }
-
+    
     private void GetTable(byte[] encondeTable, int part, int size)
     {
         if (tableParts == null || tableParts.Length != size)
@@ -145,6 +146,8 @@ public class SyncronizeTable : NetworkBehaviour
         byte[] fullTableBytes = CombineBytes(tableParts);
         Debug.Log($"[SyncronizeTable] Servidor: Tabela completa recebida ({fullTableBytes.Length} bytes total)");
         StartCoroutine(WaitForMatchControllerAndDecode(Encoding.UTF8.GetString(fullTableBytes)));
+
+        StartCoroutine(SendSteamIdDelayed());
     }
 
     private IEnumerator WaitForMatchControllerAndDecode(string xmlString)
@@ -164,6 +167,11 @@ public class SyncronizeTable : NetworkBehaviour
             yield break;
         }
 
+        while (receivedOpponentSteamId == false || sentSteamIdToOpponent == false)
+        {
+            yield return null;
+        }
+
         DecodeTable(xmlString);
     }
 
@@ -176,7 +184,9 @@ public class SyncronizeTable : NetworkBehaviour
             Debug.LogError("[SyncronizeTable] Falha ao decodificar tabela - tableData é null");
             return;
         }
-        
+
+        Debug.Log("[SyncronizeTable] Decodificando table e iniciando jogo");
+
         tableData.LoadTable();
         matchController.StartGame(tableData);
     }

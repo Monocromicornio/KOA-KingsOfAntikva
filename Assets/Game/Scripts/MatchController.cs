@@ -31,6 +31,8 @@ public class MatchController : MonoBehaviour
 
     public bool isLoadingScreenFinished;
 
+    private bool changeTurnPending = false;
+
     private bool homeTeamTurn = false; //False to start with home, true for away
 
     public TurnState currentTurn { get; private set; }
@@ -44,6 +46,7 @@ public class MatchController : MonoBehaviour
 
     public SyncronizeTable syncronize;
 
+    public OnlineTurnManager onlineTurnManager;
     [SerializeField]
     private GameObject game;
     public PlayerSquad playerSquad;
@@ -86,7 +89,9 @@ public class MatchController : MonoBehaviour
         if (networkManager.IsConnected())
         {
             _ = NetworkGameObject.Instantiate(syncronize.gameObject, Vector3.up, Quaternion.identity);
+            _ = NetworkGameObject.Instantiate(onlineTurnManager.gameObject, Vector3.up, Quaternion.identity);
         }
+
         else if (!networkManager.IsServerConnection())
         {
             myTurn = TurnState.homeTeam;
@@ -100,16 +105,27 @@ public class MatchController : MonoBehaviour
     {
         // clientDisconnected = Callback<ClientDisconnectedEventArgs>.Create(OnClientDisconnected);
         // serverDisconnected = Callback<ServerDisconnectedEventArgs>.Create(OnServerDisconnected);
+        LoadingEvents.OnLoadingFinished += OnLoadingFinished;
         steamConnectionStatusChanged = Callback<SteamNetConnectionStatusChangedCallback_t>.Create(OnSteamConnectionStatusChanged);
+
     }
 
     private void OnDisable()
     {
         //clientDisconnected.Dispose();
-       // serverDisconnected.Dispose();
+        // serverDisconnected.Dispose();
+        LoadingEvents.OnLoadingFinished -= OnLoadingFinished;
         steamConnectionStatusChanged.Dispose();
     }
 
+
+    private void OnLoadingFinished()
+    {
+        if (networkManager.IsConnected())
+        {
+            _ = NetworkGameObject.Instantiate(onlineTurnManager.gameObject, Vector3.up, Quaternion.identity);
+        }
+    }
     public async void StartGame(TableData clientTable)
     {
         await Task.WhenAll(
@@ -123,6 +139,7 @@ public class MatchController : MonoBehaviour
     private IEnumerator StartGame()
     {
         yield return new WaitForSeconds(2);
+
         ChangeTurn();
 
         while (isLoadingScreenFinished == false)
@@ -256,18 +273,32 @@ public class MatchController : MonoBehaviour
 
     public void ChangeTurn()
     {
+        // Duplicate-call guard is only needed online, where multiple code paths
+        // (local piece coroutine + network packet receiver) can both fire for the same action.
+        if (hasConnection && changeTurnPending)
+        {
+            Debug.LogWarning($"[MatchController] ChangeTurn BLOCKED — already pending (online). Caller: {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name} on {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType?.Name}");
+            return;
+        }
+
+        if (hasConnection) changeTurnPending = true;
+        Debug.Log($"[MatchController] ChangeTurn called — pending={changeTurnPending}, turn={turn}, myTurn={myTurn}, Caller: {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name} on {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType?.Name}");
+
         if (SyncronizeTable.Instance == null)
         {
             ChangeTurnImmediate();
         }
         else
         {
-            SyncronizeTable.Instance.SetChangeTurn();
+            OnlineTurnManager.Instance.SetChangeTurn();
         }
     }
 
     public void ChangeTurnImmediate()
     {
+        Debug.Log($"[MatchController] ChangeTurnImmediate called — resetting pending. turn={turn}, myTurn={myTurn}");
+        changeTurnPending = false;
+
         if (finished) return;
         if (!game.activeSelf)
         {
@@ -279,6 +310,8 @@ public class MatchController : MonoBehaviour
         homeTeamTurn = !homeTeamTurn;
         currentTurn = homeTeamTurn ? TurnState.homeTeam : TurnState.awayTeam;
         turn = currentTurn;
+
+        Debug.Log($"[MatchController] Turn changed to {turn}");
 
         ResetPiecesForNewTurn();
 
