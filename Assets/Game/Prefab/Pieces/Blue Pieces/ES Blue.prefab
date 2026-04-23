@@ -90,6 +90,8 @@ MonoBehaviour:
   syncParticles: 0
   ShowNetworkParameters: 1
   BehaviorlId: 3
+  indexCurrentField: -1
+  indexPreviousField: -1
   targetField: {fileID: 0}
   body: {fileID: 7540906493992834473}
   type: 1
@@ -923,11 +925,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4318840428861223422}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &4617012734634697360 stripped
 RectTransform:
@@ -935,34 +933,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1509115068107259742}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5302037425490319995 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1509115068107259742}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4318840428861223422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5302037425490319995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: prefab.es_blue_tooltip_text_tmp_
-  _fallback: 'Especialista
-
-    Desarma as bombas inimigas'
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12
 --- !u!1001 &2259576082218127529
 PrefabInstance:
   m_ObjectHideFlags: 0

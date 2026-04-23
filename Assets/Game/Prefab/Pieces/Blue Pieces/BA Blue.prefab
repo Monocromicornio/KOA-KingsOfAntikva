@@ -682,6 +682,8 @@ MonoBehaviour:
   syncParticles: 0
   ShowNetworkParameters: 1
   BehaviorlId: 1
+  indexCurrentField: -1
+  indexPreviousField: -1
   targetField: {fileID: 0}
   body: {fileID: 4254644608191902057}
   type: 3
@@ -2160,38 +2162,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4263543604626374032}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
---- !u!1 &1675478140519346856 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-    type: 3}
-  m_PrefabInstance: {fileID: 5342839978747746189}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4263543604626374032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675478140519346856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: prefab.ba_blue_tooltip_text_tmp_
-  _fallback: "Barbaro\nPe\xE7a de valor 4"
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12
 --- !u!224 &2217473135121271363 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,

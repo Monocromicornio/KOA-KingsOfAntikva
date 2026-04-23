@@ -323,6 +323,11 @@ public class Piece : NetworkBehaviour
             return;
         }
 
+        if(hasConnection == false)
+        {
+            return;
+        }
+        
         using (DataStream writer = new DataStream())
         {
             writer.Write(oldIndex);

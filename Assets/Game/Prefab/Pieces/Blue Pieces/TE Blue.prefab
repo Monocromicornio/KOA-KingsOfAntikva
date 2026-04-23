@@ -9713,6 +9713,8 @@ MonoBehaviour:
   syncParticles: 0
   ShowNetworkParameters: 1
   BehaviorlId: 3
+  indexCurrentField: -1
+  indexPreviousField: -1
   targetField: {fileID: 0}
   body: {fileID: 5603066192594323481}
   type: 10
@@ -20211,11 +20213,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1668372250528241833}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &3987164695336522705 stripped
 RectTransform:
@@ -20223,29 +20221,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7185169520533753375}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4527018430103382842 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-    type: 3}
-  m_PrefabInstance: {fileID: 7185169520533753375}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1668372250528241833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4527018430103382842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: prefab.te_blue_tooltip_text_tmp_
-  _fallback: "Tesouro\nSe o inimigo encontrar seu tesouro voc\xEA perde"
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12
