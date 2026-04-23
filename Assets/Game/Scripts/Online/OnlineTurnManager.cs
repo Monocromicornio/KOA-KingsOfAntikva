@@ -10,10 +10,12 @@ public class OnlineTurnManager : NetworkBehaviour
 
     const int CHANGE_TURN_EVENT = 22980;
 
+    const int RECEIVED_OPPONENT_STEAM_ID = 32980;
     //Subscribe the reciever method to the event
     public override void OnNetworkStarted()
     {
         this.RegisterEvent(CHANGE_TURN_EVENT, this.OnReceivedChangeTurnEvent, true);
+        this.RegisterEvent(RECEIVED_OPPONENT_STEAM_ID, this.OnReceivedSteamIdEvent, true);
         Debug.Log("[OnlineTurnManager] Network started, registering change turn event delegate");
     }
 
@@ -24,12 +26,24 @@ public class OnlineTurnManager : NetworkBehaviour
         Debug.Log("[OnlineTurnManager] Received remote change turn event from opponent");
     }
 
+    private void OnReceivedSteamIdEvent(IDataStream reader)
+    {
+        ulong opponentSteamId = reader.Read<ulong>();
+
+        this.ReceivedOpponentSteamId(opponentSteamId);
+        Debug.Log("[OnlineTurnManager] Received Steam ID event from opponent");
+    }
+
     //regular method
     private void ReceiveChangeTurnFromOther()
     {
         matchController.ChangeTurnImmediate(); 
     }
 
+    private void ReceivedOpponentSteamId(ulong opponentSteamId)
+    {
+        SyncronizeTable.Instance.ReceiveOpponentSteamId(opponentSteamId);
+    }
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -51,6 +65,15 @@ public class OnlineTurnManager : NetworkBehaviour
         using (DataStream writer = new DataStream())
         {
             this.Send(CHANGE_TURN_EVENT, writer, DeliveryMode.Reliable);
+        }
+    }
+
+    public void SendSteamIdToOpponent(ulong steamId)
+    {
+        using (DataStream writer = new DataStream())
+        {
+            writer.Write(steamId);
+            this.Send(RECEIVED_OPPONENT_STEAM_ID, writer, DeliveryMode.Reliable);
         }
     }
 }

@@ -26,6 +26,8 @@ public class SyncronizeTable : NetworkBehaviour
 
     private bool turnCallbackRegistered = false;
 
+    private bool receivedOpponentSteamId = false;
+    private bool sentSteamIdToOpponent = false;
     void Awake()
     {
         if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
@@ -63,7 +65,7 @@ public class SyncronizeTable : NetworkBehaviour
 
     void Start()
     {
-        StartCoroutine(SendSteamIdDelayed());
+        //StartCoroutine(SendSteamIdDelayed());
 
         if (networkManager.IsServerConnection()) return;
         StartCoroutine(SendPartsToServer());
@@ -74,10 +76,11 @@ public class SyncronizeTable : NetworkBehaviour
         yield return new WaitForSeconds(2f);
 
         Debug.Log($"[SyncronizeTable] Enviando meu Steam ID para oponente: {LocalSteamId}");
-        NetworkExecute<ulong>(ReceiveOpponentSteamId, LocalSteamId);
+        OnlineTurnManager.Instance.SendSteamIdToOpponent(LocalSteamId);
+        sentSteamIdToOpponent = true;
     }
 
-    private void ReceiveOpponentSteamId(ulong opponentId)
+    public void ReceiveOpponentSteamId(ulong opponentId)
     {
         if (opponentId == LocalSteamId)
         {
@@ -95,6 +98,7 @@ public class SyncronizeTable : NetworkBehaviour
         Debug.Log($"[SyncronizeTable] ✓ Steam ID do oponente recebido: {OpponentSteamId}");
 
         OnOpponentSteamIdReceived?.Invoke(OpponentSteamId);
+        receivedOpponentSteamId = true;
     }
 
     IEnumerator SendPartsToServer()
@@ -121,6 +125,8 @@ public class SyncronizeTable : NetworkBehaviour
         }
 
         Debug.Log("[SyncronizeTable] Todas as partes da tabela foram enviadas");
+
+        StartCoroutine(SendSteamIdDelayed());
     }
     
     private void GetTable(byte[] encondeTable, int part, int size)
@@ -140,6 +146,8 @@ public class SyncronizeTable : NetworkBehaviour
         byte[] fullTableBytes = CombineBytes(tableParts);
         Debug.Log($"[SyncronizeTable] Servidor: Tabela completa recebida ({fullTableBytes.Length} bytes total)");
         StartCoroutine(WaitForMatchControllerAndDecode(Encoding.UTF8.GetString(fullTableBytes)));
+
+        StartCoroutine(SendSteamIdDelayed());
     }
 
     private IEnumerator WaitForMatchControllerAndDecode(string xmlString)
@@ -159,6 +167,11 @@ public class SyncronizeTable : NetworkBehaviour
             yield break;
         }
 
+        while (receivedOpponentSteamId == false || sentSteamIdToOpponent == false)
+        {
+            yield return null;
+        }
+
         DecodeTable(xmlString);
     }
 
@@ -171,7 +184,9 @@ public class SyncronizeTable : NetworkBehaviour
             Debug.LogError("[SyncronizeTable] Falha ao decodificar tabela - tableData é null");
             return;
         }
-        
+
+        Debug.LogError("[SyncronizeTable] Decodificando table e iniciando jogo");
+
         tableData.LoadTable();
         matchController.StartGame(tableData);
     }
