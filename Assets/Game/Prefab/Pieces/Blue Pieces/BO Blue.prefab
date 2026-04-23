@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6882154806359441366}
   - component: {fileID: 7837648028798507341}
   - component: {fileID: -8104086174035437449}
+  - component: {fileID: 553215419399972794}
   m_Layer: 10
   m_Name: BO Blue
   m_TagString: Player
@@ -88,6 +89,8 @@ MonoBehaviour:
   syncParticles: 0
   ShowNetworkParameters: 1
   BehaviorlId: 3
+  indexCurrentField: -1
+  indexPreviousField: -1
   targetField: {fileID: 0}
   body: {fileID: 3620785317967201504}
   type: 11
@@ -137,8 +140,9 @@ MonoBehaviour:
   BehaviorlId: 2
   animator: {fileID: 6033026153546891418}
   gDie: {fileID: 6930496545603783166, guid: 8bbb9615441ef8e4786fb47ee3e76bf7, type: 3}
-  auDie: {fileID: 8205623995168136039}
-  auDown: {fileID: 0}
+  attackClip: {fileID: 0}
+  dieClip: {fileID: 0}
+  moveEndClip: {fileID: 0}
 --- !u!114 &6882154806359441366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +190,103 @@ MonoBehaviour:
   instancePrefabSignature: bd48fab5-7c93-46d8-abc1-5a6e8ea667e2
   childToDisable: []
   childToSync: []
+--- !u!82 &553215419399972794
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80674005514539198}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &740474906815663888
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,11 +1093,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5523406995422772715}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &4794791003780805886 stripped
 RectTransform:
@@ -1004,29 +1101,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1614854608850790704}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5407969309481864213 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1614854608850790704}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5523406995422772715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5407969309481864213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: prefab.bo_blue_tooltip_text_tmp_
-  _fallback: "Bomba\nMata qualquer pe\xE7a menos o especialista"
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12

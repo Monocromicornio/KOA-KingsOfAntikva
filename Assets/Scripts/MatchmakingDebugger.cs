@@ -174,8 +174,6 @@ namespace com.onlineobject.objectnet.integration
                 Log("Componente encontrado!");
                 Log($"Min Players: {waitManager.minPlayersToStart}");
                 Log($"Game Scene: {waitManager.gameSceneName}");
-                Log($"Waiting Panel: {(waitManager.waitingPanel != null ? "Configurado" : "NULL ⚠️")}");
-                Log($"Player Count Text: {(waitManager.playerCountText != null ? "Configurado" : "NULL ⚠️")}");
                 Log($"Status Text: {(waitManager.statusText != null ? "Configurado" : "NULL ⚠️")}");
             }
             else

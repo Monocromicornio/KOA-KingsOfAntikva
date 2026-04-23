@@ -110,6 +110,7 @@ public class MovePiece : MonoBehaviour
 
         transform.position = targetPosition;
         anim.SetAnimation("Walk", false);
+        anim.PlayMoveEndSound();
         piece.CheckPieceOnField();
     }
 
@@ -125,6 +126,7 @@ public class MovePiece : MonoBehaviour
 
         transform.position = target.position;
         anim.SetAnimation("Walk", false);
+        anim.PlayMoveEndSound();
         piece.CheckPieceOnField();
     }
 

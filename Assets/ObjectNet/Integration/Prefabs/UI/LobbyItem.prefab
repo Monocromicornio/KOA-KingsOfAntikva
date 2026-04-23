@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5732830965965119053}
   - component: {fileID: 2740947548648827451}
   - component: {fileID: 5644033418522610252}
-  - component: {fileID: 5578810933096276611}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -80,26 +79,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: JOIN
---- !u!114 &5578810933096276611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21588550424790506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: prefab.lobbyitem_join_text_legacy_
-  _fallback: JOIN
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12
 --- !u!1 &517004385809471913
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +90,6 @@ GameObject:
   - component: {fileID: 1728543250328788052}
   - component: {fileID: 8022942835797907218}
   - component: {fileID: 854117180930891679}
-  - component: {fileID: 543649974625069267}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -180,26 +158,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Lobby Teste
---- !u!114 &543649974625069267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 517004385809471913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: prefab.lobbyitem_name
-  _fallback: Lobby Teste
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12
 --- !u!1 &3142137060877561972
 GameObject:
   m_ObjectHideFlags: 0

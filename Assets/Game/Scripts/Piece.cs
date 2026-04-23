@@ -17,8 +17,8 @@ public class Piece : NetworkBehaviour
     private NetworkVariable<int> fieldIndex = -1;
     private NetworkVariable<int> previousFieldIndex = -1;
 
-    public int indexCurrentField => (int)fieldIndex;
-    public int indexPreviousField => (int)previousFieldIndex;
+    public int indexCurrentField = -1;
+    public int indexPreviousField = -1;
     public GameField field
     {
         get
@@ -38,6 +38,9 @@ public class Piece : NetworkBehaviour
     public bool isDying { get; private set; }
     private bool onValueChangeSetted = false;
     private bool hasActedThisTurn = false;
+
+
+    const int CHANGE_FIELDINDEX_EVENT = 12980;
 
     private void Awake()
     {
@@ -66,10 +69,36 @@ public class Piece : NetworkBehaviour
         onValueChangeSetted = true;
         fieldIndex.OnValueChange((int oldValue, int newValue) =>
         {
-            board.GetGameField(oldValue)?.SetPiece(null);
-            field?.SetPiece(this);
-
+            Debug.Log("[Piece] Field index value changed via Passive Update");
+            // indexCurrentField = newValue;
+            //  board.GetGameField(oldValue)?.SetPiece(null);
+            // field?.SetPiece(this);
         });
+    }
+
+    public override void OnNetworkStarted()
+    {
+        this.RegisterEvent(CHANGE_FIELDINDEX_EVENT, this.OnReceivedChangeTurnEvent, true);
+        Debug.Log("[PIECE] Network started, registering field change event delegate");
+    }
+
+    //Event will trigger this method
+    private void OnReceivedChangeTurnEvent(IDataStream reader)
+    {
+        int receivedOldIndex = reader.Read<int>();
+        int receivedNewIndex = reader.Read<int>();
+
+        this.ReceiveChangeTurnFromOther(receivedOldIndex, receivedNewIndex);
+        Debug.Log("[PIECE] Received remote field change event from opponent. OLD VALUE " + receivedOldIndex + " NEW VALUE " + receivedNewIndex);
+    }
+
+    //regular method
+    private void ReceiveChangeTurnFromOther(int receivedOldIndex, int receivedNewIndex)
+    {
+        indexCurrentField = receivedNewIndex;
+        indexPreviousField = receivedOldIndex;
+        board.GetGameField(receivedOldIndex)?.SetPiece(null);
+        field?.SetPiece(this);
     }
 
     public void SetControlToClient()
@@ -131,9 +160,9 @@ public class Piece : NetworkBehaviour
     {
         if (pieceColor == PieceColor.red) return;
         if (hasActedThisTurn) return;
-        
+
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
-        
+
         if (!isTutorialMode)
         {
             if (!matchController.IsMyTurn()) return;
@@ -159,6 +188,10 @@ public class Piece : NetworkBehaviour
         fieldIndex.SetValue(field.index);
         previousFieldIndex.SetValue(field.index);
 
+        indexCurrentField = field.index;
+        indexPreviousField = field.index;
+        SyncCurrentField(indexPreviousField, indexCurrentField);
+
         targetField = null;
 
         transform.position = this.field.transform.position;
@@ -176,18 +209,18 @@ public class Piece : NetworkBehaviour
         if (hasActedThisTurn) return;
 
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
-        
+
         if (!isTutorialMode)
         {
             matchController.MadeActionOnTurn();
         }
-        
+
         hasActedThisTurn = true;
         targetField = field;
-        
+
         bool onField = CheckPieceOnField();
         if (!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
-        
+
         SendMessage("Deselect", SendMessageOptions.DontRequireReceiver);
     }
 
@@ -196,10 +229,10 @@ public class Piece : NetworkBehaviour
         if (!IsActive() || finished) return;
 
         targetField = field;
-        
+
         bool onField = CheckPieceOnField();
         if (!onField) SendMessage("NewTarget", targetField, SendMessageOptions.DontRequireReceiver);
-        
+
         SendMessage("Deselect", SendMessageOptions.DontRequireReceiver);
     }
 
@@ -220,16 +253,20 @@ public class Piece : NetworkBehaviour
             GameField oldField = field;
             int oldIndex = fieldIndex;
             previousFieldIndex.SetValue(oldIndex);
+            indexPreviousField = oldIndex;
+
             targetField.SetPiece(null);
             field?.SetPiece(null);
 
             fieldIndex.SetValue(targetField.index);
+            indexCurrentField = targetField.index;
             field.SetPiece(this);
 
             TutorialEvents.TriggerPieceMoved(this, oldField, field);
 
             SendMessage("ChangeField", targetField, SendMessageOptions.DontRequireReceiver);
             ChangeTurn();
+            SyncCurrentField(oldIndex, targetField.index);
             return true;
         }
 
@@ -279,21 +316,59 @@ public class Piece : NetworkBehaviour
         }
     }
 
+    private void SyncCurrentField(int oldIndex, int newIndex)
+    {
+        if (!IsActive())
+        {
+            return;
+        }
+
+        if(hasConnection == false)
+        {
+            return;
+        }
+        
+        using (DataStream writer = new DataStream())
+        {
+            writer.Write(oldIndex);
+            writer.Write(newIndex);
+            this.Send(CHANGE_FIELDINDEX_EVENT, writer, DeliveryMode.Reliable);
+        }
+    }
     private void ChangeTurn()
     {
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
 
         if (!isTutorialMode)
         {
-            if (!IsActive() ) return; //|| !matchController.IsMyTurn()
+            if (!IsActive())
+            {
+                Debug.LogWarning($"[Piece:{name}] ChangeTurn BLOCKED — IsActive()=false. IsMyTurn={matchController.IsMyTurn()}, turn={matchController.turn}");
+                return;
+            }
+
+            // IsMyTurn() guard is only meaningful in online matches to prevent the remote copy
+            // of a moved piece from firing a second ChangeTurn after the network has already applied it.
+            if (hasConnection && !matchController.IsMyTurn())
+            {
+                Debug.LogWarning($"[Piece:{name}] ChangeTurn BLOCKED — IsMyTurn()=false (online). turn={matchController.turn}, myTurn={matchController.myTurn}");
+                return;
+            }
         }
         else
         {
-            if (!IsActive()) return;
+            if (!IsActive())
+            {
+                Debug.LogWarning($"[Piece:{name}] ChangeTurn BLOCKED (tutorial) — IsActive()=false.");
+                return;
+            }
         }
-        
+
+        Debug.Log($"[Piece:{name}] ChangeTurn PASSING — calling matchController.ChangeTurn(). turn={matchController.turn}");
         SendMessage("EndTurn", targetField, SendMessageOptions.DontRequireReceiver);
-        
+
+      
+
         if (!isTutorialMode)
         {
             matchController.ChangeTurn();

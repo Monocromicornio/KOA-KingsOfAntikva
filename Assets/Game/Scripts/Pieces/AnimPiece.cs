@@ -6,12 +6,12 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Piece))]
+[RequireComponent(typeof(AudioSource))]
 public class AnimPiece : NetworkBehaviour
 {
     private MatchController matchController => MatchController.instance;
     private bool hasConnection => matchController.hasConnection;
     private SoundController soundController => matchController.soundController;
-    private GameMode gameMode => matchController.gameMode;
 
     [Header("Animation")]
     [SerializeField]
@@ -23,16 +23,54 @@ public class AnimPiece : NetworkBehaviour
     [SerializeField]
     private GameObject gDie;
 
-    [Header("Sound")]
+    [Header("Sound - Per Piece Clips")]
+    [Tooltip("Sound played when this piece attacks.")]
     [SerializeField]
-    private AudioSource auDie;
+    private AudioClip attackClip;
 
+    [Tooltip("Sound played when this piece dies.")]
     [SerializeField]
-    private AudioSource auDown;
+    private AudioClip dieClip;
+
+    //[Tooltip("Sound played when this piece falls/collapses after dying.")]
+   // [SerializeField]
+    //private AudioClip downClip;
+
+    [Tooltip("Sound played when this piece finishes moving.")]
+    [SerializeField]
+    private AudioClip moveEndClip;
+
+    private AudioSource audioSource;
 
     private void Awake()
     {
         anim = animator;
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    /// <summary>
+    /// Plays a one-shot AudioClip on this piece's AudioSource.
+    /// </summary>
+    private void PlayClip(AudioClip clip)
+    {
+        if (clip == null || audioSource == null) return;
+        audioSource.PlayOneShot(clip);
+    }
+
+    /// <summary>
+    /// Plays the attack sound configured on this piece.
+    /// </summary>
+    public void PlayAttackSound()
+    {
+        PlayClip(attackClip);
+    }
+
+    /// <summary>
+    /// Plays the movement-end sound configured on this piece.
+    /// </summary>
+    public void PlayMoveEndSound()
+    {
+        PlayClip(moveEndClip);
     }
 
     public void SetAnimation(string animName)
@@ -91,21 +129,12 @@ public class AnimPiece : NetworkBehaviour
     }
 
     /// <summary>
-    /// Triggers death animation and sounds immediately.
+    /// Triggers death animation and sounds immediately using this piece's own clips.
     /// All timing is controlled externally by InteractivePiece.deathAnimationDelay.
     /// </summary>
     private void DieEffect()
     {
-        bool dieSoldier = gameMode.type == GameMode.GameType.Hard && tag == "Enemy";
-
-        if (dieSoldier)
-        {
-            soundController.DieSoldier();
-        }
-        else
-        {
-            if (auDie) auDie.Play();
-        }
+        PlayClip(dieClip);
 
         SetAnimation("Die", true);
 
@@ -114,14 +143,7 @@ public class AnimPiece : NetworkBehaviour
             Instantiate(gDie, transform.position, gDie.transform.rotation);
         }
 
-        if (dieSoldier)
-        {
-            soundController.DownSoldier();
-        }
-        else
-        {
-            if (auDown) auDown.Play();
-        }
+       // PlayClip(downClip);
     }
 
     public void Win()
