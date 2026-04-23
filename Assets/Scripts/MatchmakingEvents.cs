@@ -55,9 +55,7 @@ namespace com.onlineobject.objectnet.integration
 
         private bool IsSearching()
         {
-            return lobbyList != null && 
-                   lobbyList.searchingPanel != null && 
-                   lobbyList.searchingPanel.activeSelf;
+            return lobbyList != null && lobbyList.IsSearching;
         }
 
         public void OnMatchFoundCallback()

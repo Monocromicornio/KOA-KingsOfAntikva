@@ -12,8 +12,6 @@ namespace com.onlineobject.objectnet.integration
     public class SteamLobbyWaitManager : MonoBehaviour
     {
         [Header("UI References")]
-        public GameObject waitingPanel;
-        public TextMeshProUGUI playerCountText;
         public TextMeshProUGUI statusText;
         public Button leaveLobbyButton;
 
@@ -34,11 +32,6 @@ namespace com.onlineobject.objectnet.integration
         private void Start()
         {
             lobbyChatUpdate = Callback<LobbyChatUpdate_t>.Create(OnLobbyChatUpdate);
-
-            if (waitingPanel != null)
-            {
-               // waitingPanel.SetActive(false);
-            }
 
             if (leaveLobbyButton != null)
             {
@@ -72,9 +65,18 @@ namespace com.onlineobject.objectnet.integration
 
             Debug.Log("[SteamLobbyWait] Aguardando jogadores no lobby: " + lobbyID);
 
-            if (waitingPanel != null)
+            // Atualiza status com o nome da sala
+            if (statusText != null)
             {
-                waitingPanel.SetActive(true);
+                string lobbyName = SteamMatchmaking.GetLobbyData(currentLobbyID, "LobbyName");
+                if (!string.IsNullOrEmpty(lobbyName))
+                {
+                    statusText.text = string.Format("Sala ({0})", lobbyName);
+                }
+                else
+                {
+                    statusText.text = "Aguardando jogadores...";
+                }
             }
 
             UpdatePlayerCount();
@@ -89,28 +91,12 @@ namespace com.onlineobject.objectnet.integration
 
             Debug.Log(string.Format("[SteamLobbyWait] Jogadores: {0}/{1}", playerCount, minPlayersToStart));
 
-            if (playerCountText != null)
+            if (playerCount >= minPlayersToStart && !hasStartedGame)
             {
-                playerCountText.text = string.Format("Jogadores: {0}/{1}", playerCount, minPlayersToStart);
-            }
-
-            if (statusText != null)
-            {
-                if (playerCount >= minPlayersToStart)
+                if (statusText != null)
                 {
                     statusText.text = "Iniciando partida...";
                 }
-                else
-                {
-                    int needed = minPlayersToStart - playerCount;
-                    statusText.text = string.Format("Aguardando {0} jogador{1}...", 
-                        needed, 
-                        needed > 1 ? "es" : "");
-                }
-            }
-
-            if (playerCount >= minPlayersToStart && !hasStartedGame)
-            {
                 Invoke("StartGame", 1f);
             }
         }
@@ -124,11 +110,6 @@ namespace com.onlineobject.objectnet.integration
             isWaitingForPlayers = false;
 
             Debug.Log("[SteamLobbyWait] Iniciando jogo!");
-
-            if (waitingPanel != null)
-            {
-                waitingPanel.SetActive(false);
-            }
 
             NetworkAutoLoadController.EnableAutoLoadForGame();
 
@@ -154,11 +135,6 @@ namespace com.onlineobject.objectnet.integration
             isWaitingForPlayers = false;
             hasStartedGame = false;
             currentLobbyID = default(CSteamID);
-
-            if (waitingPanel != null)
-            {
-                waitingPanel.SetActive(false);
-            }
         }
 #endif
     }

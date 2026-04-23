@@ -53,7 +53,7 @@ namespace com.onlineobject.objectnet.integration
                 float elapsedTime = Time.time - searchStartTime;
                 int minutes = Mathf.FloorToInt(elapsedTime / 60f);
                 int seconds = Mathf.FloorToInt(elapsedTime % 60f);
-                searchTimerText.text = string.Format("Buscando partida... {0:00}:{1:00}", minutes, seconds);
+                searchTimerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
             }
         }
 

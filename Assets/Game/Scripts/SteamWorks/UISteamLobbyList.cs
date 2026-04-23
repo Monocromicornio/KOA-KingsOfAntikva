@@ -18,7 +18,7 @@ namespace com.onlineobject.objectnet.integration
 
         public Button QuickPlayButton;
 
-        public InputField LobbyName;
+        public TMP_InputField LobbyName;
 
         public GameObject LobbyItemsRoot;
 
@@ -27,8 +27,8 @@ namespace com.onlineobject.objectnet.integration
         public string LobbyKey = "MyObjectNetGameName";
 
         [Header("Auto Matchmaking")]
-        public GameObject searchingPanel;
         public TextMeshProUGUI searchTimerText;
+        public TextMeshProUGUI statusText;
         public Button cancelSearchButton;
         public float lobbyCheckInterval = 1.5f;
         public int maxSearchRetries = 5;
@@ -46,6 +46,9 @@ namespace com.onlineobject.objectnet.integration
         private bool isSearching = false;
         private float searchStartTime;
         private int currentRetry = 0;
+
+        /// <summary>Indica se o matchmaking automático está em andamento.</summary>
+        public bool IsSearching => isSearching;
 
 #if STEAMWORKS_NET
         public ELobbyDistanceFilter[] FilterTypes = { ELobbyDistanceFilter.k_ELobbyDistanceFilterClose };
@@ -72,11 +75,6 @@ namespace com.onlineobject.objectnet.integration
             }
 
             cancelSearchButton.onClick.AddListener(CancelMatchmaking);
-
-            if (searchingPanel != null)
-            {
-                this.searchingPanel.SetActive(false);
-            }
 
             RefreshLobby();
         }
@@ -141,7 +139,7 @@ namespace com.onlineobject.objectnet.integration
                 float elapsedTime = Time.time - searchStartTime;
                 int minutes = Mathf.FloorToInt(elapsedTime / 60f);
                 int seconds = Mathf.FloorToInt(elapsedTime % 60f);
-                searchTimerText.text = string.Format("Buscando partida... {0:00}:{1:00}", minutes, seconds);
+                searchTimerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
             }
         }
 
@@ -189,9 +187,9 @@ namespace com.onlineobject.objectnet.integration
                 Debug.Log("[UISteamLobbyList] SavePieceOrder desabilitado para matchmaking");
             }
 
-            if (searchingPanel != null)
+            if (statusText != null)
             {
-                searchingPanel.SetActive(true);
+                statusText.text = "Buscando jogadores";
             }
 
             Debug.Log($"[UISteamLobbyList] Iniciando busca por lobbies com {maxPlayersPerLobby} jogadores...");
@@ -350,11 +348,6 @@ namespace com.onlineobject.objectnet.integration
         {
             isSearching = false;
 
-            if (searchingPanel != null)
-            {
-                searchingPanel.SetActive(false);
-            }
-
             StopAllCoroutines();
 
             if (playerWaitController != null || steamLobbyWaitManager != null)
@@ -433,9 +426,9 @@ namespace com.onlineobject.objectnet.integration
             isSearching = false;
             currentRetry = 0;
 
-            if (searchingPanel != null)
+            if (statusText != null)
             {
-                searchingPanel.SetActive(false);
+                statusText.text = "";
             }
 
             StopAllCoroutines();

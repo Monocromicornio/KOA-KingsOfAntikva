@@ -28,6 +28,7 @@ public class MatchController : MonoBehaviour
 
     public bool hasStarted { get; private set; }
     public bool finished { get; private set; }
+    private bool _playerWon;
 
     public bool isLoadingScreenFinished;
 
@@ -58,7 +59,7 @@ public class MatchController : MonoBehaviour
 
     [Header("UI")]
     [SerializeField]
-    private Button exit;
+    private GameResultScreenController resultScreen;
 
     [Header("Turn Timer")]
     [SerializeField]
@@ -73,7 +74,6 @@ public class MatchController : MonoBehaviour
         turn = TurnState.undefined;
         myTurn = networkManager.IsServerConnection() ? TurnState.homeTeam : TurnState.awayTeam;
         allPieces = new List<Piece>();
-        exit.gameObject.SetActive(false);
 
         if (cameraPos && networkManager.IsClientConnection())
         {
@@ -331,11 +331,11 @@ public class MatchController : MonoBehaviour
     {
         if (finished) return;
         Debug.Log("Won Game");
+        _playerWon = true;
         if (MatchEvents.isRanked == true)
         {
             PlayerProfileManager.Instance.AddPoints(50);   // Ganha 50 pts
         }
-        //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posi��o no ranking:
 
         SetFinishGame(playerSquad.pieces.ToArray(), true);
         SetFinishGame(enemySquad.pieces.ToArray(), false);
@@ -345,11 +345,11 @@ public class MatchController : MonoBehaviour
     {
         if (finished) return;
         Debug.Log("Lost Game");
+        _playerWon = false;
         if (MatchEvents.isRanked == true)
         {
-            PlayerProfileManager.Instance.AddPoints(-20);  // Perde 20 pts (m�nimo 0)
+            PlayerProfileManager.Instance.AddPoints(-20);  // Perde 20 pts (mínimo 0)
         }
-        //PlayerProfileManager.Instance.UpdateRankingPosition(3); // Atualizar posi��o no ranking:
 
         SetFinishGame(enemySquad.pieces.ToArray(), true);
         SetFinishGame(playerSquad.pieces.ToArray(), false);
@@ -367,7 +367,14 @@ public class MatchController : MonoBehaviour
             turnTimer.StopTimer();
         }
 
-        if(exit != null) exit.gameObject.SetActive(true);
+        // Show result screen
+        if (resultScreen != null)
+        {
+            if (_playerWon)
+                resultScreen.ShowWinScreen(50);
+            else
+                resultScreen.ShowLoseScreen(-20);
+        }
 
         Invoke(nameof(CloseLobby), 2f);
     }
