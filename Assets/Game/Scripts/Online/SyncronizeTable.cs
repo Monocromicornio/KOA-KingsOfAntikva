@@ -185,7 +185,7 @@ public class SyncronizeTable : NetworkBehaviour
             return;
         }
 
-        Debug.LogError("[SyncronizeTable] Decodificando table e iniciando jogo");
+        Debug.Log("[SyncronizeTable] Decodificando table e iniciando jogo");
 
         tableData.LoadTable();
         matchController.StartGame(tableData);
