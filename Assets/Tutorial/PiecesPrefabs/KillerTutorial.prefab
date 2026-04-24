@@ -43,7 +43,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: fe688af8d70de9241a823b706a12d428, type: 3}
+  m_Resource: {fileID: 8300000, guid: 6faba17dc79bcfc4ebe7d283b186cdd1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
@@ -172,7 +172,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 66d9044739350124c85bd5920dc4a1ad, type: 3}
+  m_Resource: {fileID: 8300000, guid: 726c4e351abac184f9ccf739f1557066, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
@@ -407,6 +407,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OfflineDestructorPiece
   anim: {fileID: 6252771003644715043}
   force: 0
+  deathAnimationDelay: 1
+  attackAnimationDuration: 1
   AttackEffect: {fileID: 5004953754998910068, guid: 34be9bb42c135c24d834766d72ef3384,
     type: 3}
   AttackEffectPos: {fileID: 4248553798612859440}

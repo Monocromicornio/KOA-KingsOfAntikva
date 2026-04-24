@@ -158,10 +158,10 @@ public class TurnTimer : MonoBehaviour
 
     private void UpdateTimerDisplay()
     {
-        int minutes = Mathf.FloorToInt(currentTime / 60f);
+        //int minutes = Mathf.FloorToInt(currentTime / 60f);
         int seconds = Mathf.FloorToInt(currentTime % 60f);
 
-        timerText.text = $"{minutes:00}:{seconds:00}";
+        timerText.text = $"{seconds:00}";
 
         if (currentTime <= dangerThreshold)
         {

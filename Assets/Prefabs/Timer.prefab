@@ -619,8 +619,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5888382722676227699}
   - {fileID: 8531596817366722662}
+  - {fileID: 5888382722676227699}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -766,13 +766,14 @@ GameObject:
   - component: {fileID: 5888382722676227699}
   - component: {fileID: 7398515425985306293}
   - component: {fileID: 6568214260576803680}
+  - component: {fileID: 1368125706513138504}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TurnInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5888382722676227699
 RectTransform:
   m_ObjectHideFlags: 0
@@ -820,11 +821,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Sua vez
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontAsset: {fileID: 11400000, guid: 5e81f6dccaaeed4428df339ed5d872cb, type: 2}
+  m_sharedMaterial: {fileID: -3867837926074141043, guid: 5e81f6dccaaeed4428df339ed5d872cb,
+    type: 2}
+  m_fontSharedMaterials:
+  - {fileID: -3867837926074141043, guid: 5e81f6dccaaeed4428df339ed5d872cb, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -892,6 +895,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1368125706513138504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7713928437693268815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63ca5809d3465ae44921d86691443b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurnInfoUI
 --- !u!1 &8254381031730525314
 GameObject:
   m_ObjectHideFlags: 0

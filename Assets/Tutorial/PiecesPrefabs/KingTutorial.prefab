@@ -118,6 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OfflineAttackPiece
   anim: {fileID: 147479045624381143}
   force: 9
+  deathAnimationDelay: 1
+  attackAnimationDuration: 1
   AttackEffect: {fileID: 6474037483755172099, guid: 81724ec6cf7787540b6d6ada01995303,
     type: 3}
   AttackEffectPos: {fileID: 6659532249529008186}
@@ -285,7 +287,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 4535335169034535895, guid: 1ad339664904fe94ea3f27da3c796d73,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 66d9044739350124c85bd5920dc4a1ad, type: 3}
+  m_Resource: {fileID: 8300000, guid: d2d7a12f669ee5645a9ef575baca3324, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
@@ -415,7 +417,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 4535335169034535895, guid: 1ad339664904fe94ea3f27da3c796d73,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: fe688af8d70de9241a823b706a12d428, type: 3}
+  m_Resource: {fileID: 8300000, guid: e96540cc3a1fae341bc3c1d0e4050208, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
