@@ -17,10 +17,10 @@ public class LocalizationEditorWindow : EditorWindow
     private const string CsvExportPath = "Assets/Localization/localization.csv"; // translator file
 
     private LocalizationTable _table;
-    private string _sourceLang = "en";
-    private string _languagesCsv = "en,ro"; // configure languages here
+    private string _sourceLang = "pt-br";
+    private string _languagesCsv = "pt-br,en"; // configure languages here
     private bool _includeScenes = true;
-    private bool _includePrefabs = true;
+    private bool _includePrefabs = false;
 
     [MenuItem("Tools/Localization/Manager")]
     public static void ShowWindow()
