@@ -37,6 +37,7 @@ public class BombPiece : InteractivePiece
                 
         if (this != null && piece != null)
         {
+            anim.PlayAttackSound();
             piece.TriggerExplosion();
             piece.SetLose();
         }

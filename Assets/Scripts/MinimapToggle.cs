@@ -17,23 +17,51 @@ public class MinimapToggle : MonoBehaviour
     [Range(0f, 1f)]
     public float minScale = 0f;
 
+    [Header("Estado Inicial")]
+    [Tooltip("Se verdadeiro, o minimapa começa visível. Se falso, começa oculto.")]
+    public bool startVisible = false;
+
+    [Tooltip("Se verdadeiro, ignora o estado inicial e aguarda o MatchIntroAnimator controlar o alpha de entrada.")]
+    public bool controlledByIntroAnimator = false;
+
     // Escala original capturada no Awake — preserva o valor configurado no Inspector
     private Vector3 _restScale;
     private CanvasGroup _canvasGroup;
     private Coroutine _activeCoroutine;
-    private bool _isVisible = true;
+    private bool _isVisible = false;
 
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _restScale   = transform.localScale;
 
-        // Começa oculto sem animação
-        _isVisible                    = false;
-        _canvasGroup.alpha            = 0f;
-        _canvasGroup.interactable     = false;
-        _canvasGroup.blocksRaycasts   = false;
-        transform.localScale          = _restScale * minScale;
+        if (controlledByIntroAnimator)
+        {
+            // O MatchIntroAnimator gerencia o alpha de entrada.
+            // Apenas garante que a escala está pronta e o estado interno é coerente.
+            _isVisible = true;
+            transform.localScale = _restScale;
+            return;
+        }
+
+        if (startVisible)
+        {
+            // Começa visível sem animação
+            _isVisible                    = true;
+            _canvasGroup.alpha            = 1f;
+            _canvasGroup.interactable     = true;
+            _canvasGroup.blocksRaycasts   = true;
+            transform.localScale          = _restScale;
+        }
+        else
+        {
+            // Começa oculto sem animação
+            _isVisible                    = false;
+            _canvasGroup.alpha            = 0f;
+            _canvasGroup.interactable     = false;
+            _canvasGroup.blocksRaycasts   = false;
+            transform.localScale          = _restScale * minScale;
+        }
     }
 
     // ─── API pública ─────────────────────────────────────────────────────────

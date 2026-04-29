@@ -3873,7 +3873,7 @@ PrefabInstance:
     - target: {fileID: 2638799901550718947, guid: 80d5b9cc7004a28449873ffe72c96a6f,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: Rei Azul
       objectReference: {fileID: 0}
     - target: {fileID: 2638799901550718947, guid: 80d5b9cc7004a28449873ffe72c96a6f,
         type: 3}
@@ -3888,7 +3888,7 @@ PrefabInstance:
     - target: {fileID: 3455898621853032324, guid: 80d5b9cc7004a28449873ffe72c96a6f,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 3455898621853032324, guid: 80d5b9cc7004a28449873ffe72c96a6f,
         type: 3}
@@ -6557,7 +6557,7 @@ PrefabInstance:
     - target: {fileID: 3171604594816723059, guid: 64d31e75afa0638489fa9bf309df9c57,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: Points
       objectReference: {fileID: 0}
     - target: {fileID: 3171604594816723059, guid: 64d31e75afa0638489fa9bf309df9c57,
         type: 3}
@@ -6592,7 +6592,7 @@ PrefabInstance:
     - target: {fileID: 7961675703769422975, guid: 64d31e75afa0638489fa9bf309df9c57,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: Name
       objectReference: {fileID: 0}
     - target: {fileID: 7961675703769422975, guid: 64d31e75afa0638489fa9bf309df9c57,
         type: 3}
@@ -7503,6 +7503,7 @@ MonoBehaviour:
   turnTimer: {fileID: 1679294169}
   hudElements:
   - {fileID: 4125871172579289928}
+  - {fileID: 1115550414}
   hudFadeDuration: 0.5
 --- !u!114 &440258587
 MonoBehaviour:
@@ -17469,6 +17470,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MinimapToggle
   animationDuration: 0.25
   minScale: 0
+  startVisible: 0
+  controlledByIntroAnimator: 1
 --- !u!225 &1115550421
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -33769,7 +33772,7 @@ PrefabInstance:
     - target: {fileID: 424070140672480488, guid: 771b6190ed70bc7429e84c6f72a49c43,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3959644547614303157, guid: 771b6190ed70bc7429e84c6f72a49c43,
         type: 3}
@@ -33804,7 +33807,7 @@ PrefabInstance:
     - target: {fileID: 6568214260576803680, guid: 771b6190ed70bc7429e84c6f72a49c43,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: Sua vez
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
