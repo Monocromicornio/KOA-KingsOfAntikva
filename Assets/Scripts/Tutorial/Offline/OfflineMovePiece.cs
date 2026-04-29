@@ -126,6 +126,7 @@ public class OfflineMovePiece : MonoBehaviour
         if (anim != null)
         {
             anim.SetAnimation("Walk", false);
+            anim.PlayMoveEndSound();
         }
         
         piece.CheckPieceOnField();
@@ -149,6 +150,7 @@ public class OfflineMovePiece : MonoBehaviour
         if (anim != null)
         {
             anim.SetAnimation("Walk", false);
+            anim.PlayMoveEndSound();
         }
         
         piece.CheckPieceOnField();

@@ -96,10 +96,11 @@ public class OfflineInteractivePiece : MonoBehaviour
     /// </summary>
     protected IEnumerator FeedbackAttack(UnityAction action, string animName = "Attack")
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         
         if (anim != null)
         {
+            anim.PlayAttackSound();
             anim.SetAnimation(animName);
         }
         
@@ -176,8 +177,12 @@ public class OfflineInteractivePiece : MonoBehaviour
         yield return new WaitForSeconds(cachedAttackAnimDuration);
 
         // Counter-attack animation
-        yield return new WaitForSeconds(1);
-        if (anim != null) anim.SetAnimation("CounterAttack");
+        yield return new WaitForSeconds(0.5f);
+        if (anim != null)
+        {
+            anim.PlayAttackSound();
+            anim.SetAnimation("CounterAttack");
+        }
 
         // Handle loser death from THIS (winner) coroutine
         if (attacker != null && attacker.piece != null)

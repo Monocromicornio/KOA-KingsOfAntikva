@@ -395,6 +395,7 @@ GameObject:
   - component: {fileID: 6107259716075658186}
   - component: {fileID: 252695191498343340}
   - component: {fileID: 5433815913388308516}
+  - component: {fileID: 2246022903009982585}
   m_Layer: 0
   m_Name: TutorialPrefabRed
   m_TagString: Player
@@ -451,8 +452,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3177028865687585191}
   gDie: {fileID: 6930496545603783166, guid: 8bbb9615441ef8e4786fb47ee3e76bf7, type: 3}
-  auDie: {fileID: 2996183948256283268}
-  auDown: {fileID: 9039648608235696138}
+  endMoveParticles: {fileID: 7577762396697615277, guid: 145578c48d19ff846b1c743f95378079,
+    type: 3}
+  attackClip: {fileID: 8300000, guid: 0699c24494c1a7345937442151d7bd1a, type: 3}
+  dieClip: {fileID: 8300000, guid: f0a936bfe1e61084191ef948161228fb, type: 3}
+  moveEndClip: {fileID: 8300000, guid: 84a041c3f27af3444974d40e5c08b23a, type: 3}
 --- !u!114 &6376987779941714317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +470,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 8
+  attackIconPrefab: {fileID: 2939492879758800836, guid: 8204e6036f615364ab6f2b29c61269be,
+    type: 3}
+  selectedIconPrefab: {fileID: 1227084451520444215, guid: 71c90b3c6b15133488fdb40e1fd21a78,
+    type: 3}
+  attackIconHeight: 2.5
+  selectedIconHeight: 0.1
 --- !u!114 &6107259716075658186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,6 +529,103 @@ MonoBehaviour:
   fake: {fileID: 0}
   fakePiecePrefab: {fileID: 1081960598004890, guid: 39ea64b1ce1e4f3469797db4e54e8b54,
     type: 3}
+--- !u!82 &2246022903009982585
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456265060332113610}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5104457403120807281
 GameObject:
   m_ObjectHideFlags: 0

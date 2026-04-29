@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(OfflinePiece))]
+[RequireComponent(typeof(AudioSource))]
 public class OfflineAnimPiece : MonoBehaviour
 {
     [Header("Animation")]
@@ -17,16 +18,57 @@ public class OfflineAnimPiece : MonoBehaviour
     [SerializeField]
     private GameObject gDie;
 
-    [Header("Sound")]
     [SerializeField]
-    private AudioSource auDie;
+    private GameObject endMoveParticles;
 
+    [Header("Sound - Per Piece Clips")]
+    [Tooltip("Sound played when this piece attacks.")]
     [SerializeField]
-    private AudioSource auDown;
+    private AudioClip attackClip;
+
+    [Tooltip("Sound played when this piece dies.")]
+    [SerializeField]
+    private AudioClip dieClip;
+
+    [Tooltip("Sound played when this piece finishes moving.")]
+    [SerializeField]
+    private AudioClip moveEndClip;
+
+    private AudioSource audioSource;
 
     private void Awake()
     {
         anim = animator;
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    /// <summary>
+    /// Plays a one-shot AudioClip on this piece's AudioSource.
+    /// </summary>
+    private void PlayClip(AudioClip clip)
+    {
+        if (clip == null || audioSource == null) return;
+        audioSource.PlayOneShot(clip);
+    }
+
+    /// <summary>
+    /// Plays the attack sound configured on this piece.
+    /// </summary>
+    public void PlayAttackSound()
+    {
+        PlayClip(attackClip);
+    }
+
+    /// <summary>
+    /// Plays the movement-end sound and spawns end-move particles.
+    /// </summary>
+    public void PlayMoveEndSound()
+    {
+        PlayClip(moveEndClip);
+        if (endMoveParticles != null)
+        {
+            Instantiate(endMoveParticles, transform.position, endMoveParticles.transform.rotation);
+        }
     }
 
     public void SetAnimation(string animName)
@@ -89,16 +131,14 @@ public class OfflineAnimPiece : MonoBehaviour
     public void PlayDieAnimation()
     {
         StartCoroutine(WaitForEndOfFrame(() => {
+            PlayClip(dieClip);
+
             SetAnimation("Die", true);
-            
-            if (auDie) auDie.Play();
 
             if (gDie != null)
             {
                 Instantiate(gDie, transform.position, gDie.transform.rotation);
             }
-
-            if (auDown) auDown.Play();
         }));
     }
 
