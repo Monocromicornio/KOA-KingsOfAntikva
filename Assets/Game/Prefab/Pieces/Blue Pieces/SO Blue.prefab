@@ -207,6 +207,8 @@ MonoBehaviour:
   syncParticles: 0
   ShowNetworkParameters: 1
   BehaviorlId: 1
+  indexCurrentField: -1
+  indexPreviousField: -1
   targetField: {fileID: 0}
   body: {fileID: 7624168460183210384}
   type: 0
@@ -256,6 +258,8 @@ MonoBehaviour:
   BehaviorlId: 2
   animator: {fileID: 5958168748770724252}
   gDie: {fileID: 6930496545603783166, guid: 8bbb9615441ef8e4786fb47ee3e76bf7, type: 3}
+  endMoveParticles: {fileID: 7577762396697615277, guid: 145578c48d19ff846b1c743f95378079,
+    type: 3}
   attackClip: {fileID: 8300000, guid: 0699c24494c1a7345937442151d7bd1a, type: 3}
   dieClip: {fileID: 8300000, guid: f0a936bfe1e61084191ef948161228fb, type: 3}
   moveEndClip: {fileID: 8300000, guid: 23eabf8965b959c4883b843200f1f880, type: 3}
@@ -272,6 +276,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 8
+  attackIconPrefab: {fileID: 2939492879758800836, guid: 8204e6036f615364ab6f2b29c61269be,
+    type: 3}
+  selectedIconPrefab: {fileID: 1227084451520444215, guid: 71c90b3c6b15133488fdb40e1fd21a78,
+    type: 3}
+  attackIconHeight: 2.5
+  selectedIconHeight: 0.1
 --- !u!114 &6582686768798050283
 MonoBehaviour:
   m_ObjectHideFlags: 0

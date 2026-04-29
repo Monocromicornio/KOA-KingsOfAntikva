@@ -22,6 +22,8 @@ public class AnimPiece : NetworkBehaviour
     [Header("Particle")]
     [SerializeField]
     private GameObject gDie;
+    [SerializeField]
+    private GameObject endMoveParticles;
 
     [Header("Sound - Per Piece Clips")]
     [Tooltip("Sound played when this piece attacks.")]
@@ -71,6 +73,10 @@ public class AnimPiece : NetworkBehaviour
     public void PlayMoveEndSound()
     {
         PlayClip(moveEndClip);
+        if (endMoveParticles != null)
+        {
+            Instantiate(endMoveParticles, transform.position, endMoveParticles.transform.rotation);
+        }
     }
 
     public void SetAnimation(string animName)

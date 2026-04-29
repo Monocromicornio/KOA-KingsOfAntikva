@@ -25,6 +25,21 @@ public class OfflineSelectablePiece : MonoBehaviour
     [Min(1)]
     private int distance = 1;
 
+    [Header("Selection Icons")]
+    [Tooltip("Prefab spawned above enemy pieces that can be attacked.")]
+    [SerializeField] private GameObject attackIconPrefab;
+
+    [Tooltip("Prefab shown on the selected piece's own field.")]
+    [SerializeField] private GameObject selectedIconPrefab;
+
+    [Tooltip("Height offset for the attack icon above enemy pieces.")]
+    [SerializeField] private float attackIconHeight = 2.5f;
+
+    [Tooltip("Height offset for the selected icon on the piece's field.")]
+    [SerializeField] private float selectedIconHeight = 0.1f;
+
+    private GameField originField;
+
     private void Awake()
     {
         selectedFields = new Dictionary<string, List<GameField>>();
@@ -64,6 +79,8 @@ public class OfflineSelectablePiece : MonoBehaviour
         ActiveSelectablesFields();
 
         if (selectedFields.Count == 0) return;
+
+        ShowOriginIcon();
     }
 
     private void Deselect()
@@ -77,6 +94,7 @@ public class OfflineSelectablePiece : MonoBehaviour
             }
         }
 
+        HideOriginIcon();
         selectedFields.Clear();
     }
 
@@ -135,10 +153,19 @@ public class OfflineSelectablePiece : MonoBehaviour
 
     private void SelectFieldsInSameAxis(Axis axis)
     {
+        FieldDirection direction = AxisToDirection(axis);
         List<GameField> gameFields = GetFieldsInSameAxis(axis);
+
         foreach (GameField field in gameFields)
         {
-            field.Select();
+            if (IsEnemyField(field))
+            {
+                field.SelectAsAttack(attackIconPrefab, attackIconHeight);
+            }
+            else
+            {
+                field.Select(direction);
+            }
         }
     }
 
@@ -246,5 +273,65 @@ public class OfflineSelectablePiece : MonoBehaviour
         }
 
         return true;
+    }
+
+    // ========================
+    // Direction & Icon Helpers
+    // ========================
+
+    /// <summary>
+    /// Converts the internal Axis enum to the public FieldDirection enum.
+    /// </summary>
+    private static FieldDirection AxisToDirection(Axis axis)
+    {
+        switch (axis)
+        {
+            case Axis.columnPositive: return FieldDirection.Up;
+            case Axis.columnNegative: return FieldDirection.Down;
+            case Axis.rowPositive:    return FieldDirection.Right;
+            case Axis.rowNegative:    return FieldDirection.Left;
+            default:                  return FieldDirection.Down;
+        }
+    }
+
+    /// <summary>
+    /// Checks if a field contains an enemy piece relative to this piece (supports both online and offline pieces).
+    /// </summary>
+    private bool IsEnemyField(GameField field)
+    {
+        if (!field.hasPiece) return false;
+
+        PieceColor targetColor;
+        if (field.piece != null)
+            targetColor = field.piece.pieceColor;
+        else if (field.offlinePiece != null)
+            targetColor = field.offlinePiece.pieceColor;
+        else
+            return false;
+
+        return targetColor != piece.pieceColor;
+    }
+
+    /// <summary>
+    /// Shows the origin/selected icon on the piece's own field.
+    /// </summary>
+    private void ShowOriginIcon()
+    {
+        if (selectedIconPrefab == null || board == null) return;
+
+        originField = board.GetGameField(currentField);
+        originField?.SelectAsOrigin(selectedIconPrefab, selectedIconHeight);
+    }
+
+    /// <summary>
+    /// Hides the origin/selected icon from the piece's field.
+    /// </summary>
+    private void HideOriginIcon()
+    {
+        if (originField != null)
+        {
+            originField.ClearIcon();
+            originField = null;
+        }
     }
 }

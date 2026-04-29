@@ -62,6 +62,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -83,9 +85,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &9043372745848693607
 MeshCollider:
@@ -210,12 +214,27 @@ PrefabInstance:
     - target: {fileID: 5602004189585775911, guid: da325369847fc02489d663e6c43201eb,
         type: 3}
       propertyPath: m_Name
-      value: FieldRev Variant
+      value: Field_Game
       objectReference: {fileID: 0}
     - target: {fileID: 5602004190188200994, guid: da325369847fc02489d663e6c43201eb,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5602004190205561928, guid: da325369847fc02489d663e6c43201eb,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5602004190205561928, guid: da325369847fc02489d663e6c43201eb,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5602004190205561928, guid: da325369847fc02489d663e6c43201eb,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5602004190205561929, guid: da325369847fc02489d663e6c43201eb,
         type: 3}
@@ -227,6 +246,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5602004190205561934, guid: da325369847fc02489d663e6c43201eb,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ef248e6642343d4cabe42f212715cca, type: 2}
     - target: {fileID: 7335726028203845614, guid: da325369847fc02489d663e6c43201eb,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -253,7 +277,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6183133040655655870, guid: da325369847fc02489d663e6c43201eb, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5602004189585775908, guid: da325369847fc02489d663e6c43201eb,
         type: 3}
