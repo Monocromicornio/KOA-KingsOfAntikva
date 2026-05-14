@@ -114,6 +114,7 @@ PlayerSettings:
   xboxEnableGuest: 0
   xboxEnablePIXSampling: 0
   metalFramebufferOnly: 0
+  metalUseMetalDisplayLink: 0
   xboxOneResolution: 0
   xboxOneSResolution: 0
   xboxOneXResolution: 3
@@ -298,7 +299,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: a67a221223f88de40a7e106a2aff9b57, type: 3}
+      m_Icon: {fileID: 2800000, guid: c38a870dd15e05c4a8d38992f0ceac08, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -980,7 +981,13 @@ PlayerSettings:
   windowsGamepadBackendHint: 0
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
-  qualitySettingsNames: []
+  qualitySettingsNames:
+  - Very Low
+  - Low
+  - Medium
+  - High
+  - Very High
+  - Ultra
   projectName: 
   organizationId: 
   cloudEnabled: 0

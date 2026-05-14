@@ -209,7 +209,11 @@ public class OfflinePiece : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (activePiece == this) activePiece = null;
+        if (activePiece == this)
+        {
+            activePiece = null;
+            GetComponent<OfflineSelectablePiece>()?.ForceDeselect();
+        }
         field?.SetOfflinePiece(null);
     }
 

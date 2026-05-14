@@ -73,6 +73,16 @@ public class OfflineSelectablePiece : MonoBehaviour
         Deselect();
     }
 
+    /// <summary>
+    /// Forces deselection of all highlighted fields and resets selection state.
+    /// Call this when the piece is removed or the tutorial step changes to prevent stale field highlights.
+    /// </summary>
+    public void ForceDeselect()
+    {
+        Deselect();
+        getted = false;
+    }
+
     private void Select()
     {
         getted = true;

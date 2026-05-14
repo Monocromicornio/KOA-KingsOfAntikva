@@ -223,13 +223,18 @@ public class TutorialManager : MonoBehaviour
         {
             if (piece != null)
             {
-                if (piece is Piece onlinePiece && onlinePiece.field != null)
+                if (piece is OfflinePiece offlinePiece)
+                {
+                    offlinePiece.GetComponent<OfflineSelectablePiece>()?.ForceDeselect();
+                    
+                    if (offlinePiece.field != null)
+                    {
+                        offlinePiece.field.SetOfflinePiece(null);
+                    }
+                }
+                else if (piece is Piece onlinePiece && onlinePiece.field != null)
                 {
                     onlinePiece.field.SetPiece(null);
-                }
-                else if (piece is OfflinePiece offlinePiece && offlinePiece.field != null)
-                {
-                    offlinePiece.field.SetOfflinePiece(null);
                 }
                 
                 DestroyImmediate(piece.gameObject);
@@ -316,6 +321,11 @@ public class TutorialManager : MonoBehaviour
         {
             if (piece != null)
             {
+                if (piece is OfflinePiece offlinePiece)
+                {
+                    offlinePiece.GetComponent<OfflineSelectablePiece>()?.ForceDeselect();
+                }
+
                 ResetPieceAction(piece);
             }
         }
