@@ -210,7 +210,7 @@ public class SelectablePiece : MonoBehaviour
         {
             if (IsEnemyField(field))
             {
-                field.SelectAsAttack(attackIconPrefab, attackIconHeight);
+                field.SelectAsAttack();
             }
             else
             {

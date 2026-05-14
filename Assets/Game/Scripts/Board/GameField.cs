@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class GameField : Field
 {
-    private const float DEFAULT_ICON_HEIGHT = 2.5f;
-
     private static readonly Dictionary<FieldDirection, float> DirectionYRotations = new Dictionary<FieldDirection, float>
     {
         { FieldDirection.Down, 0f },
@@ -21,6 +19,12 @@ public class GameField : Field
     [SerializeField]
     GameObject selectFeedback, canSelectFeedback;
 
+    [SerializeField]
+    GameObject indicativeFeedback;
+
+    [SerializeField]
+    GameObject attackIconFeedback;
+
     private MeshRenderer arrowRenderer;
     private GameObject spawnedIcon;
 
@@ -28,6 +32,8 @@ public class GameField : Field
     {
         selectFeedback?.SetActive(false);
         canSelectFeedback?.SetActive(false);
+        indicativeFeedback?.SetActive(false);
+        attackIconFeedback?.SetActive(false);
 
         if (selectFeedback != null)
         {
@@ -63,6 +69,8 @@ public class GameField : Field
 
     private void OnMouseOver()
     {
+        indicativeFeedback?.SetActive(true);
+
         bool isTutorialMode = TutorialModeController.IsTutorialActive();
         
         if (isTutorialMode)
@@ -78,6 +86,7 @@ public class GameField : Field
 
     private void OnMouseExit()
     {
+        indicativeFeedback?.SetActive(false);
         canSelectFeedback.SetActive(false);
     }
 
@@ -123,19 +132,13 @@ public class GameField : Field
     }
 
     /// <summary>
-    /// Marks the field as selected for attack. Hides the arrow and spawns an attack icon above the enemy piece.
+    /// Marks the field as selected for attack. Activates the attack icon feedback on this field.
     /// </summary>
-    public void SelectAsAttack(GameObject attackPrefab, float heightOffset = DEFAULT_ICON_HEIGHT)
+    public void SelectAsAttack()
     {
         selectFeedback.SetActive(true);
         HideArrowVisual();
-
-        Transform target = GetPieceTransform();
-        if (attackPrefab != null && target != null)
-        {
-            ClearIcon();
-            spawnedIcon = Instantiate(attackPrefab, target.position + Vector3.up * heightOffset, Quaternion.identity);
-        }
+        attackIconFeedback?.SetActive(true);
     }
 
     /// <summary>
@@ -164,6 +167,7 @@ public class GameField : Field
     public void Deselect()
     {
         selectFeedback.SetActive(false);
+        attackIconFeedback?.SetActive(false);
         ResetArrowVisual();
         ClearIcon();
     }
