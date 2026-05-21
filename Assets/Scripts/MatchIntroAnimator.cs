@@ -101,7 +101,7 @@ public class MatchIntroAnimator : MonoBehaviour
             _hudCanvasGroups[i]                     = GetOrAddCanvasGroup(hudElements[i]);
             _hudCanvasGroups[i].alpha               = 0f;
             _hudCanvasGroups[i].interactable        = false;
-            _hudCanvasGroups[i].blocksRaycasts      = false;
+            //_hudCanvasGroups[i].blocksRaycasts      = false;
         }
 
         // 5. Posiciona a câmera no início da animação
@@ -215,7 +215,7 @@ public class MatchIntroAnimator : MonoBehaviour
         {
             cg.alpha          = 1f;
             cg.interactable   = true;
-            cg.blocksRaycasts = true;
+            //cg.blocksRaycasts = false;
         }
     }
 

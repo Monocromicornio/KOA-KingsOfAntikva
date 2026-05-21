@@ -9,7 +9,7 @@ public class BombPiece : InteractivePiece
     protected override void Awake()
     {
         base.Awake();
-        force = int.MaxValue;
+        force = 99;
     }
    
     private void Explode()

@@ -17,7 +17,7 @@ public class TrunckPiece : InteractivePiece
     protected override void Awake()
     {
         base.Awake();
-        force = int.MaxValue;
+        force = 99;
     }
 
     private void Start()

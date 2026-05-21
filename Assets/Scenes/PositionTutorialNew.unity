@@ -1211,6 +1211,11 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3763894692370425803, guid: 1660b1df3c1aa014c90cbafafac15913,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4041444610232940587, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
       propertyPath: m_IsActive
@@ -1219,7 +1224,7 @@ PrefabInstance:
     - target: {fileID: 4109429599981915465, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: New Text
       objectReference: {fileID: 0}
     - target: {fileID: 6203030521626481233, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
@@ -1254,7 +1259,7 @@ PrefabInstance:
     - target: {fileID: 7252036943884236247, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: New Text
       objectReference: {fileID: 0}
     - target: {fileID: 7252036943884236247, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
@@ -3656,10 +3661,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1392217695}
     m_Modifications:
+    - target: {fileID: 574244336536879282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: 'Soldado
+
+        Ande quantas casa quiser na vertical ou na horizontal'
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -3704,12 +3716,12 @@ PrefabInstance:
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 508
+      value: 622
       objectReference: {fileID: 0}
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 286
+      value: 470
       objectReference: {fileID: 0}
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -3993,7 +4005,17 @@ PrefabInstance:
     - target: {fileID: 1126554203067672091, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126554203067672091, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265860708377799042, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1607262223644257737, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
@@ -4055,6 +4077,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 212665604}
+    - target: {fileID: 4794791003780805886, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794791003780805886, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
+      objectReference: {fileID: 0}
     - target: {fileID: 4794791003780805886, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4170,7 +4202,17 @@ PrefabInstance:
     - target: {fileID: 1126554203067672091, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126554203067672091, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265860708377799042, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1607262223644257737, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
@@ -4232,6 +4274,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 212665604}
+    - target: {fileID: 4794791003780805886, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794791003780805886, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
+      objectReference: {fileID: 0}
     - target: {fileID: 4794791003780805886, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4549,10 +4601,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 499394485}
     m_Modifications:
+    - target: {fileID: 574244336536879282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "Rei\nPe\xE7a mais forte de valor 9"
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -4597,12 +4654,12 @@ PrefabInstance:
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 508
+      value: 622
       objectReference: {fileID: 0}
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 286
+      value: 470
       objectReference: {fileID: 0}
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -5481,7 +5538,19 @@ PrefabInstance:
     - target: {fileID: 953138633070522485, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: 'Especialista
+
+        Desarma as bombas inimigas'
+      objectReference: {fileID: 0}
+    - target: {fileID: 953138633070522485, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371719949918633964, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1730685880023842657, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
@@ -5527,6 +5596,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617012734634697360, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617012734634697360, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
       objectReference: {fileID: 0}
     - target: {fileID: 4617012734634697360, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
@@ -6161,11 +6240,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
-    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 212665604}
     - target: {fileID: 204174837974343679, guid: 7c02cf4ea40ac23429a01df25ef0ab95,
         type: 3}
       propertyPath: m_Controller
@@ -6251,6 +6325,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 212665604}
     m_RemovedComponents:
     - {fileID: -2812836381458848527, guid: 000503531bb61764a9893992bf78f84e, type: 3}
     - {fileID: 5915757320643567642, guid: 7c02cf4ea40ac23429a01df25ef0ab95, type: 3}
@@ -7928,11 +8007,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
-    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 212665604}
     - target: {fileID: 204174837974343679, guid: 7c02cf4ea40ac23429a01df25ef0ab95,
         type: 3}
       propertyPath: m_Controller
@@ -8018,6 +8092,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2287281551110918611, guid: 000503531bb61764a9893992bf78f84e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 212665604}
     m_RemovedComponents:
     - {fileID: -2812836381458848527, guid: 000503531bb61764a9893992bf78f84e, type: 3}
     - {fileID: 5915757320643567642, guid: 7c02cf4ea40ac23429a01df25ef0ab95, type: 3}
@@ -8052,6 +8131,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 872556320165316615, guid: 39a64a6460024264a9cd4f07dde93564,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 872556320165316615, guid: 39a64a6460024264a9cd4f07dde93564,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
+      objectReference: {fileID: 0}
+    - target: {fileID: 872556320165316615, guid: 39a64a6460024264a9cd4f07dde93564,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 2.94
       objectReference: {fileID: 0}
@@ -8073,7 +8162,12 @@ PrefabInstance:
     - target: {fileID: 4698142052431190754, guid: 39a64a6460024264a9cd4f07dde93564,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "Comandante\nPe\xE7a de valor 5"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4698142052431190754, guid: 39a64a6460024264a9cd4f07dde93564,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6176818257169961629, guid: 39a64a6460024264a9cd4f07dde93564,
         type: 3}
@@ -8088,6 +8182,11 @@ PrefabInstance:
     - target: {fileID: 6586177475584591574, guid: 39a64a6460024264a9cd4f07dde93564,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6845552530044589435, guid: 39a64a6460024264a9cd4f07dde93564,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7386168918526974519, guid: 39a64a6460024264a9cd4f07dde93564,
@@ -8214,6 +8313,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 212665604}
+    - target: {fileID: 2504068903585171273, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3306562524466941552, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
         type: 3}
       propertyPath: m_Enabled
@@ -8282,7 +8386,12 @@ PrefabInstance:
     - target: {fileID: 4391946322423449808, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "Guerreiro\nPe\xE7a com valor 3"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391946322423449808, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4999646697785852646, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
         type: 3}
@@ -8313,6 +8422,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204298474471529013, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204298474471529013, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
       objectReference: {fileID: 0}
     - target: {fileID: 8204298474471529013, guid: a3c2e4049bcc73b4cb43ceff5b41202d,
         type: 3}
@@ -8364,10 +8483,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8773344370808039191}
     m_Modifications:
+    - target: {fileID: 574244336536879282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: 'Soldado
+
+        Ande quantas casa quiser na vertical ou na horizontal'
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -8412,12 +8538,12 @@ PrefabInstance:
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 508
+      value: 622
       objectReference: {fileID: 0}
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 286
+      value: 470
       objectReference: {fileID: 0}
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -8561,6 +8687,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2804673623011677393, guid: ce42c23964b412644838bc793e8cb3b7,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 2804673623011677393, guid: ce42c23964b412644838bc793e8cb3b7,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
+      objectReference: {fileID: 0}
+    - target: {fileID: 2804673623011677393, guid: ce42c23964b412644838bc793e8cb3b7,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 2.94
       objectReference: {fileID: 0}
@@ -8637,7 +8773,17 @@ PrefabInstance:
     - target: {fileID: 7765584387529328180, guid: ce42c23964b412644838bc793e8cb3b7,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "Espadachin\nPe\xE7a de valor 6"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765584387529328180, guid: ce42c23964b412644838bc793e8cb3b7,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500416018804935085, guid: ce42c23964b412644838bc793e8cb3b7,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4351143560355445342, guid: 13406f1d1e7fdd54f91aecb45f7a8e38, type: 3}
@@ -8683,11 +8829,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
-    - target: {fileID: -8476957192184334617, guid: bc2321f76058681448f7bd9c0a1b3299,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 395494897363563387, guid: b78a57b2d214d7c4892015c632eac3c6,
         type: 3}
       propertyPath: animator
@@ -8787,6 +8928,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217473135121271363, guid: b78a57b2d214d7c4892015c632eac3c6,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217473135121271363, guid: b78a57b2d214d7c4892015c632eac3c6,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
       objectReference: {fileID: 0}
     - target: {fileID: 2217473135121271363, guid: b78a57b2d214d7c4892015c632eac3c6,
         type: 3}
@@ -8958,6 +9109,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -1.8281367
       objectReference: {fileID: 0}
+    - target: {fileID: 5610839212561291071, guid: b78a57b2d214d7c4892015c632eac3c6,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5622893170529978408, guid: b78a57b2d214d7c4892015c632eac3c6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8976,7 +9132,12 @@ PrefabInstance:
     - target: {fileID: 6048011073127553190, guid: b78a57b2d214d7c4892015c632eac3c6,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "Barbaro\nPe\xE7a de valor 4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6048011073127553190, guid: b78a57b2d214d7c4892015c632eac3c6,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6391230901751222679, guid: b78a57b2d214d7c4892015c632eac3c6,
         type: 3}
@@ -9163,6 +9324,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BA
       objectReference: {fileID: 0}
+    - target: {fileID: -8476957192184334617, guid: bc2321f76058681448f7bd9c0a1b3299,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8476957192184334617, guid: bc2321f76058681448f7bd9c0a1b3299, type: 3}
     m_RemovedGameObjects: []
@@ -9221,7 +9387,17 @@ PrefabInstance:
     - target: {fileID: 1126554203067672091, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "Bomba\nMata qualquer pe\xE7a menos o especialista"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126554203067672091, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265860708377799042, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1607262223644257737, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
@@ -9283,6 +9459,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 212665604}
+    - target: {fileID: 4794791003780805886, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794791003780805886, guid: eb70597a8a1d4ec4b9723704eaad583c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
+      objectReference: {fileID: 0}
     - target: {fileID: 4794791003780805886, guid: eb70597a8a1d4ec4b9723704eaad583c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9472,6 +9658,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3987164695336522705, guid: 7e7a667bca45d03498cf4628929ea9cf,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 3987164695336522705, guid: 7e7a667bca45d03498cf4628929ea9cf,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
+      objectReference: {fileID: 0}
+    - target: {fileID: 3987164695336522705, guid: 7e7a667bca45d03498cf4628929ea9cf,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 2.94
       objectReference: {fileID: 0}
@@ -9485,10 +9681,15 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 212665604}
+    - target: {fileID: 7227988996082585261, guid: 7e7a667bca45d03498cf4628929ea9cf,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8826377136991797556, guid: 7e7a667bca45d03498cf4628929ea9cf,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "Tesouro\nSe o inimigo encontrar seu tesouro voc\xEA perde"
       objectReference: {fileID: 0}
     - target: {fileID: 8826377136991797556, guid: 7e7a667bca45d03498cf4628929ea9cf,
         type: 3}
@@ -9817,6 +10018,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 60.164085
       objectReference: {fileID: 0}
+    - target: {fileID: 3366699074827212366, guid: e7da47d40e52b48449ce07193adc8d91,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3408131094929485965, guid: e7da47d40e52b48449ce07193adc8d91,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -9870,7 +10076,7 @@ PrefabInstance:
     - target: {fileID: 3498035182812764631, guid: e7da47d40e52b48449ce07193adc8d91,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "Espi\xE3o\nO espi\xE3o tem valor 1 mas consegue derrotar o rei inimigo"
       objectReference: {fileID: 0}
     - target: {fileID: 3498035182812764631, guid: e7da47d40e52b48449ce07193adc8d91,
         type: 3}
@@ -10282,6 +10488,16 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f3f1c028b2990b649a3ddc839533dd54, type: 2}
+    - target: {fileID: 9053170250595044146, guid: e7da47d40e52b48449ce07193adc8d91,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053170250595044146, guid: e7da47d40e52b48449ce07193adc8d91,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
+      objectReference: {fileID: 0}
     - target: {fileID: 9053170250595044146, guid: e7da47d40e52b48449ce07193adc8d91,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -48192,7 +48408,19 @@ PrefabInstance:
     - target: {fileID: 953138633070522485, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: 'Especialista
+
+        Desarma as bombas inimigas'
+      objectReference: {fileID: 0}
+    - target: {fileID: 953138633070522485, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371719949918633964, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1730685880023842657, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
@@ -48238,6 +48466,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617012734634697360, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617012734634697360, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
       objectReference: {fileID: 0}
     - target: {fileID: 4617012734634697360, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
@@ -48462,10 +48700,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 991800619903363637, guid: e7995d82f804a9c42a5e34e8cf014ed5,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1436925250732549548, guid: e7995d82f804a9c42a5e34e8cf014ed5,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "Capit\xE3o\nPe\xE7a de valor 8"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436925250732549548, guid: e7995d82f804a9c42a5e34e8cf014ed5,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2407614658806333372, guid: e7995d82f804a9c42a5e34e8cf014ed5,
         type: 3}
@@ -48496,6 +48744,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834262946239379273, guid: e7995d82f804a9c42a5e34e8cf014ed5,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834262946239379273, guid: e7995d82f804a9c42a5e34e8cf014ed5,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
       objectReference: {fileID: 0}
     - target: {fileID: 6834262946239379273, guid: e7995d82f804a9c42a5e34e8cf014ed5,
         type: 3}
@@ -48727,7 +48985,12 @@ PrefabInstance:
     - target: {fileID: 2844848554802854988, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: "<b>Lanceiro</b>\nPe\xE7a de valor 7"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844848554802854988, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2977610167742352033, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
         type: 3}
@@ -48803,6 +49066,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0.00000015155098
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127971544404554709, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4604976263362679582, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
         type: 3}
@@ -49131,6 +49399,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7661248209012600489, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 622
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661248209012600489, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 470
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661248209012600489, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 2.94
       objectReference: {fileID: 0}
@@ -49243,11 +49521,7 @@ PrefabInstance:
     - {fileID: 2504597714129881253, guid: 718debec6f2d8074e867ebbf928ad1e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7193456740644247106, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8501136342407249000}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56eab7c35f27d8c488ba1ec2b1533ca7, type: 3}
 --- !u!114 &8501136342407248998 stripped
 MonoBehaviour:
@@ -49261,32 +49535,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62d33c72c5cfc247b3f644f07316f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8501136342407248999 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7193456740644247106, guid: 56eab7c35f27d8c488ba1ec2b1533ca7,
-    type: 3}
-  m_PrefabInstance: {fileID: 8501136342407248997}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8501136342407249000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8501136342407248999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_la_tooltip_text_tmp_
-  _fallback: "Alquimista\nPe\xE7a de valor 7"
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12
 --- !u!4 &8773344370808039191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8159768512308113772, guid: 7c02cf4ea40ac23429a01df25ef0ab95,

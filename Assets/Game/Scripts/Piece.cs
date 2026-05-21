@@ -33,6 +33,35 @@ public class Piece : NetworkBehaviour
     public GameObject body;
     public PieceType type;
 
+    [Header("Info")]
+    [TextArea(2, 4)]
+    [SerializeField] private string description;
+
+    /// <summary>
+    /// Description text displayed in the Selected Piece UI and tooltips.
+    /// </summary>
+    public string Description => description;
+
+    /// <summary>
+    /// Fired when a piece is selected by the player.
+    /// </summary>
+    public static event System.Action<Piece> OnPieceSelected;
+
+    /// <summary>
+    /// Fired when the currently selected piece is deselected.
+    /// </summary>
+    public static event System.Action OnPieceDeselected;
+
+    /// <summary>
+    /// Notifies listeners that a piece has been selected.
+    /// </summary>
+    public static void NotifyPieceSelected(Piece piece) => OnPieceSelected?.Invoke(piece);
+
+    /// <summary>
+    /// Notifies listeners that the current piece has been deselected.
+    /// </summary>
+    public static void NotifyPieceDeselected() => OnPieceDeselected?.Invoke();
+
     public float timeToDestroy { get; private set; }
     public bool isMyPiece { get; private set; }
     public bool isDying { get; private set; }

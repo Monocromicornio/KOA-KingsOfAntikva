@@ -117,6 +117,7 @@ public class SelectablePiece : MonoBehaviour
     private void Select()
     {
         getted = true;
+        Piece.NotifyPieceSelected(piece);
         ActiveSelectablesFields();
 
         if (selectedFields.Count == 0) return;
@@ -140,6 +141,7 @@ public class SelectablePiece : MonoBehaviour
         HideOriginIcon();
         selectedFields.Clear();
         soundController.Cancel();
+        Piece.NotifyPieceDeselected();
     }
 
     private void ActiveSelectablesFields()
