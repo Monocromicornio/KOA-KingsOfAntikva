@@ -4,16 +4,16 @@ using UnityEngine.UI;
 using TMPro;
 
 /// <summary>
-/// Controls the win/lose screen animations after a match ends.
-/// Animation sequence: Title appears large → waits → moves to rest position → background fades in → exit button fades in.
+/// Controls the win/lose result screens after a match ends.
+/// Plays Animator-based animations, then reveals the pontuation panel and exit button.
 /// </summary>
 public class GameResultScreenController : MonoBehaviour
 {
     // ─── Win Screen ──────────────────────────────────────────────────────────
     [Header("Win Screen")]
     [SerializeField] private GameObject winScreen;
-    [SerializeField] private RectTransform winTitlePanel;
-    [SerializeField] private CanvasGroup winBackgroundGroup;
+    [SerializeField] private Animator winAnimator;
+    [SerializeField] private GameObject winPontuationPanel;
     [SerializeField] private CanvasGroup winExitButtonGroup;
     [SerializeField] private Button winExitButton;
     [SerializeField] private TextMeshProUGUI winPontuationText;
@@ -21,8 +21,8 @@ public class GameResultScreenController : MonoBehaviour
     // ─── Lose Screen ─────────────────────────────────────────────────────────
     [Header("Lose Screen")]
     [SerializeField] private GameObject loseScreen;
-    [SerializeField] private RectTransform loseTitlePanel;
-    [SerializeField] private CanvasGroup loseBackgroundGroup;
+    [SerializeField] private Animator loseAnimator;
+    [SerializeField] private GameObject losePontuationPanel;
     [SerializeField] private CanvasGroup loseExitButtonGroup;
     [SerializeField] private Button loseExitButton;
     [SerializeField] private TextMeshProUGUI losePontuationText;
@@ -39,41 +39,22 @@ public class GameResultScreenController : MonoBehaviour
 
     // ─── Animation Settings ──────────────────────────────────────────────────
     [Header("Animation Settings")]
-    [SerializeField] private float titleDisplayDuration = 2f;
-    [SerializeField] private float titleScaleMultiplier = 2f;
-    [SerializeField] private float titleAnimDuration = 0.5f;
-    [SerializeField] private float fadeDuration = 0.4f;
-    [SerializeField] private float fadeStagger = 0.2f;
+    [SerializeField] private float pontuationDelay = 5f;
+    [SerializeField] private float exitButtonFadeDuration = 0.4f;
+    [SerializeField] private float exitButtonFadeStagger = 0.2f;
 
     // ─── Constants ───────────────────────────────────────────────────────────
     private const int WIN_POINTS = 50;
     private const int LOSE_POINTS = -20;
     private const string POINTS_FORMAT = "{0}{1} Influence Points";
 
-    // ─── Cached rest positions ───────────────────────────────────────────────
-    private Vector2 _winTitleRestPos;
-    private Vector2 _loseTitleRestPos;
-    private Vector3 _winTitleRestScale;
-    private Vector3 _loseTitleRestScale;
-
     private void Awake()
     {
-        // Cache rest transforms
-        if (winTitlePanel != null)
-        {
-            _winTitleRestPos = winTitlePanel.anchoredPosition;
-            _winTitleRestScale = winTitlePanel.localScale;
-        }
-
-        if (loseTitlePanel != null)
-        {
-            _loseTitleRestPos = loseTitlePanel.anchoredPosition;
-            _loseTitleRestScale = loseTitlePanel.localScale;
-        }
-
-        // Hide screens
+        // Hide screens and pontuation panels at start
         if (winScreen != null) winScreen.SetActive(false);
         if (loseScreen != null) loseScreen.SetActive(false);
+        if (winPontuationPanel != null) winPontuationPanel.SetActive(false);
+        if (losePontuationPanel != null) losePontuationPanel.SetActive(false);
 
         // Wire exit buttons
         if (winExitButton != null)
@@ -91,29 +72,19 @@ public class GameResultScreenController : MonoBehaviour
     /// <summary>Shows the victory screen with the given points.</summary>
     public void ShowWinScreen(int points)
     {
-        if (winPontuationText != null)
-        {
-            string sign = points >= 0 ? "+" : "";
-            winPontuationText.text = string.Format(POINTS_FORMAT, sign, points);
-        }
+        SetPontuationText(winPontuationText, points);
 
-        StartCoroutine(PlayResultAnimation(
-            winScreen, winTitlePanel, winBackgroundGroup, winExitButtonGroup,
-            _winTitleRestPos, _winTitleRestScale));
+        StartCoroutine(PlayResultSequence(
+            winScreen, winAnimator, winPontuationPanel, winExitButtonGroup));
     }
 
     /// <summary>Shows the defeat screen with the given points.</summary>
     public void ShowLoseScreen(int points)
     {
-        if (losePontuationText != null)
-        {
-            string sign = points >= 0 ? "+" : "";
-            losePontuationText.text = string.Format(POINTS_FORMAT, sign, points);
-        }
+        SetPontuationText(losePontuationText, points);
 
-        StartCoroutine(PlayResultAnimation(
-            loseScreen, loseTitlePanel, loseBackgroundGroup, loseExitButtonGroup,
-            _loseTitleRestPos, _loseTitleRestScale));
+        StartCoroutine(PlayResultSequence(
+            loseScreen, loseAnimator, losePontuationPanel, loseExitButtonGroup));
     }
 
     /// <summary>Handles the exit button click to return to menu.</summary>
@@ -127,57 +98,54 @@ public class GameResultScreenController : MonoBehaviour
 
     // ─── Animation sequence ──────────────────────────────────────────────────
 
-    private IEnumerator PlayResultAnimation(
+    private IEnumerator PlayResultSequence(
         GameObject screen,
-        RectTransform titlePanel,
-        CanvasGroup backgroundGroup,
-        CanvasGroup exitButtonGroup,
-        Vector2 titleRestPos,
-        Vector3 titleRestScale)
+        Animator animator,
+        GameObject pontuationPanel,
+        CanvasGroup exitButtonGroup)
     {
         // Prepare initial state
-        if (backgroundGroup != null) backgroundGroup.alpha = 0f;
         if (exitButtonGroup != null) exitButtonGroup.alpha = 0f;
+        if (pontuationPanel != null) pontuationPanel.SetActive(false);
 
         // Hide in-game HUD
         if (duringGamePanels != null) duringGamePanels.SetActive(false);
 
-        // Title starts large and centered
-        if (titlePanel != null)
-        {
-            titlePanel.anchoredPosition = Vector2.zero;
-            titlePanel.localScale = titleRestScale * titleScaleMultiplier;
-        }
-
-        // Activate screen
+        // Activate screen — this also starts the Animator since it plays on awake
         screen.SetActive(true);
 
-        // Step 1: Fade in the title
-        yield return StartCoroutine(FadeCanvasGroupOnImage(titlePanel, 0f, 1f, titleAnimDuration));
-
-        // Step 2: Hold title in center
-        yield return new WaitForSeconds(titleDisplayDuration);
-
-        // Step 3: Animate title to rest position and scale
-        yield return StartCoroutine(AnimateTitleToRest(
-            titlePanel, titleRestPos, titleRestScale, titleAnimDuration));
-
-        // Step 4: Fade in background
-        if (backgroundGroup != null)
+        // Ensure the animator is playing
+        if (animator != null)
         {
-            yield return StartCoroutine(FadeCanvasGroup(backgroundGroup, 0f, 1f, fadeDuration));
+            animator.enabled = true;
+            animator.Play(0, -1, 0f);
         }
 
-        // Step 5: Fade in exit button after stagger
-        yield return new WaitForSeconds(fadeStagger);
+        // Step 1: Wait for pontuation delay then show pontuation
+        yield return new WaitForSeconds(pontuationDelay);
+
+        if (pontuationPanel != null)
+        {
+            pontuationPanel.SetActive(true);
+        }
+
+        // Step 2: Fade in exit button after stagger
+        yield return new WaitForSeconds(exitButtonFadeStagger);
 
         if (exitButtonGroup != null)
         {
-            yield return StartCoroutine(FadeCanvasGroup(exitButtonGroup, 0f, 1f, fadeDuration));
+            yield return StartCoroutine(FadeCanvasGroup(exitButtonGroup, 0f, 1f, exitButtonFadeDuration));
         }
     }
 
-    // ─── Animation helpers ───────────────────────────────────────────────────
+    // ─── Helpers ─────────────────────────────────────────────────────────────
+
+    private static void SetPontuationText(TextMeshProUGUI textComponent, int points)
+    {
+        if (textComponent == null) return;
+        string sign = points >= 0 ? "+" : "";
+        textComponent.text = string.Format(POINTS_FORMAT, sign, points);
+    }
 
     /// <summary>Fades a CanvasGroup from startAlpha to endAlpha.</summary>
     private IEnumerator FadeCanvasGroup(CanvasGroup group, float from, float to, float duration)
@@ -194,80 +162,6 @@ public class GameResultScreenController : MonoBehaviour
         }
 
         group.alpha = to;
-    }
-
-    /// <summary>Fades an Image component on the RectTransform (for Title_Panel that has its own Canvas).</summary>
-    private IEnumerator FadeCanvasGroupOnImage(RectTransform rt, float from, float to, float duration)
-    {
-        if (rt == null) yield break;
-
-        var image = rt.GetComponent<Image>();
-        var tmpTexts = rt.GetComponentsInChildren<TextMeshProUGUI>();
-
-        float elapsed = 0f;
-
-        SetImageAlpha(image, from);
-        SetTextsAlpha(tmpTexts, from);
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            float alpha = Mathf.Lerp(from, to, EaseInOutQuad(t));
-            SetImageAlpha(image, alpha);
-            SetTextsAlpha(tmpTexts, alpha);
-            yield return null;
-        }
-
-        SetImageAlpha(image, to);
-        SetTextsAlpha(tmpTexts, to);
-    }
-
-    /// <summary>Animates the title panel from current position/scale to rest values.</summary>
-    private IEnumerator AnimateTitleToRest(
-        RectTransform titlePanel, Vector2 restPos, Vector3 restScale, float duration)
-    {
-        if (titlePanel == null) yield break;
-
-        Vector2 startPos = titlePanel.anchoredPosition;
-        Vector3 startScale = titlePanel.localScale;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            float eased = EaseInOutQuad(t);
-
-            titlePanel.anchoredPosition = Vector2.Lerp(startPos, restPos, eased);
-            titlePanel.localScale = Vector3.Lerp(startScale, restScale, eased);
-            yield return null;
-        }
-
-        titlePanel.anchoredPosition = restPos;
-        titlePanel.localScale = restScale;
-    }
-
-    // ─── Utility ─────────────────────────────────────────────────────────────
-
-    private static void SetImageAlpha(Image img, float alpha)
-    {
-        if (img == null) return;
-        Color c = img.color;
-        c.a = alpha;
-        img.color = c;
-    }
-
-    private static void SetTextsAlpha(TextMeshProUGUI[] texts, float alpha)
-    {
-        if (texts == null) return;
-        foreach (var txt in texts)
-        {
-            if (txt == null) continue;
-            Color c = txt.color;
-            c.a = alpha;
-            txt.color = c;
-        }
     }
 
     private static float EaseInOutQuad(float t)
