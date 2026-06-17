@@ -44,7 +44,6 @@ public class TrunckPiece : InteractivePiece
 
         anim.SetAnimation("Open", true);
 
-        particle.SetActive(true);
-        soundController.VictoryConfirm();
+        particle.SetActive(true);        
     }
 }

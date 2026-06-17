@@ -33,15 +33,22 @@ public class SyncronizeTable : NetworkBehaviour
         if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
         else { Destroy(gameObject); }
 
-        //Instance = this;
-
-        LocalSteamId = SteamUser.GetSteamID().m_SteamID;
         OpponentSteamId = 0;
+
+        if (SteamInitializer.Initialized)
+        {
+            LocalSteamId = SteamUser.GetSteamID().m_SteamID;
+            Debug.Log($"[SyncronizeTable] Steam ID local salvo: {LocalSteamId}");
+        }
+        else
+        {
+            Debug.LogWarning("[SyncronizeTable] Steam nao inicializado no Awake, Steam ID sera obtido no Start.");
+        }
 
         if (table != null && cachedTableReference == null)
         {
             cachedTableReference = table;
-            Debug.Log($"[SyncronizeTable] Referência de TableData cacheada: {table.name}");
+            Debug.Log($"[SyncronizeTable] Referencia de TableData cacheada: {table.name}");
         }
 
         if (table == null && cachedTableReference != null)
@@ -50,7 +57,6 @@ public class SyncronizeTable : NetworkBehaviour
             Debug.Log($"[SyncronizeTable] TableData restaurado do cache: {table.name}");
         }
 
-        Debug.Log($"[SyncronizeTable] Steam ID local salvo: {LocalSteamId}");
         Debug.Log($"[SyncronizeTable] TableData status: {(table != null ? $"OK ({table.name})" : "NULL!")}");
     }
 
@@ -65,7 +71,11 @@ public class SyncronizeTable : NetworkBehaviour
 
     void Start()
     {
-        //StartCoroutine(SendSteamIdDelayed());
+        if (LocalSteamId == 0 && SteamInitializer.Initialized)
+        {
+            LocalSteamId = SteamUser.GetSteamID().m_SteamID;
+            Debug.Log($"[SyncronizeTable] Steam ID local obtido no Start: {LocalSteamId}");
+        }
 
         if (networkManager.IsServerConnection()) return;
         StartCoroutine(SendPartsToServer());

@@ -55,6 +55,13 @@ public class MusicController : MonoBehaviour
         audioSource.Play();
     }
 
+    /// <summary>Stops all music playback and cancels any pending coroutines.</summary>
+    public void StopMusic()
+    {
+        StopAllCoroutines();
+        audioSource.Stop();
+    }
+
     private IEnumerator WaitForIntroEnd()
     {
         // Wait until the intro track finishes playing

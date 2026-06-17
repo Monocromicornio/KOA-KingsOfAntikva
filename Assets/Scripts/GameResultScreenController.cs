@@ -37,6 +37,10 @@ public class GameResultScreenController : MonoBehaviour
     [Tooltip("Panel that contains in-game HUD elements and should be hidden on result screen")]
     [SerializeField] private GameObject duringGamePanels;
 
+    // ─── Sound ───────────────────────────────────────────────────────────────
+    [Header("Sound")]
+    [SerializeField] private MusicController musicController;
+
     // ─── Animation Settings ──────────────────────────────────────────────────
     [Header("Animation Settings")]
     [SerializeField] private float pontuationDelay = 5f;
@@ -107,6 +111,9 @@ public class GameResultScreenController : MonoBehaviour
         // Prepare initial state
         if (exitButtonGroup != null) exitButtonGroup.alpha = 0f;
         if (pontuationPanel != null) pontuationPanel.SetActive(false);
+
+        // Stop background music
+        if (musicController != null) musicController.StopMusic();
 
         // Hide in-game HUD
         if (duringGamePanels != null) duringGamePanels.SetActive(false);

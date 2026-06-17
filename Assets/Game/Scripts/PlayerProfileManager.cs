@@ -22,15 +22,14 @@ public class PlayerProfileManager : MonoBehaviour
     {
         if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
         else { Destroy(gameObject); }
-
-        playerID = SteamUser.GetSteamID().m_SteamID;
-        nickname = SteamFriends.GetPersonaName();
     }
 
     IEnumerator Start()
     {
-       
         while (!SteamInitializer.Initialized) yield return null;
+
+        playerID = SteamUser.GetSteamID().m_SteamID;
+        nickname = SteamFriends.GetPersonaName();
 
         yield return StartCoroutine(GetPlayerData());
         

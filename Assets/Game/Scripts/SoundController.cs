@@ -2,17 +2,16 @@ using UnityEngine;
 
 public class SoundController : MonoBehaviour
 {
+    [Header("Music")]
+    [SerializeField]
+    AudioSource music;
+
     [Header("UI")]
     [SerializeField]
     AudioSource select;
     [SerializeField]
     AudioSource cancel;
-
-    [Header("Victory")]
-    [SerializeField]
-    AudioSource victoryPeaple;
-    [SerializeField]
-    AudioSource victoryConfirm;
+        
 
     public void Cancel()
     {
@@ -24,13 +23,11 @@ public class SoundController : MonoBehaviour
         select.Play();
     }
 
-    public void VictoryPeaple()
+    /// <summary>Stops the background music.</summary>
+    public void StopMusic()
     {
-        victoryPeaple.Play();
+        if (music != null && music.isPlaying)
+            music.Stop();
     }
-
-    public void VictoryConfirm()
-    {
-        victoryConfirm.Play();
-    }
+    
 }

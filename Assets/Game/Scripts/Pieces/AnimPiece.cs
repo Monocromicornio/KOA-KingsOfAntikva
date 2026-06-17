@@ -155,8 +155,7 @@ public class AnimPiece : NetworkBehaviour
     public void Win()
     {
         StartCoroutine(WaitForEndOfFrame(() => {
-            SetAnimation("Win", true);
-            soundController.VictoryPeaple();
+            SetAnimation("Win", true);           
         }));
     }
 
