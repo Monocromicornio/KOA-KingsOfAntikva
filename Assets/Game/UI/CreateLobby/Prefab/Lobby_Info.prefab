@@ -148,6 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8592499477433312244}
   - component: {fileID: 7668704519611731750}
+  - component: {fileID: 523073964367291092}
   m_Layer: 5
   m_Name: Lobby_Info
   m_TagString: Untagged
@@ -202,6 +203,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &523073964367291092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499961088779436801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27c7d47ee2aa984f972277b1ec501c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::com.onlineobject.objectnet.integration.UILobbyItem
+  label: {fileID: 6379497358247332923}
+  button: {fileID: 8677904998329598700}
 --- !u!1 &5213538400601097393
 GameObject:
   m_ObjectHideFlags: 0

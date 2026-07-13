@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace com.onlineobject.objectnet.integration {
     /// <summary>
@@ -10,7 +11,7 @@ namespace com.onlineobject.objectnet.integration {
         /// <summary>
         /// The text component that displays the label of the lobby item.
         /// </summary>
-        public Text label;
+        public TextMeshProUGUI label;
 
         /// <summary>
         /// The button component that can be interacted with by the user.
