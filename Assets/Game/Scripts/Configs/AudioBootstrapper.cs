@@ -1,4 +1,3 @@
-// AudioBootstrapper.cs
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -7,10 +6,9 @@ public class AudioBootstrapper : MonoBehaviour
     [Header("Mixer com parâmetros expostos")]
     public AudioMixer mixer;
 
-    const string P_MASTER = "MasterVolume", P_MUSIC = "MusicVolume",
-                 P_SFX = "SFXVolume", P_VOICE = "VoiceVolume", P_AMB = "AmbienceVolume";
+    const string P_MASTER = "MasterVolume", P_MUSIC = "MusicVolume", P_SFX = "SFXVolume", P_VOICE = "VoiceVolume", P_AMB = "AmbienceVolume";
 
-    void Awake()
+    void Start()
     {
         // aplica valores salvos (ou 1.0 padrão) logo no boot
         Apply(P_MASTER, PlayerPrefs.GetFloat(P_MASTER, 1f));
@@ -23,10 +21,7 @@ public class AudioBootstrapper : MonoBehaviour
         if (PlayerPrefs.GetInt("Mute", 0) == 1) mixer.SetFloat(P_MASTER, -80f);
     }
 
-    static float ToDb(float v) => Mathf.Log10(Mathf.Clamp(v, 0.0001f, 1f)) * 20f;
+    static float ToDb(float v) => Mathf.Lerp(-80f, 0f, v);
 
-    void Apply(string param, float value)
-    {
-        mixer.SetFloat(param, ToDb(value));
-    }
+    void Apply(string param, float value) => mixer.SetFloat(param, ToDb(value));
 }

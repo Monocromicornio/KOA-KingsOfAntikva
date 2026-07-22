@@ -22,7 +22,7 @@ public class AudioSettingsUI : MonoBehaviour
         sfx.SetValueWithoutNotify(PlayerPrefs.GetFloat(P_SFX, 1f));
         voice.SetValueWithoutNotify(PlayerPrefs.GetFloat(P_VOICE, 1f));
         ambience.SetValueWithoutNotify(PlayerPrefs.GetFloat(P_AMB, 1f));
-       // muteToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("Mute", 0) == 1);
+        // muteToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("Mute", 0) == 1);
 
         // aplicar ao abrir (útil se mudou fora da UI)
         ApplyParam(P_MASTER, master.value);
@@ -38,7 +38,7 @@ public class AudioSettingsUI : MonoBehaviour
         sfx.onValueChanged.AddListener(v => { ApplyParam(P_SFX, v); SaveFloat(P_SFX, v); });
         voice.onValueChanged.AddListener(v => { ApplyParam(P_VOICE, v); SaveFloat(P_VOICE, v); });
         ambience.onValueChanged.AddListener(v => { ApplyParam(P_AMB, v); SaveFloat(P_AMB, v); });
-       // muteToggle.onValueChanged.AddListener(OnMute);
+        // muteToggle.onValueChanged.AddListener(OnMute);
     }
 
     void OnDisable()
@@ -52,7 +52,7 @@ public class AudioSettingsUI : MonoBehaviour
        // muteToggle.onValueChanged.RemoveAllListeners();
     }
 
-    static float ToDb(float v) => Mathf.Log10(Mathf.Clamp(v, 0.0001f, 1f)) * 20f;
+    static float ToDb(float v) => Mathf.Lerp(-80f, 0f, v);
 
     void ApplyParam(string param, float val) { mixer.SetFloat(param, ToDb(val)); }
 
