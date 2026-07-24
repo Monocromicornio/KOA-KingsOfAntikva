@@ -139,10 +139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_so_tooltip_bg_description
+  _fallback: '<b>Private soldier</b>
 
-    Desarma as bombas inimigas'
+    Walk up to 8 spaces vertically or horizontally'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -573,10 +573,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_ba_tooltip_bg_description
+  _fallback: '<b>Barbarian</b>
 
-    Desarma as bombas inimigas'
+    Value piece 4'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -733,7 +733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.hud_imggametype_toggles_toggle1_label
+  Key: positiontutorial.pieces_hud_imggametype_toggles_toggle1_label
   _fallback: Tutorial
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
@@ -1022,7 +1022,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "<b>Barbaro</b>\nPe\xE7a de valor 4"
+      value: '<b>Barbarian</b>
+
+        Value piece 4'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -1181,10 +1183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_bo_tooltip_bg_description
+  _fallback: '<b>Bomb</b>
 
-    Desarma as bombas inimigas'
+    Kills any piece except the specialist'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -1788,9 +1790,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: '<b>Bomba</b>
+      value: '<b>Bomb</b>
 
-        Explode qualquer um, menos o especialista'
+        Kills any piece except the specialist'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -1983,7 +1985,7 @@ PrefabInstance:
     - target: {fileID: 4109429599981915465, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: Portraid Name
       objectReference: {fileID: 0}
     - target: {fileID: 6203030521626481233, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
@@ -2018,7 +2020,7 @@ PrefabInstance:
     - target: {fileID: 7252036943884236247, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: Portraid Text
       objectReference: {fileID: 0}
     - target: {fileID: 7252036943884236247, guid: 1660b1df3c1aa014c90cbafafac15913,
         type: 3}
@@ -4554,10 +4556,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_co_tooltip_bg_description
+  _fallback: '<b>Commander</b>
 
-    Desarma as bombas inimigas'
+    Value piece 5'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -4620,7 +4622,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "<b>Espadachin</b>\nPe\xE7a de valor 6"
+      value: '<b>Swordsman </b>
+
+        Value piece 6'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -4785,10 +4789,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_te_tooltip_bg_description
+  _fallback: '<b>Treasure</b>
 
-    Desarma as bombas inimigas'
+    If the enemy finds your treasure you lose'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -4811,9 +4815,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: '<b>Bomba</b>
+      value: '<b>Bomb</b>
 
-        Explode qualquer um, menos o especialista'
+        Kills any piece except the specialist'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -4970,9 +4974,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: '<b>Bomba</b>
+      value: '<b>Bomb</b>
 
-        Explode qualquer um, menos o especialista'
+        Kills any piece except the specialist'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -5369,10 +5373,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_ca_tooltip_bg_description
+  _fallback: '<b>Captain</b>
 
-    Desarma as bombas inimigas'
+    Value piece 8'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -5482,7 +5486,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "<b>Soldado raso</b>\nAnda at\xE9 8 casas na vertical ou na horizontal"
+      value: '<b>Private soldier</b>
+
+        Walk up to 8 spaces vertically or horizontally'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -5647,8 +5653,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.hud_dialoguebox_box_image_name
-  _fallback: New Text
+  Key: positiontutorial.pieces_hud_dialoguebox_box_image_name
+  _fallback: Portraid Name
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -5667,8 +5673,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.hud_dialoguebox_box_text
-  _fallback: New Text
+  Key: positiontutorial.pieces_hud_dialoguebox_box_text
+  _fallback: Portraid Text
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -5781,7 +5787,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "<b>Rei</b>\nPe\xE7a mais forte de valor 9"
+      value: '<b>King</b>
+
+        Strongest piece of value 9'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -5993,10 +6001,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_bo_tooltip_bg_description
+  _fallback: '<b>Bomb</b>
 
-    Desarma as bombas inimigas'
+    Kills any piece except the specialist'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -6512,7 +6520,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "<b>Soldado raso</b>\nAnda at\xE9 8 casas na vertical ou na horizontal"
+      value: '<b>Private soldier</b>
+
+        Walk up to 8 spaces vertically or horizontally'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -6823,10 +6833,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_so_tooltip_bg_description
+  _fallback: '<b>Private soldier</b>
 
-    Desarma as bombas inimigas'
+    Walk up to 8 spaces vertically or horizontally'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -6851,10 +6861,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_la_tooltip_bg_description
+  _fallback: '<b>Lanceman</b>
 
-    Desarma as bombas inimigas'
+    Value piece 7'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -7906,7 +7916,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "<b>Lanceiro</b>\nPe\xE7a de valor 7"
+      value: '<b>Lanceman</b>
+
+        Value piece 7'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -8351,10 +8363,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_sm_tooltip_bg_description
+  _fallback: '<b>Swordsman </b>
 
-    Desarma as bombas inimigas'
+    Value piece 6'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -9075,10 +9087,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_sp_tooltip_bg_description
+  _fallback: '<b>Assassin</b>
 
-    Desarma as bombas inimigas'
+    The assassin manages to defeat the enemy king,
+    but loses to any other soldier'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -9109,10 +9122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_re_tooltip_bg_description
+  _fallback: '<b>King</b>
 
-    Desarma as bombas inimigas'
+    Strongest piece of value 9'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -9135,7 +9148,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "<b>Capit\xE3o</b>\nPe\xE7a de valor 8"
+      value: '<b>Captain</b>
+
+        Value piece 8'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -9398,10 +9413,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_gu_tooltip_bg_description
+  _fallback: '<b>Warrior</b>
 
-    Desarma as bombas inimigas'
+    Piece worth 3'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -9424,10 +9439,15 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: '<b>Assassino</b>
+      value: '<b>Assassin</b>
 
-        Consegue derrotar o rei inimigo, mas perde
-        para qualquer outro soldado'
+        The assassin manages to defeat the enemy king,
+        but loses to any other soldier'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 47.8
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -9584,7 +9604,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "<b>Tesouro</b>\nSe o inimigo encontrar seu tesouro voc\xEA perde"
+      value: '<b>Treasure</b>
+
+        If the enemy finds your treasure you lose'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -9893,7 +9915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.hud_imggametype_toggles_toggle3_label
+  Key: positiontutorial.pieces_hud_imggametype_toggles_toggle3_label
   _fallback: Hard
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
@@ -9931,10 +9953,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_bo_tooltip_bg_description
+  _fallback: '<b>Bomb</b>
 
-    Desarma as bombas inimigas'
+    Kills any piece except the specialist'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -10091,7 +10113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.hud_imggametype_toggles_toggle2_label
+  Key: positiontutorial.pieces_hud_imggametype_toggles_toggle2_label
   _fallback: Normal
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
@@ -10290,7 +10312,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "<b>Guerreiro</b>\nPe\xE7a com valor 3"
+      value: '<b>Warrior</b>
+
+        Piece worth 3'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -10819,7 +10843,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: JOGAR
+  m_text: PLAY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e81f6dccaaeed4428df339ed5d872cb, type: 2}
   m_sharedMaterial: {fileID: -3867837926074141043, guid: 5e81f6dccaaeed4428df339ed5d872cb,
@@ -10853,7 +10877,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 17
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -10912,8 +10936,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.hud_play_jogar
-  _fallback: JOGAR
+  Key: positiontutorial.pieces_hud_play_jogar
+  _fallback: PLAY
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
@@ -11056,7 +11080,9 @@ PrefabInstance:
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "<b>Comandante</b>\nPe\xE7a de valor 5"
+      value: '<b>Commander</b>
+
+        Value piece 5'
       objectReference: {fileID: 0}
     - target: {fileID: 4559227707960211282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -51279,9 +51305,9 @@ PrefabInstance:
     - target: {fileID: 953138633070522485, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
       propertyPath: m_text
-      value: 'Especialista
+      value: '<b>Engineer</b>
 
-        Desarma as bombas inimigas'
+        Defuse enemy bombs'
       objectReference: {fileID: 0}
     - target: {fileID: 1371719949918633964, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
         type: 3}
@@ -51447,10 +51473,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-  _fallback: 'Especialista
+  Key: positiontutorial.pieces_es_tooltip_bg_description
+  _fallback: '<b>Engineer</b>
 
-    Desarma as bombas inimigas'
+    Defuse enemy bombs'
   _enableTmpVisualChanges: 0
   _enableTmpAutoSize: 1
   _tmpMinSize: 18
