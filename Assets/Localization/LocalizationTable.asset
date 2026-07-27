@@ -13,621 +13,392 @@ MonoBehaviour:
   m_Name: LocalizationTable
   m_EditorClassIdentifier: Assembly-CSharp::LocalizationTable
   Languages:
-  - pt-br
   - en
+  - pt-br
   Rows:
-  - Key: game.canvas_btndisconnect_text_tmp_
+  - Key: project.assets.game.prefab.pieces_ba_tooltip_bg_description
     Values:
-    - Exit
-    - 
-  - Key: game.canvas_duringgame_panels_enemyprofile_name
-    Values:
-    - Rei Azul
-    - 
-  - Key: game.canvas_duringgame_panels_enemyprofile_points
-    Values:
-    - 1500
-    - 
-  - Key: game.canvas_duringgame_panels_minimap_frame_markingspanel_markingbutton_1_text_tmp_
-    Values:
-    - '>3'
-    - 
-  - Key: game.canvas_duringgame_panels_minimap_frame_markingspanel_markingbutton_2_text_tmp_
-    Values:
-    - '>4'
-    - 
-  - Key: game.canvas_duringgame_panels_minimap_frame_markingspanel_markingbutton_3_text_tmp_
-    Values:
-    - '>5'
-    - 
-  - Key: game.canvas_duringgame_panels_minimap_frame_markingspanel_markingbutton_4_text_tmp_
-    Values:
-    - '>6'
-    - 
-  - Key: game.canvas_duringgame_panels_minimap_frame_markingspanel_markingbutton_5_text_tmp_
-    Values:
-    - '>7'
-    - 
-  - Key: game.canvas_duringgame_panels_minimap_frame_markingspanel_markingbutton_6_text_tmp_
-    Values:
-    - '>8'
-    - 
-  - Key: game.canvas_duringgame_panels_minimap_frame_markingspanel_markingbutton_7_text_tmp_
-    Values:
-    - A
-    - 
-  - Key: game.canvas_duringgame_panels_minimap_frame_markingspanel_markingbutton_8_text_tmp_
-    Values:
-    - A
-    - 
-  - Key: game.canvas_duringgame_panels_minimap_frame_markingspanel_markingbutton_9_text_tmp_
-    Values:
-    - A
-    - 
-  - Key: game.canvas_duringgame_panels_minimap_frame_markingspanel_markingbutton_text_tmp_
-    Values:
-    - '>2'
-    - 
-  - Key: game.canvas_duringgame_panels_minimap_minimapcellprefab_text_tmp_
-    Values:
-    - 1
-    - 
-  - Key: game.canvas_duringgame_panels_playerprofile_name
-    Values:
-    - Name
-    - 
-  - Key: game.canvas_duringgame_panels_playerprofile_points
-    Values:
-    - Points
-    - 
-  - Key: game.canvas_duringgame_panels_upper_menu_match_infos_and_menu_timer_box_timertext
-    Values:
-    - 60
-    - 
-  - Key: game.canvas_duringgame_panels_upper_menu_turninfo
-    Values:
-    - Sua vez
-    - 
-  - Key: game.canvas_lose_screen_defeat_window_background_pontuation
-    Values:
-    - -50 Influence Points
-    - 
-  - Key: game.canvas_lose_screen_exit_button_text_tmp_
-    Values:
-    - SAIR
-    - 
-  - Key: game.canvas_lose_screen_title_text_tmp_
-    Values:
-    - DERROTA
-    - 
-  - Key: game.canvas_surrenderpanel_cancelar_text_tmp_
-    Values:
-    - Cancelar
-    - 
-  - Key: game.canvas_surrenderpanel_sim_text_tmp_
-    Values:
-    - Sim
-    - 
-  - Key: game.canvas_surrenderpanel_text_tmp_
-    Values:
-    - Deseja se render?
-    - 
-  - Key: game.canvas_testeanimlose_text_tmp_
-    Values:
-    - Exit
-    - 
-  - Key: game.canvas_testeanimwin_text_tmp_
-    Values:
-    - Exit
-    - 
-  - Key: game.canvas_win_screen_exit_button_text_tmp_
-    Values:
-    - SAIR
-    - 
-  - Key: game.canvas_win_screen_title_panel_text_tmp_
-    Values:
-    - "VIT\xD3RIA"
-    - 
-  - Key: game.canvas_win_screen_victory_window_background_pontuation
-    Values:
-    - +50 Influence Points
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_audioconfigs_ambience_name
-    Values:
-    - Ambience
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_audioconfigs_master_name
-    Values:
-    - Master
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_audioconfigs_music_name
-    Values:
-    - Music
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_audioconfigs_sfx_name
-    Values:
-    - SFX
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_close_configs_text_tmp_1_
-    Values:
-    - Fechar
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_antialiasing_dropdown_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_antialiasing_dropdown_template_viewport_content_item_item_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_antialiasing_name
-    Values:
-    - Anti Aliasing
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_fpslimit_dropdown_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_fpslimit_dropdown_template_viewport_content_item_item_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_fpslimit_name
-    Values:
-    - FPS Limit
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_quality_dropdown_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_quality_dropdown_template_viewport_content_item_item_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_quality_name
-    Values:
-    - Quality
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_resolution_dropdown_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_resolution_dropdown_template_viewport_content_item_item_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_resolution_name
-    Values:
-    - Resolution
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_setscreenmode_dropdown_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_setscreenmode_dropdown_template_viewport_content_item_item_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_setscreenmode_name
-    Values:
-    - Screen Mode
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_shadowquality_dropdown_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_shadowquality_dropdown_template_viewport_content_item_item_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_shadowquality_name
-    Values:
-    - Shadow Quality
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_texturequality_dropdown_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_texturequality_dropdown_template_viewport_content_item_item_label
-    Values:
-    - Option A
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_texturequality_name
-    Values:
-    - Texture Quality
-    - 
-  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scroll_view_viewport_content_vsync_name
-    Values:
-    - VSync
-    - 
-  - Key: positionparts.hud_configs_hud_configtabs_audio_text_tmp_
-    Values:
-    - Audio
-    - 
-  - Key: positionparts.hud_configs_hud_configtabs_video_text_tmp_
-    Values:
-    - Video
-    - 
-  - Key: positionparts.hud_dialoguebox_box_name_background_name
-    Values:
-    - New Text
-    - 
-  - Key: positionparts.hud_dialoguebox_box_text
-    Values:
-    - New Text
-    - 
-  - Key: positionparts.hud_dialoguebox_box_tutorialbutton_text_tmp_
-    Values:
-    - Tutorial
-    - 
-  - Key: positionparts.hud_exitpanel_exit_panel_cancel_text_tmp_
-    Values:
-    - Cancelar
-    - 
-  - Key: positionparts.hud_exitpanel_exit_panel_text
-    Values:
-    - Deseja sair do jogo?
-    - 
-  - Key: positionparts.hud_exitpanel_exit_panel_yes_text_tmp_
-    Values:
-    - Sim
-    - 
-  - Key: positionparts.hud_homepage_cancel_search_button_room_infos_status
-    Values:
-    - PLAY
-    - 
-  - Key: positionparts.hud_homepage_cancel_search_button_room_infos_timer
-    Values:
-    - 00:00
-    - 
-  - Key: positionparts.hud_homepage_cancel_search_button_text_tmp_
-    Values:
-    - X
-    - 
-  - Key: positionparts.hud_homepage_player_infos_playerinfos_playernick
-    Values:
-    - New Text
-    - 
-  - Key: positionparts.hud_homepage_player_infos_playerinfos_pontuation
-    Values:
-    - New Text
-    - 
-  - Key: positionparts.hud_homepage_play_button_jogar
-    Values:
-    - PLAY
-    - 
-  - Key: positionparts.hud_imggametype_toggles_toggle1_label
-    Values:
-    - Tutorial
-    - 
-  - Key: positionparts.hud_imggametype_toggles_toggle2_label
-    Values:
-    - Normal
-    - 
-  - Key: positionparts.hud_imggametype_toggles_toggle3_label
-    Values:
-    - Hard
-    - 
-  - Key: positionparts.hud_playmodespanel_back_text_tmp_
-    Values:
-    - VOLTAR
-    - 
-  - Key: positionparts.hud_playmodespanel_bg_lobby_text_tmp_
-    Values:
-    - CRIAR LOBBY
-    - 
-  - Key: positionparts.hud_playmodespanel_bg_offline_text_tmp_
-    Values:
-    - PARTIDA OFFLINE
-    - 
-  - Key: positionparts.hud_playmodespanel_bg_ranked_text_tmp_
-    Values:
-    - PARTIDA RANKEADA
-    - 
-  - Key: positionparts.hud_playmodespanel_bg_tutorial_text_tmp_
-    Values:
-    - TUTORIAL
-    - 
-  - Key: positionparts.hud_rankinghud_bg_close_text_tmp_
-    Values:
-    - Fechar
-    - 
-  - Key: positionparts.hud_rankinghud_bg_image_scroll_view_viewport_content_rankingcontentprefab_nick
-    Values:
-    - ASDAS
-    - 
-  - Key: positionparts.hud_rankinghud_bg_image_scroll_view_viewport_content_rankingcontentprefab_pontuation
-    Values:
-    - 1
-    - 
-  - Key: positionparts.hud_rankinghud_bg_image_scroll_view_viewport_content_rankingcontentprefab_position
-    Values:
-    - 0
-    - 
-  - Key: positionparts.hud_steam_viewer_bottonbuttons_horizontal_group_lobby_list_close_label
-    Values:
-    - Fechar
-    - 
-  - Key: positionparts.hud_steam_viewer_bottonbuttons_horizontal_group_lobby_list_lobbieslist_label
-    Values:
-    - SALAS
-    - 
-  - Key: positionparts.hud_steam_viewer_bottonbuttons_horizontal_group_lobby_list_refreshlobbies_background_label
-    Values:
-    - Refresh Lobbies
-    - 
-  - Key: positionparts.hud_steam_viewer_controls_lobbycreationroot_createlobby_background_label
-    Values:
-    - Create Lobby
-    - 
-  - Key: positionparts.hud_steam_viewer_controls_lobbycreationroot_lobbyname_inputfield_tmp_text_area_placeholder
-    Values:
-    - Lobby Name
-    - 
-  - Key: positionparts.hud_steam_viewer_controls_lobbycreationroot_lobbyname_inputfield_tmp_text_area_text
-    Values:
-    - "\u200B"
-    - 
-  - Key: positionparts.hud_steam_viewer_titlelabel
-    Values:
-    - CRIAR LOBBY
-    - 
-  - Key: positionparts.loadingscreenmanager_loadingcanvas_loadingpanel_loadingbarbackground_statustext
-    Values:
-    - asdasdas
-    - 
-  - Key: positionparts.loadingscreenmanager_loadingcanvas_loadingpanel_loadingtext
-    Values:
-    - Carregando...
-    - 
-  - Key: positionparts.pieces_ba_tooltip_text_tmp_
-    Values:
-    - "<b>Barbaro</b>\nPe\xE7a de valor 4"
-    - 
-  - Key: positionparts.pieces_bo_1_tooltip_text_tmp_
-    Values:
-    - '<b>Bomba</b>
+    - '<b>Barbarian</b>
 
-      Explode qualquer um, menos o especialista'
-    - 
-  - Key: positionparts.pieces_bo_2_tooltip_text_tmp_
+      Value piece 4'
+    - "<b>B\xE1rbaro</b>\nPe\xE7a de valor 4"
+  - Key: project.assets.game.prefab.pieces_bo_tooltip_bg_description
     Values:
-    - '<b>Bomba</b>
+    - '<b>Bomb</b>
 
-      Explode qualquer um, menos o especialista'
-    - 
-  - Key: positionparts.pieces_bo_tooltip_text_tmp_
+      Kills any piece except the specialist'
+    - "<b>Bomba</b>\nMata qualquer pe\xE7a menos o especialista"
+  - Key: project.assets.game.prefab.pieces_ca_tooltip_bg_description
     Values:
-    - '<b>Bomba</b>
+    - '<b>Captain</b>
 
-      Explode qualquer um, menos o especialista'
-    - 
-  - Key: positionparts.pieces_ca_tooltip_text_tmp_
-    Values:
+      Value piece 8'
     - "<b>Capit\xE3o</b>\nPe\xE7a de valor 8"
-    - 
-  - Key: positionparts.pieces_co_tooltip_text_tmp_
+  - Key: project.assets.game.prefab.pieces_co_tooltip_bg_description
     Values:
+    - '<b>Commander</b>
+
+      Value piece 5'
     - "<b>Comandante</b>\nPe\xE7a de valor 5"
-    - 
-  - Key: positionparts.pieces_es_1_tooltip_text_tmp_
+  - Key: project.assets.game.prefab.pieces_es_tooltip_bg_description
     Values:
+    - '<b>Engineer</b>
+
+      Defuse enemy bombs'
     - '<b>Engenheiro</b>
 
       Desarma as bombas inimigas'
-    - 
-  - Key: positionparts.pieces_es_tooltip_text_tmp_
+  - Key: project.assets.game.prefab.pieces_gu_tooltip_bg_description
     Values:
-    - '<b>Engenheiro</b>
+    - '<b>Warrior</b>
 
-      Desarma as bombas inimigas'
-    - 
-  - Key: positionparts.pieces_gu_tooltip_text_tmp_
-    Values:
+      Piece worth 3'
     - "<b>Guerreiro</b>\nPe\xE7a com valor 3"
-    - 
-  - Key: positionparts.pieces_la_tooltip_text_tmp_
+  - Key: project.assets.game.prefab.pieces_la_tooltip_bg_description
     Values:
+    - '<b>Lanceman</b>
+
+      Value piece 7'
     - "<b>Lanceiro</b>\nPe\xE7a de valor 7"
-    - 
-  - Key: positionparts.pieces_re_tooltip_text_tmp_
+  - Key: project.assets.game.prefab.pieces_re_tooltip_bg_description
     Values:
+    - '<b>King</b>
+
+      Strongest piece of value 9'
     - "<b>Rei</b>\nPe\xE7a mais forte de valor 9"
-    - 
-  - Key: positionparts.pieces_sm_tooltip_text_tmp_
+  - Key: project.assets.game.prefab.pieces_sm_tooltip_bg_description
     Values:
-    - "<b>Espadachin</b>\nPe\xE7a de valor 6"
-    - 
-  - Key: positionparts.pieces_so_1_tooltip_text_tmp_
+    - '<b>Swordsman </b>
+
+      Value piece 6'
+    - "<b>Espadachim </b>\nPe\xE7a de valor 6"
+  - Key: project.assets.game.prefab.pieces_so_tooltip_bg_description
     Values:
+    - '<b>Private soldier</b>
+
+      Walk up to 8 spaces vertically or horizontally'
     - "<b>Soldado raso</b>\nAnda at\xE9 8 casas na vertical ou na horizontal"
-    - 
-  - Key: positionparts.pieces_so_tooltip_text_tmp_
+  - Key: project.assets.game.prefab.pieces_sp_tooltip_bg_description
     Values:
-    - "<b>Soldado raso</b>\nAnda at\xE9 8 casas na vertical ou na horizontal"
-    - 
-  - Key: positionparts.pieces_sp_tooltip_text_tmp_
-    Values:
+    - '<b>Assassin</b>
+
+      The assassin manages to defeat the enemy king, but
+      loses to any other soldier'
     - '<b>Assassino</b>
 
       O assassino consegue derrotar o rei inimigo, mas perde
       para qualquer outro soldado'
-    - 
-  - Key: positionparts.pieces_te_tooltip_text_tmp_
+  - Key: project.assets.game.prefab.pieces_te_tooltip_bg_description
     Values:
+    - '<b>Treasure</b>
+
+      If the enemy finds your treasure you lose'
     - "<b>Tesouro</b>\nSe o inimigo encontrar seu tesouro voc\xEA perde"
-    - 
-  - Key: positionparts.pieces_x1_1_tooltip_text_tmp_
+  - Key: positiontutorial.pieces_hud_dialoguebox_box_image_name
     Values:
-    - 'Soldado
-
-      Ande quantas casa quiser na vertical ou na horizontal'
-    - 
-  - Key: positionparts.pieces_x2_1_tooltip_text_tmp_
+    - Portraid Name
+    - Nome do Portraid
+  - Key: positiontutorial.pieces_hud_dialoguebox_box_text
     Values:
-    - 'Especialista
-
-      Desarma as bombas inimigas'
-    - 
-  - Key: positionparts.pieces_x2_tooltip_text_tmp_
-    Values:
-    - 'Especialista
-
-      Desarma as bombas inimigas'
-    - 
-  - Key: positionparts.pieces_x3_tooltip_text_tmp_
-    Values:
-    - "Guerreiro\nPe\xE7a com valor 3"
-    - 
-  - Key: positionparts.pieces_x4_tooltip_text_tmp_
-    Values:
-    - "Barbaro\nPe\xE7a de valor 4"
-    - 
-  - Key: positionparts.pieces_x5_tooltip_text_tmp_
-    Values:
-    - "Comandante\nPe\xE7a de valor 5"
-    - 
-  - Key: positionparts.pieces_x6_tooltip_text_tmp_
-    Values:
-    - "Espadachin\nPe\xE7a de valor 6"
-    - 
-  - Key: positionparts.pieces_x7_tooltip_text_tmp_
-    Values:
-    - "Alquimista\nPe\xE7a de valor 7"
-    - 
-  - Key: positionparts.pieces_x8_tooltip_text_tmp_
-    Values:
-    - "Capit\xE3o\nPe\xE7a de valor 8"
-    - 
-  - Key: positionparts.pieces_xb_1_tooltip_text_tmp_
-    Values:
-    - "Bomba\nMata qualquer pe\xE7a menos o especialista"
-    - 
-  - Key: positionparts.pieces_xb_2_tooltip_text_tmp_
-    Values:
-    - "Bomba\nMata qualquer pe\xE7a menos o especialista"
-    - 
-  - Key: positionparts.pieces_xb_tooltip_text_tmp_
-    Values:
-    - "Bomba\nMata qualquer pe\xE7a menos o especialista"
-    - 
-  - Key: positionparts.pieces_xf_tooltip_text_tmp_
-    Values:
-    - "Tesouro\nSe o inimigo encontrar seu tesouro voc\xEA perde"
-    - 
-  - Key: positionparts.pieces_xs_tooltip_text_tmp_
-    Values:
-    - "Espi\xE3o\nO espi\xE3o tem valor 1 mas consegue derrotar o rei inimigo"
-    - 
-  - Key: positiontutorialnew.hud_dialoguebox_box_image_name
-    Values:
-    - New Text
-    - 
-  - Key: positiontutorialnew.hud_dialoguebox_box_text
-    Values:
-    - New Text
-    - 
-  - Key: positiontutorialnew.hud_imggametype_toggles_toggle1_label
+    - Portraid Text
+    - Texto do Portraid
+  - Key: positiontutorial.pieces_hud_imggametype_toggles_toggle1_label
     Values:
     - Tutorial
-    - 
-  - Key: positiontutorialnew.hud_imggametype_toggles_toggle2_label
+    - Tutorial
+  - Key: positiontutorial.pieces_hud_imggametype_toggles_toggle2_label
     Values:
     - Normal
-    - 
-  - Key: positiontutorialnew.hud_imggametype_toggles_toggle3_label
+    - Normal
+  - Key: positiontutorial.pieces_hud_imggametype_toggles_toggle3_label
     Values:
     - Hard
-    - 
-  - Key: positiontutorialnew.hud_play_jogar
+    - "Dif\xEDcil"
+  - Key: positiontutorial.pieces_hud_play_jogar
     Values:
+    - PLAY
     - JOGAR
-    - 
-  - Key: positiontutorialnew.pieces_ba_tooltip_text_tmp_
-    Values:
-    - "Barbaro\nPe\xE7a de valor 4"
-    - 
-  - Key: positiontutorialnew.pieces_bo_1_tooltip_text_tmp_
-    Values:
-    - "Bomba\nMata qualquer pe\xE7a menos o especialista"
-    - 
-  - Key: positiontutorialnew.pieces_bo_2_tooltip_text_tmp_
-    Values:
-    - "Bomba\nMata qualquer pe\xE7a menos o especialista"
-    - 
-  - Key: positiontutorialnew.pieces_bo_tooltip_text_tmp_
-    Values:
-    - "Bomba\nMata qualquer pe\xE7a menos o especialista"
-    - 
-  - Key: positiontutorialnew.pieces_ca_tooltip_text_tmp_
-    Values:
-    - "Capit\xE3o\nPe\xE7a de valor 8"
-    - 
-  - Key: positiontutorialnew.pieces_co_tooltip_text_tmp_
-    Values:
-    - "Comandante\nPe\xE7a de valor 5"
-    - 
-  - Key: positiontutorialnew.pieces_es_1_tooltip_text_tmp_
-    Values:
-    - 'Especialista
-
-      Desarma as bombas inimigas'
-    - 
-  - Key: positiontutorialnew.pieces_es_tooltip_text_tmp_
-    Values:
-    - 'Especialista
-
-      Desarma as bombas inimigas'
-    - 
-  - Key: positiontutorialnew.pieces_gu_tooltip_text_tmp_
-    Values:
-    - "Guerreiro\nPe\xE7a com valor 3"
-    - 
-  - Key: positiontutorialnew.pieces_la_tooltip_text_tmp_
-    Values:
-    - "Alquimista\nPe\xE7a de valor 7"
-    - 
-  - Key: positiontutorialnew.pieces_re_tooltip_text_tmp_
-    Values:
-    - "Rei\nPe\xE7a mais forte de valor 9"
-    - 
-  - Key: positiontutorialnew.pieces_sm_tooltip_text_tmp_
-    Values:
-    - "Espadachin\nPe\xE7a de valor 6"
-    - 
-  - Key: positiontutorialnew.pieces_so_1_tooltip_text_tmp_
-    Values:
-    - 'Soldado
-
-      Ande quantas casa quiser na vertical ou na horizontal'
-    - 
-  - Key: positiontutorialnew.pieces_so_tooltip_text_tmp_
-    Values:
-    - 'Soldado
-
-      Ande quantas casa quiser na vertical ou na horizontal'
-    - 
-  - Key: positiontutorialnew.pieces_sp_tooltip_text_tmp_
-    Values:
-    - "Espi\xE3o\nO espi\xE3o tem valor 1 mas consegue derrotar o rei inimigo"
-    - 
-  - Key: positiontutorialnew.pieces_te_tooltip_text_tmp_
-    Values:
-    - "Tesouro\nSe o inimigo encontrar seu tesouro voc\xEA perde"
-    - 
-  - Key: tutorialscene.canvas_dialoguebox_box_image_name
-    Values:
-    - New Text
-    - 
-  - Key: tutorialscene.canvas_dialoguebox_box_text
-    Values:
-    - New Text
-    - 
-  - Key: tutorialscene.canvas_timer_timerbox_match_infos_and_menu_timer_box_timertext
-    Values:
-    - 60
-    - 
   - Key: tutorialscene.canvas_timer_timerbox_turninfo
     Values:
+    - Your turn
     - Sua vez
-    - 
+  - Key: positionparts.hud_configs_hud_configs_background_audioconfigs_ambience_name
+    Values:
+    - Ambience
+    - Ambiente
+  - Key: positionparts.hud_configs_hud_configs_background_audioconfigs_master_name
+    Values:
+    - Master
+    - Geral
+  - Key: positionparts.hud_configs_hud_configs_background_audioconfigs_music_name
+    Values:
+    - Music
+    - "M\xFAsica"
+  - Key: positionparts.hud_configs_hud_configs_background_audioconfigs_sfx_name
+    Values:
+    - SFX
+    - Efeitos
+  - Key: positionparts.hud_configs_hud_configs_background_close_configs_label
+    Values:
+    - Close
+    - Fechar
+  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scrollview_viewport_content_antialiasing_name
+    Values:
+    - Anti Aliasing
+    - Anti Aliasing
+  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scrollview_viewport_content_fpslimit_name
+    Values:
+    - FPS Limit
+    - Limite de FPS
+  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scrollview_viewport_content_quality_name
+    Values:
+    - Quality
+    - Qualidade
+  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scrollview_viewport_content_resolution_name
+    Values:
+    - Resolution
+    - "Resolu\xE7\xE3o"
+  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scrollview_viewport_content_setscreenmode_name
+    Values:
+    - Screen Mode
+    - Modo de Tela
+  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scrollview_viewport_content_shadowquality_name
+    Values:
+    - Shadow Quality
+    - Qualidade da Sombra
+  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scrollview_viewport_content_texturequality_name
+    Values:
+    - Texture Quality
+    - Qualidade da Textura
+  - Key: positionparts.hud_configs_hud_configs_background_videoconfigs_scrollview_viewport_content_vsync_name
+    Values:
+    - VSync
+    - VSync
+  - Key: positionparts.hud_configs_hud_configtabs_audio_label
+    Values:
+    - Audio
+    - Audio
+  - Key: positionparts.hud_configs_hud_configtabs_video_label
+    Values:
+    - Video
+    - Video
+  - Key: positionparts.hud_dialoguebox_box_tutorialbutton_label
+    Values:
+    - Tutorial
+    - Tutorial
+  - Key: positionparts.hud_exitpanel_exit_panel_cancel_label
+    Values:
+    - Cancel
+    - Cancelar
+  - Key: positionparts.hud_exitpanel_exit_panel_text
+    Values:
+    - Do you want to exit the game?
+    - Deseja sair do jogo?
+  - Key: positionparts.hud_exitpanel_exit_panel_yes_label
+    Values:
+    - Yes
+    - Sim
+  - Key: positionparts.hud_homepage_cancel_search_button_room_infos_status
+    Values:
+    - PLAY
+    - JOGAR
+  - Key: positionparts.hud_homepage_play_button_jogar
+    Values:
+    - PLAY
+    - JOGAR
+  - Key: positionparts.hud_imggametype_toggles_toggle1_label
+    Values:
+    - Tutorial
+    - Tutorial
+  - Key: positionparts.hud_imggametype_toggles_toggle2_label
+    Values:
+    - Normal
+    - Normal
+  - Key: positionparts.hud_imggametype_toggles_toggle3_label
+    Values:
+    - Hard
+    - "Dif\xEDcil"
+  - Key: positionparts.hud_playmodespanel_back_label
+    Values:
+    - Back
+    - Voltar
+  - Key: positionparts.hud_playmodespanel_bg_lobby_label
+    Values:
+    - CREATE LOBBY
+    - CRIAR LOBBY
+  - Key: positionparts.hud_playmodespanel_bg_offline_label
+    Values:
+    - OFFLINE SEASSON
+    - PARTIDA OFFLINE
+  - Key: positionparts.hud_playmodespanel_bg_ranked_label
+    Values:
+    - RANKED SEASSON
+    - PARTIDA RANKEADA
+  - Key: positionparts.hud_playmodespanel_bg_tutorial_label
+    Values:
+    - TUTORIAL
+    - TUTORIAL
+  - Key: positionparts.hud_rankinghud_bg_close_label
+    Values:
+    - Close
+    - Fechar
+  - Key: positionparts.hud_steamviewer_controls_createlobbyandfilter_filters_label
+    Values:
+    - FILTERS
+    - FILTROS
+  - Key: positionparts.hud_steamviewer_controls_createlobbyandfilter_filters_lockedlobbytoggle_label
+    Values:
+    - Locked Lobby?
+    - Sala Privada?
+  - Key: positionparts.hud_steamviewer_controls_createlobbyandfilter_filters_searchlobby_textarea_placeholder
+    Values:
+    - Search Lobby
+    - Procurar Sala
+  - Key: positionparts.hud_steamviewer_controls_createlobbyandfilter_lobbycreationroot_createlobby_label
+    Values:
+    - Create Lobby
+    - Criar Sala
+  - Key: positionparts.hud_steamviewer_controls_createlobbyandfilter_lobbycreationroot_lobbyname_textarea_placeholder
+    Values:
+    - Lobby Name
+    - Nome da Sala
+  - Key: positionparts.hud_steamviewer_controls_createlobbyandfilter_lobbycreationroot_lobbypassword_textarea_placeholder
+    Values:
+    - Password
+    - Senha
+  - Key: positionparts.hud_steamviewer_controls_lobbylist_label
+    Values:
+    - LOBBIES
+    - SALAS
+  - Key: positionparts.hud_steamviewer_controls_lobbylist_lobbybuttons_refresh_label
+    Values:
+    - Refresh
+    - Atualizar
+  - Key: positionparts.hud_steamviewer_controls_lobbylist_lobbybuttons_return_label
+    Values:
+    - Return
+    - Voltar
+  - Key: positionparts.loadingscreenmanager_loadingcanvas_loadingpanel_loadingtext
+    Values:
+    - Loading...
+    - Carregando...
+  - Key: game.canvas_configshud_configs_background_audioconfigs_ambience_name
+    Values:
+    - Ambience
+    - Ambiente
+  - Key: game.canvas_configshud_configs_background_audioconfigs_master_name
+    Values:
+    - Master
+    - Geral
+  - Key: game.canvas_configshud_configs_background_audioconfigs_music_name
+    Values:
+    - Music
+    - Musica
+  - Key: game.canvas_configshud_configs_background_audioconfigs_sfx_name
+    Values:
+    - SFX
+    - Efeitos
+  - Key: game.canvas_configshud_configs_background_close_configs_label
+    Values:
+    - Close
+    - Fechar
+  - Key: game.canvas_configshud_configs_background_videoconfigs_scrollview_viewport_content_antialiasing_name
+    Values:
+    - Anti Aliasing
+    - Anti Aliasing
+  - Key: game.canvas_configshud_configs_background_videoconfigs_scrollview_viewport_content_fpslimit_name
+    Values:
+    - FPS Limit
+    - Limite de FPS
+  - Key: game.canvas_configshud_configs_background_videoconfigs_scrollview_viewport_content_quality_name
+    Values:
+    - Quality
+    - Qualidade
+  - Key: game.canvas_configshud_configs_background_videoconfigs_scrollview_viewport_content_resolution_name
+    Values:
+    - Resolution
+    - "Resolu\xE7\xE3o"
+  - Key: game.canvas_configshud_configs_background_videoconfigs_scrollview_viewport_content_setscreenmode_name
+    Values:
+    - Screen Mode
+    - Modo de Tela
+  - Key: game.canvas_configshud_configs_background_videoconfigs_scrollview_viewport_content_shadowquality_name
+    Values:
+    - Shadow Quality
+    - Qualidade da Sombra
+  - Key: game.canvas_configshud_configs_background_videoconfigs_scrollview_viewport_content_texturequality_name
+    Values:
+    - Texture Quality
+    - Qualidade da Textura
+  - Key: game.canvas_configshud_configs_background_videoconfigs_scrollview_viewport_content_vsync_name
+    Values:
+    - VSync
+    - VSync
+  - Key: game.canvas_configshud_configtabs_audio_label
+    Values:
+    - Audio
+    - Audio
+  - Key: game.canvas_configshud_configtabs_video_label
+    Values:
+    - Video
+    - Video
+  - Key: game.canvas_duringgame_panels_minimap_frame_markingpanel_2_label
+    Values:
+    - '>2'
+    - '>2'
+  - Key: game.canvas_duringgame_panels_minimap_frame_markingpanel_3_label
+    Values:
+    - '>3'
+    - '>3'
+  - Key: game.canvas_duringgame_panels_minimap_frame_markingpanel_4_label
+    Values:
+    - '>4'
+    - '>4'
+  - Key: game.canvas_duringgame_panels_minimap_frame_markingpanel_5_label
+    Values:
+    - '>5'
+    - '>5'
+  - Key: game.canvas_duringgame_panels_minimap_frame_markingpanel_6_label
+    Values:
+    - '>6'
+    - '>6'
+  - Key: game.canvas_duringgame_panels_minimap_frame_markingpanel_7_label
+    Values:
+    - '>7'
+    - '>7'
+  - Key: game.canvas_duringgame_panels_minimap_frame_markingpanel_8_label
+    Values:
+    - '>8'
+    - '>8'
+  - Key: game.canvas_duringgame_panels_upper_menu_turninfo
+    Values:
+    - Your turn
+    - Sua vez
+  - Key: game.canvas_lose_screen_exit_button_label
+    Values:
+    - EXIT
+    - SAIR
+  - Key: game.canvas_surrenderpanel_cancelar_label
+    Values:
+    - Cancel
+    - Cancelar
+  - Key: game.canvas_surrenderpanel_sim_label
+    Values:
+    - Yes
+    - Sim
+  - Key: game.canvas_surrenderpanel_text
+    Values:
+    - Do you want to surrender?
+    - Deseja se Render?
+  - Key: game.canvas_testeanimlose_label
+    Values:
+    - Exit
+    - Sair
+  - Key: game.canvas_testeanimwin_label
+    Values:
+    - Exit
+    - Sair
+  - Key: game.canvas_win_screen_exit_button_label
+    Values:
+    - EXIT
+    - SAIR
