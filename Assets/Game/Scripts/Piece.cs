@@ -42,6 +42,8 @@ public class Piece : NetworkBehaviour
     /// </summary>
     public string Description => description;
 
+    public void SetDescription(string _description) => description = _description;
+
     /// <summary>
     /// Fired when a piece is selected by the player.
     /// </summary>

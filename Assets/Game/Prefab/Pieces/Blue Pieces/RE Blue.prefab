@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 4952251734804089609}
   - component: {fileID: 4611211167744335035}
   - component: {fileID: 8764371180265923121}
+  - component: {fileID: -4269180363163528134}
   m_Layer: 10
   m_Name: RE Blue
   m_TagString: Player
@@ -346,6 +347,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-4269180363163528134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4621453966911388100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: project.assets.game.prefab.pieces_re_description
+  _fallback: '<b>King</b>
+
+    Strongest piece of value 9'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &5369015444580118395
 GameObject:
   m_ObjectHideFlags: 0

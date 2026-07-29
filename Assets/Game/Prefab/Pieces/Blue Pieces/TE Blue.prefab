@@ -9640,6 +9640,7 @@ GameObject:
   - component: {fileID: 7099810796496407780}
   - component: {fileID: 6659729501434283143}
   - component: {fileID: 779569032578507834}
+  - component: {fileID: -8770707499736931638}
   m_Layer: 10
   m_Name: TE Blue
   m_TagString: Player
@@ -9718,7 +9719,9 @@ MonoBehaviour:
   targetField: {fileID: 0}
   body: {fileID: 5603066192594323481}
   type: 10
-  description: "<b>Tesouro</b>\nSe o inimigo encontrar seu tesouro voc\xEA perde"
+  description: '<b>Treasure</b>
+
+    If the enemy finds your treasure you lose'
 --- !u!114 &1136219555144991459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9915,6 +9918,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-8770707499736931638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4057984864569721358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: project.assets.game.prefab.pieces_te_description
+  _fallback: '<b>Treasure</b>
+
+    If the enemy finds your treasure you lose'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &4870199711936650830
 GameObject:
   m_ObjectHideFlags: 0
@@ -20083,6 +20108,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3323634189771677534}
     m_Modifications:
+    - target: {fileID: 574244336536879282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text

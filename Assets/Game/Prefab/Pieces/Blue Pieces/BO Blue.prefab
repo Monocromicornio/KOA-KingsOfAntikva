@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7837648028798507341}
   - component: {fileID: -8104086174035437449}
   - component: {fileID: 553215419399972794}
+  - component: {fileID: 5971456038036505770}
   m_Layer: 10
   m_Name: BO Blue
   m_TagString: Player
@@ -293,6 +294,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5971456038036505770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80674005514539198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: project.assets.game.prefab.pieces_bo_description
+  _fallback: '<b>Bomb</b>
+
+    Kills any piece except the specialist'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &740474906815663888
 GameObject:
   m_ObjectHideFlags: 0

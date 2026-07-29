@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2272837942174993925}
   - component: {fileID: 1730685880023842657}
   - component: {fileID: 1780124296312036362}
+  - component: {fileID: 904362247402983186}
   m_Layer: 10
   m_Name: ES Blue
   m_TagString: Player
@@ -334,6 +335,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &904362247402983186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077175158252841430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: project.assets.game.prefab.pieces_es_description
+  _fallback: '<b>Engineer</b>
+
+    Defuse enemy bombs'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &2711387937297203920
 GameObject:
   m_ObjectHideFlags: 0

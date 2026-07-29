@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6324341774908732665}
   - component: {fileID: 5628232813150075084}
   - component: {fileID: 287445998697916127}
+  - component: {fileID: 495883287713578244}
   m_Layer: 10
   m_Name: CA Blue
   m_TagString: Player
@@ -95,7 +96,9 @@ MonoBehaviour:
   targetField: {fileID: 0}
   body: {fileID: 3094341630855231030}
   type: 7
-  description: "<b>Capit\xE3o</b>\nPe\xE7a de valor 8"
+  description: '<b>Captain</b>
+
+    Value piece 8'
 --- !u!114 &88002007657159111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +334,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &495883287713578244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651506765521621030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: project.assets.game.prefab.pieces_ca_description
+  _fallback: '<b>Captain</b>
+
+    Value piece 8'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &7388568097035793147
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +397,8 @@ AudioSource:
   m_GameObject: {fileID: 7388568097035793147}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4535335169034535895, guid: 1ad339664904fe94ea3f27da3c796d73,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: fe688af8d70de9241a823b706a12d428, type: 3}
   m_PlayOnAwake: 0
@@ -532,7 +558,8 @@ AudioSource:
   m_GameObject: {fileID: 8435118011053277521}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4535335169034535895, guid: 1ad339664904fe94ea3f27da3c796d73,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 66d9044739350124c85bd5920dc4a1ad, type: 3}
   m_PlayOnAwake: 0

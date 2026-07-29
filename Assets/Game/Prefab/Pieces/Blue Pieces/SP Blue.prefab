@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 225438690476111063}
   - component: {fileID: 5293320034899042512}
   - component: {fileID: 4106780603668197544}
+  - component: {fileID: 7785852976554486868}
   m_Layer: 10
   m_Name: SP Blue
   m_TagString: Player
@@ -335,6 +336,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7785852976554486868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166717452743191706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: project.assets.game.prefab.pieces_sp_description
+  _fallback: '<b>Assassin</b>
+
+    The assassin manages to defeat the enemy king,
+    but loses to any other soldier'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &2467039547967108428
 GameObject:
   m_ObjectHideFlags: 0
