@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 
 [System.Serializable]
 public class RankingEntry
@@ -19,49 +21,66 @@ public class RankingHUDManager : MonoBehaviour
     public Transform contentParent; // onde os itens serão instanciados
     public GameObject entryPrefab;  // prefab com textos de posição, nome e pontos
 
-    private const string API_KEY = "Koa2025SecureKey!";
-    private const string GET_RANKING_URL = "https://fromzerogamestudio.com/get_ranking.php";
+    private RankingData rankingData;
+    private CancellationTokenSource _cts;
 
-    private void Start()
+    private void OnEnable()
     {
-        StartCoroutine(LoadRanking());
+        rankingData = RankingManager.rankingData;
+        _cts = new CancellationTokenSource();
+        _ = PopulateRanking(_cts.Token);
     }
 
-    private IEnumerator LoadRanking()
+    private async Task PopulateRanking(CancellationToken token)
     {
-        string url = $"{GET_RANKING_URL}?api_key={API_KEY}";
-
-        using (UnityWebRequest www = UnityWebRequest.Get(url))
+        if (RankingManager.rankingData != null)
         {
-            yield return www.SendWebRequest();
 
-            if (www.result != UnityWebRequest.Result.Success)
+            foreach (Transform child in contentParent)
             {
-                Debug.LogError("Erro ao carregar ranking: " + www.error);
-                yield break;
+                token.ThrowIfCancellationRequested();
+
+                Destroy(child.gameObject);
+                await Task.Yield();
             }
 
-            string json = www.downloadHandler.text;
-            RankingEntry[] ranking = JsonHelper.FromJson<RankingEntry>(JsonHelper.FixJson(json));
+            foreach (RankingEntry entry in rankingData.rankingInfo)
+            {
+                token.ThrowIfCancellationRequested();
 
-            PopulateRanking(ranking);
+                GameObject go = Instantiate(entryPrefab, contentParent);
+                TextMeshProUGUI[] texts = go.GetComponentsInChildren<TextMeshProUGUI>();
+
+                // Ordem: 0 = posição, 1 = nome, 2 = pontos
+                texts[0].text = entry.rankingPosition.ToString();
+                texts[1].text = entry.nickname;
+                texts[2].text = entry.pontuation.ToString();
+                await Task.Yield();
+            }
+        }
+        else
+        {
+            Debug.LogError("RankingData não identificado");
         }
     }
 
-    private void PopulateRanking(RankingEntry[] ranking)
+    private void LimpaToken()
     {
-        foreach (Transform child in contentParent)
-            Destroy(child.gameObject);
-
-        foreach (RankingEntry entry in ranking)
+        if (_cts != null)
         {
-            GameObject go = Instantiate(entryPrefab, contentParent);
-            TextMeshProUGUI[] texts = go.GetComponentsInChildren<TextMeshProUGUI>();
-
-            // Ordem: 0 = posição, 1 = nome, 2 = pontos
-            texts[0].text = entry.rankingPosition.ToString();
-            texts[1].text = entry.nickname;
-            texts[2].text = entry.pontuation.ToString();
+            _cts.Cancel();
+            _cts.Dispose();
+            _cts = null;
         }
+    }
+
+    private void OnDestroy()
+    {
+        LimpaToken();
+    }
+
+    private void OnDisable()
+    {
+        LimpaToken();
     }
 }
