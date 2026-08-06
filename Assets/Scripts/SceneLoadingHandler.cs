@@ -63,6 +63,7 @@ public class SceneLoadingHandler : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         asyncLoad.allowSceneActivation = true;
+        NetworkAutoLoadController.EnableAutoLoadForGame();
 
         yield return new WaitUntil(() => asyncLoad.isDone);
 

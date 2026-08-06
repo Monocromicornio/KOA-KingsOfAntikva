@@ -111,7 +111,16 @@ namespace com.onlineobject.objectnet.integration
 
             Debug.Log("[SteamLobbyWait] Iniciando jogo!");
 
+
             NetworkAutoLoadController.EnableAutoLoadForGame();
+
+            //if (waitingPanel != null)
+           // {
+            //    waitingPanel.SetActive(false);
+          //  }
+
+            //NetworkAutoLoadController.EnableAutoLoadForGame();
+
 
             if (savePieceOrder != null)
             {
