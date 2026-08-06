@@ -23,6 +23,7 @@ public class LocalizedText : MonoBehaviour
 
     TMP_Text _tmp;
     Text _uiText;
+    Piece _piece;
 
     void OnEnable()
     {
@@ -55,6 +56,7 @@ public class LocalizedText : MonoBehaviour
     {
         if (_tmp == null) _tmp = GetComponent<TMP_Text>();
         if (_uiText == null) _uiText = GetComponent<Text>();
+        if(_piece == null) _piece = GetComponent<Piece>();
     }
 
     IEnumerator EnsureSubscribedThenApply()
@@ -87,6 +89,10 @@ public class LocalizedText : MonoBehaviour
         else if (_uiText != null)
         {
             _uiText.text = finalText;
+        }
+        else if (_piece != null)
+        {
+            _piece.SetDescription(finalText);
         }
     }
 

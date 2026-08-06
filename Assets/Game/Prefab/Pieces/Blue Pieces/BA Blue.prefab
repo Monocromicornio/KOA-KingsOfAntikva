@@ -94,7 +94,8 @@ AudioSource:
   m_GameObject: {fileID: 3295277876792524296}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4535335169034535895, guid: 1ad339664904fe94ea3f27da3c796d73,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 97937414587d2d84db060470af8aa031, type: 3}
   m_PlayOnAwake: 0
@@ -223,7 +224,8 @@ AudioSource:
   m_GameObject: {fileID: 3663740675848036681}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4535335169034535895, guid: 1ad339664904fe94ea3f27da3c796d73,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 7c4da40432d3a074c9760b50d10c9ef8, type: 3}
   m_PlayOnAwake: 0
@@ -352,7 +354,8 @@ AudioSource:
   m_GameObject: {fileID: 5475661975386886966}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4535335169034535895, guid: 1ad339664904fe94ea3f27da3c796d73,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 1707182dc3b382349acd621383e5fd69, type: 3}
   m_PlayOnAwake: 0
@@ -608,6 +611,7 @@ GameObject:
   - component: {fileID: 7566482440537703545}
   - component: {fileID: 7581637057662928791}
   - component: {fileID: 4734056106979096796}
+  - component: {fileID: 6842162032534745999}
   m_Layer: 10
   m_Name: BA Blue
   m_TagString: Player
@@ -687,7 +691,9 @@ MonoBehaviour:
   targetField: {fileID: 0}
   body: {fileID: 4254644608191902057}
   type: 3
-  description: "<b>Barbaro</b>\nPe\xE7a de valor 4"
+  description: '<b>Barbarian</b>
+
+    Value piece 4'
 --- !u!114 &395494897363563387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -924,6 +930,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6842162032534745999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9031295786650075763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: project.assets.game.prefab.pieces_ba_description
+  _fallback: '<b>Barbarian</b>
+
+    Value piece 4'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1001 &4365345866086457013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2039,15 +2067,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8463110818339514702}
     m_Modifications:
+    - target: {fileID: 574244336536879282, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: "Barbaro\nPe\xE7a de valor 4"
+      value: '<b>Barbarian</b>
+
+        Value piece 4'
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_fontSize
-      value: 50
+      value: 39.4
       objectReference: {fileID: 0}
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -2172,8 +2207,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 389393069803916019}
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
+--- !u!1 &1675478140519346856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5342839978747746189}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &389393069803916019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675478140519346856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: project.assets.game.prefab.pieces_ba_tooltip_bg_description
+  _fallback: '<b>Barbarian</b>
+
+    Value piece 4'
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!224 &2217473135121271363 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
