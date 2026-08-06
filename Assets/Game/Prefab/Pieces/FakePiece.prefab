@@ -74465,6 +74465,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8669953757420677224, guid: 332c3c9e524a55d4b90ff434c0281259,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8798730888729598572, guid: 332c3c9e524a55d4b90ff434c0281259,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -74512,6 +74517,8 @@ MonoBehaviour:
   targetRenderer: {fileID: 1136539871388681710}
   hostMaterials:
   - {fileID: 2100000, guid: 8911e1c925b872e419044c8e417d72ec, type: 2}
+  - {fileID: 2100000, guid: 75b940ed43679404da3eb5692df7bdae, type: 2}
   clientMaterials:
   - {fileID: 2100000, guid: 75b940ed43679404da3eb5692df7bdae, type: 2}
+  - {fileID: 2100000, guid: 8911e1c925b872e419044c8e417d72ec, type: 2}
   piece: {fileID: 0}
