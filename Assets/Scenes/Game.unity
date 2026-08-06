@@ -31021,12 +31021,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1996479379}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3e63169b08d4724298af8d06560f9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NetworkMaterialSwap
-  targetRenderer: {fileID: 0}
+  targetRenderer: {fileID: 1996479381}
   hostMaterials:
   - {fileID: 2100000, guid: 4cef4842875e1304ea78ebf36a0b0537, type: 2}
   - {fileID: 2100000, guid: 54c37ab637fdc444cbfe8565b223715e, type: 2}
@@ -31034,6 +31034,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 4cef4842875e1304ea78ebf36a0b0537, type: 2}
   - {fileID: 2100000, guid: 7a66cc4eb3d03a34b871b39405be0974, type: 2}
   piece: {fileID: 0}
+--- !u!23 &1996479381 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 1b2d6358b694df54f9c2339c083dbe11,
+    type: 3}
+  m_PrefabInstance: {fileID: 1996479377}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2009664643
 GameObject:
   m_ObjectHideFlags: 0
