@@ -580,7 +580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &50230611
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3991,11 +3991,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1890787787872194033, guid: 5f1f37d982a2e5c41856536b67e3b7f6,
-        type: 3}
-      propertyPath: m_Name
-      value: RE
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7825,11 +7820,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
-    - target: {fileID: 5949168399096356364, guid: 694e368023bfbcf46afe31e5d3909e42,
-        type: 3}
-      propertyPath: m_Name
-      value: BO_2
-      objectReference: {fileID: 0}
     - target: {fileID: 5034753685526881147, guid: 694e368023bfbcf46afe31e5d3909e42,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8156,11 +8146,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
-    - target: {fileID: 5949168399096356364, guid: 694e368023bfbcf46afe31e5d3909e42,
-        type: 3}
-      propertyPath: m_Name
-      value: BO_1
-      objectReference: {fileID: 0}
     - target: {fileID: 5034753685526881147, guid: 694e368023bfbcf46afe31e5d3909e42,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11526,7 +11511,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1333766695
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12028,11 +12013,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
-    - target: {fileID: 8222810278848462890, guid: 8fcb8ccd4a663e844a3ff6404f5c0ab5,
-        type: 3}
-      propertyPath: m_Name
-      value: SO_1
-      objectReference: {fileID: 0}
     - target: {fileID: 3027608506144123441, guid: 8fcb8ccd4a663e844a3ff6404f5c0ab5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14595,7 +14575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1736483868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15722,7 +15702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -15785,7 +15765,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1816693355}
   m_OnClick:
     m_PersistentCalls:
@@ -16754,7 +16734,7 @@ MonoBehaviour:
   rightMenuBackground: {fileID: 136486116}
   playModesPanel: {fileID: 986715910}
   cardRanked: {fileID: 1816693354}
-  cardLobby: {fileID: 1736483868}
+  cardLobby: {fileID: 1333766695}
   cardOffline: {fileID: 933736550}
   backButton: {fileID: 1917119692}
   steamViewer: {fileID: 1073228170640620868}
@@ -19802,11 +19782,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
-    - target: {fileID: 7088735112848409420, guid: debed1d5215a26743bbf4c61bbdf3287,
-        type: 3}
-      propertyPath: m_Name
-      value: GU
-      objectReference: {fileID: 0}
     - target: {fileID: 6224777569091810118, guid: debed1d5215a26743bbf4c61bbdf3287,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21400,11 +21375,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8277142703167857393, guid: 55ebf1b38185d93478558a0247a13a7b,
-        type: 3}
-      propertyPath: m_Name
-      value: BA
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21501,6 +21471,7 @@ GameObject:
   - component: {fileID: 1875924144180059327}
   - component: {fileID: 3632824777249100126}
   - component: {fileID: 4907699231136299287}
+  - component: {fileID: 4907699231136299288}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -21929,11 +21900,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
-    - target: {fileID: 5949168399096356364, guid: 694e368023bfbcf46afe31e5d3909e42,
-        type: 3}
-      propertyPath: m_Name
-      value: BO
-      objectReference: {fileID: 0}
     - target: {fileID: 5034753685526881147, guid: 694e368023bfbcf46afe31e5d3909e42,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22015,6 +21981,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurvedTMPText
   curvature: -0.0007
+--- !u!114 &4907699231136299288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2927191379245282026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: positionparts.hud_homepage_current_kingofantikva_label
+  _fallback: King of Antikva
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!224 &5020905308307076521
 RectTransform:
   m_ObjectHideFlags: 0
@@ -59711,11 +59697,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6585185141526745997, guid: 15b2df77988b59c4aac5bf0db956ded1,
-        type: 3}
-      propertyPath: m_Name
-      value: CA
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -59950,11 +59931,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 380247644}
     m_Modifications:
-    - target: {fileID: 7443152242155910569, guid: 011b08abf6f22504d8e4b6f8d3e4e347,
-        type: 3}
-      propertyPath: m_Name
-      value: LA
-      objectReference: {fileID: 0}
     - target: {fileID: 2614747695889818425, guid: 011b08abf6f22504d8e4b6f8d3e4e347,
         type: 3}
       propertyPath: m_LocalPosition.x
