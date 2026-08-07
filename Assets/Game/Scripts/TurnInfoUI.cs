@@ -7,8 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class TurnInfoUI : MonoBehaviour
 {
-    private const string MY_TURN_TEXT = "Seu turno";
-    private const string ENEMY_TURN_TEXT = "Turno do Adversário";
+    private const string MY_TURN_TEXT = "Your Turn";
+    private const string ENEMY_TURN_TEXT = "Opponent's Turn";
 
     private MatchController matchController => MatchController.instance;
     private TextMeshProUGUI turnText;

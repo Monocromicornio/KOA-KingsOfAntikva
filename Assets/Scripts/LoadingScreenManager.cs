@@ -24,11 +24,17 @@ public class LoadingScreenManager : MonoBehaviour
     [SerializeField]
     private string[] loadingMessages = new string[]
     {
-        "Carregando...",
-        "Conectando com oponente...",
-        "Sincronizando dados...",
-        "Preparando partida...",
-        "Aguardando oponente..."
+        "Loading...",
+        "Connecting to opponent...",
+        "Syncing data...",
+        "Preparing match...",
+        "Waiting for opponent..."
+
+        //"Carregando...",
+        //"Conectando com oponente...",
+        //"Sincronizando dados...",
+        //"Preparando partida...",
+        //"Aguardando oponente..."
     };
 
     [Header("Settings")]

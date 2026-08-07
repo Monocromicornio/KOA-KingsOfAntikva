@@ -205,7 +205,7 @@ public class MatchController : MonoBehaviour
         StopAllCoroutines();
 
         Debug.Log("[MatchController] Carregando cena PositionParts...");
-        SceneLoadingHandler.LoadSceneWithLoading("PositionParts", "Retornando ao menu...");
+        SceneLoadingHandler.LoadSceneWithLoading("PositionParts", "Returning to the menu...");
     }
 
     public void CloseLobby()
