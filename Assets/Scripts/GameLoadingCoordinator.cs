@@ -42,7 +42,7 @@ public class GameLoadingCoordinator : MonoBehaviour
     {
         waitStartTime = Time.time;
 
-        SceneLoadingHandler.ShowLoadingScreen("Aguardando oponente...");
+        SceneLoadingHandler.ShowLoadingScreen("Waiting for opponent...");
         SceneLoadingHandler.UpdateLoadingProgress(0.5f);
 
         yield return StartCoroutine(CheckGameReady());
@@ -60,7 +60,7 @@ public class GameLoadingCoordinator : MonoBehaviour
         if (!isOnline)
         {
             Debug.Log("[GameLoadingCoordinator] Jogo offline detectado, aguardando peças carregarem...");
-            SceneLoadingHandler.SetLoadingStatus("Preparando tabuleiro...");
+            SceneLoadingHandler.SetLoadingStatus("Preparing the board...");
             
             yield return new WaitForSeconds(0.5f);
             
@@ -93,7 +93,7 @@ public class GameLoadingCoordinator : MonoBehaviour
             yield break;
         }
 
-        SceneLoadingHandler.SetLoadingStatus("Conectando com oponente...");
+        SceneLoadingHandler.SetLoadingStatus("Connecting to opponent...");
 
         bool matchControllerReady = false;
         bool opponentProfileReady = false;
@@ -117,7 +117,7 @@ public class GameLoadingCoordinator : MonoBehaviour
                 {
                     Debug.Log("[GameLoadingCoordinator] Perfil do oponente carregado");
                     SceneLoadingHandler.UpdateLoadingProgress(0.9f);
-                    SceneLoadingHandler.SetLoadingStatus("Preparando partida...");
+                    SceneLoadingHandler.SetLoadingStatus("Preparing match...");
                 }
             }
 

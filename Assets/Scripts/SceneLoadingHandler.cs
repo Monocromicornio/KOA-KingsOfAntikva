@@ -36,7 +36,7 @@ public class SceneLoadingHandler : MonoBehaviour
     {
         if (LoadingScreenManager.Instance != null)
         {
-            LoadingScreenManager.Instance.Show(loadingMessage ?? "Carregando cena...");
+            LoadingScreenManager.Instance.Show(loadingMessage ?? "Loading Scene...");
             LoadingScreenManager.Instance.UpdateProgress(0.1f);
         }
 

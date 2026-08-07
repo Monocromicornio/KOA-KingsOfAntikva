@@ -75,7 +75,7 @@ namespace com.onlineobject.objectnet.integration
                 }
                 else
                 {
-                    statusText.text = "Aguardando jogadores...";
+                    statusText.text = "Waiting for players...";
                 }
             }
 
@@ -95,7 +95,7 @@ namespace com.onlineobject.objectnet.integration
             {
                 if (statusText != null)
                 {
-                    statusText.text = "Iniciando partida...";
+                    statusText.text = "Starting match...";
                 }
                 Invoke("StartGame", 1f);
             }
@@ -129,7 +129,7 @@ namespace com.onlineobject.objectnet.integration
             }
 
             Debug.Log("Loading game scen via Steam Lobby Wait Manager");
-            SceneLoadingHandler.LoadSceneWithLoading(gameSceneName, "Iniciando partida...");
+            SceneLoadingHandler.LoadSceneWithLoading(gameSceneName, "Starting match...");
         }
 
         private void OnLeaveLobby()
