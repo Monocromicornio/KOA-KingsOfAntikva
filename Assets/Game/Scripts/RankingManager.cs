@@ -21,10 +21,8 @@ public class RankingManager : MonoBehaviour
             using (UnityWebRequest www = UnityWebRequest.Get(url))
             {
                 UnityWebRequestAsyncOperation operation = www.SendWebRequest();
-                while (!operation.isDone)
-                {
-                    await Task.Yield();
-                }
+                
+                while (!operation.isDone) await Task.Yield();
 
                 if (www.result != UnityWebRequest.Result.Success)
                 {

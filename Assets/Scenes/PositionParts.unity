@@ -19447,7 +19447,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1882380926728283508}
   m_OnClick:
     m_PersistentCalls:
@@ -20930,7 +20930,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 8978139130215045698}
   m_OnClick:
     m_PersistentCalls:
@@ -21007,6 +21007,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RankingContentPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421771803012250585, guid: aa229251e8acdde428da4ec05b498074,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 5242848536093481947, guid: aa229251e8acdde428da4ec05b498074,
         type: 3}

@@ -44,8 +44,10 @@ public class RankingHUDManager : MonoBehaviour
                 await Task.Yield();
             }
 
-            foreach (RankingEntry entry in rankingData.rankingInfo)
+            for(int i = 0; i < 100; i++)
             {
+                RankingEntry entry = rankingData.rankingInfo[i];
+
                 token.ThrowIfCancellationRequested();
 
                 GameObject go = Instantiate(entryPrefab, contentParent);
@@ -57,6 +59,20 @@ public class RankingHUDManager : MonoBehaviour
                 texts[2].text = entry.pontuation.ToString();
                 await Task.Yield();
             }
+
+            //foreach (RankingEntry entry in rankingData.rankingInfo)
+            //{
+            //    token.ThrowIfCancellationRequested();
+
+            //    GameObject go = Instantiate(entryPrefab, contentParent);
+            //    TextMeshProUGUI[] texts = go.GetComponentsInChildren<TextMeshProUGUI>();
+
+            //    // Ordem: 0 = posição, 1 = nome, 2 = pontos
+            //    texts[0].text = entry.rankingPosition.ToString();
+            //    texts[1].text = entry.nickname;
+            //    texts[2].text = entry.pontuation.ToString();
+            //    await Task.Yield();
+            //}
         }
         else
         {
