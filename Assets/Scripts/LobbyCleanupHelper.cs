@@ -7,6 +7,10 @@ using Steamworks;
 
 public static class LobbyCleanupHelper
 {
+    /// <summary>
+    /// Fecha o lobby atual. É idempotente: quando não existe lobby nem conexão ativa,
+    /// não faz nada. Sendo host, o lobby é marcado como não-acessível antes de sair.
+    /// </summary>
     public static void CloseLobbyProperly()
     {
         Debug.Log("[LobbyCleanupHelper] Fechando lobby adequadamente...");
@@ -26,27 +30,31 @@ public static class LobbyCleanupHelper
             return;
         }
         
-        bool wasConnected = networkManager.HasConnection();
-        
-        if (wasConnected)
+        ulong currentLobbyId = GetCurrentLobbyId(steamManager);
+        bool hasLobby = currentLobbyId != 0;
+        bool hasConnection = networkManager.HasConnection();
+
+        if (!hasLobby && !hasConnection)
+        {
+            Debug.Log("[LobbyCleanupHelper] Nenhum lobby ou conexão ativa para fechar");
+            return;
+        }
+
+        if (hasLobby)
         {
             bool isHost = steamManager.IsHostInstance() || networkManager.IsServerConnection();
-            
+
             if (isHost)
             {
                 Debug.Log("[LobbyCleanupHelper] Você é o HOST - Fechando lobby para todos");
-                
+
                 try
                 {
-                    var currentLobbyId = GetCurrentLobbyId(steamManager);
-                    if (currentLobbyId != 0)
-                    {
-                        CSteamID lobbyId = new CSteamID(currentLobbyId);
-                        SteamMatchmaking.SetLobbyMemberLimit(lobbyId, 0);
-                        SteamMatchmaking.SetLobbyJoinable(lobbyId, false);
-                        
-                        Debug.Log($"[LobbyCleanupHelper] Lobby {currentLobbyId} marcado como não-acessível");
-                    }
+                    CSteamID lobbyId = new CSteamID(currentLobbyId);
+                    SteamMatchmaking.SetLobbyMemberLimit(lobbyId, 0);
+                    SteamMatchmaking.SetLobbyJoinable(lobbyId, false);
+
+                    Debug.Log($"[LobbyCleanupHelper] Lobby {currentLobbyId} marcado como não-acessível");
                 }
                 catch (System.Exception e)
                 {
@@ -57,19 +65,15 @@ public static class LobbyCleanupHelper
             {
                 Debug.Log("[LobbyCleanupHelper] Você é CLIENT - Saindo do lobby");
             }
-            
-            try
-            {
-                steamManager.LeaveLobby();
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogWarning($"[LobbyCleanupHelper] Erro ao sair do lobby: {e.Message}");
-            }
         }
-        else
+
+        try
         {
-            Debug.Log("[LobbyCleanupHelper] Sem conexão ativa");
+            steamManager.LeaveLobby();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning($"[LobbyCleanupHelper] Erro ao sair do lobby: {e.Message}");
         }
 #else
         Debug.LogWarning("[LobbyCleanupHelper] Steamworks não está habilitado");

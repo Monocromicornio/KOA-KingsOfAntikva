@@ -132,13 +132,17 @@ namespace com.onlineobject.objectnet.integration
             SceneLoadingHandler.LoadSceneWithLoading(gameSceneName, "Starting match...");
         }
 
-        private void OnLeaveLobby()
+        /// <summary>Fecha o lobby atual e libera o estado de espera.</summary>
+        public void OnLeaveLobby()
         {
             Debug.Log("[SteamLobbyWait] Saindo do lobby...");
 
-            if (NetworkSteamManager.Instance() != null)
+            LobbyCleanupHelper.CloseLobbyProperly();
+
+            if (savePieceOrder != null)
             {
-                NetworkSteamManager.Instance().LeaveLobby();
+                savePieceOrder.enabled = true;
+                Debug.Log("[SteamLobbyWait] SavePieceOrder reabilitado");
             }
 
             isWaitingForPlayers = false;

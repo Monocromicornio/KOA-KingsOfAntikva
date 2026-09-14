@@ -132,14 +132,15 @@ namespace com.onlineobject.objectnet.integration
             SceneManager.LoadScene(gameSceneName);
         }
 
-        private void OnLeaveLobby()
+        /// <summary>Sai do lobby atual. Ignorado quando este controlador não está em um lobby.</summary>
+        public void OnLeaveLobby()
         {
+            if (!isInLobby)
+                return;
+
             Debug.Log("[LobbyPlayerWait] Saindo do lobby...");
 
-            if (NetworkSteamManager.Instance() != null)
-            {
-                NetworkSteamManager.Instance().LeaveLobby();
-            }
+            LobbyCleanupHelper.CloseLobbyProperly();
 
             isInLobby = false;
             hasStartedGame = false;

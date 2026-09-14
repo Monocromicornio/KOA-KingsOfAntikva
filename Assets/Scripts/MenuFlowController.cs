@@ -10,6 +10,9 @@ public class MenuFlowController : MonoBehaviour
     private const float ANIM_DURATION = 0.4f;
     private const float ANIM_STAGGER  = 0.07f;
 
+    // ─── Room slot label ─────────────────────────────────────────────────────
+    private const string ROOM_LABEL_FORMAT = "Sala ({0})";
+
     // ─── Main Menu elements ──────────────────────────────────────────────────
     [Header("Main Menu Elements")]
     public RectTransform playerInfos;
@@ -39,6 +42,14 @@ public class MenuFlowController : MonoBehaviour
     public GameObject steamViewer;
     public Button closeLobbyButton;
 
+    // ─── Room Slot (ocupa a área do Play Button) ─────────────────────────────
+    [Header("Room Slot")]
+    [Tooltip("Cancel_Search_Button/Room_Infos/Status – exibe o nome da sala criada ou o status da busca")]
+    public TextMeshProUGUI roomStatusText;
+
+    [Tooltip("Cancel_Search_Button/Room_Infos/Timer – usado apenas na busca rankeada")]
+    public GameObject roomTimer;
+
     // ─── Ranking & Config Panels ─────────────────────────────────────────────
     [Header("Ranking & Config Panels")]
     public GameObject rankingHUD;
@@ -61,6 +72,7 @@ public class MenuFlowController : MonoBehaviour
     // ─── Cached resting anchoredPositions ────────────────────────────────────
     private Vector2 _playerInfosRest;
     private Vector2 _playButtonRest;
+    private Vector2 _cancelSearchButtonRest;
     private Vector2 _rightMenuBackgroundRest;
 
     private Vector2 _cardRankedRest;
@@ -70,22 +82,59 @@ public class MenuFlowController : MonoBehaviour
     // ─── Canvas reference size ───────────────────────────────────────────────
     private RectTransform _canvasRect;
 
+    // ─── Cached Play Button component ────────────────────────────────────────
+    private Button _playButtonComponent;
+
     // ─── Ranked search state ─────────────────────────────────────────────────
     private bool _isSearching;
+
+    // ─── Room slot state (Cancel_Search_Button substitui o Play Button) ──────
+    private bool _isRoomSlotActive;
+
+    /// <summary>Indica se a busca rankeada está em andamento.</summary>
+    public bool IsSearching => _isSearching;
+
+    /// <summary>Indica se o painel da sala está ocupando a área do botão Play.</summary>
+    public bool IsRoomSlotActive => _isRoomSlotActive;
+
+    /// <summary>
+    /// O slot Play só aceita cliques fora dos estados de busca rankeada e de sala criada.
+    /// </summary>
+    public bool IsPlaySlotInteractable => !_isSearching && !_isRoomSlotActive;
+
+    /// <summary>RectTransform que ocupa a área do botão Play no estado atual.</summary>
+    private RectTransform CurrentPlaySlot => _isRoomSlotActive ? cancelSearchButton : playButton;
+
+    /// <summary>Posição de repouso do RectTransform que ocupa a área do botão Play.</summary>
+    private Vector2 CurrentPlaySlotRest => _isRoomSlotActive ? _cancelSearchButtonRest : _playButtonRest;
 
     // ─────────────────────────────────────────────────────────────────────────
     private void Awake()
     {
         _canvasRect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
 
+        DisableRoomStatusLocalization();
         CacheRestPositions();
         WireButtons();
+    }
+
+    /// <summary>
+    /// O texto da sala é definido em runtime; o LocalizedText do mesmo objeto
+    /// sobrescreveria o nome do lobby pelo fallback ao ser reativado.
+    /// </summary>
+    private void DisableRoomStatusLocalization()
+    {
+        if (roomStatusText == null) return;
+
+        var localizedText = roomStatusText.GetComponent<LocalizedText>();
+        if (localizedText != null) localizedText.enabled = false;
     }
 
     private void CacheRestPositions()
     {
         if (playerInfos)          _playerInfosRest          = playerInfos.anchoredPosition;
         if (playButton)           _playButtonRest            = playButton.anchoredPosition;
+        if (cancelSearchButton)   _cancelSearchButtonRest    = cancelSearchButton.anchoredPosition;
         if (rightMenuBackground)  _rightMenuBackgroundRest   = rightMenuBackground.anchoredPosition;
 
         if (cardRanked)  _cardRankedRest  = cardRanked.anchoredPosition;
@@ -93,33 +142,34 @@ public class MenuFlowController : MonoBehaviour
         if (cardOffline) _cardOfflineRest = cardOffline.anchoredPosition;
 
         // Cancel fica escondido atrás do Play no início
+        _isRoomSlotActive = false;
         if (cancelSearchButton) cancelSearchButton.gameObject.SetActive(false);
+        if (playButton)         playButton.gameObject.SetActive(true);
     }
 
     private void WireButtons()
     {
         if (playButton != null)
         {
-            var btn = playButton.GetComponent<Button>();
-            if (btn != null)
+            _playButtonComponent = playButton.GetComponent<Button>();
+            if (_playButtonComponent != null)
             {
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(OnPlayButtonClicked);
+                _playButtonComponent.onClick.RemoveAllListeners();
+                _playButtonComponent.onClick.AddListener(OnPlayButtonClicked);
             }
         }
 
         if (backButton != null)
             backButton.onClick.AddListener(OnBackClicked);
 
-        // Cancel_Search_Button cancela a busca rankeada
+        // Cancel_Search_Button cancela a busca rankeada ou fecha a sala criada.
+        // NÃO usar RemoveAllListeners aqui: os managers de lobby também se registram
+        // neste botão e a ordem de Awake/Start não é garantida.
         if (cancelSearchButton != null)
         {
             var btn = cancelSearchButton.GetComponent<Button>();
             if (btn != null)
-            {
-                btn.onClick.RemoveAllListeners();
                 btn.onClick.AddListener(OnCancelSearchClicked);
-            }
         }
 
         if (closeLobbyButton != null)
@@ -162,6 +212,14 @@ public class MenuFlowController : MonoBehaviour
     /// <summary>Clicou em Jogar: exibe PlayModesPanel imediatamente e esconde o menu em paralelo.</summary>
     public void OnPlayButtonClicked()
     {
+        // Durante a busca rankeada ou com a sala criada o slot é apenas informativo:
+        // o painel de modos só volta a abrir após cancelar a busca ou fechar a sala.
+        if (!IsPlaySlotInteractable)
+        {
+            Debug.Log("[MenuFlowController] Play bloqueado: busca ou sala em andamento");
+            return;
+        }
+
         savePieceOrder?.SavePieces();
         playModesPanel.SetActive(true);
         AnimateCardsIn();
@@ -197,6 +255,40 @@ public class MenuFlowController : MonoBehaviour
         CloseSteamViewer(() => ShowMainMenu());
     }
 
+    /// <summary>
+    /// Chamado quando a sala foi criada: fecha o Steam Viewer, troca o botão Play
+    /// pelo painel da sala (com o nome do lobby) e exibe o botão de cancelar.
+    /// </summary>
+    /// <param name="lobbyName">Nome informado pelo jogador para a sala.</param>
+    public void EnterLobbyRoom(string lobbyName)
+    {
+        string roomLabel = string.IsNullOrEmpty(lobbyName)
+            ? "Aguardando jogadores..."
+            : string.Format(ROOM_LABEL_FORMAT, lobbyName);
+
+        if (playModesPanel != null) playModesPanel.SetActive(false);
+
+        if (steamViewer != null && steamViewer.activeSelf)
+        {
+            CloseSteamViewer(() =>
+            {
+                ActivateRoomSlot(roomLabel, false);
+                ShowMainMenu();
+            });
+        }
+        else
+        {
+            ActivateRoomSlot(roomLabel, false);
+            ShowMainMenu();
+        }
+    }
+
+    /// <summary>Sai do estado de sala e devolve o botão Play, sem tocar na rede.</summary>
+    public void ExitLobbyRoom()
+    {
+        DeactivateRoomSlot();
+    }
+
     /// <summary>Partida Rankeada: fecha PlayModesPanel, restaura menu e inicia busca.</summary>
     public void OnRankedClicked()
     {
@@ -207,9 +299,10 @@ public class MenuFlowController : MonoBehaviour
         });
     }
 
-    /// <summary>Cancela a busca rankeada.</summary>
+    /// <summary>Cancela a busca rankeada ou fecha a sala criada e restaura o botão Play.</summary>
     public void OnCancelSearchClicked()
     {
+        LobbyCleanupHelper.CloseLobbyProperly();
         StopRankedSearch();
     }
 
@@ -261,12 +354,14 @@ public class MenuFlowController : MonoBehaviour
                 0f, decrement));
         }
 
-        // PlayButton sai pela direita
-        if (playButton)
+        // PlayButton (ou o painel da sala, quando ativo) sai pela direita
+        RectTransform hidingSlot = CurrentPlaySlot;
+        if (hidingSlot)
         {
+            Vector2 slotRest = CurrentPlaySlotRest;
             pending++;
-            StartCoroutine(MoveAnchored(playButton, _playButtonRest,
-                new Vector2(_playButtonRest.x + w, _playButtonRest.y),
+            StartCoroutine(MoveAnchored(hidingSlot, slotRest,
+                new Vector2(slotRest.x + w, slotRest.y),
                 ANIM_STAGGER, decrement));
         }
 
@@ -298,12 +393,14 @@ public class MenuFlowController : MonoBehaviour
                 _playerInfosRest, 0f, decrement));
         }
 
-        if (playButton)
+        RectTransform showingSlot = CurrentPlaySlot;
+        if (showingSlot)
         {
+            Vector2 slotRest = CurrentPlaySlotRest;
             pending++;
-            playButton.anchoredPosition = new Vector2(_playButtonRest.x + w, _playButtonRest.y);
-            StartCoroutine(MoveAnchored(playButton, playButton.anchoredPosition,
-                _playButtonRest, ANIM_STAGGER, decrement));
+            showingSlot.anchoredPosition = new Vector2(slotRest.x + w, slotRest.y);
+            StartCoroutine(MoveAnchored(showingSlot, showingSlot.anchoredPosition,
+                slotRest, ANIM_STAGGER, decrement));
         }
 
         if (rightMenuBackground)
@@ -421,22 +518,81 @@ public class MenuFlowController : MonoBehaviour
         }));
     }
 
-    // ─── Ranked Search ───────────────────────────────────────────────────────
+    // ─── Room Slot / Ranked Search ───────────────────────────────────────────
+
+    /// <summary>Substitui o botão Play pelo painel da sala e exibe o botão de cancelar.</summary>
+    /// <param name="roomLabel">Texto a exibir; null mantém o texto atual.</param>
+    /// <param name="showTimer">Exibe o cronômetro (usado apenas na busca rankeada).</param>
+    private void ActivateRoomSlot(string roomLabel, bool showTimer)
+    {
+        _isRoomSlotActive = true;
+
+        SetPlayButtonInteractable(false);
+
+        if (playButton)
+        {
+            playButton.anchoredPosition = _playButtonRest;
+            playButton.gameObject.SetActive(false);
+        }
+
+        if (roomTimer) roomTimer.SetActive(showTimer);
+
+        if (cancelSearchButton)
+        {
+            cancelSearchButton.anchoredPosition = _cancelSearchButtonRest;
+            cancelSearchButton.gameObject.SetActive(true);
+        }
+
+        if (roomStatusText != null && roomLabel != null)
+            roomStatusText.text = roomLabel;
+    }
+
+    /// <summary>Esconde o painel da sala e devolve o botão Play à sua posição de repouso.</summary>
+    private void DeactivateRoomSlot()
+    {
+        _isRoomSlotActive = false;
+
+        if (cancelSearchButton)
+        {
+            cancelSearchButton.gameObject.SetActive(false);
+            cancelSearchButton.anchoredPosition = _cancelSearchButtonRest;
+        }
+
+        if (roomTimer) roomTimer.SetActive(true);
+
+        if (playButton)
+        {
+            playButton.anchoredPosition = _playButtonRest;
+            playButton.gameObject.SetActive(true);
+        }
+
+        SetPlayButtonInteractable(true);
+    }
+
+    /// <summary>
+    /// Habilita ou bloqueia o clique no botão Play. Usado para garantir que o slot
+    /// não abra o painel de modos enquanto há busca ou sala ativa.
+    /// </summary>
+    /// <param name="isInteractable">true libera o clique; false bloqueia.</param>
+    private void SetPlayButtonInteractable(bool isInteractable)
+    {
+        if (_playButtonComponent != null)
+            _playButtonComponent.interactable = isInteractable;
+    }
 
     private void StartRankedSearch()
     {
         _isSearching = true;
 
-        if (playButton)          playButton.gameObject.SetActive(false);
-        if (cancelSearchButton)  cancelSearchButton.gameObject.SetActive(true);
+        // O texto de status da busca é definido pelo UISteamLobbyList
+        ActivateRoomSlot(null, true);
     }
 
     private void StopRankedSearch()
     {
         _isSearching = false;
 
-        if (cancelSearchButton)  cancelSearchButton.gameObject.SetActive(false);
-        if (playButton)          playButton.gameObject.SetActive(true);
+        DeactivateRoomSlot();
     }
 
     // ─── Core animation coroutines ───────────────────────────────────────────

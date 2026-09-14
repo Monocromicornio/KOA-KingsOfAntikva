@@ -38,6 +38,10 @@ namespace com.onlineobject.objectnet.integration
         public SteamLobbyWaitManager steamLobbyWaitManager;
         public SavePieceOrder savePieceOrder;
 
+        [Header("Menu Flow")]
+        [Tooltip("MenuFlowController do HUD: fecha o Steam Viewer e troca o Play pelo painel da sala")]
+        public MenuFlowController menuFlowController;
+
         [Header("Lobby Settings")]
         public int maxPlayersPerLobby = 2;
 
@@ -145,6 +149,15 @@ namespace com.onlineobject.objectnet.integration
 
         private void CreateSteamLobby()
         {
+            string requestedLobbyName = (this.LobbyName != null) ? this.LobbyName.text.Trim() : string.Empty;
+
+            if (string.IsNullOrEmpty(requestedLobbyName))
+            {
+                Debug.LogWarning("[UISteamLobbyList] Informe o nome da sala antes de criar o lobby.");
+                if (this.LobbyName != null) this.LobbyName.ActivateInputField();
+                return;
+            }
+
             SetMaxPlayers(maxPlayersPerLobby);
 
             NetworkAutoLoadController.DisableAutoLoadForMatchmaking();
@@ -157,15 +170,26 @@ namespace com.onlineobject.objectnet.integration
 
             if (string.IsNullOrEmpty(this.LobbyKey))
             {
-                NetworkSteamManager.Instance().CreateLobby(this.LobbyName.text, ("ranked", "no"));
+                NetworkSteamManager.Instance().CreateLobby(requestedLobbyName, ("ranked", "no"));
             }
             else
             {
-                NetworkSteamManager.Instance().CreateLobby(this.LobbyName.text, (MY_LOBBY_FILTER_KEY, this.LobbyKey), ("ranked" , "no"));
+                NetworkSteamManager.Instance().CreateLobby(requestedLobbyName, (MY_LOBBY_FILTER_KEY, this.LobbyKey), ("ranked" , "no"));
             }
 
-            Debug.Log($"[UISteamLobbyList] Criando lobby manual com limite de {maxPlayersPerLobby} jogadores");
+            Debug.Log($"[UISteamLobbyList] Criando lobby manual '{requestedLobbyName}' com limite de {maxPlayersPerLobby} jogadores");
             MatchEvents.SetRankedMatch(false);
+
+            // Fecha o Steam Viewer e coloca o nome da sala no lugar do botão Play
+            if (menuFlowController != null)
+            {
+                menuFlowController.EnterLobbyRoom(requestedLobbyName);
+            }
+            else
+            {
+                Debug.LogWarning("[UISteamLobbyList] menuFlowController não atribuído: o Steam Viewer não será fechado.");
+            }
+
             StartCoroutine(EnforceLobbyMemberLimit(maxPlayersPerLobby));
             StartCoroutine(NotifyPlayerWaitController());
         }
@@ -420,6 +444,7 @@ namespace com.onlineobject.objectnet.integration
             }
         }
 
+        /// <summary>Cancela a busca rankeada e libera o estado de matchmaking.</summary>
         public void CancelMatchmaking()
         {
             Debug.Log("Cancelling matchmaking");
@@ -429,6 +454,12 @@ namespace com.onlineobject.objectnet.integration
             if (statusText != null)
             {
                 statusText.text = "";
+            }
+
+            if (savePieceOrder != null)
+            {
+                savePieceOrder.enabled = true;
+                Debug.Log("[UISteamLobbyList] SavePieceOrder reabilitado após cancelamento");
             }
 
             StopAllCoroutines();

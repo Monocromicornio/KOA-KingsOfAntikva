@@ -54,7 +54,8 @@ public class RankingHUDManager : MonoBehaviour
                 TextMeshProUGUI[] texts = go.GetComponentsInChildren<TextMeshProUGUI>();
 
                 // Ordem: 0 = posição, 1 = nome, 2 = pontos
-                texts[0].text = entry.rankingPosition.ToString();
+                texts[0].text = (1 + i).ToString();
+                // texts[0].text = entry.rankingPosition.ToString();
                 texts[1].text = entry.nickname;
                 texts[2].text = entry.pontuation.ToString();
                 await Task.Yield();
