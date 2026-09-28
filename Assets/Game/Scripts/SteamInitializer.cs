@@ -13,8 +13,8 @@ using Steamworks;
 /// </summary>
 public class SteamInitializer : MonoBehaviour
 {
-    private const string STEAM_APP_ID = "4800480";
-    private const uint STEAM_APP_ID_UINT = 4800480;
+    private const string STEAM_APP_ID = "4458960";
+    private const uint STEAM_APP_ID_UINT = 4458960;
 
     /// <summary>
     /// Returns true when the Steam API has been successfully initialized.
