@@ -83,6 +83,19 @@ public class LocalizationManager : MonoBehaviour
     public bool TryGet(string key, out string value) => _table.TryGetValue(key, out value);
 
     /// <summary>
+    /// Returns the value for the given key in the current language, or the fallback when the key is empty,
+    /// the manager is not available yet or the key has no translation.
+    /// </summary>
+    public static string GetTextOrFallback(string key, string fallback)
+    {
+        if (string.IsNullOrEmpty(key) || Instance == null) return fallback;
+
+        return Instance.TryGet(key, out var localizedValue) && !string.IsNullOrEmpty(localizedValue)
+            ? localizedValue
+            : fallback;
+    }
+
+    /// <summary>
     /// Serializes a localization dictionary to JSON.
     /// </summary>
     public static string ToJson(SerializableDict dict, bool pretty = true)

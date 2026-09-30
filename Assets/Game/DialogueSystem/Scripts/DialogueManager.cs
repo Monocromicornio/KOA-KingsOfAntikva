@@ -28,6 +28,8 @@ public class DialogueManager : MonoBehaviour
     private bool canCloseDialogue = true;
 
     DialogueBase dialogueBase;
+    DialogueBase.Info currentInfo;
+    LocalizationManager subscribedLocalizationManager;
 
     public void Awake()
     {
@@ -42,6 +44,44 @@ public class DialogueManager : MonoBehaviour
         boxDialogue.gameObject.SetActive(false);
         portraitLeft.gameObject.SetActive(false);
         portraitRight.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        EnsureLanguageSubscription();
+    }
+
+    private void OnDestroy()
+    {
+        if (subscribedLocalizationManager != null)
+        {
+            subscribedLocalizationManager.OnLanguageChanged -= RefreshCurrentLineLanguage;
+            subscribedLocalizationManager = null;
+        }
+    }
+
+    private void EnsureLanguageSubscription()
+    {
+        if (subscribedLocalizationManager != null) return;
+
+        var localizationManager = LocalizationManager.Instance;
+        if (localizationManager == null) return;
+
+        subscribedLocalizationManager = localizationManager;
+        subscribedLocalizationManager.OnLanguageChanged += RefreshCurrentLineLanguage;
+    }
+
+    // Re-renders the line being shown when the player switches language mid-dialogue.
+    private void RefreshCurrentLineLanguage()
+    {
+        if (currentInfo == null || !boxDialogue.gameObject.activeInHierarchy) return;
+
+        StopAllCoroutines();
+        isCurrentlyTyping = false;
+
+        completeText = currentInfo.GetLocalizedText();
+        dialogueName.text = currentInfo.GetLocalizedSpeaker();
+        dialogueText.text = completeText;
     }
 
     private void Update()
@@ -64,6 +104,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EnqueueDialogue(DialogueBase db)
     {
+        EnsureLanguageSubscription();
         boxDialogue.gameObject.SetActive(true);
 
         dialogueInfo.Clear();
@@ -102,10 +143,11 @@ public class DialogueManager : MonoBehaviour
 
 
         DialogueBase.Info info = dialogueInfo.Dequeue();
-        completeText = info.text;
+        currentInfo = info;
+        completeText = info.GetLocalizedText();
 
-        dialogueName.text = info.speaker;
-        dialogueText.text = info.text;
+        dialogueName.text = info.GetLocalizedSpeaker();
+        dialogueText.text = completeText;
 
         if (!info.isDoublePortrait)        
         {
@@ -129,16 +171,16 @@ public class DialogueManager : MonoBehaviour
             portraitRight.gameObject.SetActive(info.portraitRight != null);
         }
         dialogueText.text = "";
-        StartCoroutine(TypeText(info));
+        StartCoroutine(TypeText(completeText));
                
         info.myEvent.Invoke();
     }
 
-    IEnumerator TypeText(DialogueBase.Info info)
+    IEnumerator TypeText(string textToType)
     {
         isCurrentlyTyping = true;
 
-        foreach(char c in info.text.ToCharArray())
+        foreach(char c in textToType.ToCharArray())
         {
             yield return new WaitForSeconds(delay);
             dialogueText.text += c;
@@ -159,6 +201,7 @@ public class DialogueManager : MonoBehaviour
         portraitLeft.gameObject.SetActive(false);
         portraitRight.gameObject.SetActive(false);
         dialogueInfo.Clear();
+        currentInfo = null;
         isCurrentlyTyping = false;
         canCloseDialogue = true;
     }

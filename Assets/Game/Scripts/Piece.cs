@@ -37,10 +37,14 @@ public class Piece : NetworkBehaviour
     [TextArea(2, 4)]
     [SerializeField] private string description;
 
+    [Tooltip("Localization table key for the description. When empty or missing in the table, 'description' is used.")]
+    [SerializeField] private string descriptionKey;
+
     /// <summary>
-    /// Description text displayed in the Selected Piece UI and tooltips.
+    /// Description text displayed in the Selected Piece UI and tooltips, in the current language.
+    /// Falls back to the serialized description when the key is empty or has no translation.
     /// </summary>
-    public string Description => description;
+    public string Description => LocalizationManager.GetTextOrFallback(descriptionKey, description);
 
     public void SetDescription(string _description) => description = _description;
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,9 +15,13 @@ public class LocalizationEditorWindow : EditorWindow
     private const string TableAssetPath = "Assets/Localization/LocalizationTable.asset";
     private const string ResourcesJsonFolder = "Assets/Resources/Localization"; // runtime JSON output
     private const string CsvExportPath = "Assets/Localization/localization.csv"; // translator file
+    private const string DialogueKeyPrefix = "dialogue";
+    private const string DialogueSpeakerKeyPrefix = "dialogue.speaker";
+    private const string DialogueLineIndexFormat = "D2";
 
     private LocalizationTable _table;
     private string _sourceLang = "pt-br";
+    private string _scriptedTextSourceLang = "en"; // language the DialogueBase texts and code-defined options are written in
     private string _languagesCsv = "pt-br,en"; // configure languages here
     private bool _includeScenes = true;
     private bool _includePrefabs = false;
@@ -38,6 +42,7 @@ public class LocalizationEditorWindow : EditorWindow
         _table = (LocalizationTable)EditorGUILayout.ObjectField("Table Asset", _table, typeof(LocalizationTable), false);
 
         _sourceLang = EditorGUILayout.TextField("Source Language", _sourceLang);
+        _scriptedTextSourceLang = EditorGUILayout.TextField("Dialogue/Code Source Language", _scriptedTextSourceLang);
         _languagesCsv = EditorGUILayout.TextField("Languages (CSV)", _languagesCsv);
 
         EditorGUILayout.Space();
@@ -49,6 +54,16 @@ public class LocalizationEditorWindow : EditorWindow
         if (GUILayout.Button("1) Scan & Assign Keys (Scenes/Prefabs)"))
         {
             ScanAndAssignKeys();
+        }
+
+        if (GUILayout.Button("1b) Scan & Assign Keys (Dialogue ScriptableObjects)"))
+        {
+            ScanDialogues();
+        }
+
+        if (GUILayout.Button("1c) Register Code Keys (Settings Dropdowns, Turn Info)"))
+        {
+            RegisterCodeKeys();
         }
 
         if (GUILayout.Button("2) Export CSV (Master)"))
@@ -70,7 +85,8 @@ public class LocalizationEditorWindow : EditorWindow
         EditorGUILayout.HelpBox(
             "Workflow:\n" +
             "• Configure languages\n" +
-            "• Scan & assign keys\n" +
+            "• Scan & assign keys (scenes/prefabs and dialogues)\n" +
+            "• Register code keys (settings dropdowns, turn info)\n" +
             "• Export CSV → Send to translators\n" +
             "• Import CSV when updated\n" +
             "• Export JSONs for runtime",
@@ -181,6 +197,12 @@ public class LocalizationEditorWindow : EditorWindow
     {
         if (string.IsNullOrWhiteSpace(textValue)) return 0;
 
+        // Dropdown captions/items display the dropdown options (localized in code), so they must never get a LocalizedText.
+        if (go.GetComponentInParent<TMP_Dropdown>(true) != null || go.GetComponentInParent<Dropdown>(true) != null) return 0;
+
+        // Texts written by code-localized components (turn info, selected piece panel...) must never get a LocalizedText either.
+        if (go.GetComponentInParent<ILocalizedByCode>(true) != null) return 0;
+
         var lt = go.GetComponent<LocalizedText>();
         if (lt == null) lt = go.AddComponent<LocalizedText>();
 
@@ -205,6 +227,97 @@ public class LocalizationEditorWindow : EditorWindow
         stack.Reverse();
         return string.Join("/", stack);
     }
+
+    // --- Dialogue ScriptableObjects ---
+
+    /// <summary>
+    /// Assigns missing text/speaker keys to every DialogueBase asset and upserts their texts into the table
+    /// (using the dialogue source language). Existing keys and translations are preserved.
+    /// </summary>
+    public void ScanDialogues()
+    {
+        foreach (var l in SplitLangs()) _table.EnsureLanguage(l);
+        _table.EnsureLanguage(_scriptedTextSourceLang);
+
+        int assetCount = 0;
+        int lineCount = 0;
+
+        var dialogueGuids = AssetDatabase.FindAssets($"t:{nameof(DialogueBase)}", new[] { "Assets" });
+        foreach (var guid in dialogueGuids)
+        {
+            var path = AssetDatabase.GUIDToAssetPath(guid);
+            var dialogue = AssetDatabase.LoadAssetAtPath<DialogueBase>(path);
+            if (dialogue == null || dialogue.dialogueInfo == null) continue;
+
+            bool assetChanged = false;
+            for (int i = 0; i < dialogue.dialogueInfo.Length; i++)
+            {
+                var info = dialogue.dialogueInfo[i];
+                if (info == null) continue;
+
+                if (!string.IsNullOrWhiteSpace(info.text))
+                {
+                    if (string.IsNullOrEmpty(info.textKey))
+                    {
+                        info.textKey = MakeDialogueTextKey(dialogue.name, i);
+                        assetChanged = true;
+                    }
+                    _table.Upsert(info.textKey, info.text, _scriptedTextSourceLang);
+                    lineCount++;
+                }
+
+                if (!string.IsNullOrWhiteSpace(info.speaker))
+                {
+                    if (string.IsNullOrEmpty(info.speakerKey))
+                    {
+                        info.speakerKey = MakeKey(DialogueSpeakerKeyPrefix, info.speaker);
+                        assetChanged = true;
+                    }
+                    _table.Upsert(info.speakerKey, info.speaker, _scriptedTextSourceLang);
+                }
+            }
+
+            if (assetChanged)
+            {
+                EditorUtility.SetDirty(dialogue);
+                assetCount++;
+            }
+        }
+
+        EditorUtility.SetDirty(_table);
+        AssetDatabase.SaveAssets();
+        Debug.Log($"Localization: dialogue scan complete. {lineCount} lines processed, keys assigned in {assetCount} assets.");
+    }
+
+    // --- Code-defined texts ---
+
+    /// <summary>
+    /// Upserts the translatable texts defined in code (settings dropdown options, turn info) into the table,
+    /// using the dialogue/code source language. Existing texts and translations are preserved.
+    /// </summary>
+    public void RegisterCodeKeys()
+    {
+        foreach (var l in SplitLangs()) _table.EnsureLanguage(l);
+        _table.EnsureLanguage(_scriptedTextSourceLang);
+
+        var codeTexts = VideoSettingsManager.GetTranslatableOptions()
+            .Concat(TurnInfoUI.GetTranslatableTexts())
+            .Where(text => text.IsTranslatable);
+
+        int textCount = 0;
+        foreach (var text in codeTexts)
+        {
+            _table.Upsert(text.Key, text.Fallback, _scriptedTextSourceLang);
+            textCount++;
+        }
+
+        EditorUtility.SetDirty(_table);
+        AssetDatabase.SaveAssets();
+        Debug.Log($"Localization: {textCount} code-defined text keys registered.");
+    }
+
+    static string MakeDialogueTextKey(string dialogueAssetName, int lineIndex)
+        => MakeKey(DialogueKeyPrefix, $"{dialogueAssetName}_{lineIndex.ToString(DialogueLineIndexFormat)}");
 
     static string MakeKey(string context, string path)
     {
@@ -386,7 +499,10 @@ public class LocalizationEditorWindow : EditorWindow
 
     // --- JSON Export ---
 
-    void ExportJSONs()
+    /// <summary>
+    /// Writes one runtime JSON file per table language into Resources/Localization.
+    /// </summary>
+    public void ExportJSONs()
     {
         Directory.CreateDirectory(ResourcesJsonFolder);
 

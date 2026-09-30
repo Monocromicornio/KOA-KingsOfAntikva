@@ -1,10 +1,61 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 public class VideoSettingsManager : MonoBehaviour
 {
+    // ---------- Localized option definitions (order must match the Set* methods below) ----------
+
+    private const string OptionKeyPrefix = "settings.video";
+    private const string ScreenModeKeyPrefix = OptionKeyPrefix + ".screen_mode";
+    private const string QualityKeyPrefix = OptionKeyPrefix + ".quality";
+    private const string FpsLimitKeyPrefix = OptionKeyPrefix + ".fps_limit";
+    private const string ShadowQualityKeyPrefix = OptionKeyPrefix + ".shadow_quality";
+    private const string AntiAliasingKeyPrefix = OptionKeyPrefix + ".anti_aliasing";
+    private const string TextureQualityKeyPrefix = OptionKeyPrefix + ".texture_quality";
+    private const char KeySegmentSeparator = '_';
+
+    private static readonly LocalizedString[] ScreenModeOptions =
+    {
+        new LocalizedString(ScreenModeKeyPrefix + ".exclusive_fullscreen", "Exclusive Fullscreen"),
+        new LocalizedString(ScreenModeKeyPrefix + ".windowed", "Windowed"),
+        new LocalizedString(ScreenModeKeyPrefix + ".borderless_window", "Borderless Window"),
+    };
+
+    private static readonly LocalizedString[] FpsLimitOptions =
+    {
+        LocalizedString.Literal("30"),
+        LocalizedString.Literal("60"),
+        LocalizedString.Literal("120"),
+        new LocalizedString(FpsLimitKeyPrefix + ".unlimited", "Unlimited"),
+    };
+
+    private static readonly LocalizedString[] ShadowQualityOptions =
+    {
+        new LocalizedString(ShadowQualityKeyPrefix + ".no_shadows", "No Shadows"),
+        new LocalizedString(ShadowQualityKeyPrefix + ".hard_shadows", "Hard Shadows"),
+        new LocalizedString(ShadowQualityKeyPrefix + ".all_shadows", "All Shadows"),
+    };
+
+    private static readonly LocalizedString[] AntiAliasingOptions =
+    {
+        new LocalizedString(AntiAliasingKeyPrefix + ".off", "Off"),
+        LocalizedString.Literal("2x"),
+        LocalizedString.Literal("4x"),
+        LocalizedString.Literal("8x"),
+    };
+
+    private static readonly LocalizedString[] TextureQualityOptions =
+    {
+        new LocalizedString(TextureQualityKeyPrefix + ".high", "High"),
+        new LocalizedString(TextureQualityKeyPrefix + ".medium", "Medium"),
+        new LocalizedString(TextureQualityKeyPrefix + ".low", "Low"),
+    };
+
     [Header("UI")]
     public TMP_Dropdown resolutionDropdown;
     public TMP_Dropdown screenModeDropdown;
@@ -16,12 +67,51 @@ public class VideoSettingsManager : MonoBehaviour
     public TMP_Dropdown textureDropdown;
 
     private Resolution[] resolutions;
+    private LocalizationManager _subscribedLocalizationManager;
+
+    /// <summary>
+    /// Returns every translatable dropdown option used by the video settings, including the project quality levels.
+    /// Used by the localization editor to register the keys in the table.
+    /// </summary>
+    public static IEnumerable<LocalizedString> GetTranslatableOptions()
+    {
+        return ScreenModeOptions
+            .Concat(GetQualityOptions())
+            .Concat(FpsLimitOptions)
+            .Concat(ShadowQualityOptions)
+            .Concat(AntiAliasingOptions)
+            .Concat(TextureQualityOptions)
+            .Where(option => option.IsTranslatable);
+    }
+
+    private static LocalizedString[] GetQualityOptions()
+    {
+        return QualitySettings.names
+            .Select(qualityName => new LocalizedString($"{QualityKeyPrefix}.{MakeKeySegment(qualityName)}", qualityName))
+            .ToArray();
+    }
+
+    // "Very High" -> "very_high"
+    private static string MakeKeySegment(string displayName)
+    {
+        var segment = new StringBuilder(displayName.Length);
+        foreach (char character in displayName.Trim().ToLowerInvariant())
+        {
+            bool isSeparator = !char.IsLetterOrDigit(character);
+            if (isSeparator && (segment.Length == 0 || segment[segment.Length - 1] == KeySegmentSeparator))
+                continue;
+
+            segment.Append(isSeparator ? KeySegmentSeparator : character);
+        }
+        return segment.ToString().TrimEnd(KeySegmentSeparator);
+    }
 
     void OnEnable()
     {
-        LoadDropdownOptions();
+        RefreshLocalizedOptionLabels();
         LoadResolutions();
         LoadSettings();
+        StartCoroutine(SubscribeToLanguageChangesWhenReady());
 
         // Liga os listeners (UI → aplicação imediata)
         resolutionDropdown.onValueChanged.AddListener(SetResolution);
@@ -45,29 +135,39 @@ public class VideoSettingsManager : MonoBehaviour
         shadowQualityDropdown.onValueChanged.RemoveAllListeners();
         aaDropdown.onValueChanged.RemoveAllListeners();
         textureDropdown.onValueChanged.RemoveAllListeners();
+
+        if (_subscribedLocalizationManager != null)
+        {
+            _subscribedLocalizationManager.OnLanguageChanged -= RefreshLocalizedOptionLabels;
+            _subscribedLocalizationManager = null;
+        }
     }
 
     // ---------- Inicialização ----------
 
-    void LoadDropdownOptions()
+    /// <summary>
+    /// Fills the option dropdowns with labels in the current language, keeping the current selections
+    /// and without applying any setting.
+    /// </summary>
+    public void RefreshLocalizedOptionLabels()
     {
-        screenModeDropdown.ClearOptions();
-        screenModeDropdown.AddOptions(new List<string> { "Exclusive Fullscreen", "Windowed", "Borderless Window" });
+        screenModeDropdown.SetLocalizedOptions(ScreenModeOptions);
+        qualityDropdown.SetLocalizedOptions(GetQualityOptions());
+        fpsDropdown.SetLocalizedOptions(FpsLimitOptions);
+        shadowQualityDropdown.SetLocalizedOptions(ShadowQualityOptions);
+        aaDropdown.SetLocalizedOptions(AntiAliasingOptions);
+        textureDropdown.SetLocalizedOptions(TextureQualityOptions);
+    }
 
-        qualityDropdown.ClearOptions();
-        qualityDropdown.AddOptions(new List<string>(QualitySettings.names));
+    private IEnumerator SubscribeToLanguageChangesWhenReady()
+    {
+        while (LocalizationManager.Instance == null)
+            yield return null;
 
-        fpsDropdown.ClearOptions();
-        fpsDropdown.AddOptions(new List<string> { "30", "60", "120", "Unlimited" });
-
-        shadowQualityDropdown.ClearOptions();
-        shadowQualityDropdown.AddOptions(new List<string> { "No Shadows", "Hard Shadows", "All Shadows" });
-
-        aaDropdown.ClearOptions();
-        aaDropdown.AddOptions(new List<string> { "Off", "2x", "4x", "8x" });
-
-        textureDropdown.ClearOptions();
-        textureDropdown.AddOptions(new List<string> { "High", "Medium", "Low" });
+        _subscribedLocalizationManager = LocalizationManager.Instance;
+        _subscribedLocalizationManager.OnLanguageChanged -= RefreshLocalizedOptionLabels;
+        _subscribedLocalizationManager.OnLanguageChanged += RefreshLocalizedOptionLabels;
+        RefreshLocalizedOptionLabels();
     }
 
     void LoadResolutions()

@@ -611,7 +611,6 @@ GameObject:
   - component: {fileID: 7566482440537703545}
   - component: {fileID: 7581637057662928791}
   - component: {fileID: 4734056106979096796}
-  - component: {fileID: 6842162032534745999}
   m_Layer: 10
   m_Name: BA Blue
   m_TagString: Player
@@ -694,6 +693,7 @@ MonoBehaviour:
   description: '<b>Barbarian</b>
 
     Value piece 4'
+  descriptionKey: project.assets.game.prefab.pieces_ba_tooltip_bg_description
 --- !u!114 &395494897363563387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,28 +930,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6842162032534745999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9031295786650075763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: project.assets.game.prefab.pieces_ba_description
-  _fallback: '<b>Barbarian</b>
-
-    Value piece 4'
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12
 --- !u!1001 &4365345866086457013
 PrefabInstance:
   m_ObjectHideFlags: 0

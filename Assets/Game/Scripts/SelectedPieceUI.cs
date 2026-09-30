@@ -4,17 +4,22 @@ using UnityEngine;
 /// <summary>
 /// Manages the Selected Piece UI panel in the canvas.
 /// Shows piece force and description when a piece is selected, hides when deselected.
+/// The description follows the current language (see Piece.Description).
 /// </summary>
-public class SelectedPieceUI : MonoBehaviour
+public class SelectedPieceUI : MonoBehaviour, ILocalizedByCode
 {
     [SerializeField] private TextMeshProUGUI forceText;
     [SerializeField] private TextMeshProUGUI descriptionText;
+
+    private Piece displayedPiece;
+    private LocalizationManager subscribedLocalizationManager;
 
     private void Awake()
     {
         AutoFindReferences();
         Piece.OnPieceSelected += OnPieceSelected;
         Piece.OnPieceDeselected += OnPieceDeselected;
+        SubscribeToLanguageChanges();
         gameObject.SetActive(false);
     }
 
@@ -22,6 +27,7 @@ public class SelectedPieceUI : MonoBehaviour
     {
         Piece.OnPieceSelected -= OnPieceSelected;
         Piece.OnPieceDeselected -= OnPieceDeselected;
+        UnsubscribeFromLanguageChanges();
     }
 
     private void AutoFindReferences()
@@ -46,13 +52,42 @@ public class SelectedPieceUI : MonoBehaviour
 
     private void OnPieceSelected(Piece piece)
     {
+        displayedPiece = piece;
+        SubscribeToLanguageChanges();
         UpdateInfo(piece);
         gameObject.SetActive(true);
     }
 
     private void OnPieceDeselected()
     {
+        displayedPiece = null;
         gameObject.SetActive(false);
+    }
+
+    // The panel starts inactive (no coroutines), so the subscription is retried on every selection
+    // in case the LocalizationManager did not exist yet during Awake.
+    private void SubscribeToLanguageChanges()
+    {
+        var localizationManager = LocalizationManager.Instance;
+        if (localizationManager == null || localizationManager == subscribedLocalizationManager) return;
+
+        UnsubscribeFromLanguageChanges();
+        subscribedLocalizationManager = localizationManager;
+        subscribedLocalizationManager.OnLanguageChanged += RefreshDisplayedPiece;
+    }
+
+    private void UnsubscribeFromLanguageChanges()
+    {
+        if (subscribedLocalizationManager == null) return;
+
+        subscribedLocalizationManager.OnLanguageChanged -= RefreshDisplayedPiece;
+        subscribedLocalizationManager = null;
+    }
+
+    private void RefreshDisplayedPiece()
+    {
+        if (displayedPiece != null && gameObject.activeInHierarchy)
+            UpdateInfo(displayedPiece);
     }
 
     /// <summary>
