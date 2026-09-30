@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_so_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_so_tooltip_bg_description
   _fallback: '<b>Private soldier</b>
 
     Walk up to 8 spaces vertically or horizontally'
@@ -573,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_ba_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_ba_tooltip_bg_description
   _fallback: '<b>Barbarian</b>
 
     Value piece 4'
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_bo_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_bo_tooltip_bg_description
   _fallback: '<b>Bomb</b>
 
     Kills any piece except the specialist'
@@ -4557,7 +4557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_co_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_co_tooltip_bg_description
   _fallback: '<b>Commander</b>
 
     Value piece 5'
@@ -4790,7 +4790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_te_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_te_tooltip_bg_description
   _fallback: '<b>Treasure</b>
 
     If the enemy finds your treasure you lose'
@@ -5374,7 +5374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_ca_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_ca_tooltip_bg_description
   _fallback: '<b>Captain</b>
 
     Value piece 8'
@@ -6002,7 +6002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_bo_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_bo_tooltip_bg_description
   _fallback: '<b>Bomb</b>
 
     Kills any piece except the specialist'
@@ -6834,7 +6834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_so_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_so_tooltip_bg_description
   _fallback: '<b>Private soldier</b>
 
     Walk up to 8 spaces vertically or horizontally'
@@ -6862,7 +6862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_la_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_la_tooltip_bg_description
   _fallback: '<b>Lanceman</b>
 
     Value piece 7'
@@ -7792,40 +7792,8 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 8016408258170204312, guid: b99fa23f35fe0164996c20cbc7f93958, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5302037425490319995, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1158810615}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 115b6b1e57a1e7f44917a46a08e1fd10, type: 3}
---- !u!1 &1158810614 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5302037425490319995, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
-    type: 3}
-  m_PrefabInstance: {fileID: 1158810613}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1158810615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158810614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorialnew.pieces_es_1_tooltip_text_tmp_
-  _fallback: 'Especialista
-
-    Desarma as bombas inimigas'
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12
 --- !u!1 &1226220597
 GameObject:
   m_ObjectHideFlags: 0
@@ -8364,7 +8332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_sm_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_sm_tooltip_bg_description
   _fallback: '<b>Swordsman </b>
 
     Value piece 6'
@@ -9089,7 +9057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_sp_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_sp_tooltip_bg_description
   _fallback: '<b>Assassin</b>
 
     The assassin manages to defeat the enemy king,
@@ -9124,7 +9092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_re_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_re_tooltip_bg_description
   _fallback: '<b>King</b>
 
     Strongest piece of value 9'
@@ -9415,7 +9383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_gu_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_gu_tooltip_bg_description
   _fallback: '<b>Warrior</b>
 
     Piece worth 3'
@@ -9955,7 +9923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_bo_tooltip_bg_description
+  Key: project.assets.game.prefab.pieces_bo_tooltip_bg_description
   _fallback: '<b>Bomb</b>
 
     Kills any piece except the specialist'
@@ -51451,40 +51419,8 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 8016408258170204312, guid: b99fa23f35fe0164996c20cbc7f93958, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5302037425490319995, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7121314379929235838}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 115b6b1e57a1e7f44917a46a08e1fd10, type: 3}
---- !u!1 &7121314379929235837 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5302037425490319995, guid: 115b6b1e57a1e7f44917a46a08e1fd10,
-    type: 3}
-  m_PrefabInstance: {fileID: 7121314379929235836}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7121314379929235838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7121314379929235837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: positiontutorial.pieces_es_tooltip_bg_description
-  _fallback: '<b>Engineer</b>
-
-    Defuse enemy bombs'
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12
 --- !u!4 &7399097680583110790 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5249892533754993861, guid: ce42c23964b412644838bc793e8cb3b7,
