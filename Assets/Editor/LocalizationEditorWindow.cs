@@ -302,6 +302,7 @@ public class LocalizationEditorWindow : EditorWindow
 
         var codeTexts = VideoSettingsManager.GetTranslatableOptions()
             .Concat(TurnInfoUI.GetTranslatableTexts())
+            .Concat(GameTexts.GetTranslatableTexts())
             .Where(text => text.IsTranslatable);
 
         int textCount = 0;

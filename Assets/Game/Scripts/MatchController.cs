@@ -12,6 +12,13 @@ using UnityEngine.UI;
 public class MatchController : MonoBehaviour
 {
     public static MatchController instance;
+
+    /// <summary>Points gained by winning a ranked match.</summary>
+    private const int RankedWinPoints = 50;
+
+    /// <summary>Points lost by losing a ranked match.</summary>
+    private const int RankedLosePoints = -20;
+
     public NetworkManager networkManager => NetworkManager.Instance();
     public bool hasConnection => networkManager.HasConnection() &&
                                  (networkManager.IsServerStarted() || networkManager.IsConnected());
@@ -205,7 +212,7 @@ public class MatchController : MonoBehaviour
         StopAllCoroutines();
 
         Debug.Log("[MatchController] Carregando cena PositionParts...");
-        SceneLoadingHandler.LoadSceneWithLoading("PositionParts", "Returning to the menu...");
+        SceneLoadingHandler.LoadSceneWithLoading("PositionParts", GameTexts.LoadingReturningToMenu.GetText());
     }
 
     public void CloseLobby()
@@ -367,7 +374,7 @@ public class MatchController : MonoBehaviour
         _playerWon = true;
         if (MatchEvents.isRanked == true)
         {
-            PlayerProfileManager.Instance.AddPoints(50);   // Ganha 50 pts
+            PlayerProfileManager.Instance.AddPoints(RankedWinPoints);   // Ganha 50 pts
         }
 
         SetFinishGame(playerSquad.pieces.ToArray(), true);
@@ -381,7 +388,7 @@ public class MatchController : MonoBehaviour
         _playerWon = false;
         if (MatchEvents.isRanked == true)
         {
-            PlayerProfileManager.Instance.AddPoints(-20);  // Perde 20 pts (mínimo 0)
+            PlayerProfileManager.Instance.AddPoints(RankedLosePoints);  // Perde 20 pts (mínimo 0)
         }
 
         SetFinishGame(enemySquad.pieces.ToArray(), true);
@@ -403,10 +410,11 @@ public class MatchController : MonoBehaviour
         // Show result screen
         if (resultScreen != null)
         {
+            // Only ranked matches change the player's points; offline and lobby matches show 0
             if (_playerWon)
-                resultScreen.ShowWinScreen(50);
+                resultScreen.ShowWinScreen(MatchEvents.isRanked ? RankedWinPoints : 0);
             else
-                resultScreen.ShowLoseScreen(-20);
+                resultScreen.ShowLoseScreen(MatchEvents.isRanked ? RankedLosePoints : 0);
         }
 
         Invoke(nameof(CloseLobby), 2f);
@@ -415,6 +423,18 @@ public class MatchController : MonoBehaviour
     public void Surrender()
     {
         SetEnemyWin();
+        FinishGame();
+    }
+
+    /// <summary>
+    /// Offline safety net: the NPC has no legal move, so the match would freeze on its turn.
+    /// The player wins, like a walkover (W.O.) in online matches.
+    /// </summary>
+    public void EnemyHasNoMoves()
+    {
+        if (finished) return;
+        Debug.LogWarning("[MatchController] The NPC has no legal move. The player wins by W.O.");
+        SetPlayerWin();
         FinishGame();
     }
     /// <summary>

@@ -10,9 +10,6 @@ public class MenuFlowController : MonoBehaviour
     private const float ANIM_DURATION = 0.4f;
     private const float ANIM_STAGGER  = 0.07f;
 
-    // ─── Room slot label ─────────────────────────────────────────────────────
-    private const string ROOM_LABEL_FORMAT = "Sala ({0})";
-
     // ─── Main Menu elements ──────────────────────────────────────────────────
     [Header("Main Menu Elements")]
     public RectTransform playerInfos;
@@ -263,8 +260,8 @@ public class MenuFlowController : MonoBehaviour
     public void EnterLobbyRoom(string lobbyName)
     {
         string roomLabel = string.IsNullOrEmpty(lobbyName)
-            ? "Aguardando jogadores..."
-            : string.Format(ROOM_LABEL_FORMAT, lobbyName);
+            ? GameTexts.LobbyWaitingForPlayers.GetText()
+            : string.Format(GameTexts.LobbyRoomLabelFormat.GetText(), lobbyName);
 
         if (playModesPanel != null) playModesPanel.SetActive(false);
 

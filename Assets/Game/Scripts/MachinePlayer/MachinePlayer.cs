@@ -25,10 +25,23 @@ public class MachinePlayer : MonoBehaviour
     IEnumerator Turn()
     {
         yield return new WaitForSeconds(1);
+        if (matchController.finished) yield break;
+
         GetSelectablePieces();
         var selectables = GetActiveSelectables();
+
+        // Without this the turn would never end and the match would freeze
+        if (selectables.Count == 0)
+        {
+            matchController.EnemyHasNoMoves();
+            yield break;
+        }
+
         int index = Random.Range(0, selectables.Count);
-        ActionPiece(selectables[index]);
+        if (!ActionPiece(selectables[index]))
+        {
+            matchController.EnemyHasNoMoves();
+        }
     }
 
     private void GetSelectablePieces()
@@ -67,7 +80,8 @@ public class MachinePlayer : MonoBehaviour
         return selectables;
     }
 
-    private void ActionPiece(SelectablePiece selectablePiece)
+    /// <returns>False when the piece has no valid target.</returns>
+    private bool ActionPiece(SelectablePiece selectablePiece)
     {
         Piece piece = selectablePiece.piece;
         var selectedFields = selectablePiece.selectedFields;
@@ -90,8 +104,11 @@ public class MachinePlayer : MonoBehaviour
             toSelect.Add(targetField);
         }
 
+        if (toSelect.Count == 0) return false;
+
         int index = Random.Range(0, toSelect.Count);
         piece.SelectedAField(toSelect[index]);
+        return true;
     }
 
 /// <summary>

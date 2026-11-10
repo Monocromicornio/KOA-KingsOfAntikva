@@ -56,20 +56,7 @@ namespace com.onlineobject.objectnet.integration
 
             Debug.Log("[LobbyPlayerWait] Lobby criado: " + lobbyID);
 
-            // Atualiza status com o nome da sala
-            if (statusText != null)
-            {
-                string lobbyName = SteamMatchmaking.GetLobbyData(currentLobbyID, "LobbyName");
-                if (!string.IsNullOrEmpty(lobbyName))
-                {
-                    statusText.text = string.Format("Sala ({0})", lobbyName);
-                }
-                else
-                {
-                    statusText.text = "Aguardando jogadores...";
-                }
-            }
-
+            UpdateRoomStatusText();
             UpdatePlayerCount();
         }
 
@@ -81,21 +68,19 @@ namespace com.onlineobject.objectnet.integration
 
             Debug.Log("[LobbyPlayerWait] Entrou no lobby: " + lobbyID);
 
-            // Atualiza status com o nome da sala
-            if (statusText != null)
-            {
-                string lobbyName = SteamMatchmaking.GetLobbyData(currentLobbyID, "LobbyName");
-                if (!string.IsNullOrEmpty(lobbyName))
-                {
-                    statusText.text = string.Format("Sala ({0})", lobbyName);
-                }
-                else
-                {
-                    statusText.text = "Aguardando jogadores...";
-                }
-            }
-
+            UpdateRoomStatusText();
             UpdatePlayerCount();
+        }
+
+        /// <summary>Atualiza o status com o nome da sala (ou a mensagem de espera), no idioma atual.</summary>
+        private void UpdateRoomStatusText()
+        {
+            if (statusText == null) return;
+
+            string lobbyName = SteamMatchmaking.GetLobbyData(currentLobbyID, "LobbyName");
+            statusText.text = string.IsNullOrEmpty(lobbyName)
+                ? GameTexts.LobbyWaitingForPlayers.GetText()
+                : string.Format(GameTexts.LobbyRoomLabelFormat.GetText(), lobbyName);
         }
 
         private void UpdatePlayerCount()
@@ -111,7 +96,7 @@ namespace com.onlineobject.objectnet.integration
             {
                 if (statusText != null)
                 {
-                    statusText.text = "Iniciando partida...";
+                    statusText.text = GameTexts.LobbyStartingMatch.GetText();
                 }
                 StartGame();
             }

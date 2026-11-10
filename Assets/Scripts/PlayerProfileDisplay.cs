@@ -82,7 +82,7 @@ public class PlayerProfileDisplay : MonoBehaviour
                 Debug.LogWarning("[PlayerProfileDisplay] Steam ID do oponente ainda não foi definido");
                 if (playerNameText != null)
                 {
-                    playerNameText.text = "Aguardando...";
+                    playerNameText.text = GameTexts.ProfileWaiting.GetText();
                 }
                 if (pointsText != null)
                 {

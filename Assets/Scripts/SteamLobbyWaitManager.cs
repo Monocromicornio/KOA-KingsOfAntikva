@@ -71,11 +71,11 @@ namespace com.onlineobject.objectnet.integration
                 string lobbyName = SteamMatchmaking.GetLobbyData(currentLobbyID, "LobbyName");
                 if (!string.IsNullOrEmpty(lobbyName))
                 {
-                    statusText.text = string.Format("Sala ({0})", lobbyName);
+                    statusText.text = string.Format(GameTexts.LobbyRoomLabelFormat.GetText(), lobbyName);
                 }
                 else
                 {
-                    statusText.text = "Waiting for players...";
+                    statusText.text = GameTexts.LobbyWaitingForPlayers.GetText();
                 }
             }
 
@@ -95,7 +95,7 @@ namespace com.onlineobject.objectnet.integration
             {
                 if (statusText != null)
                 {
-                    statusText.text = "Starting match...";
+                    statusText.text = GameTexts.LobbyStartingMatch.GetText();
                 }
                 Invoke("StartGame", 1f);
             }
@@ -129,7 +129,7 @@ namespace com.onlineobject.objectnet.integration
             }
 
             Debug.Log("Loading game scen via Steam Lobby Wait Manager");
-            SceneLoadingHandler.LoadSceneWithLoading(gameSceneName, "Starting match...");
+            SceneLoadingHandler.LoadSceneWithLoading(gameSceneName, GameTexts.LobbyStartingMatch.GetText());
         }
 
         /// <summary>Fecha o lobby atual e libera o estado de espera.</summary>

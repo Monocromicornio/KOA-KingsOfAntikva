@@ -20,23 +20,6 @@ public class LoadingScreenManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI statusText;
 
-    [Header("Loading Messages")]
-    [SerializeField]
-    private string[] loadingMessages = new string[]
-    {
-        "Loading...",
-        "Connecting to opponent...",
-        "Syncing data...",
-        "Preparing match...",
-        "Waiting for opponent..."
-
-        //"Carregando...",
-        //"Conectando com oponente...",
-        //"Sincronizando dados...",
-        //"Preparando partida...",
-        //"Aguardando oponente..."
-    };
-
     [Header("Settings")]
     [SerializeField]
     private float messageChangeInterval = 2f;
@@ -82,7 +65,7 @@ public class LoadingScreenManager : MonoBehaviour
 
         if (loadingText != null)
         {
-            loadingText.text = customMessage ?? loadingMessages[0];
+            loadingText.text = customMessage ?? GameTexts.LoadingCycleMessages[0].GetText();
         }
 
         if (statusText != null)
@@ -169,13 +152,15 @@ public class LoadingScreenManager : MonoBehaviour
 
     private IEnumerator CycleLoadingMessages()
     {
+        var loadingMessages = GameTexts.LoadingCycleMessages;
         int messageIndex = 0;
 
         while (isShowing)
         {
             if (loadingText != null)
             {
-                loadingText.text = loadingMessages[messageIndex];
+                // Read the text on every cycle so a language change is picked up immediately.
+                loadingText.text = loadingMessages[messageIndex].GetText();
             }
 
             messageIndex = (messageIndex + 1) % loadingMessages.Length;

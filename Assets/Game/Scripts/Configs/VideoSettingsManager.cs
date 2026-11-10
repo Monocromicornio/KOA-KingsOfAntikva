@@ -19,6 +19,13 @@ public class VideoSettingsManager : MonoBehaviour
     private const string TextureQualityKeyPrefix = OptionKeyPrefix + ".texture_quality";
     private const char KeySegmentSeparator = '_';
 
+    // ---------- Resolution persistence ----------
+
+    private const string ResolutionWidthKey = "ResolutionWidth";
+    private const string ResolutionHeightKey = "ResolutionHeight";
+    private const string LegacyResolutionIndexKey = "ResolutionIndex"; // index-based key, unreliable across monitors
+    private const string ResolutionLabelFormat = "{0}x{1}";
+
     private static readonly LocalizedString[] ScreenModeOptions =
     {
         new LocalizedString(ScreenModeKeyPrefix + ".exclusive_fullscreen", "Exclusive Fullscreen"),
@@ -170,23 +177,66 @@ public class VideoSettingsManager : MonoBehaviour
         RefreshLocalizedOptionLabels();
     }
 
+    /// <summary>
+    /// Lists one entry per width x height (Screen.resolutions repeats each size per refresh rate),
+    /// keeping the highest refresh rate available for that size.
+    /// </summary>
     void LoadResolutions()
     {
-        resolutions = Screen.resolutions;
+        resolutions = Screen.resolutions
+            .GroupBy(resolution => (resolution.width, resolution.height))
+            .Select(sameSize => sameSize.OrderByDescending(resolution => resolution.refreshRateRatio.value).First())
+            .OrderBy(resolution => resolution.width)
+            .ThenBy(resolution => resolution.height)
+            .ToArray();
+
         resolutionDropdown.ClearOptions();
         foreach (var res in resolutions)
-            resolutionDropdown.options.Add(new TMP_Dropdown.OptionData($"{res.width}x{res.height}"));
+            resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(string.Format(ResolutionLabelFormat, res.width, res.height)));
         resolutionDropdown.RefreshShownValue();
+    }
+
+    /// <summary>
+    /// Finds the dropdown index of the saved resolution (or of the current window size when nothing was saved).
+    /// Falls back to the closest available size so a different monitor never selects a random entry.
+    /// </summary>
+    int FindSavedResolutionIndex()
+    {
+        if (resolutions == null || resolutions.Length == 0) return 0;
+
+        int targetWidth = PlayerPrefs.GetInt(ResolutionWidthKey, Screen.width);
+        int targetHeight = PlayerPrefs.GetInt(ResolutionHeightKey, Screen.height);
+
+        int closestIndex = 0;
+        long closestDistance = long.MaxValue;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            long widthDifference = resolutions[i].width - targetWidth;
+            long heightDifference = resolutions[i].height - targetHeight;
+            long distance = widthDifference * widthDifference + heightDifference * heightDifference;
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestIndex = i;
+            }
+        }
+        return closestIndex;
     }
 
     // ---------- Aplicação e salvamento ----------
 
+    /// <summary>
+    /// Applies the resolution selected in the dropdown and saves its width and height.
+    /// </summary>
     public void SetResolution(int index)
     {
-        if (index >= resolutions.Length) return;
+        if (resolutions == null || index < 0 || index >= resolutions.Length) return;
         var res = resolutions[index];
-        Screen.SetResolution(res.width, res.height, Screen.fullScreenMode);
-        PlayerPrefs.SetInt("ResolutionIndex", index);
+        Screen.SetResolution(res.width, res.height, Screen.fullScreenMode, res.refreshRateRatio);
+        PlayerPrefs.SetInt(ResolutionWidthKey, res.width);
+        PlayerPrefs.SetInt(ResolutionHeightKey, res.height);
+        PlayerPrefs.DeleteKey(LegacyResolutionIndexKey);
         PlayerPrefs.Save();
     }
 
@@ -261,7 +311,8 @@ public class VideoSettingsManager : MonoBehaviour
     // ---------- Restaura valores ao abrir ----------
     void LoadSettings()
     {
-        resolutionDropdown.value = PlayerPrefs.GetInt("ResolutionIndex", 0);
+        resolutionDropdown.SetValueWithoutNotify(FindSavedResolutionIndex());
+        resolutionDropdown.RefreshShownValue();
         screenModeDropdown.value = PlayerPrefs.GetInt("ScreenMode", 1);
         vSyncToggle.isOn = PlayerPrefs.GetInt("VSync", 1) == 1;
         qualityDropdown.value = PlayerPrefs.GetInt("Quality", 2);

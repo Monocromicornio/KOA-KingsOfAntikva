@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using KOA.Placement;
 using UnityEngine;
 
 public class EnemySquad : Squad
@@ -17,45 +18,45 @@ public class EnemySquad : Squad
     [SerializeField]
     Piece[] defaultPieces;
 
+    // The first default piece always starts on this slot of the formation (a front-row cell).
+    private const int PinnedPieceIndex = 0;
+    private const int PinnedSlot = 6;
+
     public override Task LoadPieces()
     {
-        int pieceCount = defaultPieces.Length;
+        int pieceCount = Mathf.Min(defaultPieces.Length, gameFields.Length);
         int lastIndex = gameFields.Length - 1;
         int firstIndex = lastIndex - pieceCount + 1;
 
-        if (firstIndex < 0) firstIndex = 0;
+        // Board cells that make up the enemy formation (the last rows of the board)
+        int[] formationCells = new int[pieceCount];
+        for (int i = 0; i < pieceCount; i++)
+            formationCells[i] = firstIndex + i;
 
-        // Create a list with the target field indices
-        List<int> fieldIndexes = new List<int>();
-        for (int i = firstIndex; i <= lastIndex; i++)
-            fieldIndexes.Add(i);
+        // Pieces without a SelectablePiece (bombs, chest) never move
+        bool[] pieceIsImmobile = new bool[pieceCount];
+        for (int i = 0; i < pieceCount; i++)
+            pieceIsImmobile[i] = defaultPieces[i].GetComponent<SelectablePiece>() == null;
 
-        // Shuffle the pieces
-        List<Piece> pieces = new List<Piece>(defaultPieces);
-        for (int i = 1; i < pieces.Count; i++)
+        // Arrange the pieces so that no movable piece is sealed in by immobile ones,
+        // otherwise the NPC could end up with no legal move and the match would freeze.
+        System.Random random = new System.Random(Random.Range(int.MinValue, int.MaxValue));
+        bool found = EnemyPlacementGenerator.TryGenerate(
+            pieceIsImmobile, formationCells, gameFields.Length, board.ColumnLength(), random,
+            out int[] cellOfPiece, out int attempts, PinnedPieceIndex, PinnedSlot);
+
+        if (!found)
         {
-            int rnd = Random.Range(i, pieces.Count);
-            Piece temp = pieces[i];
-            pieces[i] = pieces[rnd];
-            pieces[rnd] = temp;
+            Debug.LogError($"[EnemySquad] No playable arrangement found after {attempts} attempts. Using an unchecked random one.");
+            cellOfPiece = EnemyPlacementGenerator.GenerateRandom(
+                pieceIsImmobile, formationCells, random, PinnedPieceIndex, PinnedSlot);
         }
 
-        // Position each piece in a random field within the range
-        for (int i = 0; i < pieces.Count && fieldIndexes.Count > 0; i++)
+        for (int i = 0; i < pieceCount; i++)
         {
-            //Select a random field
-            int rndField;
-            if (i == 0) rndField = 6;
-            else rndField = Random.Range(0, fieldIndexes.Count);
-            int fieldIndex = fieldIndexes[rndField];
-
-            //Remove from list
-            fieldIndexes.RemoveAt(rndField);
-
-            //Get a piece
-            Vector3 pos = gameFields[fieldIndex].transform.position;
+            Vector3 pos = gameFields[cellOfPiece[i]].transform.position;
             Quaternion rot = Quaternion.Euler(0, 180, 0);
-            Piece piece = Instantiate(pieces[i], pos, rot);
+            Piece piece = Instantiate(defaultPieces[i], pos, rot);
 
             //Set as fake
             piece.TurnRedPiece();

@@ -10,7 +10,7 @@ public class RankingKOA : MonoBehaviour
     {
         if(_rankingData == null)
         {
-            GetComponent<TMP_Text>().text = "Loading Ranking...";
+            GetComponent<TMP_Text>().text = GameTexts.RankingLoading.GetText();
 
             while (_rankingData == null)
             {

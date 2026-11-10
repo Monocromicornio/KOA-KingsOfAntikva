@@ -5,6 +5,8 @@ using System;
 
 public class TurnTimer : MonoBehaviour
 {
+    private const string TimerDisplayFormat = "00";
+
     [Header("UI References")]
     [SerializeField]
     private TextMeshProUGUI timerText;
@@ -158,10 +160,11 @@ public class TurnTimer : MonoBehaviour
 
     private void UpdateTimerDisplay()
     {
-        //int minutes = Mathf.FloorToInt(currentTime / 60f);
-        int seconds = Mathf.FloorToInt(currentTime % 60f);
+        // Ceil keeps the countdown intuitive: shows the full duration (e.g. "60") at the start
+        // and only reaches "00" when the time has really expired.
+        int secondsRemaining = Mathf.CeilToInt(currentTime);
 
-        timerText.text = $"{seconds:00}";
+        timerText.text = secondsRemaining.ToString(TimerDisplayFormat);
 
         if (currentTime <= dangerThreshold)
         {

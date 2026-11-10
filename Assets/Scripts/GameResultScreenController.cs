@@ -50,7 +50,6 @@ public class GameResultScreenController : MonoBehaviour
     // ─── Constants ───────────────────────────────────────────────────────────
     private const int WIN_POINTS = 50;
     private const int LOSE_POINTS = -20;
-    private const string POINTS_FORMAT = "{0}{1} Influence Points";
 
     private void Awake()
     {
@@ -150,8 +149,9 @@ public class GameResultScreenController : MonoBehaviour
     private static void SetPontuationText(TextMeshProUGUI textComponent, int points)
     {
         if (textComponent == null) return;
-        string sign = points >= 0 ? "+" : "";
-        textComponent.text = string.Format(POINTS_FORMAT, sign, points);
+        // Gains get an explicit "+"; zero (non-ranked matches) and losses show no extra sign
+        string sign = points > 0 ? "+" : "";
+        textComponent.text = string.Format(GameTexts.ResultInfluencePointsFormat.GetText(), sign, points);
     }
 
     /// <summary>Fades a CanvasGroup from startAlpha to endAlpha.</summary>

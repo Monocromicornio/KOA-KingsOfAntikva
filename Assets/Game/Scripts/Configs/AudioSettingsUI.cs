@@ -1,68 +1,94 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
+/// <summary>
+/// Binds the audio settings sliders (and the optional mute toggle) to the mixer and persists their values.
+/// </summary>
 public class AudioSettingsUI : MonoBehaviour
 {
     [Header("Mixer")]
     public AudioMixer mixer;
 
     [Header("Sliders")]
+    [Tooltip("Opcional: deixe vazio se a interface não tiver o slider.")]
     public Slider master, music, sfx, voice, ambience;
-   // public Toggle muteToggle;
 
-    const string P_MASTER = "MasterVolume", P_MUSIC = "MusicVolume",
-                 P_SFX = "SFXVolume", P_VOICE = "VoiceVolume", P_AMB = "AmbienceVolume";
+    [Header("Optional")]
+    [Tooltip("Opcional: se não houver toggle de mudo, o estado de mudo antigo é limpo ao abrir o painel.")]
+    public Toggle muteToggle;
+
+    private readonly List<Slider> _boundSliders = new List<Slider>();
 
     void OnEnable()
     {
-        // carregar sem disparar callbacks
-        master.SetValueWithoutNotify(PlayerPrefs.GetFloat(P_MASTER, 1f));
-        music.SetValueWithoutNotify(PlayerPrefs.GetFloat(P_MUSIC, 1f));
-        sfx.SetValueWithoutNotify(PlayerPrefs.GetFloat(P_SFX, 1f));
-        voice.SetValueWithoutNotify(PlayerPrefs.GetFloat(P_VOICE, 1f));
-        ambience.SetValueWithoutNotify(PlayerPrefs.GetFloat(P_AMB, 1f));
-        // muteToggle.SetIsOnWithoutNotify(PlayerPrefs.GetInt("Mute", 0) == 1);
+        BindMuteToggle();
 
-        // aplicar ao abrir (�til se mudou fora da UI)
-        ApplyParam(P_MASTER, master.value);
-        ApplyParam(P_MUSIC, music.value);
-        ApplyParam(P_SFX, sfx.value);
-        ApplyParam(P_VOICE, voice.value);
-        ApplyParam(P_AMB, ambience.value);
-        //if (muteToggle.isOn) mixer.SetFloat(P_MASTER, -80f);
-
-        // ligar eventos
-        master.onValueChanged.AddListener(v => { ApplyParam(P_MASTER, v); SaveFloat(P_MASTER, v); });
-        music.onValueChanged.AddListener(v => { ApplyParam(P_MUSIC, v); SaveFloat(P_MUSIC, v); });
-        sfx.onValueChanged.AddListener(v => { ApplyParam(P_SFX, v); SaveFloat(P_SFX, v); });
-        voice.onValueChanged.AddListener(v => { ApplyParam(P_VOICE, v); SaveFloat(P_VOICE, v); });
-        ambience.onValueChanged.AddListener(v => { ApplyParam(P_AMB, v); SaveFloat(P_AMB, v); });
-        // muteToggle.onValueChanged.AddListener(OnMute);
+        BindSlider(master, AudioVolumeSettings.MasterVolumeParameter);
+        BindSlider(music, AudioVolumeSettings.MusicVolumeParameter);
+        BindSlider(sfx, AudioVolumeSettings.SfxVolumeParameter);
+        BindSlider(voice, AudioVolumeSettings.VoiceVolumeParameter);
+        BindSlider(ambience, AudioVolumeSettings.AmbienceVolumeParameter);
     }
 
     void OnDisable()
     {
-        // remove listeners pra evitar m�ltiplos binds ao reabrir
-        master.onValueChanged.RemoveAllListeners();
-        music.onValueChanged.RemoveAllListeners();
-        sfx.onValueChanged.RemoveAllListeners();
-        voice.onValueChanged.RemoveAllListeners();
-        ambience.onValueChanged.RemoveAllListeners();
-       // muteToggle.onValueChanged.RemoveAllListeners();
+        // remove listeners pra evitar múltiplos binds ao reabrir
+        foreach (var slider in _boundSliders)
+            slider.onValueChanged.RemoveAllListeners();
+        _boundSliders.Clear();
+
+        if (muteToggle != null)
+            muteToggle.onValueChanged.RemoveListener(HandleMuteToggled);
     }
 
-    static float ToDb(float v) => Mathf.Lerp(-80f, 0f, v);
-
-    void ApplyParam(string param, float val) { mixer.SetFloat(param, ToDb(val)); }
-
-    void SaveFloat(string key, float v) { PlayerPrefs.SetFloat(key, v); PlayerPrefs.Save(); }
-
-    void OnMute(bool on)
+    private void BindMuteToggle()
     {
-        if (on) mixer.SetFloat(P_MASTER, -80f);
-        else ApplyParam(P_MASTER, master.value);
-        PlayerPrefs.SetInt("Mute", on ? 1 : 0);
-        PlayerPrefs.Save();
+        if (muteToggle == null)
+        {
+            // Without a mute toggle the player could never undo a previously saved mute.
+            if (AudioVolumeSettings.IsMuted)
+                AudioVolumeSettings.SetMuted(mixer, false);
+            return;
+        }
+
+        muteToggle.SetIsOnWithoutNotify(AudioVolumeSettings.IsMuted);
+        muteToggle.onValueChanged.AddListener(HandleMuteToggled);
+    }
+
+    private void BindSlider(Slider slider, string parameterName)
+    {
+        if (slider == null) return;
+
+        // The same slider must never drive two parameters (e.g. Voice pointing to the SFX slider).
+        if (_boundSliders.Contains(slider))
+        {
+            Debug.LogWarning($"[AudioSettingsUI] O slider '{slider.name}' já controla outro parâmetro; '{parameterName}' foi ignorado.");
+            return;
+        }
+
+        if (!AudioVolumeSettings.IsParameterExposed(mixer, parameterName))
+        {
+            Debug.LogWarning($"[AudioSettingsUI] O mixer não expõe '{parameterName}'; o slider '{slider.name}' foi ocultado.");
+            slider.gameObject.SetActive(false);
+            return;
+        }
+
+        float savedVolume = AudioVolumeSettings.GetSavedVolume(parameterName);
+        slider.SetValueWithoutNotify(savedVolume);
+        AudioVolumeSettings.ApplyVolume(mixer, parameterName, savedVolume);
+
+        slider.onValueChanged.AddListener(linearVolume =>
+        {
+            AudioVolumeSettings.ApplyVolume(mixer, parameterName, linearVolume);
+            AudioVolumeSettings.SaveVolume(parameterName, linearVolume);
+        });
+        _boundSliders.Add(slider);
+    }
+
+    private void HandleMuteToggled(bool isMuted)
+    {
+        AudioVolumeSettings.SetMuted(mixer, isMuted);
     }
 }

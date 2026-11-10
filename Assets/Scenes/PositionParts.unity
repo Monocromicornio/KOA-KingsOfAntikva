@@ -4894,6 +4894,7 @@ GameObject:
   m_Component:
   - component: {fileID: 531334166}
   - component: {fileID: 531334165}
+  - component: {fileID: 531334167}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -4929,6 +4930,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &531334167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531334164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f2bc3709705094882473ca1d8838d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DemoBuildSwitch
+  demoBuild: 0
+  menuFlow: {fileID: 1910468107}
+  tutorialShortcut: {fileID: 264371827}
+  rankedButton: {fileID: 1816693357}
+  rankedLocker: {fileID: 50230610}
+  lobbyCard: {fileID: 1736483867}
+  tutorialCard: {fileID: 1333766694}
 --- !u!1 &534981784 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2895601557566234012, guid: f58a8615bffd84b42822f9aa30c1777a,
@@ -6862,12 +6882,6 @@ MonoBehaviour:
   loadingBarFill: {fileID: 1911452781}
   loadingText: {fileID: 706973766}
   statusText: {fileID: 1254570858}
-  loadingMessages:
-  - Loading...
-  - Connecting to opponent...
-  - Syncing data...
-  - Preparing match...
-  - Waiting for opponent...
   messageChangeInterval: 2
   minDisplayTime: 1
 --- !u!4 &783197980
@@ -20848,6 +20862,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -565
       objectReference: {fileID: 0}
+    - target: {fileID: 3517981078758758583, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      propertyPath: voice
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3634810233429232144, guid: b79e5e5f038313e4c8fa9460f27a77c4,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -20867,6 +20886,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3659476537243841622, guid: b79e5e5f038313e4c8fa9460f27a77c4,
+        type: 3}
+      propertyPath: m_text
+      value: Linguagem
       objectReference: {fileID: 0}
     - target: {fileID: 3659476537243841622, guid: b79e5e5f038313e4c8fa9460f27a77c4,
         type: 3}

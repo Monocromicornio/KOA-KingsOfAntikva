@@ -213,7 +213,7 @@ namespace com.onlineobject.objectnet.integration
 
             if (statusText != null)
             {
-                statusText.text = "Buscando jogadores";
+                statusText.text = GameTexts.LobbySearchingPlayers.GetText();
             }
 
             Debug.Log($"[UISteamLobbyList] Iniciando busca por lobbies com {maxPlayersPerLobby} jogadores...");

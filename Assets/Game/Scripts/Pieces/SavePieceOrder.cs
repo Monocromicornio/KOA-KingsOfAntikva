@@ -40,7 +40,7 @@ public class SavePieceOrder : MonoBehaviour
     public void Offline()
     {
         MatchEvents.SetRankedMatch(false);
-        PressButton(() => SceneLoadingHandler.LoadSceneWithLoading("Game", "Loading Offiline Seasson..."));
+        PressButton(() => SceneLoadingHandler.LoadSceneWithLoading("Game", GameTexts.LoadingOfflineSession.GetText()));
     }
 
     public void SavePieces()
