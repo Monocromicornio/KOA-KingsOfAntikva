@@ -86,7 +86,7 @@ public class PlayerProfileDisplay : MonoBehaviour
                 }
                 if (pointsText != null)
                 {
-                    pointsText.text = "--- pts";
+                    pointsText.text = FormatPoints("---");
                 }
                 return;
             }
@@ -130,19 +130,19 @@ public class PlayerProfileDisplay : MonoBehaviour
         {
             if (isLocalPlayer)
             {
-                pointsText.text = $"{profileManager.pontuation} pts";
+                pointsText.text = FormatPoints(profileManager.pontuation);
             }
             else
             {
                 int opponentPoints = profileManager.GetOpponentPoints(steamId);
                 if (opponentPoints >= 0)
                 {
-                    pointsText.text = $"{opponentPoints} pts";
+                    pointsText.text = FormatPoints(opponentPoints);
                     Debug.Log($"[PlayerProfileDisplay] Pontos do oponente: {opponentPoints}");
                 }
                 else
                 {
-                    pointsText.text = "--- pts";
+                    pointsText.text = FormatPoints("---");
                     Debug.Log("[PlayerProfileDisplay] Pontos do oponente não disponíveis");
                 }
             }
@@ -271,11 +271,17 @@ public class PlayerProfileDisplay : MonoBehaviour
         LoadPlayerProfile();
     }
     
+    /// <summary>Formats a points value (or "---" when unknown) using the localized "{0} pts" text.</summary>
+    private static string FormatPoints(object points)
+    {
+        return string.Format(GameTexts.ProfilePointsFormat.GetText(), points);
+    }
+
     public void UpdatePoints(int points)
     {
         if (pointsText != null)
         {
-            pointsText.text = $"{points} pts";
+            pointsText.text = FormatPoints(points);
         }
     }
     
@@ -283,7 +289,7 @@ public class PlayerProfileDisplay : MonoBehaviour
     {
         if (!isLocalPlayer && pointsText != null)
         {
-            pointsText.text = $"{points} pts";
+            pointsText.text = FormatPoints(points);
             Debug.Log($"[PlayerProfileDisplay] Pontos do oponente atualizados: {points}");
         }
     }

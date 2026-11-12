@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5507367763486089230}
   - component: {fileID: 8188616766320112481}
   - component: {fileID: 7695992156758504336}
+  - component: {fileID: 7480195312604417901}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -138,6 +139,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7480195312604417901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178071774044120882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  Key: lobby.join_button
+  _fallback: Join
+  _enableTmpVisualChanges: 0
+  _enableTmpAutoSize: 1
+  _tmpMinSize: 18
+  _tmpMaxSize: 120
+  _leftPadding: 12
+  _rightPadding: 12
 --- !u!1 &499961088779436801
 GameObject:
   m_ObjectHideFlags: 0

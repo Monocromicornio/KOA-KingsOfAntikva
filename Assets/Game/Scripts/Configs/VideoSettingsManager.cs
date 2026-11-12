@@ -26,6 +26,17 @@ public class VideoSettingsManager : MonoBehaviour
     private const string LegacyResolutionIndexKey = "ResolutionIndex"; // index-based key, unreliable across monitors
     private const string ResolutionLabelFormat = "{0}x{1}";
 
+    // The only sizes offered in the resolution dropdown (besides the monitor's native size): 720p, 768p, 900p, 1080p, 1440p, 4K.
+    private static readonly (int width, int height)[] MainResolutions =
+    {
+        (1280, 720),
+        (1366, 768),
+        (1600, 900),
+        (1920, 1080),
+        (2560, 1440),
+        (3840, 2160),
+    };
+
     private static readonly LocalizedString[] ScreenModeOptions =
     {
         new LocalizedString(ScreenModeKeyPrefix + ".exclusive_fullscreen", "Exclusive Fullscreen"),
@@ -178,14 +189,24 @@ public class VideoSettingsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Lists one entry per width x height (Screen.resolutions repeats each size per refresh rate),
-    /// keeping the highest refresh rate available for that size.
+    /// Lists only the main resolutions the monitor supports, plus the monitor's own (native) resolution.
+    /// Screen.resolutions has dozens of entries (it repeats every size per refresh rate), so each size is listed once,
+    /// keeping its highest refresh rate. Add or remove sizes in <see cref="MainResolutions"/>.
     /// </summary>
     void LoadResolutions()
     {
-        resolutions = Screen.resolutions
+        var supportedSizes = Screen.resolutions
             .GroupBy(resolution => (resolution.width, resolution.height))
             .Select(sameSize => sameSize.OrderByDescending(resolution => resolution.refreshRateRatio.value).First())
+            .ToArray();
+
+        var nativeResolution = Screen.currentResolution;
+        var mainSizes = supportedSizes
+            .Where(resolution => IsMainResolution(resolution) || IsSameSize(resolution, nativeResolution))
+            .ToArray();
+
+        // Never leave the dropdown empty (e.g. a monitor that supports none of the main sizes).
+        resolutions = (mainSizes.Length > 0 ? mainSizes : supportedSizes)
             .OrderBy(resolution => resolution.width)
             .ThenBy(resolution => resolution.height)
             .ToArray();
@@ -194,6 +215,20 @@ public class VideoSettingsManager : MonoBehaviour
         foreach (var res in resolutions)
             resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(string.Format(ResolutionLabelFormat, res.width, res.height)));
         resolutionDropdown.RefreshShownValue();
+    }
+
+    private static bool IsMainResolution(Resolution resolution)
+    {
+        foreach (var (width, height) in MainResolutions)
+        {
+            if (resolution.width == width && resolution.height == height) return true;
+        }
+        return false;
+    }
+
+    private static bool IsSameSize(Resolution a, Resolution b)
+    {
+        return a.width == b.width && a.height == b.height;
     }
 
     /// <summary>

@@ -13,6 +13,8 @@ public static class GameTexts
     public static readonly LocalizedString LobbyWaitingForPlayers = new LocalizedString("lobby.waiting_for_players", "Waiting for players...");
     public static readonly LocalizedString LobbyStartingMatch = new LocalizedString("lobby.starting_match", "Starting match...");
     public static readonly LocalizedString LobbySearchingPlayers = new LocalizedString("lobby.searching_players", "Searching for players");
+    /// <summary>Label of the Join button in the Lobby_Info prefab (a LocalizedText component with this key lives on it).</summary>
+    public static readonly LocalizedString LobbyJoinButton =new LocalizedString("lobby.join_button", "Join");
 
     // ---------- Loading screen ----------
 
@@ -37,6 +39,9 @@ public static class GameTexts
     // ---------- Profiles / ranking ----------
 
     public static readonly LocalizedString ProfileWaiting = new LocalizedString("profile.waiting", "Waiting...");
+
+    /// <summary>Format with the points (or "---" when unknown) as {0}.</summary>
+    public static readonly LocalizedString ProfilePointsFormat = new LocalizedString("profile.points_format", "{0} pts");
     public static readonly LocalizedString RankingLoading = new LocalizedString("ranking.loading", "Loading ranking...");
 
     // ---------- Result screen ----------
@@ -53,6 +58,7 @@ public static class GameTexts
         yield return LobbyWaitingForPlayers;
         yield return LobbyStartingMatch;
         yield return LobbySearchingPlayers;
+        yield return LobbyJoinButton;
 
         yield return LoadingGeneric;
         yield return LoadingConnectingToOpponent;
@@ -63,6 +69,7 @@ public static class GameTexts
         yield return LoadingOfflineSession;
 
         yield return ProfileWaiting;
+        yield return ProfilePointsFormat;
         yield return RankingLoading;
 
         yield return ResultInfluencePointsFormat;

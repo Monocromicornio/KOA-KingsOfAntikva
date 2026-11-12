@@ -14,6 +14,46 @@ public class LocalizationManager : MonoBehaviour
     /// <summary>Language used when neither Steam nor the operating system language has a translation.</summary>
     public const string DefaultLanguageCode = "en";
     public const string BrazilianPortugueseLanguageCode = "pt-br";
+    public const string SpanishLanguageCode = "es";
+    public const string GermanLanguageCode = "de";
+    public const string FrenchLanguageCode = "fr";
+    public const string ItalianLanguageCode = "it";
+    public const string JapaneseLanguageCode = "ja";
+    public const string SimplifiedChineseLanguageCode = "zh-hans";
+    public const string TraditionalChineseLanguageCode = "zh-hant";
+
+    /// <summary>
+    /// A language the player can pick. <see cref="Code"/> is the file name in Resources/Localization (and the column
+    /// header in the localization CSV); <see cref="NativeName"/> is shown in the language dropdown, written in the language itself.
+    /// </summary>
+    public readonly struct LanguageInfo
+    {
+        public readonly string Code;
+        public readonly string NativeName;
+
+        public LanguageInfo(string code, string nativeName)
+        {
+            Code = code;
+            NativeName = nativeName;
+        }
+    }
+
+    /// <summary>
+    /// Every language the game ships. To add one: add it here, add its column to the localization CSV, import the CSV
+    /// and export the JSONs (Tools > Localization > Manager). Chinese and Japanese also need a CJK font (see LocalizationFontFallback).
+    /// </summary>
+    public static readonly IReadOnlyList<LanguageInfo> SupportedLanguages = new[]
+    {
+        new LanguageInfo(DefaultLanguageCode, "English"),
+        new LanguageInfo(BrazilianPortugueseLanguageCode, "Português (BR)"),
+        new LanguageInfo(SpanishLanguageCode, "Español"),
+        new LanguageInfo(GermanLanguageCode, "Deutsch"),
+        new LanguageInfo(FrenchLanguageCode, "Français"),
+        new LanguageInfo(ItalianLanguageCode, "Italiano"),
+        new LanguageInfo(JapaneseLanguageCode, "日本語"),
+        new LanguageInfo(SimplifiedChineseLanguageCode, "简体中文"),
+        new LanguageInfo(TraditionalChineseLanguageCode, "繁體中文"),
+    };
 
     // Steam game language names (Steam client > Properties > Language): https://partner.steamgames.com/doc/store/localization/languages
     private static readonly Dictionary<string, string> SteamLanguageToCode = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -21,12 +61,28 @@ public class LocalizationManager : MonoBehaviour
         { "english", DefaultLanguageCode },
         { "brazilian", BrazilianPortugueseLanguageCode },
         { "portuguese", BrazilianPortugueseLanguageCode },
+        { "spanish", SpanishLanguageCode },
+        { "latam", SpanishLanguageCode },
+        { "german", GermanLanguageCode },
+        { "french", FrenchLanguageCode },
+        { "italian", ItalianLanguageCode },
+        { "japanese", JapaneseLanguageCode },
+        { "schinese", SimplifiedChineseLanguageCode },
+        { "tchinese", TraditionalChineseLanguageCode },
     };
 
     private static readonly Dictionary<SystemLanguage, string> SystemLanguageToCode = new Dictionary<SystemLanguage, string>
     {
         { SystemLanguage.English, DefaultLanguageCode },
         { SystemLanguage.Portuguese, BrazilianPortugueseLanguageCode },
+        { SystemLanguage.Spanish, SpanishLanguageCode },
+        { SystemLanguage.German, GermanLanguageCode },
+        { SystemLanguage.French, FrenchLanguageCode },
+        { SystemLanguage.Italian, ItalianLanguageCode },
+        { SystemLanguage.Japanese, JapaneseLanguageCode },
+        { SystemLanguage.ChineseSimplified, SimplifiedChineseLanguageCode },
+        { SystemLanguage.ChineseTraditional, TraditionalChineseLanguageCode },
+        { SystemLanguage.Chinese, SimplifiedChineseLanguageCode }, // generic "Chinese" reported without a script
     };
 
     public static LocalizationManager Instance { get; private set; }
@@ -63,6 +119,12 @@ public class LocalizationManager : MonoBehaviour
             ? PlayerPrefs.GetString(LanguagePrefsKey)
             : DetectPreferredLanguage();
         LoadLanguage(initialLanguage);
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+            LocalizationFontFallback.Release();
     }
 
     void Start()
@@ -133,6 +195,9 @@ public class LocalizationManager : MonoBehaviour
 
         CurrentLanguage = lang;
         _table.Clear();
+
+        // Registered before the table is announced, so every label already finds the CJK glyphs when it refreshes.
+        LocalizationFontFallback.Apply(lang);
 
         if (textAsset != null)
         {

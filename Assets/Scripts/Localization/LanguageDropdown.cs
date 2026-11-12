@@ -10,22 +10,8 @@ using UnityEngine;
 [RequireComponent(typeof(TMP_Dropdown))]
 public class LanguageDropdown : MonoBehaviour
 {
-    [Serializable]
-    public class LanguageOption
-    {
-        [Tooltip("Language code matching the file name in Resources/Localization (e.g. \"en\", \"pt-br\").")]
-        public string code;
-
-        [Tooltip("Name shown in the dropdown (usually written in the language itself).")]
-        public string displayName;
-    }
-
-    [SerializeField]
-    private List<LanguageOption> _languages = new List<LanguageOption>
-    {
-        new LanguageOption { code = "en", displayName = "English" },
-        new LanguageOption { code = "pt-br", displayName = "Português (BR)" },
-    };
+    // The languages (and their names) come from code, not from the scene, so adding a language never needs a scene edit.
+    private static IReadOnlyList<LocalizationManager.LanguageInfo> Languages => LocalizationManager.SupportedLanguages;
 
     private TMP_Dropdown _dropdown;
     private LocalizationManager _subscribedManager;
@@ -55,9 +41,9 @@ public class LanguageDropdown : MonoBehaviour
 
     private void PopulateOptions()
     {
-        var optionNames = new List<string>(_languages.Count);
-        foreach (var language in _languages)
-            optionNames.Add(language.displayName);
+        var optionNames = new List<string>(Languages.Count);
+        foreach (var language in Languages)
+            optionNames.Add(language.NativeName);
 
         _dropdown.ClearOptions();
         _dropdown.AddOptions(optionNames);
@@ -91,7 +77,7 @@ public class LanguageDropdown : MonoBehaviour
 
     private void HandleDropdownValueChanged(int selectedIndex)
     {
-        if (selectedIndex < 0 || selectedIndex >= _languages.Count) return;
+        if (selectedIndex < 0 || selectedIndex >= Languages.Count) return;
 
         var manager = LocalizationManager.Instance;
         if (manager == null)
@@ -100,14 +86,14 @@ public class LanguageDropdown : MonoBehaviour
             return;
         }
 
-        manager.SetLanguage(_languages[selectedIndex].code);
+        manager.SetLanguage(Languages[selectedIndex].Code);
     }
 
     private int FindLanguageIndex(string languageCode)
     {
-        for (int i = 0; i < _languages.Count; i++)
+        for (int i = 0; i < Languages.Count; i++)
         {
-            if (string.Equals(_languages[i].code, languageCode, StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(Languages[i].Code, languageCode, StringComparison.OrdinalIgnoreCase))
                 return i;
         }
         return -1;

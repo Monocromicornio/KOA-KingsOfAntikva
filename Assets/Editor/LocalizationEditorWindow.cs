@@ -22,7 +22,8 @@ public class LocalizationEditorWindow : EditorWindow
     private LocalizationTable _table;
     private string _sourceLang = "pt-br";
     private string _scriptedTextSourceLang = "en"; // language the DialogueBase texts and code-defined options are written in
-    private string _languagesCsv = "pt-br,en"; // configure languages here
+    // Languages the table gets a column for. Defaults to every language the game ships (LocalizationManager.SupportedLanguages).
+    private string _languagesCsv = string.Join(",", LocalizationManager.SupportedLanguages.Select(language => language.Code));
     private bool _includeScenes = true;
     private bool _includePrefabs = false;
 
