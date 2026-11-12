@@ -3,12 +3,13 @@ using UnityEngine;
 
 /// <summary>
 /// Manages the Selected Piece UI panel in the canvas.
-/// Shows piece force and description when a piece is selected, hides when deselected.
-/// The description follows the current language (see Piece.Description).
+/// Shows piece force, name and description when a piece is selected, hides when deselected.
+/// The name and description follow the current language (see Piece.DisplayName and Piece.Description).
 /// </summary>
 public class SelectedPieceUI : MonoBehaviour, ILocalizedByCode
 {
     [SerializeField] private TextMeshProUGUI forceText;
+    [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
 
     private Piece displayedPiece;
@@ -40,6 +41,13 @@ public class SelectedPieceUI : MonoBehaviour, ILocalizedByCode
             Transform forceTransform = bg.Find("Force");
             if (forceTransform != null)
                 forceText = forceTransform.GetComponent<TextMeshProUGUI>();
+        }
+
+        if (nameText == null)
+        {
+            Transform nameTransform = bg.Find("Name");
+            if (nameTransform != null)
+                nameText = nameTransform.GetComponent<TextMeshProUGUI>();
         }
 
         if (descriptionText == null)
@@ -101,6 +109,9 @@ public class SelectedPieceUI : MonoBehaviour, ILocalizedByCode
 
         if (forceText != null)
             forceText.text = interactive != null ? interactive.force.ToString() : "-";
+
+        if (nameText != null)
+            nameText.text = !string.IsNullOrEmpty(piece.DisplayName) ? piece.DisplayName : "";
 
         if (descriptionText != null)
             descriptionText.text = !string.IsNullOrEmpty(piece.Description) ? piece.Description : "";

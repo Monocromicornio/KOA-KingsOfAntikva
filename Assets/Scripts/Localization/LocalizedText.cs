@@ -21,9 +21,22 @@ public class LocalizedText : MonoBehaviour
     [SerializeField] private float _leftPadding = 12f;
     [SerializeField] private float _rightPadding = 12f;
 
+    // ───── Fit to box (play mode) ─────
+    [Header("Fit To Box (play mode)")]
+    [Tooltip("Keeps the text inside its box in every language: leaves room at the sides, never splits a single word and shrinks the font only when needed.")]
+    [SerializeField] private bool _fitToBox = true;
+    [Tooltip("Smallest font size, as a fraction of the font size designed in the scene.")]
+    [Range(0.3f, 1f)] [SerializeField] private float _fitMinScale = 0.55f;
+    [Tooltip("Free space kept at the left and right edges, as a fraction of the box width.")]
+    [Range(0f, 0.2f)] [SerializeField] private float _fitSidePadding = 0.07f;
+
     TMP_Text _tmp;
     Text _uiText;
     Piece _piece;
+
+    TextFitter.Design _design;
+    bool _designCaptured;
+    string _lastFittedText;
 
     void OnEnable()
     {
@@ -81,10 +94,7 @@ public class LocalizedText : MonoBehaviour
 
         if (_tmp != null)
         {
-            _tmp.text = finalText;
-            ApplyBounds();
-            ApplyTmpAutoSize();
-            _tmp.ForceMeshUpdate(true);
+            ApplyToTmp(finalText, false);
         }
         else if (_uiText != null)
         {
@@ -94,6 +104,46 @@ public class LocalizedText : MonoBehaviour
         {
             _piece.SetDescription(finalText);
         }
+    }
+
+    /// <summary>
+    /// Shows the given text exactly as play mode would, including the fit to the box. For editor tools and tests:
+    /// outside play mode the label itself only shows its fallback text, unfitted.
+    /// </summary>
+    public void ApplyTextForPreview(string text)
+    {
+        Cache();
+        if (_tmp != null) ApplyToTmp(text, true);
+    }
+
+    void ApplyToTmp(string text, bool preview)
+    {
+        // The manual "TMP Auto Size" options above take over the label completely; otherwise it is fitted to its box.
+        bool fit = _fitToBox && !_enableTmpVisualChanges && (Application.isPlaying || preview);
+        if (fit)
+        {
+            if (!_designCaptured)
+            {
+                _design = TextFitter.Capture(_tmp);
+                _designCaptured = true;
+            }
+            _lastFittedText = text;
+            TextFitter.Fit(_tmp, text, _design, _fitMinScale, _fitSidePadding);
+        }
+        else
+        {
+            _tmp.text = text;
+            ApplyBounds();
+            ApplyTmpAutoSize();
+        }
+        _tmp.ForceMeshUpdate(true);
+    }
+
+    // The box can get its size after the first Apply (layout groups, canvas scaling) or change later: fit again.
+    void OnRectTransformDimensionsChange()
+    {
+        if (!Application.isPlaying || !_designCaptured || _tmp == null || _lastFittedText == null || !isActiveAndEnabled) return;
+        TextFitter.Fit(_tmp, _lastFittedText, _design, _fitMinScale, _fitSidePadding);
     }
 
     // ─────────────────────────────────

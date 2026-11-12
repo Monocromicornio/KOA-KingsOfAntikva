@@ -34,6 +34,11 @@ public class Piece : NetworkBehaviour
     public PieceType type;
 
     [Header("Info")]
+    [SerializeField] private string displayName;
+
+    [Tooltip("Localization table key for the piece name. When empty or missing in the table, 'displayName' is used.")]
+    [SerializeField] private string nameKey;
+
     [TextArea(2, 4)]
     [SerializeField] private string description;
 
@@ -41,7 +46,13 @@ public class Piece : NetworkBehaviour
     [SerializeField] private string descriptionKey;
 
     /// <summary>
-    /// Description text displayed in the Selected Piece UI and tooltips, in the current language.
+    /// Piece name displayed in the Selected Piece UI and tooltips, in the current language.
+    /// Falls back to the serialized display name when the key is empty or has no translation.
+    /// </summary>
+    public string DisplayName => LocalizationManager.GetTextOrFallback(nameKey, displayName);
+
+    /// <summary>
+    /// Description text (without the name) displayed in the Selected Piece UI and tooltips, in the current language.
     /// Falls back to the serialized description when the key is empty or has no translation.
     /// </summary>
     public string Description => LocalizationManager.GetTextOrFallback(descriptionKey, description);

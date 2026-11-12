@@ -179,10 +179,10 @@ MonoBehaviour:
   targetField: {fileID: 0}
   body: {fileID: 560047081837103822}
   type: 5
-  description: '<b>Swordsman </b>
-
-    Value piece 6'
-  descriptionKey: project.assets.game.prefab.pieces_sm_tooltip_bg_description
+  displayName: Swordsman
+  nameKey: piece.sm.name
+  description: Value piece 6
+  descriptionKey: piece.sm.description
 --- !u!114 &2009041790342081616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2015,17 +2015,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5249892533754993861}
     m_Modifications:
+    - target: {fileID: 1337413517271781817, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_text
+      value: Swordsman
+      objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: '<b>Swordsman </b>
-
-        Value piece 6'
+      value: Value piece 6
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_fontSize
-      value: 39.4
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -2150,11 +2153,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8719249259403906271}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &2804673623011677393 stripped
 RectTransform:
@@ -2162,31 +2161,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8218976387703703839}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3416615424206482490 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-    type: 3}
-  m_PrefabInstance: {fileID: 8218976387703703839}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8719249259403906271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3416615424206482490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: project.assets.game.prefab.pieces_sm_tooltip_bg_description
-  _fallback: '<b>Swordsman </b>
-
-    Value piece 6'
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12

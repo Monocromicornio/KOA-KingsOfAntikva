@@ -1,54 +1,6 @@
 {
   "items": [
     {
-      "key": "project.assets.game.prefab.pieces_ba_tooltip_bg_description",
-      "value": "<b>Barbar</b>\nFigur mit Wert 4"
-    },
-    {
-      "key": "project.assets.game.prefab.pieces_bo_tooltip_bg_description",
-      "value": "<b>Bombe</b>\nBesiegt jede Figur außer dem Ingenieur"
-    },
-    {
-      "key": "project.assets.game.prefab.pieces_ca_tooltip_bg_description",
-      "value": "<b>Hauptmann</b>\nFigur mit Wert 8"
-    },
-    {
-      "key": "project.assets.game.prefab.pieces_co_tooltip_bg_description",
-      "value": "<b>Kommandant</b>\nFigur mit Wert 5"
-    },
-    {
-      "key": "project.assets.game.prefab.pieces_es_tooltip_bg_description",
-      "value": "<b>Ingenieur</b>\nEntschärft gegnerische Bomben"
-    },
-    {
-      "key": "project.assets.game.prefab.pieces_gu_tooltip_bg_description",
-      "value": "<b>Krieger</b>\nFigur mit Wert 3"
-    },
-    {
-      "key": "project.assets.game.prefab.pieces_la_tooltip_bg_description",
-      "value": "<b>Lanzenträger</b>\nFigur mit Wert 7"
-    },
-    {
-      "key": "project.assets.game.prefab.pieces_re_tooltip_bg_description",
-      "value": "<b>König</b>\nStärkste Figur mit Wert 9"
-    },
-    {
-      "key": "project.assets.game.prefab.pieces_sm_tooltip_bg_description",
-      "value": "<b>Schwertkämpfer</b>\nFigur mit Wert 6"
-    },
-    {
-      "key": "project.assets.game.prefab.pieces_so_tooltip_bg_description",
-      "value": "<b>Einfacher Soldat</b>\nZieht bis zu 8 Felder vertikal oder horizontal"
-    },
-    {
-      "key": "project.assets.game.prefab.pieces_sp_tooltip_bg_description",
-      "value": "<b>Assassine</b>\nDer Assassine kann den gegnerischen König besiegen, verliert aber gegen jeden anderen Soldaten"
-    },
-    {
-      "key": "project.assets.game.prefab.pieces_te_tooltip_bg_description",
-      "value": "<b>Schatz</b>\nFindet der Gegner deinen Schatz, verlierst du"
-    },
-    {
       "key": "positiontutorial.pieces_hud_dialoguebox_box_image_name",
       "value": "Name des Porträts"
     },
@@ -178,15 +130,15 @@
     },
     {
       "key": "positionparts.hud_playmodespanel_bg_lobby_label",
-      "value": "LOBBY ERSTELLEN"
+      "value": "NEUE LOBBY"
     },
     {
       "key": "positionparts.hud_playmodespanel_bg_offline_label",
-      "value": "OFFLINE-SPIEL"
+      "value": "OFFLINE"
     },
     {
       "key": "positionparts.hud_playmodespanel_bg_ranked_label",
-      "value": "RANGLISTENSPIEL"
+      "value": "RANKED"
     },
     {
       "key": "positionparts.hud_playmodespanel_bg_tutorial_label",
@@ -450,7 +402,7 @@
     },
     {
       "key": "settings.video.screen_mode.exclusive_fullscreen",
-      "value": "Exklusiver Vollbildmodus"
+      "value": "Vollbild"
     },
     {
       "key": "settings.video.screen_mode.windowed",
@@ -591,6 +543,102 @@
     {
       "key": "profile.points_format",
       "value": "{0} Pkt."
+    },
+    {
+      "key": "piece.ba.name",
+      "value": "Barbar"
+    },
+    {
+      "key": "piece.ba.description",
+      "value": "Figur mit Wert 4"
+    },
+    {
+      "key": "piece.bo.name",
+      "value": "Bombe"
+    },
+    {
+      "key": "piece.bo.description",
+      "value": "Besiegt jede Figur außer dem Ingenieur"
+    },
+    {
+      "key": "piece.ca.name",
+      "value": "Hauptmann"
+    },
+    {
+      "key": "piece.ca.description",
+      "value": "Figur mit Wert 8"
+    },
+    {
+      "key": "piece.co.name",
+      "value": "Kommandant"
+    },
+    {
+      "key": "piece.co.description",
+      "value": "Figur mit Wert 5"
+    },
+    {
+      "key": "piece.es.name",
+      "value": "Ingenieur"
+    },
+    {
+      "key": "piece.es.description",
+      "value": "Entschärft gegnerische Bomben"
+    },
+    {
+      "key": "piece.gu.name",
+      "value": "Krieger"
+    },
+    {
+      "key": "piece.gu.description",
+      "value": "Figur mit Wert 3"
+    },
+    {
+      "key": "piece.la.name",
+      "value": "Lanzenträger"
+    },
+    {
+      "key": "piece.la.description",
+      "value": "Figur mit Wert 7"
+    },
+    {
+      "key": "piece.re.name",
+      "value": "König"
+    },
+    {
+      "key": "piece.re.description",
+      "value": "Stärkste Figur mit Wert 9"
+    },
+    {
+      "key": "piece.sm.name",
+      "value": "Schwertkämpfer"
+    },
+    {
+      "key": "piece.sm.description",
+      "value": "Figur mit Wert 6"
+    },
+    {
+      "key": "piece.so.name",
+      "value": "Einfacher Soldat"
+    },
+    {
+      "key": "piece.so.description",
+      "value": "Zieht bis zu 8 Felder vertikal oder horizontal"
+    },
+    {
+      "key": "piece.sp.name",
+      "value": "Assassine"
+    },
+    {
+      "key": "piece.sp.description",
+      "value": "Der Assassine kann den gegnerischen König besiegen, verliert aber gegen jeden anderen Soldaten"
+    },
+    {
+      "key": "piece.te.name",
+      "value": "Schatz"
+    },
+    {
+      "key": "piece.te.description",
+      "value": "Findet der Gegner deinen Schatz, verlierst du"
     }
   ]
 }

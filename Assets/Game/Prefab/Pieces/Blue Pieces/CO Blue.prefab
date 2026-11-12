@@ -376,10 +376,10 @@ MonoBehaviour:
   targetField: {fileID: 0}
   body: {fileID: 6303431076481605322}
   type: 4
-  description: '<b>Commander</b>
-
-    Value piece 5'
-  descriptionKey: project.assets.game.prefab.pieces_co_tooltip_bg_description
+  displayName: Commander
+  nameKey: piece.co.name
+  description: Value piece 5
+  descriptionKey: piece.co.description
 --- !u!114 &1074828252203640849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2054,17 +2054,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7386168918526974519}
     m_Modifications:
+    - target: {fileID: 1337413517271781817, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_text
+      value: Commander
+      objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: '<b>Commander</b>
-
-        Value piece 5'
+      value: Value piece 5
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_fontSize
-      value: 39.4
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -2189,40 +2192,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5891429037302340294}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
---- !u!1 &404623805501124844 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-    type: 3}
-  m_PrefabInstance: {fileID: 6410990548019713481}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5891429037302340294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404623805501124844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: project.assets.game.prefab.pieces_co_tooltip_bg_description
-  _fallback: '<b>Commander</b>
-
-    Value piece 5'
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12
 --- !u!224 &872556320165316615 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,

@@ -95,10 +95,10 @@ MonoBehaviour:
   targetField: {fileID: 0}
   body: {fileID: 3274585518398805949}
   type: 2
-  description: '<b>Warrior</b>
-
-    Piece worth 3'
-  descriptionKey: project.assets.game.prefab.pieces_gu_tooltip_bg_description
+  displayName: Warrior
+  nameKey: piece.gu.name
+  description: Piece worth 3
+  descriptionKey: piece.gu.description
 --- !u!114 &3848785732441106412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,17 +807,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4059355268180363157}
     m_Modifications:
+    - target: {fileID: 1337413517271781817, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_text
+      value: Warrior
+      objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: '<b>Warrior</b>
-
-        Piece worth 3'
+      value: Piece worth 3
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_fontSize
-      value: 39.4
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -947,11 +950,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2835470717787045260}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &8204298474471529013 stripped
 RectTransform:
@@ -959,34 +958,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2681925777179822075}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8673360664851505886 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-    type: 3}
-  m_PrefabInstance: {fileID: 2681925777179822075}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2835470717787045260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8673360664851505886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: project.assets.game.prefab.pieces_gu_tooltip_bg_description
-  _fallback: '<b>Warrior</b>
-
-    Piece worth 3'
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12
 --- !u!1001 &5562367064884359174
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -38,6 +38,8 @@ public static class LocalizationFontFallback
     };
 
     private const string OperatingSystemFontStyle = "Regular";
+    // Part of the name of every font created here; lets stale ones be recognised after the Editor reloads scripts.
+    private const string FontNameMarker = "(CJK fallback";
 
     private static readonly Dictionary<string, TMP_FontAsset> FontCache = new Dictionary<string, TMP_FontAsset>(StringComparer.OrdinalIgnoreCase);
     private static readonly HashSet<string> LanguagesWithoutFont = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -90,13 +92,16 @@ public static class LocalizationFontFallback
     /// </summary>
     public static void Release()
     {
-        if (RegisteredFallbacks.Count == 0) return;
+        if (TMP_Settings.instance == null) return;
 
         var settingsFallbacks = TMP_Settings.fallbackFontAssets;
         if (settingsFallbacks != null)
         {
             foreach (var font in RegisteredFallbacks)
                 settingsFallbacks.Remove(font);
+
+            // Fonts created here before the Editor reloaded scripts are no longer tracked: drop them by name (and destroyed ones).
+            settingsFallbacks.RemoveAll(font => font == null || font.name.Contains(FontNameMarker));
         }
 
         RegisteredFallbacks.Clear();
@@ -162,7 +167,7 @@ public static class LocalizationFontFallback
                 var font = TMP_FontAsset.CreateFontAsset(family, OperatingSystemFontStyle);
                 if (font != null)
                 {
-                    font.name = $"{family} (CJK fallback, {languageCode})";
+                    font.name = $"{family} {FontNameMarker}, {languageCode})";
                     return font;
                 }
             }

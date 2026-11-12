@@ -94,10 +94,10 @@ MonoBehaviour:
   targetField: {fileID: 0}
   body: {fileID: 3620785317967201504}
   type: 11
-  description: '<b>Bomb</b>
-
-    Kills any piece except the specialist'
-  descriptionKey: project.assets.game.prefab.pieces_bo_tooltip_bg_description
+  displayName: Bomb
+  nameKey: piece.bo.name
+  description: Kills any piece except the Engineer
+  descriptionKey: piece.bo.description
 --- !u!114 &6070362150032259933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -967,17 +967,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1607262223644257737}
     m_Modifications:
+    - target: {fileID: 1337413517271781817, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
+        type: 3}
+      propertyPath: m_text
+      value: Bomb
+      objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_text
-      value: '<b>Bomb</b>
-
-        Kills any piece except the specialist'
+      value: Kills any piece except the Engineer
       objectReference: {fileID: 0}
     - target: {fileID: 1858665728012865323, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
       propertyPath: m_fontSize
-      value: 28
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6116900628043390414, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
         type: 3}
@@ -1102,11 +1105,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6172553356400672657}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a6ed081307099f43ac6e0a8dbe2770f, type: 3}
 --- !u!224 &4794791003780805886 stripped
 RectTransform:
@@ -1114,31 +1113,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1614854608850790704}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5407969309481864213 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6730043443748644133, guid: 6a6ed081307099f43ac6e0a8dbe2770f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1614854608850790704}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6172553356400672657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5407969309481864213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3612972ddd96043b27c3e23a7434ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  Key: project.assets.game.prefab.pieces_bo_tooltip_bg_description
-  _fallback: '<b>Bomb</b>
-
-    Kills any piece except the specialist'
-  _enableTmpVisualChanges: 0
-  _enableTmpAutoSize: 1
-  _tmpMinSize: 18
-  _tmpMaxSize: 120
-  _leftPadding: 12
-  _rightPadding: 12

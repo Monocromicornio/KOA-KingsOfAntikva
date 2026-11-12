@@ -1,12 +1,17 @@
 using UnityEngine;
 using TMPro;
 
-public class ShowTooltip : MonoBehaviour
+/// <summary>
+/// Shows the piece tooltip: the piece name, its description and its force, taken from the Piece (in the current language).
+/// The tooltip must contain TextMeshProUGUI children named "Name", "Description" and "Force" (at any depth).
+/// </summary>
+public class ShowTooltip : MonoBehaviour, ILocalizedByCode
 {
     [SerializeField] Transform tooltip;
 
     private Piece piece;
     private InteractivePiece interactivePiece;
+    private TextMeshProUGUI nameText;
     private TextMeshProUGUI descriptionText;
     private TextMeshProUGUI forceText;
 
@@ -17,13 +22,9 @@ public class ShowTooltip : MonoBehaviour
         {
             tooltip.gameObject.SetActive(false);
 
-            Transform descTransform = tooltip.Find("Description");
-            if (descTransform != null)
-                descriptionText = descTransform.GetComponent<TextMeshProUGUI>();
-
-            Transform forceTransform = tooltip.Find("Force");
-            if (forceTransform != null)
-                forceText = forceTransform.GetComponent<TextMeshProUGUI>();
+            nameText = FindText(tooltip, "Name");
+            descriptionText = FindText(tooltip, "Description");
+            forceText = FindText(tooltip, "Force");
         }
 
         piece = GetComponent<Piece>();
@@ -34,11 +35,20 @@ public class ShowTooltip : MonoBehaviour
             interactivePiece = piece.GetComponent<InteractivePiece>();
     }
 
+    private static TextMeshProUGUI FindText(Transform root, string objectName)
+    {
+        foreach (var text in root.GetComponentsInChildren<TextMeshProUGUI>(true))
+        {
+            if (text.name == objectName) return text;
+        }
+        return null;
+    }
+
     public void Show()
     {
         if (tooltip != null)
         {
-            UpdateDescription();
+            UpdateTexts();
             UpdateForce();
             tooltip.gameObject.SetActive(true);
         }
@@ -50,15 +60,18 @@ public class ShowTooltip : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates the tooltip description text from the piece's description field.
-    /// Only overwrites if the piece has a non-empty description.
+    /// Updates the tooltip name and description from the piece, in the current language.
+    /// Only overwrites a text when the piece has a non-empty value for it.
     /// </summary>
-    private void UpdateDescription()
+    private void UpdateTexts()
     {
-        if (descriptionText == null || piece == null) return;
-        if (string.IsNullOrEmpty(piece.Description)) return;
+        if (piece == null) return;
 
-        descriptionText.text = piece.Description;
+        if (nameText != null && !string.IsNullOrEmpty(piece.DisplayName))
+            nameText.text = piece.DisplayName;
+
+        if (descriptionText != null && !string.IsNullOrEmpty(piece.Description))
+            descriptionText.text = piece.Description;
     }
 
     /// <summary>
